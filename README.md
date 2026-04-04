@@ -74,6 +74,31 @@ Traditional drug discovery requires expensive physical experiments and long iter
 
 ---
 
-## 🏗️ Architecture
-
-### System Flow
+### 6. **Project Structure**
+3Dprinter/
+│
+├── 📄 main.py                    # Entry point - Web server launcher
+├── 📄 web_server.py              # Flask backend + API routes
+├── 📄 visualizer_3d.py           # 3D structure visualization
+│
+├── 📁 Agents/
+│   ├── ranker_agent.py           # Case classification (5 nodes)
+│   ├── printer_3d_agent.py       # 3D structure generation (3 cases)
+│   └── metrics.py                # Pipeline metrics aggregation
+│
+├── 📁 evaluators/
+│   ├── ranker_evaluator.py       # Ranker quality metrics
+│   └── printer_evaluator.py      # Printer quality metrics
+│
+├── 📁 settings/
+│   └── configuration.py          # All configs (LLM, API, models)
+│
+├── 📁 templates/
+│   └── index.html                # Web interface HTML
+│
+├── 📁 static/
+│   ├── style.css                 # UI styling
+│   └── app.js                    # Frontend JavaScript
+│
+├── 📄 requirements.txt           # Python dependencies
+└── 📄 README.md                  # This file
