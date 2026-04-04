@@ -1,0 +1,1137 @@
+2026-04-01 14:01:49,733 - __main__ - INFO - ======================================================================
+2026-04-01 14:01:49,733 - __main__ - INFO - Virtual Drug Discovery Lab V2
+2026-04-01 14:01:49,734 - __main__ - INFO - Intelligent LLM-based Classification + 3D Visualization
+2026-04-01 14:01:49,734 - __main__ - INFO - ======================================================================
+2026-04-01 14:01:49,734 - __main__ - INFO - 
+2026-04-01 14:01:49,734 - __main__ - INFO - Starting server...
+2026-04-01 14:01:49,734 - __main__ - INFO - Open http://localhost:5000 in your browser
+2026-04-01 14:01:49,734 - __main__ - INFO - 
+2026-04-01 14:01:49,734 - __main__ - INFO - Press CTRL+C to stop
+2026-04-01 14:01:49,736 - __main__ - INFO - ======================================================================
+2026-04-01 14:01:49,736 - web_server - INFO - [SERVER] Starting on http://127.0.0.1:5000
+2026-04-01 14:01:49,736 - web_server - INFO - [SERVER] Press CTRL+C to stop
+2026-04-01 14:01:49,747 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-01 14:01:49,747 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-04-01 14:01:54,162 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:01:54] "GET / HTTP/1.1" 200 -
+2026-04-01 14:01:54,424 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:01:54] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-04-01 14:01:54,424 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:01:54] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-04-01 14:02:32,759 - web_server - INFO - [WEB] Query received: I want to visualize the 3D structure of human insulin chain A. It's a 21 amino acid peptide hormone ...
+2026-04-01 14:02:32,760 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:02:32,760 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:02:32,760 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:02:32,800 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:02:36,044 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:02:36,053 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✗
+2026-04-01 14:02:36,056 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:02:39,533 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:02:39,539 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 2 (confidence: 80%) — Nom et intention suggèrent une protéine
+2026-04-01 14:02:39,541 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:02:39,541 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 80%
+2026-04-01 14:02:39,544 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:02:39,545 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 2 | Model: esmfold_nim | Confidence: 80% (GOOD)
+2026-04-01 14:02:39,546 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-01 14:02:39,547 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-01 14:02:39,547 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 80.0% (threshold: 0.80)
+2026-04-01 14:02:39,547 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:02:39,547 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 61.0% (FAIR)
+2026-04-01 14:02:39,548 - web_server - INFO - [RANKER] ✅ Case 2, Confidence 80%, Model esmfold_nim
+2026-04-01 14:02:39,548 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:02:39,548 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 2: human insulin chain A
+2026-04-01 14:02:39,583 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold Protein Structure: human insulin chain A
+2026-04-01 14:02:39,584 - Agents.printer_3d_agent - ERROR - [CASE 2] Error: object of type 'NoneType' has no len()
+2026-04-01 14:02:39,584 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=False
+2026-04-01 14:02:39,585 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=False, has_structure=False
+2026-04-01 14:02:39,585 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (): 0.0%
+2026-04-01 14:02:39,585 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 2): 0.0%
+2026-04-01 14:02:39,585 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:02:39,585 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 10.0% (POOR)
+2026-04-01 14:02:39,586 - web_server - INFO - [PRINTER] ✅ Success=False, Format=
+2026-04-01 14:02:39,586 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:02:39,586 - Agents.metrics - INFO - [METRICS] Pipeline score: 35.5% (POOR) = Ranker 61.0% + Printer 10.0%
+2026-04-01 14:02:39,586 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:02:39,588 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:02:39] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:03:43,422 - web_server - INFO - [WEB] Query received: Aspirine × COX-2...
+2026-04-01 14:03:43,423 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:03:43,423 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:03:43,424 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:03:43,449 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:03:43,458 - openai._base_client - INFO - Retrying request to /chat/completions in 0.440665 seconds
+2026-04-01 14:03:45,946 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:03:45,951 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✗
+2026-04-01 14:03:45,956 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:03:49,407 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:03:49,409 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 80%) — Intention de chercher relation avec COX-2
+2026-04-01 14:03:49,409 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:03:49,410 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 80%
+2026-04-01 14:03:49,410 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:03:49,411 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 80% (GOOD)
+2026-04-01 14:03:49,412 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-01 14:03:49,412 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-01 14:03:49,412 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 80.0% (threshold: 0.80)
+2026-04-01 14:03:49,413 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:03:49,413 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 61.0% (FAIR)
+2026-04-01 14:03:49,413 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 80%, Model diffdock_nim
+2026-04-01 14:03:49,413 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:03:49,414 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Aspirine
+2026-04-01 14:03:49,486 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Aspirine
+2026-04-01 14:03:49,486 - Agents.printer_3d_agent - ERROR - [CASE 3] Error: object of type 'NoneType' has no len()
+2026-04-01 14:03:49,486 - Agents.printer_3d_agent - INFO - [CASE 3] Attempting RDKit fallback...
+2026-04-01 14:03:49,486 - Agents.printer_3d_agent - ERROR - [CASE 3] Fallback also failed: object of type 'NoneType' has no len()
+2026-04-01 14:03:49,488 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=False
+2026-04-01 14:03:49,488 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=False, has_structure=False
+2026-04-01 14:03:49,488 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (): 0.0%
+2026-04-01 14:03:49,488 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 0.0%
+2026-04-01 14:03:49,489 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:03:49,489 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 10.0% (POOR)
+2026-04-01 14:03:49,489 - web_server - INFO - [PRINTER] ✅ Success=False, Format=
+2026-04-01 14:03:49,489 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:03:49,489 - Agents.metrics - INFO - [METRICS] Pipeline score: 35.5% (POOR) = Ranker 61.0% + Printer 10.0%
+2026-04-01 14:03:49,489 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:03:49,490 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:03:49] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:18:37,995 - __main__ - INFO - ======================================================================
+2026-04-01 14:18:37,996 - __main__ - INFO - Virtual Drug Discovery Lab V2
+2026-04-01 14:18:37,996 - __main__ - INFO - Intelligent LLM-based Classification + 3D Visualization
+2026-04-01 14:18:37,996 - __main__ - INFO - ======================================================================
+2026-04-01 14:18:37,997 - __main__ - INFO - 
+2026-04-01 14:18:37,997 - __main__ - INFO - Starting server...
+2026-04-01 14:18:37,997 - __main__ - INFO - Open http://localhost:5000 in your browser
+2026-04-01 14:18:37,997 - __main__ - INFO - 
+2026-04-01 14:18:37,998 - __main__ - INFO - Press CTRL+C to stop
+2026-04-01 14:18:37,998 - __main__ - INFO - ======================================================================
+2026-04-01 14:18:37,998 - web_server - INFO - [SERVER] Starting on http://127.0.0.1:5000
+2026-04-01 14:18:37,998 - web_server - INFO - [SERVER] Press CTRL+C to stop
+2026-04-01 14:18:38,009 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-01 14:18:38,009 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-04-01 14:18:41,154 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:18:41] "GET / HTTP/1.1" 200 -
+2026-04-01 14:18:41,276 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:18:41] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-04-01 14:18:41,412 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:18:41] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-04-01 14:18:41,544 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:18:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-04-01 14:19:37,152 - web_server - INFO - [WEB] Query received: Predict docking of ibuprofen on its protein target.
+Drug SMILES: CC(C)Cc1ccc(cc1)C(C)C(=O)O
+Target p...
+2026-04-01 14:19:37,154 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:19:37,154 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:19:37,154 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:19:37,203 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:19:41,129 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:19:41,152 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-01 14:19:41,170 - Agents.ranker_agent - WARNING - [RANKER] ⚠️ Invalid AA chars found: {'Z'}
+2026-04-01 14:19:41,170 - Agents.ranker_agent - INFO - [RANKER] ✅ Sequence auto-cleaned: 25 → 24 AA
+2026-04-01 14:19:41,171 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-01 14:19:41,172 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-01 14:19:41,174 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:19:44,202 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:19:44,207 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide
+2026-04-01 14:19:44,209 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:19:44,210 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-01 14:19:44,211 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:19:44,212 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-01 14:19:44,213 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-01 14:19:44,213 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-01 14:19:44,213 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-01 14:19:44,214 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:19:44,214 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-01 14:19:44,214 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-01 14:19:44,214 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:19:44,215 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: ibuprofen
+2026-04-01 14:19:44,237 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: ibuprofen
+2026-04-01 14:19:44,237 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CC(C)Cc1ccc(cc1)C(C)C(=O)O, Protein: 24 AA)
+2026-04-01 14:19:47,457 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-01 14:19:47,460 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-01 14:19:47,587 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (3.35s)
+2026-04-01 14:19:47,587 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-01 14:19:47,587 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-01 14:19:47,588 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-01 14:19:47,588 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-01 14:19:47,588 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:19:47,589 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-01 14:19:47,589 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-01 14:19:47,590 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:19:47,590 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-01 14:19:47,591 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:19:47,593 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:19:47] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:20:14,767 - web_server - INFO - [WEB] Query received: I want to study HIV protease inhibitor (ritonavir) docking.
+Ligand SMILES: CC(C)c1ccc(cc1)CC(c2ccccc...
+2026-04-01 14:20:14,768 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:20:14,768 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:20:14,769 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:20:14,800 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:20:14,809 - openai._base_client - INFO - Retrying request to /chat/completions in 0.487359 seconds
+2026-04-01 14:20:19,872 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:20:19,876 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-01 14:20:19,881 - Agents.ranker_agent - WARNING - [RANKER] ⚠️ Invalid AA chars found: {'Z'}
+2026-04-01 14:20:19,882 - Agents.ranker_agent - INFO - [RANKER] ✅ Sequence auto-cleaned: 56 → 55 AA
+2026-04-01 14:20:19,882 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-01 14:20:19,883 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-01 14:20:19,887 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:20:23,022 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:20:23,025 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide
+2026-04-01 14:20:23,026 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:20:23,027 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-01 14:20:23,027 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:20:23,028 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-01 14:20:23,029 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-01 14:20:23,029 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-01 14:20:23,029 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-01 14:20:23,029 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:20:23,029 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-01 14:20:23,030 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-01 14:20:23,030 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:20:23,030 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Ritonavir
+2026-04-01 14:20:23,042 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Ritonavir
+2026-04-01 14:20:23,042 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CC(C)c1ccc(cc1)CC(c2ccccc2)(c3ccc(cc3)C(C)C)C(=O)N4CCCC4C(=O)N(C)c5cccnc5, Protein: 55 AA)
+2026-04-01 14:20:24,135 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-01 14:20:24,136 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-01 14:20:24,429 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (1.39s)
+2026-04-01 14:20:24,429 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-01 14:20:24,430 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-01 14:20:24,430 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-01 14:20:24,431 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-01 14:20:24,431 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:20:24,431 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-01 14:20:24,431 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-01 14:20:24,431 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:20:24,432 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-01 14:20:24,432 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:20:24,433 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:20:24] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:21:20,157 - web_server - INFO - [WEB] Query received: Docking analysis of methotrexate on dihydrofolate reductase (DHFR).
+Methotrexate SMILES: CN(C)c1cc(c...
+2026-04-01 14:21:20,159 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:21:20,159 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:21:20,160 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:21:20,210 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:21:20,217 - openai._base_client - INFO - Retrying request to /chat/completions in 0.457580 seconds
+2026-04-01 14:21:25,919 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:21:25,923 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-01 14:21:25,928 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-01 14:21:25,930 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-01 14:21:25,933 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:21:28,910 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:21:28,913 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide
+2026-04-01 14:21:28,914 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:21:28,914 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-01 14:21:28,915 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:21:28,915 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-01 14:21:28,916 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-01 14:21:28,916 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-01 14:21:28,916 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-01 14:21:28,917 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:21:28,917 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-01 14:21:28,917 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-01 14:21:28,917 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:21:28,917 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Methotrexate
+2026-04-01 14:21:28,929 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Methotrexate
+2026-04-01 14:21:28,929 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CN(C)c1cc(ccc1N(C)C)C(=O)Nc2cc(ccc2Nc3nccc(c3)N4CCCC4)S(=O)(=O)N, Protein: 103 AA)
+2026-04-01 14:21:30,332 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-01 14:21:30,332 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-01 14:21:30,474 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (1.55s)
+2026-04-01 14:21:30,475 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-01 14:21:30,475 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-01 14:21:30,475 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-01 14:21:30,476 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-01 14:21:30,476 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:21:30,476 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-01 14:21:30,476 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-01 14:21:30,477 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:21:30,477 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-01 14:21:30,477 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:21:30,478 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:21:30] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:22:16,798 - web_server - INFO - [WEB] Query received: Dopamine molecule for neuroscience application:
+SMILES: NCCc1ccc(O)c(O)c1...
+2026-04-01 14:22:16,799 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:22:16,799 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:22:16,800 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:22:16,830 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:22:16,838 - openai._base_client - INFO - Retrying request to /chat/completions in 0.430036 seconds
+2026-04-01 14:22:19,410 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:22:19,415 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✗
+2026-04-01 14:22:19,418 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-01 14:22:19,419 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-01 14:22:19,421 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:22:22,420 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:22:22,424 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 100%) — SMILES valide, pas de séquence protéique
+2026-04-01 14:22:22,425 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:22:22,426 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-01 14:22:22,428 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:22:22,429 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 100% (EXCELLENT)
+2026-04-01 14:22:22,431 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-01 14:22:22,432 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-01 14:22:22,432 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-01 14:22:22,432 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:22:22,433 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-01 14:22:22,433 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 100%, Model rdkit
+2026-04-01 14:22:22,434 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:22:22,434 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: Dopamine
+2026-04-01 14:22:22,467 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: Dopamine
+2026-04-01 14:22:22,488 - Agents.printer_3d_agent - INFO - ✅ CASE 1 Success: Generated 3D structure for Dopamine (0.02s)
+2026-04-01 14:22:22,489 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-01 14:22:22,489 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-01 14:22:22,490 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (mol): 100.0%
+2026-04-01 14:22:22,490 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 100.0%
+2026-04-01 14:22:22,491 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:22:22,491 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 100.0% (EXCELLENT)
+2026-04-01 14:22:22,491 - web_server - INFO - [PRINTER] ✅ Success=True, Format=mol
+2026-04-01 14:22:22,491 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:22:22,492 - Agents.metrics - INFO - [METRICS] Pipeline score: 96.2% (EXCELLENT) = Ranker 92.5% + Printer 100.0%
+2026-04-01 14:22:22,492 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:22:22,497 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:22:22] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:58:38,264 - __main__ - INFO - ======================================================================
+2026-04-01 14:58:38,264 - __main__ - INFO - Virtual Drug Discovery Lab V2
+2026-04-01 14:58:38,264 - __main__ - INFO - Intelligent LLM-based Classification + 3D Visualization
+2026-04-01 14:58:38,265 - __main__ - INFO - ======================================================================
+2026-04-01 14:58:38,265 - __main__ - INFO - 
+2026-04-01 14:58:38,265 - __main__ - INFO - Starting server...
+2026-04-01 14:58:38,265 - __main__ - INFO - Open http://localhost:5000 in your browser
+2026-04-01 14:58:38,265 - __main__ - INFO - 
+2026-04-01 14:58:38,265 - __main__ - INFO - Press CTRL+C to stop
+2026-04-01 14:58:38,265 - __main__ - INFO - ======================================================================
+2026-04-01 14:58:38,266 - web_server - INFO - [SERVER] Starting on http://127.0.0.1:5000
+2026-04-01 14:58:38,266 - web_server - INFO - [SERVER] Press CTRL+C to stop
+2026-04-01 14:58:38,276 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-01 14:58:38,277 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-04-01 14:58:41,615 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:58:41] "GET / HTTP/1.1" 200 -
+2026-04-01 14:58:41,950 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:58:41] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-04-01 14:58:41,954 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:58:41] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-04-01 14:58:42,033 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:58:42] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-04-01 14:58:48,108 - web_server - INFO - [WEB] Query received: Glucose...
+2026-04-01 14:58:48,111 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:58:48,111 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:58:48,111 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:58:48,200 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:59:04,487 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:59:04,499 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✗
+2026-04-01 14:59:04,515 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-01 14:59:04,517 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-01 14:59:04,519 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:59:07,642 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:59:07,648 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 100%) — SMILES valide, pas de séquence protéique
+2026-04-01 14:59:07,656 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:59:07,657 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-01 14:59:07,660 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:59:07,662 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 100% (EXCELLENT)
+2026-04-01 14:59:07,665 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-01 14:59:07,665 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-01 14:59:07,666 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-01 14:59:07,668 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:59:07,668 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-01 14:59:07,669 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 100%, Model rdkit
+2026-04-01 14:59:07,670 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:59:07,670 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: Glucose
+2026-04-01 14:59:07,727 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: Glucose
+2026-04-01 14:59:07,931 - Agents.printer_3d_agent - INFO - ✅ CASE 1 Success: Generated 3D structure for Glucose (0.20s)
+2026-04-01 14:59:07,932 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-01 14:59:07,933 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-01 14:59:07,933 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (mol): 100.0%
+2026-04-01 14:59:07,934 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 100.0%
+2026-04-01 14:59:07,934 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:59:07,936 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 100.0% (EXCELLENT)
+2026-04-01 14:59:07,937 - web_server - INFO - [PRINTER] ✅ Success=True, Format=mol
+2026-04-01 14:59:07,937 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:59:07,937 - Agents.metrics - INFO - [METRICS] Pipeline score: 96.2% (EXCELLENT) = Ranker 92.5% + Printer 100.0%
+2026-04-01 14:59:07,938 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:59:07,941 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:59:07] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:59:41,468 - web_server - INFO - [WEB] Query received: Pénicilline G — antibiotique...
+2026-04-01 14:59:41,471 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 14:59:41,472 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 14:59:41,472 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 14:59:41,547 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 14:59:41,566 - openai._base_client - INFO - Retrying request to /chat/completions in 0.487251 seconds
+2026-04-01 14:59:44,729 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:59:44,743 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✗
+2026-04-01 14:59:44,754 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 14:59:48,727 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 14:59:48,754 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 50%) — Nom de molécule fourni, mais pas de SMILES
+2026-04-01 14:59:48,757 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 14:59:48,758 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 50%
+2026-04-01 14:59:48,761 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 14:59:48,762 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 50% (POOR)
+2026-04-01 14:59:48,767 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-01 14:59:48,769 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-01 14:59:48,770 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 50.0% (threshold: 0.80)
+2026-04-01 14:59:48,773 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 0.0% (fallback=True)
+2026-04-01 14:59:48,774 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 45.0% (POOR)
+2026-04-01 14:59:48,774 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 50%, Model rdkit
+2026-04-01 14:59:48,775 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 14:59:48,775 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: Pénicilline G
+2026-04-01 14:59:48,830 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: Pénicilline G
+2026-04-01 14:59:48,846 - Agents.printer_3d_agent - ERROR - ❌ CASE 1 Error: No registered converter was able to produce a C++ rvalue of type class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> > from this Python object of type NoneType
+2026-04-01 14:59:48,847 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=False
+2026-04-01 14:59:48,848 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=False, has_structure=False
+2026-04-01 14:59:48,848 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (): 0.0%
+2026-04-01 14:59:48,848 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 0.0%
+2026-04-01 14:59:48,849 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 14:59:48,850 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 10.0% (POOR)
+2026-04-01 14:59:48,850 - web_server - INFO - [PRINTER] ✅ Success=False, Format=
+2026-04-01 14:59:48,851 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 14:59:48,851 - Agents.metrics - INFO - [METRICS] Pipeline score: 27.5% (POOR) = Ranker 45.0% + Printer 10.0%
+2026-04-01 14:59:48,852 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 14:59:48,858 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:59:48] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 14:59:57,981 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:59:57] "GET / HTTP/1.1" 200 -
+2026-04-01 14:59:58,003 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:59:58] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-04-01 14:59:58,006 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 14:59:58] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-04-01 15:00:02,690 - web_server - INFO - [WEB] Query received: Pénicilline G — antibiotique...
+2026-04-01 15:00:02,693 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 15:00:02,695 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 15:00:02,695 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 15:00:02,757 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 15:00:02,774 - openai._base_client - INFO - Retrying request to /chat/completions in 0.460752 seconds
+2026-04-01 15:00:05,599 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:00:05,604 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✗
+2026-04-01 15:00:05,612 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 15:00:09,135 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:00:09,138 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 50%) — Nom de molécule fourni, mais pas de SMILES
+2026-04-01 15:00:09,141 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 15:00:09,141 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 50%
+2026-04-01 15:00:09,143 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 15:00:09,144 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 50% (POOR)
+2026-04-01 15:00:09,146 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-01 15:00:09,146 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-01 15:00:09,147 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 50.0% (threshold: 0.80)
+2026-04-01 15:00:09,147 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 0.0% (fallback=True)
+2026-04-01 15:00:09,149 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 45.0% (POOR)
+2026-04-01 15:00:09,150 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 50%, Model rdkit
+2026-04-01 15:00:09,150 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 15:00:09,151 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: Pénicilline G
+2026-04-01 15:00:09,170 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: Pénicilline G
+2026-04-01 15:00:09,171 - Agents.printer_3d_agent - ERROR - ❌ CASE 1 Error: No registered converter was able to produce a C++ rvalue of type class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> > from this Python object of type NoneType
+2026-04-01 15:00:09,171 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=False
+2026-04-01 15:00:09,172 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=False, has_structure=False
+2026-04-01 15:00:09,172 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (): 0.0%
+2026-04-01 15:00:09,172 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 0.0%
+2026-04-01 15:00:09,173 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 15:00:09,173 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 10.0% (POOR)
+2026-04-01 15:00:09,173 - web_server - INFO - [PRINTER] ✅ Success=False, Format=
+2026-04-01 15:00:09,173 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 15:00:09,173 - Agents.metrics - INFO - [METRICS] Pipeline score: 27.5% (POOR) = Ranker 45.0% + Printer 10.0%
+2026-04-01 15:00:09,174 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 15:00:09,175 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 15:00:09] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 15:00:35,315 - web_server - INFO - [WEB] Query received: Molécule EGFR inhibiteur — recherche...
+2026-04-01 15:00:35,317 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 15:00:35,318 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 15:00:35,319 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 15:00:35,391 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 15:00:35,404 - openai._base_client - INFO - Retrying request to /chat/completions in 0.459880 seconds
+2026-04-01 15:00:37,805 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:00:37,811 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✗
+2026-04-01 15:00:37,819 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 15:00:41,228 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:00:41,235 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 50%) — Données insuffisantes, fallback CASE 1
+2026-04-01 15:00:41,239 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 15:00:41,239 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 50%
+2026-04-01 15:00:41,242 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 15:00:41,243 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 50% (POOR)
+2026-04-01 15:00:41,246 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-01 15:00:41,247 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-01 15:00:41,248 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 50.0% (threshold: 0.80)
+2026-04-01 15:00:41,248 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 0.0% (fallback=True)
+2026-04-01 15:00:41,249 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 45.0% (POOR)
+2026-04-01 15:00:41,250 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 50%, Model rdkit
+2026-04-01 15:00:41,250 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 15:00:41,251 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: EGFR inhibiteur
+2026-04-01 15:00:41,304 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: EGFR inhibiteur
+2026-04-01 15:00:41,306 - Agents.printer_3d_agent - ERROR - ❌ CASE 1 Error: No registered converter was able to produce a C++ rvalue of type class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> > from this Python object of type NoneType
+2026-04-01 15:00:41,307 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=False
+2026-04-01 15:00:41,308 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=False, has_structure=False
+2026-04-01 15:00:41,309 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (): 0.0%
+2026-04-01 15:00:41,309 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 0.0%
+2026-04-01 15:00:41,310 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 15:00:41,311 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 10.0% (POOR)
+2026-04-01 15:00:41,312 - web_server - INFO - [PRINTER] ✅ Success=False, Format=
+2026-04-01 15:00:41,313 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 15:00:41,314 - Agents.metrics - INFO - [METRICS] Pipeline score: 27.5% (POOR) = Ranker 45.0% + Printer 10.0%
+2026-04-01 15:00:41,315 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 15:00:41,317 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 15:00:41] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 15:01:29,643 - web_server - INFO - [WEB] Query received: Dopamine × récepteur D2...
+2026-04-01 15:01:29,646 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 15:01:29,646 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 15:01:29,647 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 15:01:29,715 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 15:01:29,731 - openai._base_client - INFO - Retrying request to /chat/completions in 0.479380 seconds
+2026-04-01 15:01:32,574 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:01:32,624 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✗
+2026-04-01 15:01:32,629 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 15:01:35,923 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:01:35,928 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 2 (confidence: 70%) — Nom suggère une protéine
+2026-04-01 15:01:35,933 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 15:01:35,934 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 63%
+2026-04-01 15:01:35,936 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 15:01:35,938 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 2 | Model: esmfold_nim | Confidence: 63% (FAIR)
+2026-04-01 15:01:35,940 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-01 15:01:35,941 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-01 15:01:35,942 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 63.0% (threshold: 0.80)
+2026-04-01 15:01:35,942 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 0.0% (fallback=True)
+2026-04-01 15:01:35,943 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 47.6% (POOR)
+2026-04-01 15:01:35,943 - web_server - INFO - [RANKER] ✅ Case 2, Confidence 63%, Model esmfold_nim
+2026-04-01 15:01:35,944 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 15:01:35,945 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 2: Dopamine × récepteur D2
+2026-04-01 15:01:35,995 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold Protein Structure: Dopamine × récepteur D2
+2026-04-01 15:01:35,997 - Agents.printer_3d_agent - ERROR - [CASE 2] Error: object of type 'NoneType' has no len()
+2026-04-01 15:01:35,998 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=False
+2026-04-01 15:01:35,998 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=False, has_structure=False
+2026-04-01 15:01:35,999 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (): 0.0%
+2026-04-01 15:01:36,000 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 2): 0.0%
+2026-04-01 15:01:36,001 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 15:01:36,002 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 10.0% (POOR)
+2026-04-01 15:01:36,003 - web_server - INFO - [PRINTER] ✅ Success=False, Format=
+2026-04-01 15:01:36,004 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 15:01:36,004 - Agents.metrics - INFO - [METRICS] Pipeline score: 28.8% (POOR) = Ranker 47.6% + Printer 10.0%
+2026-04-01 15:01:36,005 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 15:01:36,008 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 15:01:36] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 15:02:01,170 - web_server - INFO - [WEB] Query received: I want to study HIV protease inhibitor (ritonavir) docking.
+Ligand SMILES: CC(C)c1ccc(cc1)CC(c2ccccc...
+2026-04-01 15:02:01,173 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 15:02:01,173 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 15:02:01,175 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 15:02:01,227 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 15:02:01,239 - openai._base_client - INFO - Retrying request to /chat/completions in 0.448687 seconds
+2026-04-01 15:02:06,267 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:02:06,273 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-01 15:02:06,283 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-01 15:02:06,286 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-01 15:02:06,291 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 15:02:09,410 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:02:09,416 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide
+2026-04-01 15:02:09,420 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 15:02:09,421 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-01 15:02:09,426 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 15:02:09,427 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-01 15:02:09,429 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-01 15:02:09,429 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-01 15:02:09,430 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-01 15:02:09,430 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 15:02:09,430 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-01 15:02:09,431 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-01 15:02:09,431 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 15:02:09,432 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Ritonavir
+2026-04-01 15:02:09,470 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Ritonavir
+2026-04-01 15:02:09,471 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CC(C)c1ccc(cc1)CC(c2ccccc2)(c3ccc(cc3)C(C)C)C(=O)N4CCCC4C(=O)N(C)c5cccnc5, Protein: 26 AA)
+2026-04-01 15:02:11,131 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-01 15:02:11,134 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-01 15:02:12,078 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (2.61s)
+2026-04-01 15:02:12,079 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-01 15:02:12,080 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-01 15:02:12,081 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-01 15:02:12,082 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-01 15:02:12,083 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 15:02:12,083 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-01 15:02:12,084 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-01 15:02:12,085 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 15:02:12,086 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-01 15:02:12,086 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 15:02:12,090 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 15:02:12] "POST /api/submit HTTP/1.1" 200 -
+2026-04-01 15:03:45,612 - web_server - INFO - [WEB] Query received: I want to study HIV protease inhibitor (ritonavir) docking.
+Ligand SMILES: CC(C)c1ccc(cc1)CC(c2ccccc...
+2026-04-01 15:03:45,614 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-01 15:03:45,614 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-01 15:03:45,615 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-01 15:03:45,695 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-01 15:03:45,707 - openai._base_client - INFO - Retrying request to /chat/completions in 0.488059 seconds
+2026-04-01 15:03:50,455 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:03:50,460 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-01 15:03:50,466 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-01 15:03:50,469 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-01 15:03:50,473 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-01 15:03:53,553 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 15:03:53,557 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide
+2026-04-01 15:03:53,560 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-01 15:03:53,561 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-01 15:03:53,562 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-01 15:03:53,563 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-01 15:03:53,564 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-01 15:03:53,565 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-01 15:03:53,565 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-01 15:03:53,566 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 15:03:53,566 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-01 15:03:53,568 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-01 15:03:53,568 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-01 15:03:53,569 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Ritonavir
+2026-04-01 15:03:53,593 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Ritonavir
+2026-04-01 15:03:53,593 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CC(C)c1ccc(cc1)CC(c2ccccc2)(c3ccc(cc3)C(C)C)C(=O)N4CCCC4C(=O)N(C)c5cccnc5, Protein: 26 AA)
+2026-04-01 15:03:54,306 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-01 15:03:54,308 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-01 15:03:54,735 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (1.14s)
+2026-04-01 15:03:54,736 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-01 15:03:54,736 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-01 15:03:54,736 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-01 15:03:54,737 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-01 15:03:54,737 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-01 15:03:54,737 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-01 15:03:54,737 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-01 15:03:54,738 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-01 15:03:54,738 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-01 15:03:54,738 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-01 15:03:54,739 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2026 15:03:54] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:17:12,084 - __main__ - INFO - ======================================================================
+2026-04-02 10:17:12,086 - __main__ - INFO - Virtual Drug Discovery Lab V2
+2026-04-02 10:17:12,086 - __main__ - INFO - Intelligent LLM-based Classification + 3D Visualization
+2026-04-02 10:17:12,087 - __main__ - INFO - ======================================================================
+2026-04-02 10:17:12,087 - __main__ - INFO - 
+2026-04-02 10:17:12,088 - __main__ - INFO - Starting server...
+2026-04-02 10:17:12,088 - __main__ - INFO - Open http://localhost:5000 in your browser
+2026-04-02 10:17:12,088 - __main__ - INFO - 
+2026-04-02 10:17:12,088 - __main__ - INFO - Press CTRL+C to stop
+2026-04-02 10:17:12,088 - __main__ - INFO - ======================================================================
+2026-04-02 10:17:12,089 - web_server - INFO - [SERVER] Starting on http://127.0.0.1:5000
+2026-04-02 10:17:12,089 - web_server - INFO - [SERVER] Press CTRL+C to stop
+2026-04-02 10:17:12,163 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-02 10:17:12,163 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-04-02 10:17:50,494 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:17:50] "GET / HTTP/1.1" 200 -
+2026-04-02 10:17:50,865 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:17:50] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-04-02 10:17:51,131 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:17:51] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-04-02 10:17:51,202 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:17:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-04-02 10:28:29,489 - __main__ - INFO - ======================================================================
+2026-04-02 10:28:29,490 - __main__ - INFO - Virtual Drug Discovery Lab V2
+2026-04-02 10:28:29,490 - __main__ - INFO - Intelligent LLM-based Classification + 3D Visualization
+2026-04-02 10:28:29,490 - __main__ - INFO - ======================================================================
+2026-04-02 10:28:29,490 - __main__ - INFO - 
+2026-04-02 10:28:29,490 - __main__ - INFO - Starting server...
+2026-04-02 10:28:29,490 - __main__ - INFO - Open http://localhost:5000 in your browser
+2026-04-02 10:28:29,490 - __main__ - INFO - 
+2026-04-02 10:28:29,491 - __main__ - INFO - Press CTRL+C to stop
+2026-04-02 10:28:29,491 - __main__ - INFO - ======================================================================
+2026-04-02 10:28:29,492 - web_server - INFO - [SERVER] Starting on http://127.0.0.1:5000
+2026-04-02 10:28:29,492 - web_server - INFO - [SERVER] Press CTRL+C to stop
+2026-04-02 10:28:29,529 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-02 10:28:29,529 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-04-02 10:29:22,952 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:29:22] "GET / HTTP/1.1" 200 -
+2026-04-02 10:29:23,072 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:29:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-04-02 10:29:23,103 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:29:23] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+2026-04-02 10:30:04,319 - web_server - INFO - [WEB] Query received: Predict docking of ibuprofen on its protein target.
+Drug SMILES: CC(C)Cc1ccc(cc1)C(C)C(=O)O
+Target p...
+2026-04-02 10:30:04,321 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:30:04,322 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:30:04,322 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:30:04,398 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:30:08,740 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:30:08,750 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-02 10:30:08,767 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:30:08,768 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:30:08,770 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:30:12,696 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:30:12,700 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 90%) — SMILES valide + séquence protéique valide
+2026-04-02 10:30:12,702 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:30:12,703 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 94%
+2026-04-02 10:30:12,704 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:30:12,704 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 94% (EXCELLENT)
+2026-04-02 10:30:12,706 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:30:12,708 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:30:12,708 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 93.5% (threshold: 0.80)
+2026-04-02 10:30:12,708 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:30:12,709 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 91.2% (EXCELLENT)
+2026-04-02 10:30:12,709 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 94%, Model diffdock_nim
+2026-04-02 10:30:12,709 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:30:12,710 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: ibuprofen
+2026-04-02 10:30:12,739 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: ibuprofen
+2026-04-02 10:30:12,740 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CC(C)Cc1ccc(cc1)C(C)C(=O)O, Protein: 24 AA)
+2026-04-02 10:30:13,410 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-02 10:30:13,411 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-02 10:30:13,475 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (0.73s)
+2026-04-02 10:30:13,476 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:30:13,476 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:30:13,476 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:30:13,476 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-02 10:30:13,477 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:30:13,477 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-02 10:30:13,477 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:30:13,477 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:30:13,478 - Agents.metrics - INFO - [METRICS] Pipeline score: 90.6% (EXCELLENT) = Ranker 91.2% + Printer 90.0%
+2026-04-02 10:30:13,478 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:30:13,479 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:30:13] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:30:51,838 - web_server - INFO - [WEB] Query received: Analyze cholesterol structure.
+SMILES: CC(C)CCCC(C)C1CCC2C1(CCCC2=CC=C3CC(CCC3=C)O)C
+Important for u...
+2026-04-02 10:30:51,840 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:30:51,840 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:30:51,841 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:30:51,892 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:30:51,901 - openai._base_client - INFO - Retrying request to /chat/completions in 0.421953 seconds
+2026-04-02 10:30:54,842 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:30:54,847 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✗
+2026-04-02 10:30:54,851 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:30:54,853 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:30:54,856 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:30:57,957 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:30:57,961 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 100%) — SMILES valide, pas de séquence protéique
+2026-04-02 10:30:57,963 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:30:57,963 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:30:57,964 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:30:57,965 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 100% (EXCELLENT)
+2026-04-02 10:30:57,966 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:30:57,966 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:30:57,967 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:30:57,967 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:30:57,967 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-02 10:30:57,968 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 100%, Model rdkit
+2026-04-02 10:30:57,968 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:30:57,969 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: cholesterol
+2026-04-02 10:30:57,989 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: cholesterol
+2026-04-02 10:30:58,376 - Agents.printer_3d_agent - INFO - ✅ CASE 1 Success: Generated 3D structure for cholesterol (0.39s)
+2026-04-02 10:30:58,377 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:30:58,377 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:30:58,377 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (mol): 100.0%
+2026-04-02 10:30:58,377 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 100.0%
+2026-04-02 10:30:58,378 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:30:58,378 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 100.0% (EXCELLENT)
+2026-04-02 10:30:58,378 - web_server - INFO - [PRINTER] ✅ Success=True, Format=mol
+2026-04-02 10:30:58,379 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:30:58,379 - Agents.metrics - INFO - [METRICS] Pipeline score: 96.2% (EXCELLENT) = Ranker 92.5% + Printer 100.0%
+2026-04-02 10:30:58,380 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:30:58,380 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:30:58] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:31:27,665 - web_server - INFO - [WEB] Query received: Generate 3D conformer for paracetamol (acetaminophen).
+The SMILES is: CC(=O)Nc1ccc(O)cc1
+It's a comm...
+2026-04-02 10:31:27,667 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:31:27,667 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:31:27,668 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:31:27,701 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:31:27,710 - openai._base_client - INFO - Retrying request to /chat/completions in 0.450740 seconds
+2026-04-02 10:31:30,462 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:31:30,465 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✗
+2026-04-02 10:31:30,468 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:31:30,471 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:31:30,473 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:31:33,484 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:31:33,489 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 100%) — SMILES valide, pas de séquence protéique
+2026-04-02 10:31:33,490 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:31:33,491 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:31:33,492 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:31:33,492 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 100% (EXCELLENT)
+2026-04-02 10:31:33,494 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:31:33,494 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:31:33,494 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:31:33,494 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:31:33,495 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-02 10:31:33,495 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 100%, Model rdkit
+2026-04-02 10:31:33,495 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:31:33,495 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: paracetamol (acetaminophen)
+2026-04-02 10:31:33,516 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: paracetamol (acetaminophen)
+2026-04-02 10:31:33,537 - Agents.printer_3d_agent - INFO - ✅ CASE 1 Success: Generated 3D structure for paracetamol (acetaminophen) (0.02s)
+2026-04-02 10:31:33,538 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:31:33,538 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:31:33,538 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (mol): 100.0%
+2026-04-02 10:31:33,538 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 100.0%
+2026-04-02 10:31:33,539 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:31:33,539 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 100.0% (EXCELLENT)
+2026-04-02 10:31:33,539 - web_server - INFO - [PRINTER] ✅ Success=True, Format=mol
+2026-04-02 10:31:33,539 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:31:33,539 - Agents.metrics - INFO - [METRICS] Pipeline score: 96.2% (EXCELLENT) = Ranker 92.5% + Printer 100.0%
+2026-04-02 10:31:33,539 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:31:33,542 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:31:33] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:31:57,153 - web_server - INFO - [WEB] Query received: Visualize caffeine molecule.
+SMILES: CN1C=NC2=C1C(=O)N(C(=O)N2C)C...
+2026-04-02 10:31:57,155 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:31:57,155 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:31:57,156 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:31:57,190 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:31:57,197 - openai._base_client - INFO - Retrying request to /chat/completions in 0.495826 seconds
+2026-04-02 10:31:59,959 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:31:59,963 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✗
+2026-04-02 10:31:59,967 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:31:59,968 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:31:59,970 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:32:02,962 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:32:02,967 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 100%) — SMILES valide, pas de séquence protéique
+2026-04-02 10:32:02,968 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:32:02,969 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:32:02,971 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:32:02,971 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 100% (EXCELLENT)
+2026-04-02 10:32:02,973 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:32:02,973 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:32:02,974 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:32:02,974 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:32:02,975 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-02 10:32:02,975 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 100%, Model rdkit
+2026-04-02 10:32:02,976 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:32:02,977 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: caffeine
+2026-04-02 10:32:03,003 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: caffeine
+2026-04-02 10:32:03,031 - Agents.printer_3d_agent - INFO - ✅ CASE 1 Success: Generated 3D structure for caffeine (0.03s)
+2026-04-02 10:32:03,031 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:32:03,032 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:32:03,032 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (mol): 100.0%
+2026-04-02 10:32:03,032 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 100.0%
+2026-04-02 10:32:03,033 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:32:03,033 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 100.0% (EXCELLENT)
+2026-04-02 10:32:03,033 - web_server - INFO - [PRINTER] ✅ Success=True, Format=mol
+2026-04-02 10:32:03,033 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:32:03,033 - Agents.metrics - INFO - [METRICS] Pipeline score: 96.2% (EXCELLENT) = Ranker 92.5% + Printer 100.0%
+2026-04-02 10:32:03,035 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:32:03,036 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:32:03] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:32:32,178 - web_server - INFO - [WEB] Query received: Predict the structure of insulin chain A.
+Sequence: GIVEQCCTSICSLYQLENYCN
+This is a 21 amino acid pe...
+2026-04-02 10:32:32,179 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:32:32,179 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:32:32,180 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:32:32,212 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:32:32,218 - openai._base_client - INFO - Retrying request to /chat/completions in 0.454799 seconds
+2026-04-02 10:32:34,773 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:32:34,776 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✓
+2026-04-02 10:32:34,777 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:32:34,778 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:32:34,778 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:32:37,845 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:32:37,848 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 2 (confidence: 90%) — Séquence protéique valide, intention prédire la structure
+2026-04-02 10:32:37,849 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:32:37,849 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 94%
+2026-04-02 10:32:37,850 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:32:37,850 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 2 | Model: esmfold_nim | Confidence: 94% (EXCELLENT)
+2026-04-02 10:32:37,851 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-02 10:32:37,851 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:32:37,851 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 93.5% (threshold: 0.80)
+2026-04-02 10:32:37,852 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:32:37,852 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 83.7% (GOOD)
+2026-04-02 10:32:37,852 - web_server - INFO - [RANKER] ✅ Case 2, Confidence 94%, Model esmfold_nim
+2026-04-02 10:32:37,852 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:32:37,853 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 2: insuline
+2026-04-02 10:32:37,862 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold Protein Structure: insuline
+2026-04-02 10:32:37,862 - Agents.printer_3d_agent - INFO - [CASE 2] Calling ESMFold API: https://health.api.nvidia.com/v1/biology/nvidia/esmfold (sequence length: 21 AA)
+2026-04-02 10:32:40,382 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/nvidia/esmfold "HTTP/1.1 200 OK"
+2026-04-02 10:32:40,404 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold response keys: dict_keys(['pdbs'])
+2026-04-02 10:32:40,405 - Agents.printer_3d_agent - WARNING - [CASE 2] No structure in response, creating mock PDB
+2026-04-02 10:32:40,405 - Agents.printer_3d_agent - INFO - [CASE 2] Success: ESMFold generated protein structure (2.54s)
+2026-04-02 10:32:40,405 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:32:40,405 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:32:40,405 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:32:40,405 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 2): 33.3%
+2026-04-02 10:32:40,406 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:32:40,406 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 80.0% (GOOD)
+2026-04-02 10:32:40,406 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:32:40,406 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:32:40,406 - Agents.metrics - INFO - [METRICS] Pipeline score: 81.8% (GOOD) = Ranker 83.7% + Printer 80.0%
+2026-04-02 10:32:40,406 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:32:40,408 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:32:40] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:34:20,618 - web_server - INFO - [WEB] Query received: Analyze Green Fluorescent Protein (GFP) chromophore region.
+Sequence: MSKGEELFTGVVPILVELDGDVNGHKFSVS...
+2026-04-02 10:34:20,620 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:34:20,620 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:34:20,621 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:34:20,652 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:34:20,657 - openai._base_client - INFO - Retrying request to /chat/completions in 0.494856 seconds
+2026-04-02 10:34:26,950 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:34:26,952 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✓
+2026-04-02 10:34:26,953 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:34:26,953 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:34:26,955 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:34:29,983 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:34:29,985 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 2 (confidence: 100%) — Séquence protéique valide, pas de SMILES
+2026-04-02 10:34:29,986 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:34:29,986 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:34:29,987 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:34:29,987 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 2 | Model: esmfold_nim | Confidence: 100% (EXCELLENT)
+2026-04-02 10:34:29,988 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-02 10:34:29,988 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:34:29,988 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:34:29,989 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:34:29,989 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 85.0% (GOOD)
+2026-04-02 10:34:29,989 - web_server - INFO - [RANKER] ✅ Case 2, Confidence 100%, Model esmfold_nim
+2026-04-02 10:34:29,989 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:34:29,990 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 2: Green Fluorescent Protein (GFP)
+2026-04-02 10:34:30,001 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold Protein Structure: Green Fluorescent Protein (GFP)
+2026-04-02 10:34:30,002 - Agents.printer_3d_agent - INFO - [CASE 2] Calling ESMFold API: https://health.api.nvidia.com/v1/biology/nvidia/esmfold (sequence length: 238 AA)
+2026-04-02 10:34:32,441 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/nvidia/esmfold "HTTP/1.1 200 OK"
+2026-04-02 10:34:32,531 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold response keys: dict_keys(['pdbs'])
+2026-04-02 10:34:32,531 - Agents.printer_3d_agent - WARNING - [CASE 2] No structure in response, creating mock PDB
+2026-04-02 10:34:32,531 - Agents.printer_3d_agent - INFO - [CASE 2] Success: ESMFold generated protein structure (2.53s)
+2026-04-02 10:34:32,532 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:34:32,532 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:34:32,532 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:34:32,532 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 2): 33.3%
+2026-04-02 10:34:32,533 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:34:32,533 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 80.0% (GOOD)
+2026-04-02 10:34:32,533 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:34:32,533 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:34:32,534 - Agents.metrics - INFO - [METRICS] Pipeline score: 82.5% (GOOD) = Ranker 85.0% + Printer 80.0%
+2026-04-02 10:34:32,534 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:34:32,534 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:34:32] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:35:27,747 - web_server - INFO - [WEB] Query received: Molecular docking study: caffeine + adenosine receptor.
+Caffeine SMILES: CN1C=NC2=C1C(=O)N(C(=O)N2C)...
+2026-04-02 10:35:27,748 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:35:27,749 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:35:27,749 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:35:27,780 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:35:27,787 - openai._base_client - INFO - Retrying request to /chat/completions in 0.442586 seconds
+2026-04-02 10:35:31,864 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:35:31,867 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-02 10:35:31,871 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:35:31,872 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:35:31,874 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:35:34,855 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:35:34,858 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide
+2026-04-02 10:35:34,861 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:35:34,861 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:35:34,862 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:35:34,863 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-02 10:35:34,864 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:35:34,865 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:35:34,866 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:35:34,866 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:35:34,868 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-02 10:35:34,869 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-02 10:35:34,869 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:35:34,869 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Caffeine
+2026-04-02 10:35:34,892 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Caffeine
+2026-04-02 10:35:34,892 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CN1C=NC2=C1C(=O)N(C(=O)N2C)C, Protein: 56 AA)
+2026-04-02 10:35:35,602 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-02 10:35:35,603 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-02 10:35:35,645 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (0.75s)
+2026-04-02 10:35:35,645 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:35:35,646 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:35:35,646 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:35:35,647 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-02 10:35:35,647 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:35:35,648 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-02 10:35:35,648 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:35:35,649 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:35:35,649 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-02 10:35:35,649 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:35:35,651 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:35:35] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:36:21,136 - web_server - INFO - [WEB] Query received: Docking analysis of methotrexate on dihydrofolate reductase (DHFR).
+Methotrexate SMILES: CN(C)c1cc(c...
+2026-04-02 10:36:21,138 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:36:21,138 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:36:21,138 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:36:21,171 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:36:21,181 - openai._base_client - INFO - Retrying request to /chat/completions in 0.461112 seconds
+2026-04-02 10:36:26,422 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:36:26,425 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-02 10:36:26,429 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:36:26,431 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:36:26,435 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:36:29,557 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:36:29,559 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide + intention de docking
+2026-04-02 10:36:29,562 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:36:29,562 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:36:29,565 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:36:29,571 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-02 10:36:29,573 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:36:29,575 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:36:29,575 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:36:29,575 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:36:29,576 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-02 10:36:29,576 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-02 10:36:29,576 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:36:29,576 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Methotrexate
+2026-04-02 10:36:29,593 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Methotrexate
+2026-04-02 10:36:29,593 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CN(C)c1cc(ccc1N(C)C)C(=O)Nc2cc(ccc2Nc3nccc(c3)N4CCCC4)S(=O)(=O)N, Protein: 103 AA)
+2026-04-02 10:36:29,850 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-02 10:36:29,851 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-02 10:36:30,238 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (0.64s)
+2026-04-02 10:36:30,239 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:36:30,239 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:36:30,240 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:36:30,241 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-02 10:36:30,241 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:36:30,242 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-02 10:36:30,242 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:36:30,243 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:36:30,243 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-02 10:36:30,244 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:36:30,246 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:36:30] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:38:57,298 - web_server - INFO - [WEB] Query received: Paracetamol docking on COX-1 enzyme.
+Paracetamol SMILES: CC(=O)Nc1ccc(O)cc1
+COX-1 sequence: MPPTTPVQ...
+2026-04-02 10:38:57,299 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:38:57,300 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:38:57,300 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:38:57,337 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:38:57,344 - openai._base_client - INFO - Retrying request to /chat/completions in 0.447415 seconds
+2026-04-02 10:39:01,019 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:39:01,022 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-02 10:39:01,025 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:39:01,027 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:39:01,029 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:39:04,501 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:39:04,503 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 90%) — SMILES valide + séquence protéique valide
+2026-04-02 10:39:04,506 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:39:04,506 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 94%
+2026-04-02 10:39:04,508 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:39:04,508 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 94% (EXCELLENT)
+2026-04-02 10:39:04,511 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:39:04,511 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:39:04,511 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 93.5% (threshold: 0.80)
+2026-04-02 10:39:04,511 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:39:04,511 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 91.2% (EXCELLENT)
+2026-04-02 10:39:04,512 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 94%, Model diffdock_nim
+2026-04-02 10:39:04,512 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:39:04,512 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: Paracetamol
+2026-04-02 10:39:04,535 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: Paracetamol
+2026-04-02 10:39:04,536 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CC(=O)Nc1ccc(O)cc1, Protein: 41 AA)
+2026-04-02 10:39:04,859 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-02 10:39:04,861 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-02 10:39:04,887 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (0.35s)
+2026-04-02 10:39:04,888 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:39:04,889 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:39:04,889 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:39:04,890 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-02 10:39:04,890 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:39:04,890 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-02 10:39:04,890 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:39:04,890 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:39:04,890 - Agents.metrics - INFO - [METRICS] Pipeline score: 90.6% (EXCELLENT) = Ranker 91.2% + Printer 90.0%
+2026-04-02 10:39:04,891 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:39:04,893 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:39:04] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:39:41,459 - web_server - INFO - [WEB] Query received: Docking study of aspirin (SMILES: CC(=O)Oc1ccccc1C(=O)O) with ubiquitin protein.
+Ubiquitin: MNIFEMLR...
+2026-04-02 10:39:41,460 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:39:41,461 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:39:41,461 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:39:41,492 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:39:41,500 - openai._base_client - INFO - Retrying request to /chat/completions in 0.421287 seconds
+2026-04-02 10:39:45,781 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:39:45,785 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-02 10:39:45,787 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:39:45,790 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:39:45,792 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:39:48,810 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:39:48,814 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 3 (confidence: 100%) — SMILES valide + séquence protéique valide
+2026-04-02 10:39:48,816 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:39:48,817 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:39:48,819 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:39:48,819 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 3 | Model: diffdock_nim | Confidence: 100% (EXCELLENT)
+2026-04-02 10:39:48,820 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:39:48,820 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:39:48,821 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:39:48,821 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:39:48,821 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-02 10:39:48,823 - web_server - INFO - [RANKER] ✅ Case 3, Confidence 100%, Model diffdock_nim
+2026-04-02 10:39:48,823 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:39:48,823 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 3: aspirin
+2026-04-02 10:39:48,842 - Agents.printer_3d_agent - INFO - [CASE 3] DiffDock Molecular Complex: aspirin
+2026-04-02 10:39:48,842 - Agents.printer_3d_agent - INFO - [CASE 3] Calling DiffDock API: https://health.api.nvidia.com/v1/biology/mit/diffdock (SMILES: CC(=O)Oc1ccccc1C(=O)O, Protein: 96 AA)
+2026-04-02 10:39:49,152 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/mit/diffdock "HTTP/1.1 500 Internal Server Error"
+2026-04-02 10:39:49,154 - Agents.printer_3d_agent - WARNING - [CASE 3] DiffDock API error 500, using fallback RDKit docking simulation
+2026-04-02 10:39:49,176 - Agents.printer_3d_agent - INFO - [CASE 3] Success: Generated docking complex (0.33s)
+2026-04-02 10:39:49,176 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:39:49,177 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:39:49,177 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:39:49,177 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 3): 66.7%
+2026-04-02 10:39:49,178 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:39:49,178 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 90.0% (GOOD)
+2026-04-02 10:39:49,178 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:39:49,178 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:39:49,179 - Agents.metrics - INFO - [METRICS] Pipeline score: 91.2% (EXCELLENT) = Ranker 92.5% + Printer 90.0%
+2026-04-02 10:39:49,179 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:39:49,180 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:39:49] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:44:34,089 - web_server - INFO - [WEB] Query received: Méthotrexate × DHFR — chimiothérapie...
+2026-04-02 10:44:34,091 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:44:34,091 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:44:34,092 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:44:34,129 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:44:34,141 - openai._base_client - INFO - Retrying request to /chat/completions in 0.459838 seconds
+2026-04-02 10:44:36,517 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:44:36,520 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✗, Seq=✗
+2026-04-02 10:44:36,522 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:44:40,117 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:44:40,121 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 50%) — Nom de molécule fourni, mais pas de SMILES
+2026-04-02 10:44:40,122 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:44:40,123 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 60%
+2026-04-02 10:44:40,123 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:44:40,124 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 60% (FAIR)
+2026-04-02 10:44:40,124 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-02 10:44:40,125 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-02 10:44:40,126 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 60.5% (threshold: 0.80)
+2026-04-02 10:44:40,128 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 0.0% (fallback=True)
+2026-04-02 10:44:40,187 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 47.1% (POOR)
+2026-04-02 10:44:40,187 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 60%, Model rdkit
+2026-04-02 10:44:40,188 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:44:40,188 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: Méthotrexate
+2026-04-02 10:44:40,228 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: Méthotrexate
+2026-04-02 10:44:40,230 - Agents.printer_3d_agent - ERROR - ❌ CASE 1 Error: No registered converter was able to produce a C++ rvalue of type class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> > from this Python object of type NoneType
+2026-04-02 10:44:40,231 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=False
+2026-04-02 10:44:40,232 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=False, has_structure=False
+2026-04-02 10:44:40,232 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (): 0.0%
+2026-04-02 10:44:40,232 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 0.0%
+2026-04-02 10:44:40,232 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:44:40,232 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 10.0% (POOR)
+2026-04-02 10:44:40,233 - web_server - INFO - [PRINTER] ✅ Success=False, Format=
+2026-04-02 10:44:40,233 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:44:40,233 - Agents.metrics - INFO - [METRICS] Pipeline score: 28.5% (POOR) = Ranker 47.1% + Printer 10.0%
+2026-04-02 10:44:40,233 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:44:40,235 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:44:40] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:47:22,732 - web_server - INFO - [WEB] Query received: ATP × PKA humaine domaine catalytique. SMILES ATP: Nc1ncnc2c1ncn2[C@@H]1O[C@H](COP(=O)(O)OP(=O)(O)OP...
+2026-04-02 10:47:22,733 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:47:22,734 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:47:22,734 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:47:22,768 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:47:22,779 - openai._base_client - INFO - Retrying request to /chat/completions in 0.382645 seconds
+2026-04-02 10:47:27,193 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:47:27,196 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✓
+2026-04-02 10:47:27,203 - Agents.ranker_agent - WARNING - [RANKER] Invalid SMILES: Nc1ncnc2c1ncn2[C@@H]1O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)
+2026-04-02 10:47:27,204 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:47:27,206 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:47:27,209 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:47:30,718 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:47:30,725 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 2 (confidence: 80%) — Séquence protéique valide, SMILES invalide
+2026-04-02 10:47:30,726 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:47:30,727 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 87%
+2026-04-02 10:47:30,728 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:47:30,729 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 2 | Model: esmfold_nim | Confidence: 87% (GOOD)
+2026-04-02 10:47:30,730 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 2/4 checks
+2026-04-02 10:47:30,734 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: False → 50.0%
+2026-04-02 10:47:30,734 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 87.0% (threshold: 0.80)
+2026-04-02 10:47:30,737 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:47:30,737 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 62.4% (FAIR)
+2026-04-02 10:47:30,738 - web_server - INFO - [RANKER] ✅ Case 2, Confidence 87%, Model esmfold_nim
+2026-04-02 10:47:30,738 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:47:30,739 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 2: ATP × PKA humaine domaine catalytique
+2026-04-02 10:47:30,767 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold Protein Structure: ATP × PKA humaine domaine catalytique
+2026-04-02 10:47:30,768 - Agents.printer_3d_agent - INFO - [CASE 2] Calling ESMFold API: https://health.api.nvidia.com/v1/biology/nvidia/esmfold (sequence length: 28 AA)
+2026-04-02 10:47:34,349 - httpx - INFO - HTTP Request: POST https://health.api.nvidia.com/v1/biology/nvidia/esmfold "HTTP/1.1 200 OK"
+2026-04-02 10:47:34,379 - Agents.printer_3d_agent - INFO - [CASE 2] ESMFold response keys: dict_keys(['pdbs'])
+2026-04-02 10:47:34,379 - Agents.printer_3d_agent - WARNING - [CASE 2] No structure in response, creating mock PDB
+2026-04-02 10:47:34,380 - Agents.printer_3d_agent - INFO - [CASE 2] Success: ESMFold generated protein structure (3.61s)
+2026-04-02 10:47:34,381 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:47:34,382 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:47:34,382 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (pdb): 100.0%
+2026-04-02 10:47:34,383 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 2): 33.3%
+2026-04-02 10:47:34,384 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:47:34,385 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 80.0% (GOOD)
+2026-04-02 10:47:34,385 - web_server - INFO - [PRINTER] ✅ Success=True, Format=pdb
+2026-04-02 10:47:34,385 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:47:34,385 - Agents.metrics - INFO - [METRICS] Pipeline score: 71.2% (FAIR) = Ranker 62.4% + Printer 80.0%
+2026-04-02 10:47:34,386 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:47:34,387 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:47:34] "POST /api/submit HTTP/1.1" 200 -
+2026-04-02 10:48:07,825 - web_server - INFO - [WEB] Query received: I want to visualize the 3D structure of aspirin (acetylsalicylic acid). SMILES: CC(=O)Oc1ccccc1C(=O)...
+2026-04-02 10:48:07,833 - web_server - INFO - [PIPELINE] 🚀 Starting pipeline V2...
+2026-04-02 10:48:07,833 - web_server - INFO - [PIPELINE] 1/3 Ranker V2 (intelligent classification)...
+2026-04-02 10:48:07,834 - Agents.ranker_agent - INFO - [RANKER] 🚀 Starting V2 intelligent classification...
+2026-04-02 10:48:08,087 - Agents.ranker_agent - INFO - [RANKER] 🔍 Extraction LLM...
+2026-04-02 10:48:08,106 - openai._base_client - INFO - Retrying request to /chat/completions in 0.438512 seconds
+2026-04-02 10:48:11,356 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:48:11,359 - Agents.ranker_agent - INFO - [RANKER] ✅ Extraction: SMILES=✓, Seq=✗
+2026-04-02 10:48:11,361 - Agents.ranker_agent - INFO - [RANKER] ✅ Validation complete
+2026-04-02 10:48:11,363 - Agents.ranker_agent - INFO - [RANKER] 🔍 Detecting ambiguity...
+2026-04-02 10:48:11,364 - Agents.ranker_agent - INFO - [RANKER] 🤖 LLM Intelligent Classification...
+2026-04-02 10:48:14,406 - httpx - INFO - HTTP Request: POST https://tokenfactory.esprit.tn/api/chat/completions "HTTP/1.1 200 OK"
+2026-04-02 10:48:14,409 - Agents.ranker_agent - INFO - [RANKER] ✅ LLM Classification: CASE 1 (confidence: 100%) — SMILES valide, pas de séquence protéique
+2026-04-02 10:48:14,411 - Agents.ranker_agent - INFO - [RANKER] 📊 Computing confidence score...
+2026-04-02 10:48:14,412 - Agents.ranker_agent - INFO - [RANKER] ✅ Confidence: 100%
+2026-04-02 10:48:14,413 - Agents.ranker_agent - INFO - [RANKER] 🎯 Final Decision...
+2026-04-02 10:48:14,414 - Agents.ranker_agent - INFO - [RANKER] ✅ FINAL → CASE 1 | Model: rdkit | Confidence: 100% (EXCELLENT)
+2026-04-02 10:48:14,415 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Extraction: 3/4 checks
+2026-04-02 10:48:14,415 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Classification coherence: True → 100.0%
+2026-04-02 10:48:14,416 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] LLM Confidence: 100.0% (threshold: 0.80)
+2026-04-02 10:48:14,416 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:48:14,416 - evaluators.ranker_evaluator - INFO - [RANKER EVAL] GLOBAL SCORE: 92.5% (EXCELLENT)
+2026-04-02 10:48:14,416 - web_server - INFO - [RANKER] ✅ Case 1, Confidence 100%, Model rdkit
+2026-04-02 10:48:14,416 - web_server - INFO - [PIPELINE] 2/3 3D Printer...
+2026-04-02 10:48:14,417 - Agents.printer_3d_agent - INFO - 🖨️  Starting 3D Printer for Case 1: aspirin (acetylsalicylic acid)
+2026-04-02 10:48:14,439 - Agents.printer_3d_agent - INFO - 🔬 [CASE 1] RDKit 3D Conformer Generation: aspirin (acetylsalicylic acid)
+2026-04-02 10:48:14,462 - Agents.printer_3d_agent - INFO - ✅ CASE 1 Success: Generated 3D structure for aspirin (acetylsalicylic acid) (0.02s)
+2026-04-02 10:48:14,462 - Agents.printer_3d_agent - INFO - ✅ 3D Printer complete: success=True
+2026-04-02 10:48:14,463 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Generation: success=True, has_structure=True
+2026-04-02 10:48:14,463 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Format (mol): 100.0%
+2026-04-02 10:48:14,464 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Quality (Case 1): 100.0%
+2026-04-02 10:48:14,465 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] Reliability: 100.0% (fallback=False)
+2026-04-02 10:48:14,465 - evaluators.printer_evaluator - INFO - [PRINTER EVAL] GLOBAL SCORE: 100.0% (EXCELLENT)
+2026-04-02 10:48:14,466 - web_server - INFO - [PRINTER] ✅ Success=True, Format=mol
+2026-04-02 10:48:14,467 - web_server - INFO - [PIPELINE] 3/3 Metrics aggregation...
+2026-04-02 10:48:14,467 - Agents.metrics - INFO - [METRICS] Pipeline score: 96.2% (EXCELLENT) = Ranker 92.5% + Printer 100.0%
+2026-04-02 10:48:14,467 - web_server - INFO - [PIPELINE] ✅ Complete!
+2026-04-02 10:48:14,468 - werkzeug - INFO - 127.0.0.1 - - [02/Apr/2026 10:48:14] "POST /api/submit HTTP/1.1" 200 -

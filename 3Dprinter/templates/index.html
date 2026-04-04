@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Drug Discovery Lab</title>
+    <script src="https://3Dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+      <div class="header">
+        <h1>Virtual Drug Discovery Lab</h1>
+        <p>Molecular Structure Analysis & 3D Visualization</p>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="content">
+        <!-- INPUT SECTION -->
+        <div class="input-section">
+          <div class="input-card">
+            <h2>Enter Your Query</h2>
+
+            <div class="input-group">
+              <label for="description">Description or Molecule Name:</label>
+              <textarea
+                id="description"
+                placeholder="Examples:&#10;• 'docking of aspirin on COX-2'&#10;• 'ubiquitin protein structure'&#10;• SMILES: CC(=O)Oc1ccccc1C(=O)O&#10;• Gene name: EGFR"
+                rows="6"
+              >
+              </textarea>
+            </div>
+
+            <button id="submitBtn" class="btn-primary" onclick="submitQuery()">
+              <span id="btnText">Analyze</span>
+              <span id="btnSpinner" class="spinner hidden"></span>
+            </button>
+
+            <div id="errorMsg" class="error-message hidden"></div>
+          </div>
+
+          <!-- PRESETS -->
+          <div class="presets">
+            <h3>Quick Examples:</h3>
+            <button class="preset-btn" onclick="loadPreset('aspirin')">
+              Aspirin (Small Molecule)
+            </button>
+            <button class="preset-btn" onclick="loadPreset('ubiquitin')">
+              Ubiquitin (Protein)
+            </button>
+            <button class="preset-btn" onclick="loadPreset('docking')">
+              Docking (Complex)
+            </button>
+          </div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div id="resultsSection" class="results-section hidden">
+          <!-- CASE BADGE -->
+          <div id="caseBadge" class="case-badge"></div>
+
+          <!-- RANKER RESULTS -->
+          <div class="results-card">
+            <h3>Ranker Classification</h3>
+            <div id="rankerInfo" class="info-grid"></div>
+          </div>
+
+          <!-- METRICS -->
+          <div class="results-card">
+            <h3>Performance Metrics</h3>
+            <div id="metricsInfo" class="metrics-grid"></div>
+          </div>
+
+          <!-- 3D VIEWER -->
+          <div class="results-card full-width">
+            <h3>3D Structure</h3>
+            <div
+              id="viewer"
+              style="
+                width: 100%;
+                height: 500px;
+                background: white;
+                border: 2px solid #e0e0e0;
+                border-radius: 8px;
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 15px;
+              "
+            >
+            </div>
+              <div class="controls">
+                <button onclick="setStyle('stick')">Stick</button>
+                <button onclick="setStyle('cartoon')">Cartoon</button>
+                <button onclick="setStyle('sphere')">Sphere</button>
+                <button onclick="setStyle('line')">Line</button>
+                <button onclick="resetView()">Reset</button>
+                <button onclick="toggleSpin()">Spin</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHEMISTRY INFO -->
+          <div class="results-card full-width">
+            <h3>Chemical Information</h3>
+            <div id="chemInfo" class="chem-info"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        Virtual Drug Discovery Lab | Powered by 3Dmol.js + Llama3.1
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,427 @@
+"""
+Printer 3D Evaluator — Métriques de qualité du 3D Printer
+Score global = 35% génération + 25% format + 30% qualité structurale + 10% fiabilité NIM
+"""
+
+import logging
+from typing import Dict, Any, Optional
+from dataclasses import dataclass
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class PrinterMetrics:
+    """Résultats des métriques 3D Printer"""
+    generation_score: float       # 0.0-1.0
+    format_score: float           # 0.0-1.0
+    quality_score: float          # 0.0-1.0
+    reliability_score: float      # 0.0-1.0 (pas de fallback)
+    
+    global_score: float           # Score global pondéré
+    
+    generation_details: Dict[str, Any]
+    format_details: Dict[str, Any]
+    quality_details: Dict[str, Any]
+    reliability_details: Dict[str, Any]
+    
+    status: str                   # "EXCELLENT" / "GOOD" / "FAIR" / "POOR"
+    
+    def __str__(self) -> str:
+        bar = "█" * int(self.global_score * 10) + "░" * (10 - int(self.global_score * 10))
+        return (
+            f"[PRINTER METRICS]\n"
+            f"  Global Score   : {bar} {self.global_score:.1%} ({self.status})\n"
+            f"  ├─ Generation  : {self.generation_score:.1%} (35%)\n"
+            f"  ├─ Format      : {self.format_score:.1%} (25%)\n"
+            f"  ├─ Quality     : {self.quality_score:.1%} (30%)\n"
+            f"  └─ Reliability : {self.reliability_score:.1%} (10%)"
+        )
+
+
+def evaluate_printer(
+    printer_output: Any,
+    case: int,
+    structure_content: Optional[str] = None
+) -> PrinterMetrics:
+    """
+    Évalue la performance du 3D Printer sur 4 dimensions
+    
+    Args:
+        printer_output: Printer3DOutput du Printer
+        case: Numéro du cas (1, 2 ou 3)
+        structure_content: Contenu de la structure (optionnel pour validation avancée)
+    
+    Returns:
+        PrinterMetrics avec scores détaillés
+    """
+    
+    # ═══════════════════════════════════════════════════════════
+    # 1. GENERATION SCORE (35%)
+    # ═══════════════════════════════════════════════════════════
+    
+    generation_details = {}
+    
+    # Check 1 : Success flag
+    success = printer_output.success
+    generation_details["success"] = success
+    
+    # Check 2 : Structure non-vide
+    has_structure = bool(printer_output.structure and len(printer_output.structure) > 0)
+    generation_details["structure_present"] = has_structure
+    generation_details["structure_size"] = len(printer_output.structure or "")
+    
+    # Score génération
+    generation_score = 1.0 if (success and has_structure) else 0.0
+    generation_details["score"] = generation_score
+    
+    logger.info(f"[PRINTER EVAL] Generation: success={success}, has_structure={has_structure}")
+    
+    
+    # ═══════════════════════════════════════════════════════════
+    # 2. FORMAT SCORE (25%)
+    # ═══════════════════════════════════════════════════════════
+    
+    format_details = {}
+    format_score = 0.0
+    
+    if not printer_output.structure:
+        format_details["valid"] = False
+        format_details["reason"] = "Structure vide"
+        format_score = 0.0
+    else:
+        structure = printer_output.structure
+        file_format = printer_output.format.lower()
+        
+        # Check format spécifique
+        if file_format == "pdb":
+            checks = [
+                structure.strip().endswith("END"),
+                "ATOM" in structure or "HETATM" in structure,
+                _count_atoms(structure, "PDB") > 0
+            ]
+        elif file_format == "mol":
+            checks = [
+                structure.strip().endswith("M  END"),
+                "V2000" in structure or "V3000" in structure,
+                _count_atoms(structure, "MOL") > 0
+            ]
+        else:
+            checks = [False]
+        
+        format_details["format"] = file_format
+        format_details["checks"] = {
+            "end_marker": checks[0] if len(checks) > 0 else False,
+            "content_present": checks[1] if len(checks) > 1 else False,
+            "atoms_count": checks[2] if len(checks) > 2 else False
+        }
+        format_details["passed"] = sum(checks)
+        format_details["total"] = len(checks)
+        
+        # Score format
+        format_score = sum(checks) / len(checks) if checks else 0.0
+    
+    format_details["score"] = format_score
+    
+    logger.info(f"[PRINTER EVAL] Format ({printer_output.format}): {format_score:.1%}")
+    
+    
+    # ═══════════════════════════════════════════════════════════
+    # 3. QUALITY SCORE (30%) - Dépend du cas
+    # ═══════════════════════════════════════════════════════════
+    
+    quality_details = {}
+    quality_score = 0.0
+    
+    if case == 1:
+        # CAS 1 : Petite molécule (RDKit)
+        # Check : coordonnées 3D présentes + SMILES round-trip
+        quality_score = _evaluate_case1_quality(printer_output, quality_details)
+        quality_details["case"] = 1
+        quality_details["type"] = "Small molecule (RDKit)"
+        
+    elif case == 2:
+        # CAS 2 : Protéine (ESMFold)
+        # Check : pLDDT >= 70 (si disponible)
+        quality_score = _evaluate_case2_quality(printer_output, quality_details)
+        quality_details["case"] = 2
+        quality_details["type"] = "Protein (ESMFold)"
+        
+    elif case == 3:
+        # CAS 3 : Docking (DiffDock)
+        # Check : ≥ 1 pose + confiance
+        quality_score = _evaluate_case3_quality(printer_output, quality_details)
+        quality_details["case"] = 3
+        quality_details["type"] = "Docking complex (DiffDock)"
+    
+    logger.info(f"[PRINTER EVAL] Quality (Case {case}): {quality_score:.1%}")
+    
+    
+    # ═══════════════════════════════════════════════════════════
+    # 4. RELIABILITY SCORE (10%) - Pas de fallback NIM
+    # ═══════════════════════════════════════════════════════════
+    
+    reliability_details = {}
+    
+    # Check si fallback utilisé
+    model_used = printer_output.model_used.lower()
+    
+    has_fallback = False
+    if case == 2 and "rdkit" in model_used:
+        has_fallback = True  # ESMFold fallback to RDKit mock
+    elif case == 3 and "rdkit" in model_used:
+        has_fallback = True  # DiffDock fallback to RDKit simulation
+    
+    reliability_score = 0.0 if has_fallback else 1.0
+    reliability_details["model_used"] = model_used
+    reliability_details["has_fallback"] = has_fallback
+    reliability_details["score"] = reliability_score
+    
+    logger.info(f"[PRINTER EVAL] Reliability: {reliability_score:.1%} (fallback={has_fallback})")
+    
+    
+    # ═══════════════════════════════════════════════════════════
+    # SCORE GLOBAL (PONDÉRÉ)
+    # ═══════════════════════════════════════════════════════════
+    
+    global_score = (
+        generation_score * 0.35 +
+        format_score * 0.25 +
+        quality_score * 0.30 +
+        reliability_score * 0.10
+    )
+    
+    # Déterminer le statut
+    if global_score >= 0.90:
+        status = "EXCELLENT"
+    elif global_score >= 0.75:
+        status = "GOOD"
+    elif global_score >= 0.60:
+        status = "FAIR"
+    else:
+        status = "POOR"
+    
+    logger.info(f"[PRINTER EVAL] GLOBAL SCORE: {global_score:.1%} ({status})")
+    
+    return PrinterMetrics(
+        generation_score=generation_score,
+        format_score=format_score,
+        quality_score=quality_score,
+        reliability_score=reliability_score,
+        global_score=global_score,
+        generation_details=generation_details,
+        format_details=format_details,
+        quality_details=quality_details,
+        reliability_details=reliability_details,
+        status=status
+    )
+
+
+def _count_atoms(structure: str, format_type: str) -> int:
+    """Compte le nombre d'atomes dans la structure"""
+    if format_type == "PDB":
+        return structure.count("ATOM") + structure.count("HETATM")
+    elif format_type == "MOL":
+        # Première ligne du bloc d'atomes en MOL V2000 : "nb_atomes ..."
+        lines = structure.split("\n")
+        if len(lines) > 3:
+            try:
+                parts = lines[3].split()
+                return int(parts[0])
+            except:
+                return 0
+    return 0
+
+
+def _evaluate_case1_quality(printer_output: Any, details: Dict) -> float:
+    """Évaluation qualité CAS 1 (petite molécule RDKit)"""
+    
+    if not printer_output.structure:
+        details["quality_checks"] = ["structure_present"]
+        details["passed"] = 0
+        return 0.0
+    
+    checks = []
+    
+    # Check 1 : MOL format avec bloc de coordonnées
+    structure = printer_output.structure
+    has_atom_block = ("V2000" in structure or "V3000" in structure)
+    checks.append(has_atom_block)
+    details["has_atom_block"] = has_atom_block
+    
+    # Check 2 : Nombre d'atomes raisonnable
+    atom_count = _count_atoms(structure, "MOL")
+    has_reasonable_atoms = 1 <= atom_count <= 200
+    checks.append(has_reasonable_atoms)
+    details["atom_count"] = atom_count
+    details["atoms_reasonable"] = has_reasonable_atoms
+    
+    # Check 3 : Coordonnées 3D (des nombres en colonnes 31-60 du bloc ATOM)
+    has_coordinates = _has_3d_coordinates(structure, "MOL")
+    checks.append(has_coordinates)
+    details["has_coordinates"] = has_coordinates
+    
+    score = sum(checks) / len(checks) if checks else 0.0
+    details["quality_checks"] = ["atom_block", "reasonable_count", "3d_coords"]
+    details["passed"] = sum(checks)
+    details["total"] = len(checks)
+    
+    return score
+
+
+def _evaluate_case2_quality(printer_output: Any, details: Dict) -> float:
+    """Évaluation qualité CAS 2 (protéine ESMFold)"""
+    
+    if not printer_output.structure:
+        details["quality_checks"] = ["structure_present"]
+        details["passed"] = 0
+        return 0.0
+    
+    checks = []
+    
+    # Check 1 : PDB format
+    structure = printer_output.structure
+    is_pdb = structure.count("ATOM") > 0 or structure.count("HETATM") > 0
+    checks.append(is_pdb)
+    details["is_pdb"] = is_pdb
+    
+    # Check 2 : Nombre de résidus raisonnable (protéine > 20 AA)
+    atom_count = _count_atoms(structure, "PDB")
+    # Moyenne ~3-5 atomes par résidu pour un backbone
+    estimated_residues = atom_count // 4 if atom_count > 0 else 0
+    has_protein_length = estimated_residues >= 20
+    checks.append(has_protein_length)
+    details["estimated_residues"] = estimated_residues
+    details["has_protein_length"] = has_protein_length
+    
+    # Check 3 : pLDDT élevé (si ESMFold a fourni)
+    # pLDDT en colonne B-factor du PDB
+    has_high_confidence = _check_plddt(structure)
+    checks.append(has_high_confidence)
+    details["high_confidence"] = has_high_confidence
+    
+    score = sum(checks) / len(checks) if checks else 0.0
+    details["quality_checks"] = ["pdb_format", "protein_length", "high_confidence"]
+    details["passed"] = sum(checks)
+    details["total"] = len(checks)
+    
+    return score
+
+
+def _evaluate_case3_quality(printer_output: Any, details: Dict) -> float:
+    """Évaluation qualité CAS 3 (docking DiffDock)"""
+    
+    if not printer_output.structure:
+        details["quality_checks"] = ["structure_present"]
+        details["passed"] = 0
+        return 0.0
+    
+    checks = []
+    
+    # Check 1 : PDB format avec ligand (HETATM)
+    structure = printer_output.structure
+    has_ligand = "HETATM" in structure and "ATOM" in structure
+    checks.append(has_ligand)
+    details["has_protein_and_ligand"] = has_ligand
+    
+    # Check 2 : Nombre minimum d'atomes (ligand + protéine)
+    atom_count = _count_atoms(structure, "PDB")
+    has_sufficient_atoms = atom_count >= 10  # Ligand minimum 5 + protéine backbone
+    checks.append(has_sufficient_atoms)
+    details["atom_count"] = atom_count
+    details["sufficient_atoms"] = has_sufficient_atoms
+    
+    # Check 3 : Distances ligand-protéine raisonnables
+    has_good_poses = _check_docking_poses(structure)
+    checks.append(has_good_poses)
+    details["good_poses"] = has_good_poses
+    
+    score = sum(checks) / len(checks) if checks else 0.0
+    details["quality_checks"] = ["ligand_present", "sufficient_atoms", "good_poses"]
+    details["passed"] = sum(checks)
+    details["total"] = len(checks)
+    
+    return score
+
+
+def _has_3d_coordinates(structure: str, format_type: str) -> bool:
+    """Vérifie que des coordonnées 3D sont présentes"""
+    if format_type == "MOL":
+        # MOL V2000 : colonnes 1-10 (x), 11-20 (y), 21-30 (z)
+        lines = structure.split("\n")
+        for line in lines[4:]:  # Skip header
+            if line.startswith("M"):
+                break
+            if len(line) >= 30:
+                try:
+                    x = float(line[0:10])
+                    y = float(line[10:20])
+                    z = float(line[20:30])
+                    # Au moins une coordonnée non-zéro
+                    if x != 0.0 or y != 0.0 or z != 0.0:
+                        return True
+                except:
+                    pass
+    return False
+
+
+def _check_plddt(structure: str) -> bool:
+    """Vérifie les scores pLDDT (B-factor >= 70 indique confiance élevée)"""
+    lines = structure.split("\n")
+    plddt_values = []
+    
+    for line in lines:
+        if line.startswith("ATOM") or line.startswith("HETATM"):
+            try:
+                # B-factor en colonnes 61-66
+                bfactor = float(line[60:66])
+                plddt_values.append(bfactor)
+            except:
+                pass
+    
+    # Moyenne pLDDT >= 70 = haute confiance
+    if plddt_values:
+        mean_plddt = sum(plddt_values) / len(plddt_values)
+        return mean_plddt >= 70.0
+    
+    return False
+
+
+def _check_docking_poses(structure: str) -> bool:
+    """Vérifie que le docking a des poses raisonnables"""
+    # Ligand et protéine à distance raisonnable (< 10 Ų)
+    lines = structure.split("\n")
+    
+    protein_coords = []
+    ligand_coords = []
+    
+    for line in lines:
+        if line.startswith("ATOM"):
+            try:
+                x = float(line[30:38])
+                y = float(line[38:46])
+                z = float(line[46:54])
+                protein_coords.append((x, y, z))
+            except:
+                pass
+        elif line.startswith("HETATM"):
+            try:
+                x = float(line[30:38])
+                y = float(line[38:46])
+                z = float(line[46:54])
+                ligand_coords.append((x, y, z))
+            except:
+                pass
+    
+    if protein_coords and ligand_coords:
+        # Distance minimum entre ligand et protéine
+        min_dist = float('inf')
+        for lx, ly, lz in ligand_coords:
+            for px, py, pz in protein_coords:
+                dist = ((lx - px) ** 2 + (ly - py) ** 2 + (lz - pz) ** 2) ** 0.5
+                min_dist = min(min_dist, dist)
+        
+        # Ligand doit être proche mais pas collé (0.5 < dist < 15 Å)
+        return 0.5 < min_dist < 15.0
+    
+    return False
