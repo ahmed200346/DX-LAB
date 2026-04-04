@@ -68,5 +68,12 @@ Traditional drug discovery requires expensive physical experiments and long iter
 - 💾 Structure export capabilities
 
 ### 5. **Performance Metrics**
-- **Ranker Score**: 30% extraction + 40% classification + 20
-
+- **Ranker Score**: 30% extraction + 40% classification + 20% confidence + 10% reliability
+- **Printer Score**: 35% generation + 25% format + 30% quality + 10% reliability
+- **Pipeline Score**: Combined assessment (0-100%)
+
+---
+
+## 🏗️ Architecture
+
+### System Flow
