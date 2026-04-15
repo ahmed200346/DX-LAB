@@ -93,11 +93,22 @@ def health():
 # ═══════════════════════════════════════════════════════════════
 # PIPELINE PROCESSOR
 # ═══════════════════════════════════════════════════════════════
-
 async def _process_query(description: str) -> dict:
     """Execute complete pipeline: Ranker → Printer → Metrics"""
     
     logger.info("[PIPELINE] 🚀 Starting pipeline V2...")
+    
+    # ────────────────────────────────────────────────────────────
+    # DÉTERMINER LE TYPE D'ENTRÉE
+    # ────────────────────────────────────────────────────────────
+    
+    # Heuristique simple:
+    if len(description) < 30 and not any(c in description for c in ":,;.!?(SMILES|sequence|protein)"):
+        input_type = "direct"  # Ex: "Aspirin", "ubiquitin"
+        logger.info(f"[PIPELINE] Input type: DIRECT (simple name)")
+    else:
+        input_type = "prompt"  # Ex: "Docking of aspirin on COX-2"
+        logger.info(f"[PIPELINE] Input type: PROMPT (description)")
     
     # STAGE 1: RANKER V2
     logger.info("[PIPELINE] 1/3 Ranker V2 (intelligent classification)...")
@@ -108,7 +119,8 @@ async def _process_query(description: str) -> dict:
         logger.error(f"[RANKER] Error: {e}")
         raise Exception(f"Ranker failed: {str(e)[:100]}")
     
-    ranker_metrics = evaluate_ranker(ranker_output)
+    # ← ADAPTER: passer input_type
+    ranker_metrics = evaluate_ranker(ranker_output, input_type=input_type)
     
     logger.info(
         f"[RANKER] ✅ Case {ranker_output.case}, "
@@ -146,6 +158,10 @@ async def _process_query(description: str) -> dict:
     
     # BUILD RESPONSE
     result = {
+        'input_analysis': {
+            'type': input_type,
+            'description': description[:100],
+        },
         'ranker': {
             'case': ranker_output.case,
             'model': ranker_output.model,
@@ -163,7 +179,6 @@ async def _process_query(description: str) -> dict:
                 'drug_likeness': v.get('drug_likeness'),
             }
         },
-        
         'printer': {
             'success': printer_output.success,
             'format': printer_output.format,
@@ -173,7 +188,6 @@ async def _process_query(description: str) -> dict:
             'error_message': printer_output.error_message,
             'structure': printer_output.structure,
         },
-        
         'metrics': {
             'ranker': {
                 'extraction': float(ranker_metrics.extraction_score),
@@ -200,6 +214,112 @@ async def _process_query(description: str) -> dict:
     
     logger.info("[PIPELINE] ✅ Complete!")
     return result
+# async def _process_query(description: str) -> dict:
+#     """Execute complete pipeline: Ranker → Printer → Metrics"""
+    
+#     logger.info("[PIPELINE] 🚀 Starting pipeline V2...")
+    
+#     # STAGE 1: RANKER V2
+#     logger.info("[PIPELINE] 1/3 Ranker V2 (intelligent classification)...")
+    
+#     try:
+#         ranker_output = await rank_molecule_from_description(description)
+#     except Exception as e:
+#         logger.error(f"[RANKER] Error: {e}")
+#         raise Exception(f"Ranker failed: {str(e)[:100]}")
+    
+#     ranker_metrics = evaluate_ranker(ranker_output)
+    
+#     logger.info(
+#         f"[RANKER] ✅ Case {ranker_output.case}, "
+#         f"Confidence {ranker_output.confidence:.0%}, "
+#         f"Model {ranker_output.model}"
+#     )
+    
+#     # STAGE 2: 3D PRINTER
+#     logger.info("[PIPELINE] 2/3 3D Printer...")
+    
+#     try:
+#         v = ranker_output.input_validation
+#         smiles = v.get("smiles") if v.get("has_smiles") else None
+#         protein_seq = v.get("sequence_clean") if v.get("has_protein_sequence") else None
+#         mol_name = v.get("molecule_name", "Unknown")
+        
+#         printer_output = await generate_3d_structure(
+#             ranker_output=ranker_output,
+#             smiles=smiles,
+#             protein_sequence=protein_seq,
+#             molecule_name=mol_name,
+#         )
+#     except Exception as e:
+#         logger.error(f"[PRINTER] Error: {e}")
+#         raise Exception(f"3D Printer failed: {str(e)[:100]}")
+    
+#     printer_metrics = evaluate_printer(printer_output, case=ranker_output.case)
+    
+#     logger.info(f"[PRINTER] ✅ Success={printer_output.success}, Format={printer_output.format}")
+    
+#     # STAGE 3: METRICS
+#     logger.info("[PIPELINE] 3/3 Metrics aggregation...")
+    
+#     pipeline_metrics = compute_pipeline_metrics(ranker_metrics, printer_metrics)
+    
+#     # BUILD RESPONSE
+#     result = {
+#         'ranker': {
+#             'case': ranker_output.case,
+#             'model': ranker_output.model,
+#             'confidence': float(ranker_output.confidence),
+#             'llm_reasoning': ranker_output.llm_reasoning,
+#             'alternative_cases': ranker_output.alternative_cases or [],
+#             'validation': {
+#                 'has_smiles': v.get('has_smiles', False),
+#                 'has_protein_sequence': v.get('has_protein_sequence', False),
+#                 'molecule_name': v.get('molecule_name', 'Unknown'),
+#                 'smiles': v.get('smiles'),
+#                 'sequence_length': v.get('sequence_length', 0),
+#                 'mw': v.get('mw'),
+#                 'logp': v.get('logp'),
+#                 'drug_likeness': v.get('drug_likeness'),
+#             }
+#         },
+        
+#         'printer': {
+#             'success': printer_output.success,
+#             'format': printer_output.format,
+#             'model_used': printer_output.model_used,
+#             'generation_time_s': float(printer_output.generation_time_s),
+#             'structure_size': len(printer_output.structure or ""),
+#             'error_message': printer_output.error_message,
+#             'structure': printer_output.structure,
+#         },
+        
+#         'metrics': {
+#             'ranker': {
+#                 'extraction': float(ranker_metrics.extraction_score),
+#                 'classification': float(ranker_metrics.classification_score),
+#                 'confidence': float(ranker_metrics.confidence_score),
+#                 'reliability': float(ranker_metrics.reliability_score),
+#                 'global': float(ranker_metrics.global_score),
+#                 'status': ranker_metrics.status,
+#             },
+#             'printer': {
+#                 'generation': float(printer_metrics.generation_score),
+#                 'format': float(printer_metrics.format_score),
+#                 'quality': float(printer_metrics.quality_score),
+#                 'reliability': float(printer_metrics.reliability_score),
+#                 'global': float(printer_metrics.global_score),
+#                 'status': printer_metrics.status,
+#             },
+#             'pipeline': {
+#                 'global': float(pipeline_metrics.pipeline_score),
+#                 'status': pipeline_metrics.status,
+#             }
+#         }
+#     }
+    
+#     logger.info("[PIPELINE] ✅ Complete!")
+#     return result
 
 
 # ═══════════════════════════════════════════════════════════════

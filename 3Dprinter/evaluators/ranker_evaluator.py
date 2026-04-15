@@ -38,128 +38,159 @@ class RankerMetrics:
         )
 
 
+# def evaluate_ranker(
+#     ranker_output: Any,
+#     expected_case: Optional[int] = None,
+#     extraction_method: str = "llm"
+# ) -> RankerMetrics:*
+# Dans ranker_evaluator.py — REMPLACER la fonction evaluate_ranker
+
 def evaluate_ranker(
     ranker_output: Any,
     expected_case: Optional[int] = None,
-    extraction_method: str = "llm"
+    extraction_method: str = "llm",
+    input_type: str = "auto"  # ← NOUVEAU: "direct" (nom), "prompt" (description), "auto" (détecte)
 ) -> RankerMetrics:
     """
-    Évalue la performance du Ranker sur 4 dimensions
+    Évalue la performance du Ranker
     
     Args:
-        ranker_output: RankerOutput du Ranker
-        expected_case: Cas attendu (optionnel pour validation)
+        ranker_output: RankerOutput
+        expected_case: Cas attendu (pour validation)
         extraction_method: "llm" ou "regex_fallback"
-    
-    Returns:
-        RankerMetrics avec scores détaillés
+        input_type: "direct" (nom simple), "prompt" (description), "auto" (détection)
     """
     
-    # ═══════════════════════════════════════════════════════════
-    # 1. EXTRACTION SCORE (30%)
-    # ═══════════════════════════════════════════════════════════
+    # ────────────────────────────────────────────────────────────
+    # DÉTECTION AUTO DU TYPE D'ENTRÉE
+    # ────────────────────────────────────────────────────────────
+    
+    if input_type == "auto":
+        # Heuristique simple:
+        # - Si la description contient "SMILES:", "sequence:", "Sequence:", etc. → prompt
+        # - Sinon si c'est un mot simple (< 20 caractères, pas de ponctuation) → direct
+        molecule_name = ranker_output.input_validation.get("molecule_name", "").strip()
+        
+        if len(molecule_name) < 30 and not any(c in molecule_name for c in ",:;.!?"):
+            input_type = "direct"  # Ex: "Aspirin", "ubiquitin", "EGFR"
+        else:
+            input_type = "prompt"  # Ex: "Docking of aspirin on COX-2"
+    
+    logger.info(f"[RANKER EVAL] Input type detected: {input_type}")
+    
+    # ────────────────────────────────────────────────────────────
+    # EXTRACTION SCORE (30%) — adapté au type d'entrée
+    # ────────────────────────────────────────────────────────────
     
     extraction_details = {}
     extraction_checks = []
     
     v = ranker_output.input_validation
     
-    # Check 1 : SMILES présent et valide
-    has_valid_smiles = (
-        v.get("has_smiles", False) and 
-        v.get("smiles_valid", False)
-    )
-    extraction_checks.append(has_valid_smiles)
-    extraction_details["smiles_valid"] = has_valid_smiles
+    if input_type == "direct":
+        # Pour nom simple: extraction plus permissive
+        # Au moins UNE donnée (SMILES OU séquence)
+        has_data = v.get("has_smiles", False) or v.get("has_protein_sequence", False)
+        extraction_checks.append(has_data)
+        extraction_details["has_data"] = has_data
+        
+        # Bonus si nom extrait correctement
+        has_name = bool(v.get("molecule_name") and v.get("molecule_name") != "Unknown")
+        extraction_checks.append(has_name)
+        extraction_details["name_found"] = has_name
+        
+        extraction_score = sum(extraction_checks) / len(extraction_checks)
+        extraction_details["method"] = "direct_input (relaxed)"
+        
+    else:  # "prompt"
+        # Pour description complexe: extraction stricte
+        # Check 1 : SMILES valide
+        has_valid_smiles = (
+            v.get("has_smiles", False) and 
+            v.get("smiles_valid", False)
+        )
+        extraction_checks.append(has_valid_smiles)
+        extraction_details["smiles_valid"] = has_valid_smiles
+        
+        # Check 2 : Séquence valide (si présente)
+        has_valid_sequence = (
+            not v.get("has_protein_sequence", False) or
+            (v.get("has_protein_sequence", False) and v.get("sequence_valid", False))
+        )
+        extraction_checks.append(has_valid_sequence)
+        extraction_details["sequence_valid"] = has_valid_sequence
+        
+        # Check 3 : Nom extrait
+        has_molecule_name = bool(v.get("molecule_name") and v.get("molecule_name") != "Unknown")
+        extraction_checks.append(has_molecule_name)
+        extraction_details["name_found"] = has_molecule_name
+        
+        # Check 4 : Intention extraite
+        has_intention = bool(v.get("experiment_intent") and v.get("experiment_intent") != "unknown")
+        extraction_checks.append(has_intention)
+        extraction_details["intention_found"] = has_intention
+        
+        extraction_score = sum(extraction_checks) / len(extraction_checks)
+        extraction_details["method"] = "prompt (strict)"
     
-    # Check 2 : Séquence protéique valide (si présente)
-    has_valid_sequence = (
-        not v.get("has_protein_sequence", False) or  # Pas obligatoire
-        (v.get("has_protein_sequence", False) and v.get("sequence_valid", False))
-    )
-    extraction_checks.append(has_valid_sequence)
-    extraction_details["sequence_valid"] = has_valid_sequence
-    
-    # Check 3 : Nom de molécule extrait
-    has_molecule_name = bool(v.get("molecule_name") and v.get("molecule_name") != "Unknown")
-    extraction_checks.append(has_molecule_name)
-    extraction_details["name_found"] = has_molecule_name
-    
-    # Check 4 : Intention extraite
-    has_intention = bool(v.get("experiment_intent") and v.get("experiment_intent") != "unknown")
-    extraction_checks.append(has_intention)
-    extraction_details["intention_found"] = has_intention
-    
-    # Score extraction
-    extraction_score = sum(extraction_checks) / len(extraction_checks)
     extraction_details["total_checks"] = len(extraction_checks)
     extraction_details["passed_checks"] = sum(extraction_checks)
     
-    logger.info(f"[RANKER EVAL] Extraction: {sum(extraction_checks)}/{len(extraction_checks)} checks")
+    logger.info(f"[RANKER EVAL] Extraction: {sum(extraction_checks)}/{len(extraction_checks)} checks ({input_type})")
     
-    
-    # ═══════════════════════════════════════════════════════════
-    # 2. CLASSIFICATION SCORE (40%)
-    # ═══════════════════════════════════════════════════════════
+    # ────────────────────────────────────────────────────────────
+    # CLASSIFICATION SCORE (40%)
+    # ────────────────────────────────────────────────────────────
     
     classification_details = {}
     case = ranker_output.case
     
     if expected_case is not None:
-        # Comparaison avec ground-truth
         classification_score = 1.0 if case == expected_case else 0.0
         classification_details["comparison"] = f"expected={expected_case}, predicted={case}"
         classification_details["correct"] = (case == expected_case)
-        logger.info(f"[RANKER EVAL] Classification: {case} vs expected {expected_case} → {classification_score:.1%}")
     else:
-        # Vérification cohérence SMILES/séquence vs cas
+        # Vérification cohérence
         coherence = _check_case_coherence(
             has_smiles=v.get("has_smiles", False),
             has_sequence=v.get("has_protein_sequence", False),
-            predicted_case=case
+            predicted_case=case,
+            input_type=input_type  # ← PASSER LE PARAMÈTRE
         )
         classification_score = 1.0 if coherence else 0.5
         classification_details["coherence_check"] = coherence
         classification_details["predicted_case"] = case
-        logger.info(f"[RANKER EVAL] Classification coherence: {coherence} → {classification_score:.1%}")
     
-    
-    # ═══════════════════════════════════════════════════════════
-    # 3. CONFIDENCE SCORE (20%)
-    # ═══════════════════════════════════════════════════════════
+    # ────────────────────────────────────────────────────────────
+    # CONFIDENCE SCORE (20%)
+    # ────────────────────────────────────────────────────────────
     
     confidence_score = ranker_output.confidence
     confidence_details = {
         "llm_confidence": confidence_score,
-        "threshold_met": confidence_score >= 0.80
+        "threshold_met": confidence_score >= 0.80,
+        "input_type": input_type
     }
     
-    logger.info(f"[RANKER EVAL] LLM Confidence: {confidence_score:.1%} (threshold: 0.80)")
-    
-    
-    # ═══════════════════════════════════════════════════════════
-    # 4. RELIABILITY SCORE (10%) - Pas de fallback
-    # ═══════════════════════════════════════════════════════════
+    # ────────────────────────────────────────────────────────────
+    # RELIABILITY SCORE (10%)
+    # ────────────────────────────────────────────────────────────
     
     extraction_method_used = v.get("extraction_method", "unknown")
     has_fallback = (
         extraction_method_used == "regex_fallback" or
-        confidence_score < 0.80  # Fallback forcé
+        confidence_score < 0.80
     )
     
     reliability_score = 0.0 if has_fallback else 1.0
     reliability_details = {
         "extraction_method": extraction_method_used,
         "has_fallback": has_fallback,
-        "confidence_forced_fallback": confidence_score < 0.80
     }
     
-    logger.info(f"[RANKER EVAL] Reliability: {reliability_score:.1%} (fallback={has_fallback})")
-    
-    
-    # ═══════════════════════════════════════════════════════════
-    # SCORE GLOBAL (PONDÉRÉ)
-    # ═══════════════════════════════════════════════════════════
+    # ────────────────────────────────────────────────────────────
+    # SCORE GLOBAL
+    # ────────────────────────────────────────────────────────────
     
     global_score = (
         extraction_score * 0.30 +
@@ -168,7 +199,6 @@ def evaluate_ranker(
         reliability_score * 0.10
     )
     
-    # Déterminer le statut
     if global_score >= 0.90:
         status = "EXCELLENT"
     elif global_score >= 0.75:
@@ -178,7 +208,7 @@ def evaluate_ranker(
     else:
         status = "POOR"
     
-    logger.info(f"[RANKER EVAL] GLOBAL SCORE: {global_score:.1%} ({status})")
+    logger.info(f"[RANKER EVAL] GLOBAL SCORE: {global_score:.1%} ({status}) [input_type={input_type}]")
     
     return RankerMetrics(
         extraction_score=extraction_score,
@@ -193,19 +223,56 @@ def evaluate_ranker(
     )
 
 
-def _check_case_coherence(has_smiles: bool, has_sequence: bool, predicted_case: int) -> bool:
+def _check_case_coherence(
+    has_smiles: bool, 
+    has_sequence: bool, 
+    predicted_case: int,
+    input_type: str = "auto"  # ← NOUVEAU PARAMÈTRE
+) -> bool:
     """
-    Vérifie la cohérence entre les données et le cas prédit
+    Vérifie cohérence SMILES/séquence vs cas
     
-    Cas 1: SMILES seul (pas de séquence)
-    Cas 2: Séquence seule (pas de SMILES)
-    Cas 3: SMILES + séquence
+    input_type "direct": plus permissif (nom simple)
+    input_type "prompt": stricte (description complexe)
     """
-    if has_smiles and has_sequence:
-        return predicted_case == 3
-    elif has_sequence:
-        return predicted_case == 2
-    elif has_smiles:
-        return predicted_case == 1
-    else:
-        return False
+    
+    if input_type == "direct":
+        # Mode direct: accepter si au moins une donnée est présente
+        # et cohérente avec le cas
+        if has_smiles and not has_sequence:
+            return predicted_case == 1
+        elif has_sequence and not has_smiles:
+            return predicted_case == 2
+        elif has_smiles and has_sequence:
+            return predicted_case == 3
+        else:
+            # Aucune donnée n'est pas incohérent pour direct
+            # car on peut avoir une extraction défaillante
+            return True  # Bénéfice du doute
+    
+    else:  # "prompt" ou autre
+        # Mode prompt: strict
+        if has_smiles and has_sequence:
+            return predicted_case == 3
+        elif has_sequence:
+            return predicted_case == 2
+        elif has_smiles:
+            return predicted_case == 1
+        else:
+            return False
+# def _check_case_coherence(has_smiles: bool, has_sequence: bool, predicted_case: int) -> bool:
+#     """
+#     Vérifie la cohérence entre les données et le cas prédit
+    
+#     Cas 1: SMILES seul (pas de séquence)
+#     Cas 2: Séquence seule (pas de SMILES)
+#     Cas 3: SMILES + séquence
+#     """
+#     if has_smiles and has_sequence:
+#         return predicted_case == 3
+#     elif has_sequence:
+#         return predicted_case == 2
+#     elif has_smiles:
+#         return predicted_case == 1
+#     else:
+#         return False

@@ -119,6 +119,9 @@ function displayResults(data) {
 /**
  * Affiche infos Ranker
  */
+// static/app.js — FIX SMILES DISPLAY
+// ═══════════════════════════════════════════════════════════════
+
 function displayRankerInfo(ranker) {
     const container = document.getElementById('rankerInfo');
     const v = ranker.validation;
@@ -142,11 +145,20 @@ function displayRankerInfo(ranker) {
         </div>
     `;
 
-    if (v.has_smiles) {
+    // ✅ FIX: Display SMILES without word-break
+    if (v.has_smiles && v.smiles) {
+        // Escape HTML special chars
+        const smiles_escaped = v.smiles
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        
         html += `
             <div class="info-item">
                 <div class="info-label">SMILES</div>
-                <div class="info-value">${v.smiles}</div>
+                <div class="info-value smiles-display" title="${smiles_escaped}">
+                    <code>${smiles_escaped}</code>
+                </div>
             </div>
         `;
     }
