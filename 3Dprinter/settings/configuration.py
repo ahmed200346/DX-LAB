@@ -37,7 +37,7 @@ LOCAL_LLAMA_CONFIG: Dict[str, Any] = {
     "provider": os.getenv("LLAMA_PROVIDER", "local_vllm"),
     "server_url": os.getenv("LLAMA_SERVER_URL", "https://tokenfactory.esprit.tn/api"),
     "model": os.getenv("LLAMA_MODEL", "hosted_vllm/Llama-3.1-70B-Instruct"),
-    "api_key": os.getenv("LLAMA_API_KEY", "sk-29b9436d6fbd492bb7ea094141707f91"),
+    "api_key": os.getenv("LLAMA_API_KEY", ""),
     "verify_ssl": os.getenv("LLAMA_VERIFY_SSL", "False").lower() == "true",
     "temperature": float(os.getenv("LLAMA_TEMPERATURE", "0.1")),
     "max_tokens": int(os.getenv("LLAMA_MAX_TOKENS", "1000")),
@@ -54,7 +54,7 @@ LOCAL_LLAMA_CONFIG: Dict[str, Any] = {
 GEMMA4_CONFIG: Dict[str, Any] = {
     "provider": os.getenv("GEMMA_PROVIDER", "google_ai_studio"),
     "model": os.getenv("GEMMA_MODEL", "gemma-3-27b-it"),
-    "api_key": os.getenv("GEMMA_API_KEY", "AIzaSyDTO1ot5NcK7ZDvdJqYRdRorLWtzw8fD5I"),
+    "api_key": os.getenv("GEMMA_API_KEY", ""),
     "base_url": "https://generativelanguage.googleapis.com/v1beta",
     "temperature": float(os.getenv("GEMMA_TEMPERATURE", "0.2")),
     "max_tokens": int(os.getenv("GEMMA_MAX_TOKENS", "1000")),
@@ -92,7 +92,16 @@ NIM_CONFIG: Dict[str, Any] = {
         "description": "Molecular docking: ligand-protein complex prediction"
     }
 }
-
+NEMOTRON_CONFIG: Dict[str, Any] = {
+    "provider": "nvidia_nim",
+    "model": "nvidia/nemotron-3-nano-30b-a3b",
+    "api_key": "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",  # même clé NIM existante
+    "base_url": "https://integrate.api.nvidia.com/v1",
+    "temperature": 0.1,
+    "max_tokens": 1000,
+    "top_p": 0.9,
+    "timeout": 60,
+}
 # ═══════════════════════════════════════════════════════════════
 # 3D PRINTER MODELS CONFIGURATION
 # ═══════════════════════════════════════════════════════════════
@@ -299,16 +308,8 @@ RANKER_CONFIG: Dict[str, Any] = {
 USE_LLAMA = os.getenv("USE_LLAMA", "False").lower() == "true"
 USE_GEMMA = os.getenv("USE_GEMMA", "True").lower() == "true"
 
-if USE_GEMMA:
-    LLM_CONFIG = GEMMA4_CONFIG
-    LLM_PROVIDER = "google_ai_studio"
-elif USE_LLAMA:
-    LLM_CONFIG = LOCAL_LLAMA_CONFIG
-    LLM_PROVIDER = "local_vllm"
-else:
-    # Default to Gemma
-    LLM_CONFIG = GEMMA4_CONFIG
-    LLM_PROVIDER = "google_ai_studio"
+LLM_CONFIG = NEMOTRON_CONFIG
+LLM_PROVIDER = "nvidia_nim"
 
 # ═══════════════════════════════════════════════════════════════
 # LOGGING CONFIGURATION
@@ -372,40 +373,44 @@ class Printer3DOutput:
 # ═══════════════════════════════════════════════════════════════
 # LAZY-LOAD LLM CLIENT
 # ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
+# LLM CLIENT — Nemotron via OpenAI-compatible API (NVIDIA NIM)
+# ═══════════════════════════════════════════════════════════════
 
 _llm_client = None
 
 def get_llm_client():
-    """Initialise le client LLM (Gemma 4 par défaut)"""
+    """Initialise le client Nemotron via NVIDIA NIM (OpenAI-compatible)"""
     global _llm_client
-    
     if _llm_client is None:
-        if LLM_PROVIDER == "google_ai_studio":
-            try:
-                from google import generativeai as genai
-                genai.configure(api_key=GEMMA4_CONFIG["api_key"])
-                _llm_client = genai.GenerativeModel(
-                    model_name=GEMMA4_CONFIG["model"],
-                    generation_config=genai.GenerationConfig(
-                        temperature=GEMMA4_CONFIG["temperature"],
-                        top_p=GEMMA4_CONFIG["top_p"],
-                        max_output_tokens=GEMMA4_CONFIG["max_tokens"],
-                    )
-                )
-                print(f"✅ LLM: Gemma 4 initialized via Google AI Studio")
-            except ImportError:
-                print("❌ ERROR: google-generativeai not installed. Run: pip install google-generativeai")
-                raise
-    
+        from openai import OpenAI
+        _llm_client = OpenAI(
+            api_key=NEMOTRON_CONFIG["api_key"],
+            base_url=NEMOTRON_CONFIG["base_url"],
+        )
+        print(f"✅ LLM: Nemotron-3-Nano initialized via NVIDIA NIM")
     return _llm_client
 
+# Dans configuration.py
 
-def call_llm(prompt: str) -> str:
-    """Appel unifié au LLM"""
+# À ajouter dans configuration.py
+
+def call_llm(prompt: str, system_prompt: str = "") -> str:
+    """Appel unifié à Nemotron — retourne le texte brut"""
     client = get_llm_client()
+    messages = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": prompt})
     try:
-        response = client.generate_content(prompt)
-        return response.text
+        response = client.chat.completions.create(
+            model=NEMOTRON_CONFIG["model"],
+            messages=messages,
+            temperature=NEMOTRON_CONFIG["temperature"],
+            max_tokens=NEMOTRON_CONFIG["max_tokens"],
+            top_p=NEMOTRON_CONFIG["top_p"],
+        )
+        return response.choices[0].message.content
     except Exception as e:
-        print(f"❌ LLM Error: {e}")
+        print(f"❌ Nemotron Error: {e}")
         raise

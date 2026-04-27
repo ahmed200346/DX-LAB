@@ -36,20 +36,12 @@ class RankerMetrics:
             f"  ├─ Confidence  : {self.confidence_score:.1%} (20%)\n"
             f"  └─ Reliability : {self.reliability_score:.1%} (10%)"
         )
-
-
-# def evaluate_ranker(
-#     ranker_output: Any,
-#     expected_case: Optional[int] = None,
-#     extraction_method: str = "llm"
-# ) -> RankerMetrics:*
-# Dans ranker_evaluator.py — REMPLACER la fonction evaluate_ranker
-
 def evaluate_ranker(
     ranker_output: Any,
     expected_case: Optional[int] = None,
     extraction_method: str = "llm",
-    input_type: str = "auto"  # ← NOUVEAU: "direct" (nom), "prompt" (description), "auto" (détecte)
+    input_type: str = "auto",
+    validate_with_rdkit: bool = True  # ← NOUVEAU: Valide avec RDKit
 ) -> RankerMetrics:
     """
     Évalue la performance du Ranker
@@ -260,19 +252,4 @@ def _check_case_coherence(
             return predicted_case == 1
         else:
             return False
-# def _check_case_coherence(has_smiles: bool, has_sequence: bool, predicted_case: int) -> bool:
-#     """
-#     Vérifie la cohérence entre les données et le cas prédit
-    
-#     Cas 1: SMILES seul (pas de séquence)
-#     Cas 2: Séquence seule (pas de SMILES)
-#     Cas 3: SMILES + séquence
-#     """
-#     if has_smiles and has_sequence:
-#         return predicted_case == 3
-#     elif has_sequence:
-#         return predicted_case == 2
-#     elif has_smiles:
-#         return predicted_case == 1
-#     else:
-#         return False
+

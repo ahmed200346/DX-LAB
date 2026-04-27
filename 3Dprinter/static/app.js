@@ -82,77 +82,117 @@ async function submitQuery() {
 /**
  * Affiche les résultats
  */
+/**
+ * Affiche les résultats
+ */
 function displayResults(data) {
     const resultsSection = document.getElementById('resultsSection');
     resultsSection.classList.remove('hidden');
 
+    // Extraction sécurisée du nom (Nemotron peut renvoyer molecule_name ou component_name)
+    const v = data.ranker.validation;
+    const detectedName = v.molecule_name || v.component_name || "Unknown Molecule";
+
+    // ==========================================================
+    // === AJOUTER CETTE LIGNE ICI ==============================
+    // ==========================================================
+    document.getElementById('viewer-title').innerText = `3D Structure: ${detectedName}`;
+    // ==========================================================
+
     // Case badge
     const caseNum = data.ranker.case;
-    const caseName = ['', 'Small Molecule', 'Protein', 'Docking Complex'][caseNum];
+    const caseNames = ['', 'Small Molecule', 'Protein', 'Docking Complex'];
     document.getElementById('caseBadge').innerHTML = 
-        `<strong>CASE ${caseNum}</strong> — ${caseName}`;
+        `<strong>CASE ${caseNum}</strong> — ${caseNames[caseNum]}`;
 
-    // Ranker info
-    displayRankerInfo(data.ranker);
-
-    // Metrics
+    // Mise à jour des sections avec le nom détecté
+    displayRankerInfo(data.ranker, detectedName); // On passe le nom ici
     displayMetrics(data.metrics);
 
-    // 3D Viewer
+    // 3D Viewer - Utilisation du nom détecté pour le titre
     if (data.printer.success && data.printer.structure) {
         display3DStructure(
             data.printer.structure,
             data.printer.format,
-            data.ranker.validation.molecule_name
+            detectedName // Utilisation du nom nettoyé
         );
     }
 
-    // Chemistry info
-    displayChemInfo(data.ranker.validation);
+    displayChemInfo(v);
 
-    // Scroll vers résultats
     setTimeout(() => {
         resultsSection.scrollIntoView({ behavior: 'smooth' });
     }, 100);
 }
+
+// function displayResults(data) {
+//     const resultsSection = document.getElementById('resultsSection');
+//     resultsSection.classList.remove('hidden');
+
+//     // Case badge
+//     const caseNum = data.ranker.case;
+//     const caseName = ['', 'Small Molecule', 'Protein', 'Docking Complex'][caseNum];
+//     document.getElementById('caseBadge').innerHTML = 
+//         `<strong>CASE ${caseNum}</strong> — ${caseName}`;
+
+//     // Ranker info
+//     displayRankerInfo(data.ranker);
+
+//     // Metrics
+//     displayMetrics(data.metrics);
+
+//     // 3D Viewer
+//     if (data.printer.success && data.printer.structure) {
+//         display3DStructure(
+//             data.printer.structure,
+//             data.printer.format,
+//             data.ranker.validation.molecule_name
+//         );
+//     }
+
+//     // Chemistry info
+//     displayChemInfo(data.ranker.validation);
+
+//     // Scroll vers résultats
+//     setTimeout(() => {
+//         resultsSection.scrollIntoView({ behavior: 'smooth' });
+//     }, 100);
+// }
 
 /**
  * Affiche infos Ranker
  */
 // static/app.js — FIX SMILES DISPLAY
 // ═══════════════════════════════════════════════════════════════
-
-function displayRankerInfo(ranker) {
+/**
+ * Affiche les informations du Ranker incluant le nom de la molécule
+ */
+function displayRankerInfo(ranker, moleculeName) {
     const container = document.getElementById('rankerInfo');
     const v = ranker.validation;
 
     let html = `
+        <div class="info-item">
+            <div class="info-label">Molecule Name</div>
+            <div class="info-value" style="font-weight: bold; color: #2c3e50;">${moleculeName}</div>
+        </div>
         <div class="info-item">
             <div class="info-label">Case</div>
             <div class="info-value">Case ${ranker.case}</div>
         </div>
         <div class="info-item">
             <div class="info-label">Model</div>
-            <div class="info-value">${ranker.model}</div>
+            <div class="info-value">${ranker.model.toUpperCase()}</div>
         </div>
         <div class="info-item">
             <div class="info-label">Confidence</div>
             <div class="info-value">${(ranker.confidence * 100).toFixed(0)}%</div>
         </div>
-        <div class="info-item">
-            <div class="info-label">Molecule Name</div>
-            <div class="info-value">${v.molecule_name}</div>
-        </div>
     `;
 
-    // ✅ FIX: Display SMILES without word-break
+    // Affichage du SMILES avec gestion du débordement (déjà présent dans votre code)
     if (v.has_smiles && v.smiles) {
-        // Escape HTML special chars
-        const smiles_escaped = v.smiles
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-        
+        const smiles_escaped = v.smiles.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         html += `
             <div class="info-item">
                 <div class="info-label">SMILES</div>
@@ -167,13 +207,65 @@ function displayRankerInfo(ranker) {
         html += `
             <div class="info-item">
                 <div class="info-label">Protein Length</div>
-                <div class="info-value">${v.sequence_length} AA</div>
+                <div class="info-value">${v.sequence_length || v.sequence.length} AA</div>
             </div>
         `;
     }
 
     container.innerHTML = html;
 }
+// function displayRankerInfo(ranker) {
+//     const container = document.getElementById('rankerInfo');
+//     const v = ranker.validation;
+
+//     let html = `
+//         <div class="info-item">
+//             <div class="info-label">Case</div>
+//             <div class="info-value">Case ${ranker.case}</div>
+//         </div>
+//         <div class="info-item">
+//             <div class="info-label">Model</div>
+//             <div class="info-value">${ranker.model}</div>
+//         </div>
+//         <div class="info-item">
+//             <div class="info-label">Confidence</div>
+//             <div class="info-value">${(ranker.confidence * 100).toFixed(0)}%</div>
+//         </div>
+//         <div class="info-item">
+//             <div class="info-label">Molecule Name</div>
+//             <div class="info-value">${v.molecule_name}</div>
+//         </div>
+//     `;
+
+//     // ✅ FIX: Display SMILES without word-break
+//     if (v.has_smiles && v.smiles) {
+//         // Escape HTML special chars
+//         const smiles_escaped = v.smiles
+//             .replace(/&/g, '&amp;')
+//             .replace(/</g, '&lt;')
+//             .replace(/>/g, '&gt;');
+        
+//         html += `
+//             <div class="info-item">
+//                 <div class="info-label">SMILES</div>
+//                 <div class="info-value smiles-display" title="${smiles_escaped}">
+//                     <code>${smiles_escaped}</code>
+//                 </div>
+//             </div>
+//         `;
+//     }
+
+//     if (v.has_protein_sequence) {
+//         html += `
+//             <div class="info-item">
+//                 <div class="info-label">Protein Length</div>
+//                 <div class="info-value">${v.sequence_length} AA</div>
+//             </div>
+//         `;
+//     }
+
+//     container.innerHTML = html;
+// }
 
 /**
  * Affiche les métriques

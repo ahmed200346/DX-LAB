@@ -22,11 +22,11 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from settings.configuration import (
-    LOCAL_LLAMA_CONFIG,
+    NEMOTRON_CONFIG,
     CLASSIFICATION_CONFIG,
     MoleculeInput,
     RankerOutput,
-    GEMMA4_CONFIG
+    call_llm,
 )
 
 # RDKit optional
@@ -74,48 +74,93 @@ class RankerStateV2(TypedDict):
     error: Optional[str]
 
 
-# ═══════════════════════════════════════════════════════════════
-# LLM CLIENT
-# ═══════════════════════════════════════════════════════════════
 
-# def _get_local_llm(temperature: float = 0.1) -> ChatOpenAI:
-#     """Create LLM client"""
-#     http_client = httpx.Client(verify=LOCAL_LLAMA_CONFIG["verify_ssl"])
-#     return ChatOpenAI(
-#         model=LOCAL_LLAMA_CONFIG["model"],
-#         api_key=LOCAL_LLAMA_CONFIG["api_key"],
-#         base_url=LOCAL_LLAMA_CONFIG["server_url"],
-#         temperature=temperature,
-#         max_tokens=LOCAL_LLAMA_CONFIG["max_tokens"],
-#         http_client=http_client,
-#         timeout=LOCAL_LLAMA_CONFIG["timeout"],
-#     )
 
-# # REMPLACER PAR :
-from google import generativeai as genai
-
-_gemma_client = None
-
-def _get_gemma_client():
-    global _gemma_client
-    if _gemma_client is None:
-        genai.configure(api_key=GEMMA4_CONFIG["api_key"])
-        _gemma_client = genai.GenerativeModel(
-            model_name=GEMMA4_CONFIG["model"],
-            generation_config=genai.GenerationConfig(
-                temperature=GEMMA4_CONFIG["temperature"],
-                top_p=GEMMA4_CONFIG["top_p"],
-                max_output_tokens=GEMMA4_CONFIG["max_tokens"],
-            )
-        )
-    return _gemma_client
+def _call_nemotron(user_prompt: str, system_prompt: str = "") -> str:
+    """Appel Nemotron via le client centralisé dans configuration.py"""
+    return call_llm(prompt=user_prompt, system_prompt=system_prompt)
 
 # ═══════════════════════════════════════════════════════════════
 # NODE 1: EXTRACT FROM DESCRIPTION
 # ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
+# PRE-CLASSIFIER — Détection automatique du type d'input brut
+# ═══════════════════════════════════════════════════════════════
+
+def _detect_raw_input_type(raw: str) -> Dict[str, Any]:
+    """
+    Détecte si l'input brut est directement :
+    - Un SMILES pur  → bypass extraction LLM, CASE 1 direct
+    - Une séquence AA pure → bypass extraction LLM, CASE 2 direct
+    - Les deux (format structuré) → CASE 3 direct
+    - Texte libre / nom → laisser passer au LLM normalement
+    """
+    raw = raw.strip()
+    
+    VALID_AA = set("ACDEFGHIKLMNPQRSTVWY")
+    SMILES_CHARS = set("CNOSPFBrClI@+=-#()[]\\/.%0123456789cnops")
+    
+    # — Test séquence protéique pure (seulement lettres AA valides)
+    raw_upper = raw.upper().replace("\n", "").replace(" ", "")
+    is_pure_sequence = (
+        len(raw_upper) >= 10 and
+        all(c in VALID_AA for c in raw_upper) and
+        len(raw_upper) == len(raw.replace("\n", "").replace(" ", ""))
+    )
+    
+    # — Test SMILES pur (contient caractères chimiques, pas que AA)
+    non_aa_chars = set(raw_upper) - VALID_AA
+    has_smiles_specific = bool(non_aa_chars & set("=()[]#@+\\/.%"))
+    is_pure_smiles = (
+        len(raw) >= 2 and
+        has_smiles_specific and
+        not is_pure_sequence
+    )
+    
+    # — Test format "SMILES|||SEQUENCE" (output d'agent discovery)
+    if "|||" in raw:
+        parts = raw.split("|||")
+        if len(parts) == 2:
+            return {
+                "type": "both",
+                "smiles": parts[0].strip(),
+                "protein_sequence": parts[1].strip(),
+                "bypass_llm": True
+            }
+    
+    if is_pure_sequence:
+        return {
+            "type": "sequence",
+            "smiles": None,
+            "protein_sequence": raw_upper,
+            "bypass_llm": True
+        }
+    
+    if is_pure_smiles:
+        return {
+            "type": "smiles",
+            "smiles": raw,
+            "protein_sequence": None,
+            "bypass_llm": True
+        }
+    
+    # Texte libre / nom de molécule → laisser au LLM
+    return {
+        "type": "text",
+        "smiles": None,
+        "protein_sequence": None,
+        "bypass_llm": False
+    }
+# ═══════════════════════════════════════════════════════════════
+# NODE 1: EXTRACT FROM DESCRIPTION (MODIFIÉ)
+# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
+# NODE 1: EXTRACT FROM DESCRIPTION (VERSION DÉBOGAGÉE ET CORRIGÉE)
+# ═══════════════════════════════════════════════════════════════
 
 async def extract_from_description_node(state: RankerStateV2) -> RankerStateV2:
-    """Extract SMILES, sequence, name from description using LLM"""
+    """Extract SMILES, sequence, name from description using LLM or auto-detection"""
     
     if state.get("use_structured_input"):
         mol = state["molecule_input"]
@@ -137,29 +182,104 @@ async def extract_from_description_node(state: RankerStateV2) -> RankerStateV2:
         state["extraction_confidence"] = 0.0
         return state
     
-    logger.info("[RANKER] 🔍 Extraction LLM...")
+    detected = _detect_raw_input_type(description)
     
-    # Prepare extraction prompt
+    # ═══════════════════════════════════════════════════════════
+    # CAS D'UNE DÉTECTION AUTOMATIQUE (SMILES)
+    # ═══════════════════════════════════════════════════════════
+    if detected["bypass_llm"] and detected["type"] == "smiles":
+        logger.info(f"[RANKER] ⚡ Input brut détecté: type={detected['type']} — Demande du nom au LLM...")
+        
+        smiles_for_naming = detected.get("smiles")
+        extracted_data = {
+            "smiles": smiles_for_naming,
+            "protein_sequence": None,
+            "experiment_intent": f"raw_{detected['type']}_input",
+            "extraction_method": "auto_detection_with_llm_naming",
+            "extraction_confidence": 0.97,
+        }
+
+        # === CORRECTION : DÉTECTION DU NOM PAR LE LLM (PROPRE) ===
+        try:
+            # Prompt qui demande du JSON pour plus de fiabilité
+            naming_prompt = f"""You are a chemist. Identify the most common name for the molecule given by this SMILES string.
+Respond ONLY with a valid JSON object containing the name. Example: {{"molecule_name": "Aspirin"}}.
+If you cannot identify the molecule with high confidence, set the name to "Unknown Molecule".
+
+SMILES: {smiles_for_naming}
+
+JSON:"""
+            
+            # Appel à Nemotron
+            raw_name_response = await asyncio.to_thread(
+                _call_nemotron,
+                naming_prompt,
+                "You are a chemist. Identify the common name of a molecule from its SMILES. Respond with JSON only."
+            )
+            
+            # === LOG CRUCIAL POUR DÉBOGAGE ===
+            logger.info(f"[RANKER] LLM Naming Raw Response: {raw_name_response.strip()}")
+
+            # Nettoyage et parsing du JSON
+            cleaned_response = raw_name_response.strip()
+            cleaned_response = re.sub(r"```json\s*", "", cleaned_response)
+            cleaned_response = re.sub(r"```\s*", "", cleaned_response)
+            
+            parsed_name = json.loads(cleaned_response)
+            molecule_name = parsed_name.get("molecule_name", "Unknown Molecule").strip()
+            
+            if not molecule_name or molecule_name.lower() == "unknown molecule":
+                raise ValueError("LLM could not identify the molecule")
+                
+            extracted_data["molecule_name"] = molecule_name
+            logger.info(f"[RANKER] ✅ Nom identifié par LLM: '{molecule_name}'")
+
+        except Exception as e:
+            logger.error(f"[RANKER] ❌ Erreur lors de la détection du nom par LLM: {e}")
+            extracted_data["molecule_name"] = "Auto-detected" # Valeur par défaut si échec
+            extracted_data["naming_error"] = str(e)
+
+        state["extracted_data"] = extracted_data
+        state["extraction_confidence"] = extracted_data["extraction_confidence"]
+        return state
+
+    # ═══════════════════════════════════════════════════════════
+    # CAS SÉQUENCE PROTÉIQUE OU TEXTE LIBRE
+    # ═══════════════════════════════════════════════════════════
+    if detected["bypass_llm"] and detected["type"] == "sequence":
+        # Pas besoin de demander un nom pour une simple séquence
+        logger.info(f"[RANKER] ⚡ Input brut détecté: type={detected['type']} — Pas de nom à deviner")
+        state["extracted_data"] = {
+            "smiles": None,
+            "protein_sequence": detected.get("protein_sequence"),
+            "molecule_name": "Auto-detected",
+            "experiment_intent": f"raw_{detected['type']}_input",
+            "extraction_method": "auto_detection",
+            "extraction_confidence": 0.97,
+        }
+        state["extraction_confidence"] = 0.97
+        return state
+    
+    # ═══════════════════════════════════════════════════════════
+    # CAS DU TEXTE LIBRE / NOM DE MOLÉCULE
+    # ═══════════════════════════════════════════════════════════
+    logger.info("[RANKER] 🔍 Extraction LLM from free text...")
+    
     extraction_prompt = CLASSIFICATION_CONFIG["extraction_prompt_template"].format(
         description=description
     )
     
     try:
-        # llm = _get_local_llm(temperature=0.05)
-        # messages = [
-        #     SystemMessage(content="Tu es un expert chimiste. Extrais SMILES et séquences de protéines."),
-        #     HumanMessage(content=extraction_prompt),
-        # ]
-        
-        # response = await llm.ainvoke(messages)
-        # raw = response.content.strip()
-        client = _get_gemma_client()
-        full_prompt = (
-            "Tu es un expert chimiste. Extrais SMILES et séquences de protéines.\n\n"
-            + extraction_prompt
+        raw = await asyncio.to_thread(
+            _call_nemotron,
+            extraction_prompt,
+            "Tu es un expert chimiste. Extrais SMILES et séquences de protéines."
         )
-        response = await asyncio.to_thread(client.generate_content, full_prompt)
-        raw = response.text.strip()
+        
+        # === LOG CRUCIAL POUR DÉBOGAGE ===
+        logger.info(f"[RANKER] LLM Extraction Raw Response: {raw.strip()}")
+        
+        raw = raw.strip()
         # Parse JSON
         raw = re.sub(r"```json\s*", "", raw)
         raw = re.sub(r"```\s*", "", raw)
@@ -169,6 +289,9 @@ async def extract_from_description_node(state: RankerStateV2) -> RankerStateV2:
         
         extracted = json.loads(raw)
         
+        # === LOG CRUCIAL POUR DÉBOGAGE ===
+        logger.info(f"[RANKER] LLM Extraction Parsed JSON: {json.dumps(extracted, indent=2)}")
+
         # Cleanup null values
         for key in ["smiles", "protein_sequence"]:
             val = extracted.get(key)
@@ -177,17 +300,27 @@ async def extract_from_description_node(state: RankerStateV2) -> RankerStateV2:
             elif val:
                 extracted[key] = str(val).strip()
         
+        # === CORRECTION : UTILISER L'INPUT COMME NOM SI NON TROUVÉ ===
+        extracted_name = extracted.get("molecule_name")
+        if not extracted_name or extracted_name.lower() in ["unknown", "none"]:
+            # Si le LLM n'a pas trouvé de nom, et que l'input est court, il s'agit peut-être du nom.
+            if len(description.split()) <= 3 and len(description) < 50:
+                 extracted["molecule_name"] = description.strip()
+                 logger.warning(f"[RANKER] LLM didn't provide a name, using input as fallback: '{description.strip()}'")
+            else:
+                 extracted["molecule_name"] = "Unknown Molecule"
+
         extracted["extraction_method"] = "llm"
         state["extracted_data"] = extracted
         state["extraction_confidence"] = float(extracted.get("extraction_confidence", 0.8))
         
         logger.info(
-            f"[RANKER] ✅ Extraction: SMILES={'✓' if extracted.get('smiles') else '✗'}, "
+            f"[RANKER] ✅ Final Extraction: Name='{extracted['molecule_name']}', SMILES={'✓' if extracted.get('smiles') else '✗'}, "
             f"Seq={'✓' if extracted.get('protein_sequence') else '✗'}"
         )
     
     except json.JSONDecodeError as e:
-        logger.warning(f"[RANKER] JSON parse failed, using regex fallback")
+        logger.warning(f"[RANKER] JSON parse failed, using regex fallback. Error: {e}")
         extracted = _regex_fallback_extraction(description)
         extracted["extraction_method"] = "regex_fallback"
         state["extracted_data"] = extracted
@@ -200,6 +333,100 @@ async def extract_from_description_node(state: RankerStateV2) -> RankerStateV2:
         state["extraction_confidence"] = 0.0
     
     return state
+
+
+# async def extract_from_description_node(state: RankerStateV2) -> RankerStateV2:
+#     """Extract SMILES, sequence, name from description using LLM"""
+    
+#     if state.get("use_structured_input"):
+#         mol = state["molecule_input"]
+#         state["extracted_data"] = {
+#             "smiles": mol.smiles,
+#             "protein_sequence": mol.protein_sequence,
+#             "molecule_name": mol.molecule_name or "Unknown",
+#             "experiment_intent": "structured input",
+#             "extraction_method": "structured",
+#         }
+#         state["extraction_confidence"] = 0.99
+#         logger.info("[RANKER] Bypass extraction — structured input")
+#         return state
+    
+#     description = state.get("raw_description", "").strip()
+#     if not description:
+#         state["error"] = "Description vide"
+#         state["extracted_data"] = {}
+#         state["extraction_confidence"] = 0.0
+#         return state
+#     detected = _detect_raw_input_type(description)
+    
+#     if detected["bypass_llm"]:
+#         logger.info(f"[RANKER] ⚡ Input brut détecté: type={detected['type']} — bypass LLM extraction")
+#         state["extracted_data"] = {
+#             "smiles": detected.get("smiles"),
+#             "protein_sequence": detected.get("protein_sequence"),
+#             "molecule_name": "Auto-detected",
+#             "experiment_intent": f"raw_{detected['type']}_input",
+#             "extraction_method": "auto_detection",
+#             "extraction_confidence": 0.97,
+#         }
+#         state["extraction_confidence"] = 0.97
+#         return state
+    
+#     logger.info("[RANKER] 🔍 Extraction LLM...")
+    
+#     # Prepare extraction prompt
+#     extraction_prompt = CLASSIFICATION_CONFIG["extraction_prompt_template"].format(
+#         description=description
+#     )
+    
+#     try:
+
+#         raw = await asyncio.to_thread(
+#         _call_nemotron,
+#         extraction_prompt,
+#         "Tu es un expert chimiste. Extrais SMILES et séquences de protéines."
+#              )
+#         raw = raw.strip()
+#         # Parse JSON
+#         raw = re.sub(r"```json\s*", "", raw)
+#         raw = re.sub(r"```\s*", "", raw)
+#         json_match = re.search(r'\{.*\}', raw, re.DOTALL)
+#         if json_match:
+#             raw = json_match.group(0)
+        
+#         extracted = json.loads(raw)
+        
+#         # Cleanup null values
+#         for key in ["smiles", "protein_sequence"]:
+#             val = extracted.get(key)
+#             if val in (None, "null", "None", "", "N/A"):
+#                 extracted[key] = None
+#             elif val:
+#                 extracted[key] = str(val).strip()
+        
+#         extracted["extraction_method"] = "llm"
+#         state["extracted_data"] = extracted
+#         state["extraction_confidence"] = float(extracted.get("extraction_confidence", 0.8))
+        
+#         logger.info(
+#             f"[RANKER] ✅ Extraction: SMILES={'✓' if extracted.get('smiles') else '✗'}, "
+#             f"Seq={'✓' if extracted.get('protein_sequence') else '✗'}"
+#         )
+    
+#     except json.JSONDecodeError as e:
+#         logger.warning(f"[RANKER] JSON parse failed, using regex fallback")
+#         extracted = _regex_fallback_extraction(description)
+#         extracted["extraction_method"] = "regex_fallback"
+#         state["extracted_data"] = extracted
+#         state["extraction_confidence"] = 0.6
+    
+#     except Exception as e:
+#         logger.error(f"[RANKER] Extraction error: {e}")
+#         state["error"] = str(e)
+#         state["extracted_data"] = {}
+#         state["extraction_confidence"] = 0.0
+    
+#     return state
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -435,18 +662,13 @@ Quelle est la meilleure classification (CASE 1/2/3)?
 """
     
     try:
-        # llm = _get_local_llm(temperature=0.1)
-        # messages = [
-        #     SystemMessage(content=CLASSIFICATION_CONFIG["system_prompt"]),
-        #     HumanMessage(content=context),
-        # ]
-        
-        # response = await llm.ainvoke(messages)
-        # raw = response.content.strip()
-        client = _get_gemma_client()
-        full_prompt = CLASSIFICATION_CONFIG["system_prompt"] + "\n\n" + context
-        response = await asyncio.to_thread(client.generate_content, full_prompt)
-        raw = response.text.strip()
+
+        raw = await asyncio.to_thread(
+    _call_nemotron,
+    context,
+    CLASSIFICATION_CONFIG["system_prompt"]
+)
+        raw = raw.strip()
         
         # Parse JSON
         raw = re.sub(r"```json\s*", "", raw)
