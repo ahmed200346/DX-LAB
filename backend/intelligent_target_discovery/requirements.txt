@@ -1,0 +1,40 @@
+# Core async & HTTP
+aiohttp>=3.9.0
+
+# Vector store
+qdrant-client>=1.9.0
+
+# Redis cache
+redis>=5.0.0
+
+# NLP / embeddings
+sentence-transformers>=2.7.0
+scikit-learn>=1.4.0
+scipy>=1.13.0
+numpy>=1.26.0
+
+# LLM / chunking
+llama-index-core>=0.10.0
+
+# Image handling
+Pillow>=10.3.0
+
+# PDF extraction
+PyMuPDF>=1.24.0
+
+# Web scraping (optional but recommended)
+trafilatura>=1.9.0
+
+# DuckDuckGo fallback search
+duckduckgo-search>=6.0.0
+
+# Data validation
+pydantic>=2.7.0
+
+# Logging
+loguru>=0.7.2
+
+# Scientific stack
+torch>=2.2.0          # required by sentence-transformers
+
+# Note: target_extractor.py must be provided separately (not part of this package).

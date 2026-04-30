@@ -1,0 +1,9 @@
+# Python environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Local outputs / storage
+outputs/
+qdrant_storage/

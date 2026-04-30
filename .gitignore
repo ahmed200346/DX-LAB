@@ -1,0 +1,25 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+.next/
+
+# Environment
+.env
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+
+# Local outputs / storage
+outputs/
+qdrant_storage/
