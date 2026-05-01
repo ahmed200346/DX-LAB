@@ -21,7 +21,7 @@ export default function RootLayout({
       */}
       <head />
 
-      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+      <body className={`bg-[#FCFCFC] dark:bg-[#0a0f1e] ${inter.className}`}>
         <Providers>
           <div className="isolate">
             <Header />
@@ -36,4 +36,3 @@ export default function RootLayout({
 }
 
 import { Providers } from "./providers";
-

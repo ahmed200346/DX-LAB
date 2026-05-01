@@ -12,9 +12,10 @@ const featuresData: Feature[] = [
         <path d="M23.2222 0C22.6699 0 22.2222 0.447715 22.2222 1V12.3333C22.2222 12.8856 22.6699 13.3333 23.2222 13.3333H39C39.5523 13.3333 40 12.8856 40 12.3333V0.999999C40 0.447714 39.5523 0 39 0H23.2222ZM0 39C0 39.5523 0.447715 40 1 40H16.7778C17.3301 40 17.7778 39.5523 17.7778 39V27.6667C17.7778 27.1144 17.3301 26.6667 16.7778 26.6667H1C0.447716 26.6667 0 27.1144 0 27.6667V39ZM0 21.2222C0 21.7745 0.447715 22.2222 1 22.2222H16.7778C17.3301 22.2222 17.7778 21.7745 17.7778 21.2222V0.999999C17.7778 0.447714 17.3301 0 16.7778 0H1C0.447716 0 0 0.447715 0 1V21.2222Z" />
       </svg>
     ),
+    route: "/agents/planner",
     title: "Planner Agent",
     paragraph:
-      "Translates user requirements (e.g., \"find EGFR inhibitors for lung cancer\") into executable screening plans and pipelines.",
+      'Translates user requirements (e.g., "find EGFR inhibitors for lung cancer") into executable screening plans and pipelines.',
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ const featuresData: Feature[] = [
         <path d="M19.408 28.931C19.7603 29.1896 20.2396 29.1894 20.5918 28.9306L36.3556 17.3466L38.8979 15.4883C39.4437 15.0894 39.4446 14.275 38.8996 13.8749L20.5918 0.43445C20.2396 0.175911 19.7604 0.175913 19.4082 0.434452L1.09706 13.8774C0.553051 14.2767 0.552712 15.0892 1.09638 15.4891L3.62222 17.3466L19.408 28.931Z" />
       </svg>
     ),
+    route: "/agent/data-manager",
     title: "Data Manager Agent",
     paragraph:
       "Searches through 100+ million molecular compounds from databases like PubChem and ChEMBL using semantic embeddings to find relevant matches.",
@@ -43,6 +45,7 @@ const featuresData: Feature[] = [
       </svg>
     ),
     title: "Ranker Agent",
+    route: "/agent/ranker",
     paragraph:
       "Evaluates and scores candidate molecules using multi-criteria analysis, looking at factors like binding affinity, toxicity, solubility, and overall drug-likeness.",
   },
@@ -58,6 +61,7 @@ const featuresData: Feature[] = [
       </svg>
     ),
     title: "Discoverer Agent (ITDA)",
+    route: "/agent/discoverer",
     paragraph:
       "Mines scientific literature, validates evidence, and resolves biological targets against databases like UniProt, PDB, and AlphaFold.",
   },
@@ -73,6 +77,7 @@ const featuresData: Feature[] = [
       </svg>
     ),
     title: "Reporter Agent",
+    route: "/agent/reporter",
     paragraph:
       "Compiles all the findings and data into comprehensive scientific reports, complete with explainable AI justifications for its selections.",
   },
@@ -87,9 +92,10 @@ const featuresData: Feature[] = [
         <path d="M18.9474 32.6316C18.9474 35.4705 19.8099 38.0969 21.2941 40.2796C21.7904 41.0094 21.3054 42.1053 20.4229 42.1053H4.21053C1.87368 42.1053 0 40.2316 0 37.8947V4.21053C0 1.89474 1.87368 0 4.21053 0H6.31579H16.8421H29.4737C31.7895 0 33.6842 1.87368 33.6842 4.21053V17.9544C33.6842 18.5032 33.1804 18.9474 32.6316 18.9474C25.0737 18.9474 18.9474 25.0737 18.9474 32.6316Z" />
       </svg>
     ),
-    title: "3D Printer Agent",
+    title: "Drug Safety Agent",
+    route: "/agent/safety",
     paragraph:
-      "Visualizes the complex molecular structures in 3D, allowing researchers to deeply analyze and evaluate the generated compounds.",
+      "Takes a drug name or prescription Searches trusted sources Detects: side effects drug interactions risks (age, conditions) and it gives a final decision",
   },
 ];
 export default featuresData;

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "diazepam",
+    "warning": "Increased sensitivity and risk of cognitive impairment, delirium, falls and fractures in older adults.",
+    "recommendation": "Avoid in older adults.",
+    "evidence": "Beers Criteria"
+  },
+  {
+    "name": "diphenhydramine",
+    "warning": "Strong anticholinergic properties — confusion, dry mouth, constipation, urinary retention.",
+    "recommendation": "Avoid in older adults.",
+    "evidence": "Beers Criteria"
+  },
+  {
+    "name": "nitrofurantoin",
+    "warning": "Risk of pulmonary toxicity and reduced efficacy with low creatinine clearance.",
+    "recommendation": "Avoid for long-term suppression in older adults with low CrCl.",
+    "evidence": "Beers Criteria"
+  },
+  {
+    "name": "meperidine",
+    "warning": "High risk of CNS excitation and neurotoxicity (normeperidine).",
+    "recommendation": "Avoid in older adults.",
+    "evidence": "Beers Criteria"
+  }
+]
