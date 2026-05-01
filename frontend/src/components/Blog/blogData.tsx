@@ -3,44 +3,44 @@ import { Blog } from "@/types/blog";
 const blogData: Blog[] = [
   {
     id: 1,
-    title: "Best UI components for modern websites",
+    title: "Accelerating Drug Discovery with Multi-Agent AI",
     paragraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum neque, laoreet dolor.",
-    image: "/images/blog/blog-01.jpg",
+      "Discover how specialized AI agents collaborate to evaluate millions of compounds, drastically reducing the time required for virtual screening.",
+    image: "https://tse4.mm.bing.net/th/id/OIP.BopP_7cDXQMWknZzREUYVgHaD4?rs=1&pid=ImgDetMain&o=7&rm=3",
     author: {
-      name: "Samuyl Joshi",
+      name: "Dr. Sarah Chen",
       image: "/images/blog/author-03.png",
-      designation: "Graphic Designer",
+      designation: "Lead AI Researcher",
     },
-    tags: ["creative"],
+    tags: ["AI"],
     publishDate: "2025",
   },
   {
     id: 2,
-    title: "9 simple ways to improve your design skills",
+    title: "The Role of Protein Structure Prediction in Modern Medicine",
     paragraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum neque, laoreet dolor.",
-    image: "/images/blog/blog-02.jpg",
+      "An in-depth look at how AlphaFold integration allows our agents to identify promising target proteins with unprecedented accuracy.",
+    image: "https://assets.website-files.com/604197abb436036ef8167c1a/649070a0967bdf5da028ac39_blog_2022-11_protein%20structure%20prediction%20models%401300w.png",
     author: {
-      name: "Musharof Chy",
+      name: "James Peterson",
       image: "/images/blog/author-02.png",
-      designation: "Content Writer",
+      designation: "Bioinformatics Specialist",
     },
-    tags: ["computer"],
+    tags: ["Research"],
     publishDate: "2025",
   },
   {
     id: 3,
-    title: "Tips to quickly improve your coding speed.",
+    title: "Overcoming Data Bottlenecks in Molecular Databases",
     paragraph:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum neque, laoreet dolor.",
-    image: "/images/blog/blog-03.jpg",
+      "Learn how the Data Manager Agent efficiently parses and indexes large-scale datasets from PubChem and ChEMBL for real-time querying.",
+    image: "https://tse1.mm.bing.net/th/id/OIP.F4icetXvE7AILPZC-gEI4AHaEM?rs=1&pid=ImgDetMain&o=7&rm=3",
     author: {
-      name: "Lethium Deo",
+      name: "Dr. Elena Rostova",
       image: "/images/blog/author-03.png",
-      designation: "Graphic Designer",
+      designation: "Data Scientist",
     },
-    tags: ["design"],
+    tags: ["Cheminformatics"],
     publishDate: "2025",
   },
 ];

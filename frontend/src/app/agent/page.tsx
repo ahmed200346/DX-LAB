@@ -143,28 +143,40 @@ export default function AgentPage() {
 
   return (
     <>
-      <Breadcrumb
-        pageName="Intelligent Target Discovery"
-        description="Ask about drug targets, genes, diseases – the agent searches PubMed, extracts targets, and returns structured insights."
-      />
+      {/* Modern Header for Agent Page */}
+      <section className="relative z-10 overflow-hidden pt-28 pb-8 md:pt-[150px] md:pb-[60px] xl:pt-[180px] xl:pb-[80px] 2xl:pt-[210px] 2xl:pb-[100px] bg-blue-50">
+        <div className="container">
+          <div className="-mx-4 flex flex-wrap items-center">
+            <div className="w-full px-4 text-center">
+              <h1 className="mb-5 text-3xl font-extrabold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
+                Intelligent Target <span className="text-primary">Discovery</span>
+              </h1>
+              <p className="mx-auto mb-6 max-w-[600px] text-base font-medium text-body-color">
+                Ask about drug targets, genes, and diseases. Our multi-agent AI searches PubMed, extracts validated targets, and returns structured clinical insights.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <section className="py-16 md:py-20 lg:py-24">
+      {/* Main Agent Interface */}
+      <section className="pb-16 md:pb-20 lg:pb-24 bg-blue-50">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-10/12 xl:w-8/12 mx-auto">
-              <div className="shadow-three dark:bg-gray-dark rounded-sm bg-white px-8 py-10 sm:p-12 dark:shadow-none">
+              <div className="shadow-three dark:bg-gray-dark rounded-xl bg-white border border-gray-100 px-8 py-10 sm:p-12 dark:shadow-none transition-all hover:shadow-lg">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-8">
                     <label
                       htmlFor="prompt"
-                      className="mb-3 block text-sm font-medium text-black dark:text-white"
+                      className="mb-4 flex items-center text-sm font-semibold text-black dark:text-white"
                     >
-                      Your Query
+                      <span className="mr-2 text-xl">💬</span> What would you like to discover?
                     </label>
                     <textarea
                       id="prompt"
-                      rows={5}
-                      className="border-stroke dark:text-body-color-dark dark:shadow-two text-body-color focus:border-primary dark:focus:border-primary w-full rounded-sm border bg-[#f8f8f8] px-6 py-4 text-base outline-none transition-all duration-300 dark:border-transparent dark:bg-[#2C303B]"
+                      rows={4}
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two text-body-color focus:border-primary focus:ring-4 focus:ring-primary/20 dark:focus:border-primary w-full rounded-lg border bg-[#f8f8f8] px-6 py-5 text-lg outline-none transition-all duration-300 dark:border-transparent dark:bg-[#2C303B] shadow-sm resize-y"
                       placeholder="e.g., Identify novel targets for triple‑negative breast cancer, or What are the mechanisms of KRAS G12C inhibitor resistance?"
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
@@ -174,9 +186,19 @@ export default function AgentPage() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="shadow-submit dark:shadow-submit-dark rounded-sm bg-primary px-8 py-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-primary/90 disabled:opacity-50"
+                      className="shadow-submit dark:shadow-submit-dark rounded-full bg-primary px-10 py-4 text-lg font-bold text-white transition-all duration-300 ease-in-out hover:bg-blue-600 hover:shadow-lg disabled:opacity-50 flex items-center gap-2"
                     >
-                      {loading ? "🔍 Discovering targets..." : "Discover Targets"}
+                      {loading ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Discovering...
+                        </>
+                      ) : (
+                        <>✨ Start Discovery Agent</>
+                      )}
                     </button>
                     {sourceCount > 0 && (
                       <span className="text-sm text-body-color dark:text-body-color-dark">

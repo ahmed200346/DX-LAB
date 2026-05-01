@@ -5,11 +5,11 @@ import featuresData from "./featuresData";
 const Features = () => {
   return (
     <>
-      <section id="features" className="py-16 md:py-20 lg:py-28">
+      <section id="features" className="bg-blue-50 py-16 md:py-20 lg:py-28">
         <div className="container">
           <SectionTitle
             title="Main Features"
-            paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+            paragraph="Explore the core capabilities of our multi-agent architecture, designed to streamline your drug discovery pipeline from end to end."
             center
           />
 

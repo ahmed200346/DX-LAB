@@ -5,17 +5,16 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Page | Free Next.js Template for Startup and SaaS",
-  description: "This is About Page for Startup Nextjs Template",
-  // other metadata
+  title: "About DEX-LAB | AI-Powered Virtual Laboratory",
+  description: "DEX-LAB is a state-of-the-art virtual laboratory designed to accelerate drug discovery through a collaborative multi-agent AI system.",
 };
 
 const AboutPage = () => {
   return (
     <>
       <Breadcrumb
-        pageName="About Page"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
+        pageName="Engineering a New Era in Medicine"
+        description="DEX-LAB was founded with a singular purpose: to bridge the gap between massive chemical data and life-saving treatments. We are building the infrastructure for the next generation of biopharma."
       />
       <AboutSectionOne />
       <AboutSectionTwo />
