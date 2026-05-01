@@ -1,8 +1,8 @@
 """
 embeddings.py — EmbeddingService, GroqClient, HFInferenceClient.
 
-These three are tightly coupled: EmbeddingService owns and delegates to
-the other two. Keep them in a single file.
+These are tightly coupled: EmbeddingService owns and delegates to the others.
+Keep them in a single file.
 """
 
 from __future__ import annotations
@@ -83,9 +83,9 @@ class GroqClient:
                     logger.debug(f"Groq responded ({len(content)} chars)")
                     return content
                 elif resp.status == 429:
-                    retry_after = resp.headers.get("retry-after", "?")
+                    retry_after = resp.headers.get("retry-after", "2")
                     logger.warning(f"Groq rate limit (retry-after={retry_after}s) — falling back")
-                    return ""
+                    return f"__RATE_LIMIT__:{retry_after}"
                 elif resp.status in (401, 403):
                     self._unavailable = True
                     error = await resp.text()

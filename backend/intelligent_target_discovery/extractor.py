@@ -12,7 +12,6 @@ Fixes vs v2.0:
     TargetExtractor — no duplicate model loads.
   • Groq retry: up to 2 retries with exponential back-off on transient
     failures inside target/chemical extraction.
-
   • Structured per-request metrics log at INFO level for observability.
 """
 
@@ -32,7 +31,10 @@ from bio_ner import BioNERService
 from chemical_extractor import ChemicalExtractor
 from config import cfg
 from embeddings import EmbeddingService
-from models import ACPIntent, ACPRequest, ACPResponse, ContentType, ValidatedItem
+from models import (
+    ACPIntent, ACPRequest, ACPResponse, ContentType, ValidatedItem,
+    FinalReport,              # <-- FIX: added missing import
+)
 from retriever import QueryDecomposer, RetrieverAgent
 from search import WebSearchAgent
 from storage import CacheLayer, QdrantCollectionManager
@@ -456,7 +458,7 @@ class ExtractorAgent:
             chemicals=_to_dicts(chemicals),
         )
 
-    async def generate_report(self, response: ACPResponse,query: str) -> FinalReport:
+    async def generate_report(self, response: ACPResponse, query: str) -> FinalReport:
         if not hasattr(self, "_report_gen"):
             # Use the Groq client from embedding service
             self._report_gen = ReportGenerator(self.embed_svc.groq)
@@ -470,8 +472,7 @@ class ExtractorAgent:
         )
         qa.load_session(response)
         return qa
-    
-    
+
     async def close(self):
         await self.web_agent.close()
         await self.embed_svc.close()
@@ -480,6 +481,3 @@ class ExtractorAgent:
         await self.target_extractor.close()
         await self.chemical_extractor.close()
         logger.info("ExtractorAgent v3.0 shut down cleanly.")
-
-
-    

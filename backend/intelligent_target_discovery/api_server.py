@@ -7,13 +7,17 @@ import asyncio
 from typing import Dict, List, Optional, Any
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
+from io import BytesIO
 
 from agent import IntelligentTargetDiscoveryAgent
-from models import ContentType, ACPIntent, ACPRequest
+from models import ContentType, ACPIntent, ACPRequest, ACPResponse
 from config import cfg
-from qa_assistant import QAAssistant  # for type hinting
+from qa_assistant import QAAssistant
+from report_generator import ReportGenerator
+
 
 # ============================================================================
 # Pydantic models
@@ -49,9 +53,10 @@ class AskResponse(BaseModel):
     answer: str
 
 # ============================================================================
-# In-memory storage for QA assistants (use Redis in production)
+# In-memory storage for QA assistants and session data (use Redis in production)
 # ============================================================================
 _assistants: Dict[str, QAAssistant] = {}
+_session_data: Dict[str, Dict[str, Any]] = {}   # session_id -> {"response": ACPResponse, "query": str}
 
 # ============================================================================
 # Lifespan manager for agent startup/shutdown
@@ -100,7 +105,7 @@ def _map_data_types(types: List[str]) -> List[ContentType]:
     return result if result else [ContentType.TEXT, ContentType.PDF]
 
 def _deduplicate_sources(items: List[Dict]) -> List[Dict]:
-    """Remove duplicates based on source_url."""
+    """Remove duplicates based on source_url. Preserves the first occurrence."""
     seen = set()
     unique = []
     for item in items:
@@ -124,11 +129,12 @@ def _extract_targets_list(targets: List[Any]) -> List[Dict[str, Any]]:
         result.append(d)
     return result
 
-def _build_html_report(response, prompt: str) -> str:
+def _build_html_report(response: ACPResponse, prompt: str) -> str:
     """Generate beautifully formatted HTML from the agent's response."""
-    # Deduplicate sources
+    # Collect all items and attach content type (for HTML display we don't need ctype)
     all_items = []
     for ctype, items in response.payload.items():
+        # For HTML we don't need to store ctype per item, just extend
         all_items.extend(items)
     unique_sources = _deduplicate_sources(all_items)
 
@@ -179,7 +185,7 @@ def _build_html_report(response, prompt: str) -> str:
 async def generate(request: GenerateRequest):
     """
     Process a user prompt – uses REFRESH intent to force full target extraction.
-    Creates a QA assistant for the session and stores it.
+    Creates a QA assistant for the session and stores the response for later report generation.
     """
     try:
         data_types = _map_data_types(request.data_types)
@@ -197,19 +203,44 @@ async def generate(request: GenerateRequest):
         
         response = await app.state.agent.handle_request(acp_request)
         
-        # Create QA assistant and store it
-        try:
-            assistant = await app.state.agent.create_qa_assistant(response)
+        # Store the response and query for the session (for later report download)
+        _session_data[response.session_id] = {
+            "response": response,
+            "query": request.prompt,
+        }
+        
+        # ─────────────────────────────────────────────────────────────────────
+        # Create QA assistant (Groq only)
+        # ─────────────────────────────────────────────────────────────────────
+        embed_service = getattr(app.state.agent, '_embed', None)
+        qdrant_mgr    = getattr(app.state.agent, '_qdrant', None)
+        
+        if embed_service and qdrant_mgr:
+            assistant = QAAssistant(
+                groq_client=embed_service.groq,
+                embed_service=embed_service,
+                qdrant_mgr=qdrant_mgr,
+            )
+            assistant.load_session(response)
             _assistants[response.session_id] = assistant
             print(f"✅ Created QA assistant for session {response.session_id}")
-        except Exception as e:
-            print(f"⚠️ Failed to create QA assistant: {e}")
-            # Continue without assistant
+        else:
+            # Fallback to agent’s method
+            assistant = await app.state.agent.create_qa_assistant(response)
+            _assistants[response.session_id] = assistant
+            print(f"⚠️ Created QA assistant via agent fallback")
         
-        # Deduplicate sources for JSON
+        # ─────────────────────────────────────────────────────────────────────
+        # Store content type on each source item during aggregation
+        # so that later we can retrieve the correct type per source.
+        # ─────────────────────────────────────────────────────────────────────
         all_items = []
         for ctype, items in response.payload.items():
+            for item in items:
+                # Attach the content type as a new field to each item
+                item["content_type"] = ctype
             all_items.extend(items)
+        
         unique_sources = _deduplicate_sources(all_items)
         
         sources_json = []
@@ -219,7 +250,7 @@ async def generate(request: GenerateRequest):
                 "url": src.get("source_url", ""),
                 "pmid": src.get("pmid", ""),
                 "doi": src.get("doi", ""),
-                "type": str(ctype) if 'ctype' in locals() else "unknown",
+                "type": src.get("content_type", "unknown"),
             })
         
         html_report = _build_html_report(response, request.prompt)
@@ -264,6 +295,48 @@ async def ask(request: AskRequest):
     except Exception as e:
         print(f"❌ Error in /ask: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/download-report")
+async def download_report(session_id: str):
+    """
+    Generate a properly formatted DOCX report for a completed discovery session.
+    """
+    data = _session_data.get(session_id)
+    if not data:
+        raise HTTPException(
+            status_code=404,
+            detail="Session not found. Please run a discovery query first."
+        )
+    
+    acp_response = data["response"]
+    query = data["query"]
+    
+    # Obtain Groq client from the agent (if available)
+    groq_client = None
+    embed_service = getattr(app.state.agent, '_embed', None)
+    if embed_service and hasattr(embed_service, 'groq'):
+        groq_client = embed_service.groq
+    
+    report_gen = ReportGenerator(groq_client=groq_client)
+    
+    # Generate the structured report (async)
+    final_report = await report_gen.generate(
+        response=acp_response,
+        query=query,
+        interim_ner={}   # TODO: pass actual NER data from pipeline if available
+    )
+    
+    # Export to DOCX bytes
+    docx_bytes = await report_gen.to_docx(final_report)
+    
+    # Return as downloadable file
+    return StreamingResponse(
+        BytesIO(docx_bytes),
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={
+            "Content-Disposition": f'attachment; filename="discovery_report_{session_id}.docx"'
+        }
+    )
 
 @app.get("/health")
 async def health():

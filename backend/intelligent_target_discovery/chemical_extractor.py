@@ -68,6 +68,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from io import StringIO
 from typing import Any, Dict, List, Optional, Tuple
+from urllib.parse import quote  # <-- FIX: stable URL encoding
 
 import aiohttp
 from loguru import logger
@@ -303,9 +304,10 @@ class ChemicalExtractor:
 
         excerpts = []
         for idx, item in enumerate(sorted_items):
-            content = getattr(item, "content", None) or item.get("content", "")
-            title   = getattr(item, "title",   None) or item.get("title",   "")
-            pmid    = getattr(item, "pmid",    None) or item.get("pmid",    "")
+            # FIXED: use getattr() only; item is ValidatedItem, not dict
+            content = getattr(item, "content", "") or ""
+            title   = getattr(item, "title",   "") or ""
+            pmid    = getattr(item, "pmid",    "") or ""
             label   = f"[{idx+1}] {title}" + (f" (PMID:{pmid})" if pmid else "")
             excerpts.append(f"{label}\n{content[:800]}")
 
@@ -347,12 +349,13 @@ class ChemicalExtractor:
         dois:  List[str] = []
         count = 0
         for item in items:
-            content = getattr(item, "content", None) or item.get("content", "")
-            if not name_re.search(content):
+            content = getattr(item, "content", "")
+            if not content or not name_re.search(content):
                 continue
             count += 1
-            pmid = getattr(item, "pmid", None) or item.get("pmid")
-            doi  = getattr(item, "doi",  None) or item.get("doi")
+            # FIXED: use getattr() only
+            pmid = getattr(item, "pmid", None)
+            doi  = getattr(item, "doi",  None)
             if pmid and str(pmid) not in pmids:
                 pmids.append(str(pmid))
             if doi and str(doi) not in dois:
@@ -367,9 +370,10 @@ class ChemicalExtractor:
         try:
             sess = await self._get_session()
 
+            # FIX: use urllib.parse.quote instead of aiohttp.helpers.quote
             cid_url = (
                 f"{_PUBCHEM_BASE}/compound/name/"
-                f"{aiohttp.helpers.quote(name, safe='')}/cids/JSON"
+                f"{quote(name, safe='')}/cids/JSON"
             )
             async with sess.get(cid_url) as resp:
                 if resp.status == 404:

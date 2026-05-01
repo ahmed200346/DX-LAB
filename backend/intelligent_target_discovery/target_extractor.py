@@ -211,11 +211,10 @@ class TargetExtractor:
 
     def __init__(self, groq_client=None, ner_service=None):
         self._groq       = groq_client
-        self._ner = ner_service
+        self._ner = ner_service if ner_service is not None else BioNERService()
         self._session:   Optional[aiohttp.ClientSession] = None
 
         # v2.0 service objects
-        self._ner         = BioNERService()
         self._uniprot_val = UniProtValidator()
         self._pubmed_freq = PubMedFrequencyScorer()
         self._pathway_map = PathwayMapper()
