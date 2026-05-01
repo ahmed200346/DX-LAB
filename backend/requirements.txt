@@ -1,3 +1,7 @@
+# Web framework (NEW)
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+
 # Core async & HTTP
 aiohttp>=3.9.0
 
@@ -25,6 +29,9 @@ PyMuPDF>=1.24.0
 # Web scraping (optional but recommended)
 trafilatura>=1.9.0
 
+
+# DuckDuckGo search
+ddgs>=6.0.0
 # DuckDuckGo fallback search
 duckduckgo-search>=6.0.0
 

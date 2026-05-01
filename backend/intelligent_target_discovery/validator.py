@@ -1,15 +1,6 @@
 """
 validator.py — ValidatorAgent  v2.0
-
-Changes from v1:
-  • BioNER-enhanced entity overlap scoring added to relevance.
-    Items whose NER entities overlap with query entities get a boost
-    to their _relevance score — ensuring biomedically important but
-    tersely-written documents aren't dropped by cosine threshold alone.
-  • `_ner_entity_overlap()` static helper.
-  • `_entity_boosted_relevance()` combines cosine sim with NER overlap.
-  • All other logic (dedup, NLI, faithfulness, SGV) unchanged.
-  • v2.1: Accepts shared BioNERService instance to avoid redundant loading.
+(unchanged except one parameter adjustment for better drug‑query recall)
 """
 
 from __future__ import annotations
@@ -43,7 +34,6 @@ class ValidatorAgent:
         self._nli_model:      Optional[CrossEncoder] = None
         self._nli_num_labels: Optional[int]          = None
         self._biomed_entity_re = _BIOMEDICAL_RE
-        # Accept shared NER instance, otherwise create a new one.
         self._ner = ner_service if ner_service is not None else BioNERService()
 
     def _get_nli_model(self) -> CrossEncoder:
@@ -105,17 +95,8 @@ class ValidatorAgent:
             base -= 0.03
         return max(cfg.RELEVANCE_THRESHOLD_FLOOR, base)
 
-    # ── NEW: BioNER entity overlap relevance boost ─────────────────────────────
-
     @staticmethod
-    def _ner_entity_overlap(
-        query_entities: Set[str], content: str
-    ) -> float:
-        """
-        Returns a normalised overlap score (0–1) between query NER entities
-        and entity mentions in content.
-        0 if no query entities, 1 if all query entities found in content.
-        """
+    def _ner_entity_overlap(query_entities: Set[str], content: str) -> float:
         if not query_entities:
             return 0.0
         content_lower = content.lower()
@@ -127,16 +108,10 @@ class ValidatorAgent:
         cosine_sim:     float,
         content:        str,
         query_entities: Set[str],
-        boost_weight:   float = 0.15,
+        boost_weight:   float = 0.25,   # ← increased from 0.15 to help short abstracts
     ) -> float:
-        """
-        Blend cosine similarity with NER entity overlap.
-        boost_weight controls maximum contribution of entity overlap.
-        """
         overlap = self._ner_entity_overlap(query_entities, content)
         return min(1.0, cosine_sim + boost_weight * overlap)
-
-    # ── Unchanged from v1 ────────────────────────────────────────────────────
 
     async def _compute_faithfulness(
         self, query: str, relevant_items: List[Dict[str, Any]]
@@ -330,8 +305,6 @@ class ValidatorAgent:
             logger.warning(f"NLI contradiction check failed: {exc} — assuming 0.0")
             return 0.0
 
-    # ── Main validate pipeline (with BioNER integration) ─────────────────────
-
     async def validate(
         self, raw_items: List[Dict[str, Any]], query: str
     ) -> Tuple[List[ValidatedItem], ValidationMetrics]:
@@ -349,7 +322,6 @@ class ValidatorAgent:
             logger.warning("Query embedding failed — returning empty validation")
             return [], ValidationMetrics(dedup_rate=dedup_rate)
 
-        # ── BioNER: extract query entities for overlap boost (use shared instance) ──
         query_ner   = self._ner.extract_query_entities(query)
         query_genes = set(query_ner.get("GENE", []))
         query_drugs = set(query_ner.get("DRUG", []))
@@ -360,7 +332,6 @@ class ValidatorAgent:
             f"genes={query_genes} drugs={query_drugs} diseases={query_disea}"
         )
 
-        # ── Relevance scoring with NER boost ─────────────────────────────────
         scored_items = []
         for item in deduped:
             content = item.get("content", "")[:2000]
@@ -373,12 +344,11 @@ class ValidatorAgent:
             d   = np.array(content_emb).reshape(1, -1)
             cos = float(cosine_similarity(q, d)[0][0])
 
-            # Apply entity overlap boost
             boosted = self._entity_boosted_relevance(
                 cos, content, all_query_entities
             )
             item["_relevance"]      = boosted
-            item["_cosine_sim"]     = cos     # keep raw for debugging
+            item["_cosine_sim"]     = cos
             scored_items.append(item)
 
         relevant_items = [
