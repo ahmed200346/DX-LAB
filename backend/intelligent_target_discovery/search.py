@@ -590,7 +590,9 @@ class WebSearchAgent:
         if content_type in (ContentType.TEXT, ContentType.PDF, ContentType.GRAPH):
             searxng.extend(scholar_results)
 
-        candidates = searxng[:max_results]
+        # ---- FIX: take all candidates, not just the first max_results ----
+        candidates = searxng  # previously: searxng[:max_results]
+        # ---- end of fix ----
         urls = [r.get("url", r.get("href", "")) for r in candidates]
         pdf_flag_tasks = [
             self._detect_is_pdf(u) if u else _false_coro()
@@ -627,6 +629,24 @@ class WebSearchAgent:
         query:        str  = "",
     ) -> Optional[Dict[str, Any]]:
         try:
+            # --- CRITICAL FIX: Explicitly allow PubMed domains (bypass ALL filters) ---
+            if "ncbi.nlm.nih.gov" in url or "pubmed.ncbi.nlm.nih.gov" in url:
+                # Keep PubMed results exactly as they are, without any filtering
+                content = raw.get("content", raw.get("body", ""))
+                if not content:
+                    # If no content, try to extract from title only
+                    content = raw.get("title", "")
+                return {
+                    "url":            url,
+                    "content":        content,
+                    "content_type":   content_type.value,
+                    "title":          raw.get("title", ""),
+                    "pmid":           raw.get("pmid"),
+                    "doi":            raw.get("doi"),
+                    "citation_count": raw.get("citation_count"),
+                }
+
+            # ---- Original domain filter for non-PubMed ----
             if cfg.BIOMEDICAL_DOMAIN_FILTER and content_type not in (
                 ContentType.IMAGE, ContentType.VIDEO
             ):
