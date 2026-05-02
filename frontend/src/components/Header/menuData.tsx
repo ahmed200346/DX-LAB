@@ -15,12 +15,24 @@ const menuData: Menu[] = [
   },
   {
     id: 3,
+    title: "Target Discovery",
+    path: "/agent",
+    newTab: false,
+  },
+  {
+    id: 6,                          // new unique id
+    title: "Hypothesis Generator",
+    path: "/hypothesis-generator",
+    newTab: false,
+  },
+  {
+    id: 4,
     title: "Blog",
     path: "/blog",
     newTab: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "Support",
     path: "/contact",
     newTab: false,

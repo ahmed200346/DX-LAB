@@ -1,0 +1,44 @@
+HYPOTHESIS [1]:
+Statement: USP7 inhibition directly suppresses KRAS stability by inducing ubiquitination of KRAS, thereby preventing its phosphorylation and activation.
+Addresses: GAP [1]
+Rationale: This hypothesis combines evidence from Paper 1 and Paper 3, which show that USP7 inhibitors suppress NSCLC cell proliferation, particularly in cells resistant to the KRAS-G12C inhibitor AMG510. Furthermore, Paper 3 reveals that the AcCoA-NLRX1 axis promotes drug resistance through mitophagy, suggesting a potential link between USP7 and KRAS stability.
+Experiment: Use an in vitro assay to measure KRAS ubiquitination and phosphorylation levels in response to USP7 inhibition.
+Impact Score: 8
+Novelty Score: 9
+Theme: Mechanism
+
+HYPOTHESIS [2]:
+Statement: TBK1 inhibition disrupts the inflammatory adaptive phase preceding regenerative fetal-like programs associated with drug resistance in KRAS mutant NSCLC cells.
+Addresses: GAP [2] CONFLICT [5]
+Rationale: This hypothesis combines evidence from Paper 5 and Paper 9, which show that drug-induced inflammatory programs are cancer-cell autonomous and precede the emergence of regenerative fetal-like programs associated with drug resistance. Furthermore, Paper 10 reveals that small molecule KRASG12C inhibitors can generate haptenated major histocompatibility complex (MHC) class I:peptide complexes, which represent attractive targets for immune-based therapies.
+Experiment: Use an in vitro assay to measure TBK1 expression and phosphorylation levels in response to drug-induced inflammatory programs.
+Impact Score: 8
+Novelty Score: 9
+Theme: Mechanism
+
+HYPOTHESIS [3]:
+Statement: AcCoA-NLRX1 axis inhibition suppresses mitophagy and breaks down therapeutic resistance to KRAS G12C inhibitors in NSCLC cells.
+Addresses: GAP [5] CONFLICT [2]
+Rationale: This hypothesis combines evidence from Paper 3 and Paper 6, which reveal that the AcCoA-NLRX1 axis promotes drug resistance through mitophagy. Furthermore, Paper 6 shows that combination of farnesyl-transferase inhibition with KRAS G12D targeting breaks down therapeutic resistance in pancreatic cancer.
+Experiment: Use an in vitro assay to measure AcCoA and NLRX1 expression levels in response to KRAS G12C inhibitors.
+Impact Score: 9
+Novelty Score: 10
+Theme: Mechanism
+
+HYPOTHESIS [4]:
+Statement: Redundancies in KRAS signaling pathways confer resistance to KRAS G12C inhibitors by activating alternative downstream targets, such as HRAS and RHEB.
+Addresses: GAP [4] CONFLICT [3]
+Rationale: This hypothesis combines evidence from Paper 8 and Paper 6, which reveal that redundancies within the KRAS signaling pathways provide challenges for drug development. Furthermore, Paper 6 shows that combination of farnesyl-transferase inhibition with KRAS G12D targeting breaks down therapeutic resistance in pancreatic cancer.
+Experiment: Use an in vitro assay to measure HRAS and RHEB expression levels in response to KRAS G12C inhibitors.
+Impact Score: 8
+Novelty Score: 9
+Theme: Pathway Crosstalk
+
+HYPOTHESIS [5]:
+Statement: USP21-mediated up-regulation of macropinocytosis rescues PDAC cells from Kras extinction by promoting nutrient scavenging and cell survival.
+Addresses: GAP [3]
+Rationale: This hypothesis combines evidence from Paper 9 and Paper 1, which reveal that USP7 inhibitors suppress NSCLC cell proliferation, particularly in cells resistant to the KRAS-G12C inhibitor AMG510. Furthermore, Paper 9 predicts that identifying KRAS inhibitor resistance mechanisms will be critical.
+Experiment: Use an in vitro assay to measure USP21 expression and macropinocytosis activity levels in response to Kras extinction.
+Impact Score: 8
+Novelty Score: 9
+Theme: Mechanism

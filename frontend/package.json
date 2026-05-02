@@ -2,23 +2,20 @@
   "name": "startup-nextjs-template",
   "version": "2.2.1",
   "private": true,
-"scripts": {
-  "dev": "next dev",
-  "start:backend": "node -e \"const {spawn}=require('child_process');spawn('python',['run_web.py'],{cwd:'../backend/AI Drug safety',stdio:'inherit',shell:true});\"",
-  "dev:all": "concurrently -n \"BACKEND,FRONTEND\" -c \"bgBlue.bold,bgGreen.bold\" \"npm run start:backend\" \"next dev\"",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint"
-},
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.3",
-    "concurrently": "^9.1.2",
     "eslint": "^9.24.0",
     "eslint-config-next": "15.1.6",
     "html-to-image": "^1.11.13",
     "html2pdf.js": "^0.14.0",
     "jspdf": "^4.2.1",
-    "next": "^16.2.4",
+    "next": "16.0.10",
     "next-themes": "^0.2.1",
     "postcss": "^8.5.3",
     "react": "^19.2.0",

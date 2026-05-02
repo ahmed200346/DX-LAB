@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "Ubiquitination", "label": "Ubiquitination", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "RAS functions", "label": "RAS functions", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "USP7", "label": "USP7", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS", "label": "KRAS", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "cell proliferation", "label": "cell proliferation", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "RAS stability", "label": "RAS stability", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "metastatic non-small cell lung cancer", "label": "metastatic non-small cell lung cancer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "HRAS and RHEB", "label": "HRAS and RHEB", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "USP7 inhibitors", "label": "USP7 inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "NSCLC cell proliferation", "label": "NSCLC cell proliferation", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "RAS oncogenic mutations", "label": "RAS oncogenic mutations", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "tumorigenesis", "label": "tumorigenesis", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRASG12C inhibitors", "label": "KRASG12C inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRASG12C-mutated lung cancers", "label": "KRASG12C-mutated lung cancers", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "haptenated MHC class I:peptide complexes", "label": "haptenated MHC class I:peptide complexes", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "squamous cell carcinoma gene signature", "label": "squamous cell carcinoma gene signature", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "poor response to adagrasib", "label": "poor response to adagrasib", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "AST plasticity signature", "label": "AST plasticity signature", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "poor adagrasib responses", "label": "poor adagrasib responses", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRT6A", "label": "KRT6A", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "AST", "label": "AST", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS inhibitor resistance", "label": "KRAS inhibitor resistance", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS inhibition", "label": "KRAS inhibition", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "short-term fasting", "label": "short-term fasting", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "cytosolic AcCoA levels", "label": "cytosolic AcCoA levels", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "inhibition of ATP-citrate lyase", "label": "inhibition of ATP-citrate lyase", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "reduction in cytosolic AcCoA levels", "label": "reduction in cytosolic AcCoA levels", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "mitophagy", "label": "mitophagy", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "AcCoA", "label": "AcCoA", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "NLRX1", "label": "NLRX1", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "AcCoA-NLRX1 axis", "label": "AcCoA-NLRX1 axis", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "drug resistance", "label": "drug resistance", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "efficacy of KRAS G12C inhibitors", "label": "efficacy of KRAS G12C inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS G12C inhibitors", "label": "KRAS G12C inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "nutritional status", "label": "nutritional status", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "tricarboxylic acid cycle", "label": "tricarboxylic acid cycle", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS inhibitors", "label": "KRAS inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "mitophagy response", "label": "mitophagy response", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS mutant tumors", "label": "KRAS mutant tumors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS G12C", "label": "KRAS G12C", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "treatment response", "label": "treatment response", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS mutation", "label": "KRAS mutation", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "colorectal cancer", "label": "colorectal cancer", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "pancreatic adenocarcinoma", "label": "pancreatic adenocarcinoma", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS-targeted therapies", "label": "KRAS-targeted therapies", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "drug-induced inflammatory programs", "label": "drug-induced inflammatory programs", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "regenerative fetal-like programs", "label": "regenerative fetal-like programs", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "TBK1", "label": "TBK1", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "inflammatory adaptive phase", "label": "inflammatory adaptive phase", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "TBK1 inhibition", "label": "TBK1 inhibition", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "responses to KRAS inhibition", "label": "responses to KRAS inhibition", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "therapeutic resistance", "label": "therapeutic resistance", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "efficacy of KRAS inhibitors", "label": "efficacy of KRAS inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS G12D inhibitors", "label": "KRAS G12D inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS mutant pancreatic adenocarcinoma", "label": "KRAS mutant pancreatic adenocarcinoma", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "farnesyl-transferase inhibitors", "label": "farnesyl-transferase inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRAS signaling pathways", "label": "KRAS signaling pathways", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "cancer cells", "label": "cancer cells", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "novel KRAS inhibitors", "label": "novel KRAS inhibitors", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "escape mechanisms", "label": "escape mechanisms", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "redundancies in KRAS signaling pathways", "label": "redundancies in KRAS signaling pathways", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "KRASG12C", "label": "KRASG12C", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "haptened MHC class I:peptide complexes", "label": "haptened MHC class I:peptide complexes", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"arrows": "to", "confidence": "high", "context": "tumorigenesis", "from": "Ubiquitination", "paper_ids": ["1"], "relation": "modulates", "to": "RAS functions", "width": 1}, {"arrows": "to", "confidence": "high", "context": "cell proliferation", "from": "USP7", "paper_ids": ["1"], "relation": "stabilizes", "to": "KRAS", "width": 1}, {"arrows": "to", "confidence": "high", "context": "NSCLC", "from": "USP7", "paper_ids": ["1"], "relation": "promotes", "to": "cell proliferation", "width": 1}, {"arrows": "to", "confidence": "high", "context": "KRAS inhibitor resistance", "from": "USP7", "paper_ids": ["1"], "relation": "regulates", "to": "RAS stability", "width": 1}, {"arrows": "to", "confidence": "high", "context": "oncogenic drivers in NSCLC", "from": "KRAS", "paper_ids": ["4"], "relation": "promotes", "to": "metastatic non-small cell lung cancer", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "expression level of KRAS", "from": "KRAS", "paper_ids": ["6"], "relation": "regulates", "to": "HRAS and RHEB", "width": 1}, {"arrows": "to", "confidence": "high", "context": "KRAS-G12C inhibitor resistance", "from": "USP7 inhibitors", "paper_ids": ["1"], "relation": "inhibits", "to": "NSCLC cell proliferation", "width": 1}, {"arrows": "to", "confidence": "high", "context": "cancer development", "from": "RAS oncogenic mutations", "paper_ids": ["1"], "relation": "promotes", "to": "tumorigenesis", "width": 1}, {"arrows": "to", "confidence": "high", "context": "clinical promise", "from": "KRASG12C inhibitors", "paper_ids": ["2"], "relation": "inhibits", "to": "KRASG12C-mutated lung cancers", "width": 1}, {"arrows": "to", "confidence": "high", "context": "Zhang et al.", "from": "KRASG12C inhibitors", "paper_ids": ["10"], "relation": "induces", "to": "haptenated MHC class I:peptide complexes", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "pre-treatment biopsies", "from": "squamous cell carcinoma gene signature", "paper_ids": ["2"], "relation": "promotes", "to": "poor response to adagrasib", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "baseline expression", "from": "AST plasticity signature", "paper_ids": ["2"], "relation": "promotes", "to": "poor adagrasib responses", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "baseline expression", "from": "KRT6A", "paper_ids": ["2"], "relation": "promotes", "to": "poor adagrasib responses", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "lung cancer", "from": "AST", "paper_ids": ["2"], "relation": "is_upstream_of", "to": "KRAS inhibitor resistance", "width": 1}, {"arrows": "to", "confidence": "high", "context": "upfront and acquired resistance", "from": "KRAS inhibitor resistance", "paper_ids": ["5"], "relation": "is_downstream_of", "to": "KRAS inhibition", "width": 1}, {"arrows": "to", "confidence": "high", "context": "mitophagy", "from": "short-term fasting", "paper_ids": ["3"], "relation": "reduces", "to": "cytosolic AcCoA levels", "width": 1}, {"arrows": "to", "confidence": "high", "context": "mitophagy", "from": "inhibition of ATP-citrate lyase", "paper_ids": ["3"], "relation": "reduces", "to": "cytosolic AcCoA levels", "width": 1}, {"arrows": "to", "confidence": "high", "context": "nutrient metabolism", "from": "reduction in cytosolic AcCoA levels", "paper_ids": ["3"], "relation": "induces", "to": "mitophagy", "width": 1}, {"arrows": "to", "confidence": "high", "context": "KRAS-inhibitor-induced mitophagy response", "from": "AcCoA", "paper_ids": ["3"], "relation": "interacts_with", "to": "NLRX1", "width": 1}, {"arrows": "to", "confidence": "high", "context": "KRAS inhibitor resistance", "from": "AcCoA-NLRX1 axis", "paper_ids": ["3"], "relation": "promotes", "to": "drug resistance", "width": 1}, {"arrows": "to", "confidence": "high", "context": "treatment for KRASG12C mutant NSCLC", "from": "drug resistance", "paper_ids": ["4"], "relation": "reduces", "to": "efficacy of KRAS G12C inhibitors", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "treatment for KRASG12C mutant NSCLC", "from": "drug resistance", "paper_ids": ["4"], "relation": "is_downstream_of", "to": "KRAS G12C inhibitors", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "nutrient metabolism", "from": "nutritional status", "paper_ids": ["3"], "relation": "regulates", "to": "tricarboxylic acid cycle", "width": 1}, {"arrows": "to", "confidence": "high", "context": "KRAS inhibitor resistance", "from": "KRAS inhibitors", "paper_ids": ["3"], "relation": "induces", "to": "mitophagy response", "width": 1}, {"arrows": "to", "confidence": "high", "context": "therapeutic options", "from": "KRAS inhibitors", "paper_ids": ["6"], "relation": "inhibits", "to": "KRAS mutant tumors", "width": 1}, {"arrows": "to", "confidence": "high", "context": "treatment for KRASG12C mutant NSCLC", "from": "KRAS G12C inhibitors", "paper_ids": ["4"], "relation": "inhibits", "to": "KRAS G12C", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "treatment for KRASG12C mutant NSCLC", "from": "KRAS G12C inhibitors", "paper_ids": ["4"], "relation": "induces", "to": "drug resistance", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "treatment for KRASG12C mutant NSCLC", "from": "KRAS G12C inhibitors", "paper_ids": ["4"], "relation": "is_upstream_of", "to": "treatment response", "width": 1}, {"arrows": "to", "confidence": "high", "context": "CRC cases", "from": "KRAS mutation", "paper_ids": ["5"], "relation": "promotes", "to": "colorectal cancer", "width": 1}, {"arrows": "to", "confidence": "high", "context": "pancreatic tumors", "from": "KRAS mutation", "paper_ids": ["6"], "relation": "promotes", "to": "pancreatic adenocarcinoma", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "clinical promise", "from": "KRAS-targeted therapies", "paper_ids": ["5"], "relation": "inhibits", "to": "KRAS", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "drug resistance", "from": "drug-induced inflammatory programs", "paper_ids": ["5"], "relation": "induces", "to": "regenerative fetal-like programs", "width": 1}, {"arrows": "to", "confidence": "high", "context": "KRAS inhibition", "from": "TBK1", "paper_ids": ["5"], "relation": "inhibits", "to": "inflammatory adaptive phase", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "enhance responses", "from": "TBK1 inhibition", "paper_ids": ["5"], "relation": "promotes", "to": "responses to KRAS inhibition", "width": 1}, {"arrows": "to", "confidence": "high", "context": "KRAS mutant tumors", "from": "therapeutic resistance", "paper_ids": ["6"], "relation": "reduces", "to": "efficacy of KRAS inhibitors", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "combination with farnesyl-transferase inhibitors", "from": "KRAS G12D inhibitors", "paper_ids": ["6"], "relation": "inhibits", "to": "KRAS mutant pancreatic adenocarcinoma", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "combination with KRAS G12D inhibitors", "from": "farnesyl-transferase inhibitors", "paper_ids": ["6"], "relation": "inhibits", "to": "KRAS mutant pancreatic adenocarcinoma", "width": 1}, {"arrows": "to", "confidence": "high", "context": "various cancers", "from": "KRAS signaling pathways", "paper_ids": ["8"], "relation": "interacts_with", "to": "cancer cells", "width": 1}, {"arrows": "to", "confidence": "medium", "context": "in the absence of apparent genetic mutations", "from": "novel KRAS inhibitors", "paper_ids": ["8"], "relation": "activates", "to": "escape mechanisms", "width": 1}, {"arrows": "to", "confidence": "high", "context": "challenges for drug development and targeted approaches", "from": "redundancies in KRAS signaling pathways", "paper_ids": ["8"], "relation": "promotes", "to": "drug resistance", "width": 1}, {"arrows": "to", "confidence": "high", "context": "Zhang et al.", "from": "KRASG12C", "paper_ids": ["10"], "relation": "activates", "to": "haptened MHC class I:peptide complexes", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

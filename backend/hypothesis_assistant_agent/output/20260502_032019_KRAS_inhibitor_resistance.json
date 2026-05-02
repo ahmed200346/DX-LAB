@@ -1,0 +1,405 @@
+{
+  "query": "KRAS inhibitor resistance",
+  "timestamp": "2026-05-02T03:20:19.056327",
+  "elapsed_seconds": 7.89,
+  "papers": [
+    {
+      "pmid": "39499616",
+      "title": "USP7 deubiquitinates KRAS and promotes non-small cell lung cancer.",
+      "authors": "Huang Bin, Cao Dan, Yuan Xiao et al.",
+      "year": "2024",
+      "abstract": "RAS oncogenic mutations are pivotal drivers of tumorigenesis. Ubiquitination modulates RAS functions, including activation, stability, and localization. While several E3 ligases regulate RAS ubiquitination, RAS deubiquitination remains less understood. Our study reveals that ubiquitin-specific protease 7 (USP7) directly deubiquitinates KRAS, stabilizing it and promoting the proliferation of non-small cell lung cancer (NSCLC) cells. Mechanistically, USP7 binds KRAS via its TRAF domain and removes the K48-linked polyubiquitin chains from residue K147. In addition, USP7 also stabilizes oncogenic ",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39499616/"
+    },
+    {
+      "pmid": "38402609",
+      "title": "Adeno-to-squamous transition drives resistance to KRAS inhibition in LKB1 mutant lung cancer.",
+      "authors": "Tong Xinyuan, Patel Ayushi S, Kim Eejung et al.",
+      "year": "2024",
+      "abstract": "KRASG12C inhibitors (adagrasib and sotorasib) have shown clinical promise in targeting KRASG12C-mutated lung cancers; however, most patients eventually develop resistance. In lung patients with adenocarcinoma with KRASG12C and STK11/LKB1 co-mutations, we find an enrichment of the squamous cell carcinoma gene signature in pre-treatment biopsies correlates with a poor response to adagrasib. Studies of Lkb1-deficient KRASG12C and KrasG12D lung cancer mouse models and organoids treated with KRAS inhibitors reveal tumors invoke a lineage plasticity program, adeno-to-squamous transition (AST), that ",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38402609/"
+    },
+    {
+      "pmid": "41225001",
+      "title": "Cytosolic acetyl-coenzyme A is a signalling metabolite to control mitophagy.",
+      "authors": "Zhang Yifan, Shen Xiao, Shen Yuan et al.",
+      "year": "2026",
+      "abstract": "Acetyl-coenzyme A (AcCoA) sits at the nexus of nutrient metabolism and shuttles between the canonical and non-canonical tricarboxylic acid cycle1,2, which is dynamically regulated by nutritional status, such as fasting3. Here we find that mitophagy is triggered after a reduction in cytosolic AcCoA levels through short-term fasting and through inhibition of ATP-citrate lyase (encoded by ACLY), mitochondrial citrate/malate antiporter (encoded by SLC25A1) or acyl-CoA synthetase short chain family member 2 (encoded by ACSS2), and the mitophagy can be counteracted by acetate supplementation. Notabl",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41225001/"
+    },
+    {
+      "pmid": "40172157",
+      "title": "Advances in the treatment of KRASG12C mutant non-small cell lung cancer.",
+      "authors": "Shaverdashvili Khvaramze, Burns Timothy F",
+      "year": "2025",
+      "abstract": "Kirsten rat sarcoma (KRAS) is one of the most frequently mutated oncogenic drivers in metastatic non-small cell lung cancer (NSCLC). The development of selective, covalent KRAS G12C (KRASG12C) inhibitors represents a breakthrough in the treatment for KRASG12C mutant NSCLC, but the durability of response and efficacy of these inhibitors are limited by the rapid emergence of drug resistance and their ability to only bind KRASG12C in the guanosine diphosphate-bound form. Importantly, co-occurring gene alterations, including KEAP1, STK11, and CDKN2A, may affect prognosis and response to therapies,",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40172157/"
+    },
+    {
+      "pmid": "40799551",
+      "title": "Concurrent genetic and non-genetic resistance mechanisms to KRAS inhibition in CRC.",
+      "authors": "Alonso Salvador, Chu Kevan, Parsons Marie J et al.",
+      "year": "2025",
+      "abstract": "KRAS is mutationally activated in 45-50% of colorectal cancer (CRC) cases, and while KRAS-targeted therapies have shown some clinical promise, upfront and acquired resistance limit their efficacy. To explore the acute response and mechanisms underlying KRAS inhibitor resistance, we used targeted exome sequencing and single-cell spatial transcriptomics to analyze patient-matched pre-treatment, on-treatment, and progression biopsies from patients treated with combined KRASG12C and EGFR inhibition. Acquired genetic events were identified in most patients at progression but were often subclonal an",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40799551/"
+    },
+    {
+      "pmid": "33853790",
+      "title": "Mechanisms of KRAS Inhibitor Resistance Revealed.",
+      "authors": "",
+      "year": "2021",
+      "abstract": "A recent study revealed diverse mechanisms of acquired resistance in patients with non-small cell lung cancer or colorectal cancer who stop responding to a KRASG12C inhibitor. These patients developed secondary KRAS mutations, MAPK pathway alterations, or genomic rearrangements-and in some cases multiple resistance mechanisms occurred simultaneously.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33853790/"
+    },
+    {
+      "pmid": "36751115",
+      "title": "Precision oncology provides opportunities for targeting KRAS-inhibitor resistance.",
+      "authors": "Sattler Martin, Mohanty Atish, Kulkarni Prakash et al.",
+      "year": "2023",
+      "abstract": "Novel inhibitors targeting Kirsten rat sarcoma virus homolog (KRAS) KRASG12C in various cancers have shown good initial efficacy, but therapy-related drug resistance eventually occurs in most patients. It has become apparent that cancer cells not only rely on novel mutations that provide escape mechanisms, but about half of them become resistant in the absence of apparent genetic mutations. Redundancies within the KRAS signaling pathways and cross-talk between these pathways - as well as other canonical cancer-driving mechanisms - not only provide challenges but also present opportunities for ",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36751115/"
+    },
+    {
+      "pmid": "39687047",
+      "title": "Combination of farnesyl-transferase inhibition with KRAS G12D targeting breaks down therapeutic resistance in pancreatic cancer.",
+      "authors": "Molnár Eszter, Baranyi Marcell, Szigeti Krisztina et al.",
+      "year": "2024",
+      "abstract": "Pancreatic adenocarcinoma is one of the deadliest forms of cancer with no effective therapeutic options. A KRAS mutation can be found in up to 90% of all pancreatic tumors, making it a promising therapeutic target. The introduction of new KRAS inhibitors has been a milestone in the history of KRAS mutant tumors; however, therapeutic resistance limits their efficacy. Thus, new therapeutic options, including combination therapies, are urgently needed. Recently, we have shown that KRAS G12C inhibitors in combination with farnesyl-transferase inhibitors exert synergistic antitumor effects. Here, w",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39687047/"
+    },
+    {
+      "pmid": "34599002",
+      "title": "Anticipating resistance to KRAS inhibition: a novel role for USP21 in macropinocytosis regulation.",
+      "authors": "Crawford Howard C",
+      "year": "2021",
+      "abstract": "Pancreatic ductal adenocarcinoma (PDAC) is one of the deadliest cancers. Virtually all PDAC harbors an oncogenic mutation in the KRAS gene, making it the prime target for therapy. Most previous attempts to inhibit KRAS directly have been disappointing, but recent success in targeting some KRAS mutants presages a new era in PDAC therapy. Models of PDAC have predicted that identifying KRAS inhibitor resistance mechanisms will be critical. In this issue of Genes & Development, Hou and colleagues (pp. 1327-1332) identify one such mechanism in which the deubiquitinase USP21 up-regulates the nutrien",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34599002/"
+    },
+    {
+      "pmid": "36099887",
+      "title": "Getting a handle on KRAS inhibitor resistance with hapten-mediated anti-tumor immunity.",
+      "authors": "Freed-Pastor William A, Aguirre Andrew J",
+      "year": "2022",
+      "abstract": "Covalent inhibitors of oncogenic KRASG12C have demonstrated impressive clinical responses; however, therapeutic resistance has been commonly observed. In this issue, Zhang and colleagues demonstrate that small molecule KRASG12C inhibitors can generate haptenated major histocompatibility complex (MHC) class I:peptide complexes, which represent attractive targets for immune-based therapies to combat pharmacologic resistance.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36099887/"
+    },
+    {
+      "pmid": "41446172",
+      "title": "A window trial in metastatic pancreatic ductal adenocarcinoma reveals resistance mechanisms to targeting the KRAS-MEK pathway.",
+      "authors": "Tsuda Motoyuki, Keith Dove, Daniel Colin J et al.",
+      "year": "2025",
+      "abstract": "Copy number alterations of KRAS, mutated in over 90% of pancreatic ductal adenocarcinomas (PDAC), and MYC occur in 30-40% of PDAC. Here we demonstrate that KRAS and MYC are frequently co-gained and accompanied with worse prognosis in PDAC. In a Window-of-Opportunity clinical trial for metastatic PDAC, serial biopsies and deep multi-omics analyses were utilized to explore resistance mechanisms to MEK inhibition, as a surrogate for KRAS inhibition. Tumors from four of 14 patients showed Ki-67/CA19-9-based biomarker response (BR). Non-BR tumors were enriched for KRAS / MYC co-gain and KRAS G12D v",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41446172/"
+    },
+    {
+      "pmid": "38471455",
+      "title": "Insights into how adeno-squamous transition drives KRAS inhibitor resistance.",
+      "authors": "Hu Feng, Lito Piro",
+      "year": "2024",
+      "abstract": "The histologic transformation of adenocarcinoma (ADC) to squamous cell carcinoma (SCC), known as adeno-squamous transition or AST, is frequently observed in patients with lung cancer undergoing cancer therapy. In this issue, Tong and colleagues investigate genetic and epigenetic mechanisms that drive AST to confer resistance to KRAS inhibitors in preclinical models and patients.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38471455/"
+    },
+    {
+      "pmid": "41886492",
+      "title": "HIF1α mediates resistance to radiation and to KRAS inhibitors in pancreatic adenocarcinoma.",
+      "authors": "Tu Kevin J, Roy Sanjit K, Kingsbury Tami J et al.",
+      "year": "2026",
+      "abstract": "Pancreatic ductal adenocarcinoma (PDAC) is highly treatment resistant and characterized by a hypoxic microenvironment. Here, we investigated the role of hypoxia-inducible factor 1α (HIF1α) in regulating resistance to radiation and KRAS-inhibitor. We employed CRISPR/Cas9 to knock out (KO) HIF1α from the murine KRASG12D/+; p53R172H/+ KPC and the KRASG12D/+; p53R273H; CDK2NA-/- Panc-1 human pancreatic cell lines. Compared to WT, the HIF1α KO cell lines demonstrated a shift toward an epithelial phenotype and had decreased proliferation and migration under hypoxia. HIF1α KO cell lines were less lik",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41886492/"
+    },
+    {
+      "pmid": "41362725",
+      "title": "Unravelling Resistance: Integrating Metabolism, Epigenetics, Immunology, and Proteostasis in Strategies against Kirsten Rat Sarcoma Viral Oncogene Homolog-mutant Colorectal Cancer.",
+      "authors": "Li Jingyi, Song Na, Ma Rui et al.",
+      "year": "2026",
+      "abstract": "Colorectal cancer (CRC) has a high incidence and mortality rate globally, with approximately 40% of patients harboring Kirsten rat sarcoma viral oncogene homolog (KRAS) mutations. Patients with KRAS mutations exhibit poorer prognoses compared to those with KRAS wild-type tumors, often showing resistance to targeted therapies and chemotherapy. There is an acute need for innovative therapeutic strategies, particularly as KRASG12C inhibitors have been approved by the U.S. Food and Drug Administration (FDA) for second-line therapy in treating non-small cell lung cancer (NSCLC). Yet, their efficacy",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41362725/"
+    },
+    {
+      "pmid": "41338446",
+      "title": "SRC at the crossroads of KRAS inhibitor resistance: Mechanisms and therapeutic opportunities.",
+      "authors": "Tian Hui, Zhao Dan, Zhou Zhuan et al.",
+      "year": "2026",
+      "abstract": "Kirsten rat sarcoma (KRAS) mutations are among the most common oncogenic drivers in human cancers, particularly in non-small cell lung cancer (NSCLC), colorectal cancer (CRC), and pancreatic ductal adenocarcinoma (PDAC). The development of allele-specific KRAS inhibitors, especially those targeting the KRASG12C variant, represents a landmark achievement in precision oncology. Yet their therapeutic benefit is often transient, as tumors rapidly develop seemingly heterogeneous resistance mechanisms. Increasing evidence implicates SRC, a non-receptor tyrosine kinase frequently hyperactivated in KR",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41338446/"
+    }
+  ],
+  "findings": [
+    {
+      "paper_id": "1",
+      "entities": {
+        "proteins": [
+          "USP7",
+          "KRAS"
+        ],
+        "genes": [
+          "USP7",
+          "KRAS"
+        ],
+        "drugs": [],
+        "pathways": [
+          "ubiquitination",
+          "deubiquitination"
+        ]
+      },
+      "outcome": "USP7 directly deubiquitinates KRAS, stabilizing it and promoting the proliferation of non-small cell lung cancer cells.",
+      "conclusion": "USP7 promotes non-small cell lung cancer by deubiquitinating and stabilizing KRAS."
+    },
+    {
+      "paper_id": "2",
+      "entities": {
+        "proteins": [
+          "KRAS",
+          "LKB1"
+        ],
+        "genes": [
+          "KRAS",
+          "STK11",
+          "LKB1"
+        ],
+        "drugs": [
+          "adagrasib",
+          "sotorasib"
+        ],
+        "pathways": [
+          "adeno-to-squamous transition"
+        ]
+      },
+      "outcome": "Tumors invoke a lineage plasticity program, adeno-to-squamous transition, that drives resistance to KRAS inhibition in LKB1 mutant lung cancer.",
+      "conclusion": "Adeno-to-squamous transition drives resistance to KRAS inhibition in LKB1 mutant lung cancer."
+    },
+    {
+      "paper_id": "3",
+      "entities": {
+        "proteins": [],
+        "genes": [
+          "ACLY",
+          "SLC25A1",
+          "ACSS2"
+        ],
+        "drugs": [],
+        "pathways": [
+          "mitophagy",
+          "tricarboxylic acid cycle"
+        ]
+      },
+      "outcome": "Mitophagy is triggered after a reduction in cytosolic AcCoA levels through short-term fasting and through inhibition of ATP-citrate lyase, mitochondrial citrate/malate antiporter or acyl-CoA synthetase short chain family member 2.",
+      "conclusion": "Cytosolic acetyl-coenzyme A is a signalling metabolite to control mitophagy."
+    },
+    {
+      "paper_id": "4",
+      "entities": {
+        "proteins": [
+          "KRAS"
+        ],
+        "genes": [
+          "KRAS",
+          "KEAP1",
+          "STK11",
+          "CDKN2A"
+        ],
+        "drugs": [],
+        "pathways": []
+      },
+      "outcome": "The development of selective, covalent KRAS G12C inhibitors represents a breakthrough in the treatment for KRASG12C mutant NSCLC, but the durability of response and efficacy of these inhibitors are limited by the rapid emergence of drug resistance.",
+      "conclusion": "Selective, covalent KRAS G12C inhibitors have limited durability and efficacy due to rapid emergence of drug resistance in KRASG12C mutant NSCLC."
+    },
+    {
+      "paper_id": "5",
+      "entities": {
+        "proteins": [
+          "KRAS",
+          "EGFR"
+        ],
+        "genes": [
+          "KRAS",
+          "EGFR"
+        ],
+        "drugs": [],
+        "pathways": []
+      },
+      "outcome": "Acquired genetic events were identified in most patients at progression, but were often subclonal and concurrent with non-genetic resistance mechanisms to KRAS inhibition in CRC.",
+      "conclusion": "Concurrent genetic and non-genetic resistance mechanisms limit the efficacy of KRAS inhibition in colorectal cancer."
+    },
+    {
+      "paper_id": "6",
+      "entities": {
+        "drugs": [
+          "KRASG12C inhibitor"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": [
+          "MAPK pathway"
+        ]
+      },
+      "outcome": "Patients with non-small cell lung cancer or colorectal cancer developed secondary KRAS mutations, MAPK pathway alterations, or genomic rearrangements after stopping response to a KRASG12C inhibitor.",
+      "conclusion": "Diverse mechanisms of acquired resistance to KRASG12C inhibitors occur in patients with non-small cell lung cancer or colorectal cancer."
+    },
+    {
+      "paper_id": "7",
+      "entities": {
+        "drugs": [
+          "KRAS inhibitors"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": [
+          "KRAS signaling pathways"
+        ]
+      },
+      "outcome": "Cancer cells become resistant to KRAS inhibitors not only through novel mutations but also through redundancies within the KRAS signaling pathways and cross-talk between these pathways.",
+      "conclusion": "Precision oncology provides opportunities for targeting KRAS-inhibitor resistance by understanding the mechanisms of resistance and exploiting them for therapy."
+    },
+    {
+      "paper_id": "8",
+      "entities": {
+        "drugs": [
+          "KRAS G12D inhibitors",
+          "farnesyl-transferase inhibitors"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": []
+      },
+      "outcome": "Combination of farnesyl-transferase inhibition with KRAS G12D targeting breaks down therapeutic resistance in pancreatic cancer.",
+      "conclusion": "Combination therapy of KRAS G12D inhibitors and farnesyl-transferase inhibitors exerts synergistic antitumor effects in pancreatic cancer."
+    },
+    {
+      "paper_id": "9",
+      "entities": {
+        "drugs": [
+          "KRAS inhibitors"
+        ],
+        "genes": [
+          "KRAS",
+          "USP21"
+        ],
+        "pathways": []
+      },
+      "outcome": "USP21 up-regulates macropinocytosis, which is a mechanism of resistance to KRAS inhibition in pancreatic ductal adenocarcinoma.",
+      "conclusion": "USP21 plays a novel role in regulating macropinocytosis and contributes to resistance to KRAS inhibition in pancreatic ductal adenocarcinoma."
+    },
+    {
+      "paper_id": "10",
+      "entities": {
+        "drugs": [
+          "KRASG12C inhibitors"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": [
+          "MHC class I"
+        ]
+      },
+      "outcome": "KRASG12C inhibitors generate haptenated MHC class I:peptide complexes, which can be targeted by immune-based therapies to combat pharmacologic resistance.",
+      "conclusion": "Hapten-mediated anti-tumor immunity is a potential strategy to overcome therapeutic resistance to KRASG12C inhibitors."
+    },
+    {
+      "paper_id": "11",
+      "entities": {
+        "drugs": [
+          "MEK inhibition",
+          "KRAS inhibition"
+        ],
+        "genes": [
+          "KRAS",
+          "MYC"
+        ],
+        "pathways": [
+          "KRAS-MEK pathway"
+        ]
+      },
+      "outcome": "Tumors from four of 14 patients showed Ki-67/CA19-9-based biomarker response to MEK inhibition.",
+      "conclusion": "KRAS and MYC co-gain is associated with worse prognosis and resistance to MEK inhibition in pancreatic ductal adenocarcinoma."
+    },
+    {
+      "paper_id": "12",
+      "entities": {
+        "drugs": [
+          "KRAS inhibitors"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": []
+      },
+      "outcome": "Adeno-squamous transition drives KRAS inhibitor resistance in preclinical models and patients.",
+      "conclusion": "Adeno-squamous transition is a mechanism of resistance to KRAS inhibitors in lung cancer."
+    },
+    {
+      "paper_id": "13",
+      "entities": {
+        "drugs": [
+          "KRAS inhibitors",
+          "radiation"
+        ],
+        "genes": [
+          "HIF1α",
+          "KRAS",
+          "p53"
+        ],
+        "pathways": []
+      },
+      "outcome": "HIF1α knockout cell lines demonstrated decreased proliferation and migration under hypoxia and increased sensitivity to radiation and KRAS inhibitors.",
+      "conclusion": "HIF1α mediates resistance to radiation and KRAS inhibitors in pancreatic adenocarcinoma."
+    },
+    {
+      "paper_id": "14",
+      "entities": {
+        "drugs": [
+          "KRASG12C inhibitors",
+          "chemotherapy"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": []
+      },
+      "outcome": "Patients with KRAS mutations exhibit poorer prognoses and resistance to targeted therapies and chemotherapy.",
+      "conclusion": "There is a need for innovative therapeutic strategies to overcome resistance to KRAS inhibitors in colorectal cancer."
+    },
+    {
+      "paper_id": "15",
+      "entities": {
+        "drugs": [
+          "KRAS inhibitors"
+        ],
+        "genes": [
+          "KRAS",
+          "SRC"
+        ],
+        "pathways": []
+      },
+      "outcome": "SRC is frequently hyperactivated in KRAS-mutant tumors and contributes to resistance to KRAS inhibitors.",
+      "conclusion": "SRC is a key player in KRAS inhibitor resistance and a potential therapeutic target in KRAS-mutant cancers."
+    }
+  ],
+  "gaps": "GAP 1: Insufficient data to perform gap detection.",
+  "conflicts": "CONFLICT 1: Study about KRAS inhibitors in pancreatic ductal adenocarcinoma says \"USP21 up-regulates macropinocytosis, which is a mechanism of resistance to KRAS inhibition\" but another study about KRAS inhibitors says \"Precision oncology provides opportunities for targeting KRAS-inhibitor resistance by understanding the mechanisms of resistance and exploiting them for therapy\", implying different views on resistance mechanisms and their exploitability.\n\nCONFLICT 2: Study about KRASG12C inhibitors says \"Diverse mechanisms of acquired resistance to KRASG12C inhibitors occur in patients with non-small cell lung cancer or colorectal cancer\" but another study about KRASG12C inhibitors says \"Hapten-mediated anti-tumor immunity is a potential strategy to overcome therapeutic resistance to KRASG12C inhibitors\", suggesting different perspectives on overcoming resistance.\n\nCONFLICT 3: Study about KRAS inhibitors in lung cancer says \"Adeno-squamous transition is a mechanism of resistance to KRAS inhibitors\" but another study about KRAS inhibition in LKB1 mutant lung cancer says \"Adeno-to-squamous transition drives resistance to KRAS inhibition\", which may seem similar but the first study implies a general mechanism in lung cancer, while the second study specifies it occurs in LKB1 mutant cases, potentially limiting the generalizability of the first study's conclusion.\n\nCONFLICT 4: Study about KRAS and MYC co-gain says \"KRAS and MYC co-gain is associated with worse prognosis and resistance to MEK inhibition in pancreatic ductal adenocarcinoma\" but another study about MEK inhibition does not mention this co-gain as a factor, implying a potential contradiction in understanding the role of KRAS and MYC in resistance to MEK inhibition.\n\nCONFLICT 5: Study about HIF1α says \"HIF1α mediates resistance to radiation and KRAS inhibitors in pancreatic adenocarcinoma\" but another study about KRAS inhibitors does not mention HIF1α as a mediator of resistance, suggesting different views on the role of HIF1α in resistance.\n\nCONFLICT 6: Study about KRASG12C inhibitors says \"KRASG12C inhibitors generate haptenated MHC class I:peptide complexes, which can be targeted by immune-based therapies to combat pharmacologic resistance\" but another study about KRAS mutations says \"Patients with KRAS mutations exhibit poorer prognoses and resistance to targeted therapies\", which may imply that the first study's suggestion for overcoming resistance might not be universally applicable given the generally poorer prognosis and resistance associated with KRAS mutations.",
+  "hypotheses_raw": "HYPOTHESIS [1]:\nStatement: Further mechanistic investigation into KRAS inhibitor resistance is warranted.\nRationale: Literature synthesis was incomplete due to a processing error.\nTestability: Please re-run the pipeline with a valid GROQ_API_KEY.\nImpact Score: 5\nTheme: General Research",
+  "hypotheses": [
+    {
+      "index": 1,
+      "statement": "Further mechanistic investigation into KRAS inhibitor resistance is warranted.",
+      "rationale": "Literature synthesis was incomplete due to a processing error.",
+      "testability": "Please re-run the pipeline with a valid GROQ_API_KEY.",
+      "impact_score": 5,
+      "theme": "General Research"
+    }
+  ],
+  "hypotheses_ranked": [
+    {
+      "index": 1,
+      "statement": "Further mechanistic investigation into KRAS inhibitor resistance is warranted.",
+      "rationale": "Literature synthesis was incomplete due to a processing error.",
+      "testability": "Please re-run the pipeline with a valid GROQ_API_KEY.",
+      "impact_score": 5,
+      "theme": "General Research"
+    }
+  ]
+}

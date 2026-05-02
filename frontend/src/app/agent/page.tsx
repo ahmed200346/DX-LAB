@@ -23,9 +23,8 @@ export default function AgentPage() {
   const [inputQuestion, setInputQuestion] = useState("");
   const [isAsking, setIsAsking] = useState(false);
 
-  const reportRef = useRef<HTMLDivElement>(null); // kept for potential future use
+  const reportRef = useRef<HTMLDivElement>(null);
 
-  // Close on Escape key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsAssistantOpen(false);
@@ -50,7 +49,6 @@ export default function AgentPage() {
     setSourceCount(0);
     setValidationScore(0);
     setViewMode("report");
-    // Reset assistant when new query is run
     setMessages([]);
     setIsAssistantOpen(false);
 
@@ -147,23 +145,50 @@ export default function AgentPage() {
 
   return (
     <>
-      {/* Header */}
-      <section className="relative z-10 overflow-hidden pt-28 pb-8 md:pt-[150px] md:pb-[60px] xl:pt-[180px] xl:pb-[80px] 2xl:pt-[210px] 2xl:pb-[100px] bg-blue-50">
-        <div className="container">
+      {/* ===== Header with premium typography, hexagon pattern + floating blobs ===== */}
+      <section className="relative z-10 overflow-hidden pt-28 pb-10 md:pt-[150px] md:pb-[70px] xl:pt-[180px] xl:pb-[80px] 2xl:pt-[210px] 2xl:pb-[100px] bg-blue-50">
+        {/* Subtle molecular‑hexagon pattern (base layer) */}
+        <div
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "120px 120px",
+          }}
+        />
+
+        {/* Floating decorative blobs (semi‑transparent, animated) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-28 left-1/4 w-80 h-80 bg-blue-300/20 rounded-full filter blur-3xl opacity-60 blob-float-1" />
+          <div className="absolute -bottom-24 right-1/4 w-96 h-96 bg-indigo-300/20 rounded-full filter blur-3xl opacity-60 blob-float-2" />
+          <div className="absolute top-1/3 left-3/4 w-56 h-56 bg-purple-300/20 rounded-full filter blur-3xl opacity-50 blob-float-3" />
+          <div className="absolute bottom-10 left-10 w-72 h-72 bg-cyan-300/20 rounded-full filter blur-3xl opacity-50 blob-float-1" />
+          <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-primary/15 rounded-full filter blur-2xl opacity-60 blob-float-2" />
+        </div>
+
+        <div className="container relative z-10">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 text-center">
-              <h1 className="mb-5 text-3xl font-extrabold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                Intelligent Target <span className="text-primary">Discovery</span>
+              <h1
+                className="mb-5 text-4xl font-extrabold leading-tight tracking-tight text-black sm:text-5xl md:text-6xl"
+                style={{ fontFamily: "'DM Serif Display', serif" }}
+              >
+                Intelligent Target{" "}
+                <span className="text-primary italic">Discovery</span>
               </h1>
-              <p className="mx-auto mb-6 max-w-[600px] text-base font-medium text-body-color">
-                Ask about drug targets, genes, and diseases. Our multi-agent AI searches PubMed, extracts validated targets, and returns structured clinical insights.
+              <p
+                className="mx-auto mb-6 max-w-[720px] text-lg font-medium text-body-color"
+                style={{ fontFamily: "'Sora', sans-serif" }}
+              >
+                Ask about drug targets, genes, and diseases. Our multi‑agent AI searches
+                PubMed, extracts validated targets, and returns structured clinical insights.
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </section>     
 
-      {/* Main Agent Interface */}
+      {/* Main Agent Interface (unchanged layout, typography applied) */}
       <section className="pb-16 md:pb-20 lg:pb-24 bg-blue-50">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
@@ -174,6 +199,7 @@ export default function AgentPage() {
                     <label
                       htmlFor="prompt"
                       className="mb-4 flex items-center text-sm font-semibold text-black dark:text-white"
+                      style={{ fontFamily: "'Sora', sans-serif" }}
                     >
                       <span className="mr-2 text-xl">💬</span> What would you like to discover?
                     </label>
@@ -184,6 +210,7 @@ export default function AgentPage() {
                       placeholder="e.g., Identify novel targets for triple‑negative breast cancer, or What are the mechanisms of KRAS G12C inhibitor resistance?"
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
+                      style={{ fontFamily: "'Sora', sans-serif" }}
                     />
                   </div>
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
@@ -191,6 +218,7 @@ export default function AgentPage() {
                       type="submit"
                       disabled={loading}
                       className="shadow-submit dark:shadow-submit-dark rounded-full bg-primary px-10 py-4 text-lg font-bold text-white transition-all duration-300 ease-in-out hover:bg-blue-600 hover:shadow-lg disabled:opacity-50 flex items-center gap-2"
+                      style={{ fontFamily: "'Sora', sans-serif" }}
                     >
                       {loading ? (
                         <>
@@ -205,7 +233,7 @@ export default function AgentPage() {
                       )}
                     </button>
                     {sourceCount > 0 && (
-                      <span className="text-sm text-body-color dark:text-body-color-dark">
+                      <span className="text-sm text-body-color dark:text-body-color-dark" style={{ fontFamily: "'Sora', sans-serif" }}>
                         {sourceCount} unique sources • SGV: {validationScore.toFixed(3)}
                       </span>
                     )}
@@ -272,7 +300,10 @@ export default function AgentPage() {
 
                     {showJson && fullResponse && (
                       <div className="mt-6">
-                        <h4 className="font-semibold text-black dark:text-white mb-2">
+                        <h4
+                          className="font-semibold text-black dark:text-white mb-2"
+                          style={{ fontFamily: "'DM Serif Display', serif" }}
+                        >
                           📄 Full JSON Response
                         </h4>
                         <pre className="overflow-auto rounded-sm bg-gray-100 p-4 text-xs text-gray-800 dark:bg-gray-900 dark:text-gray-200 max-h-96">
@@ -306,7 +337,6 @@ export default function AgentPage() {
       {/* FLOATING POPUP CONTAINER (shows when isAssistantOpen is true) */}
       {isAssistantOpen && fullResponse?.session_id && (
         <div className="fixed bottom-24 right-6 z-50 w-[380px] h-[500px] bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-          {/* Header */}
           <div className="flex items-center justify-between bg-primary px-4 py-3 text-white">
             <div className="flex items-center gap-2">
               <img
@@ -314,7 +344,9 @@ export default function AgentPage() {
                 alt="Dexter"
                 className="h-12 w-12 rounded-full object-cover border-2 border-white"
               />
-              <h3 className="font-semibold"> Lab Assistant</h3>
+              <h3 className="font-semibold" style={{ fontFamily: "'Sora', sans-serif" }}>
+                Lab Assistant
+              </h3>
             </div>
             <button
               onClick={() => setIsAssistantOpen(false)}
@@ -327,10 +359,9 @@ export default function AgentPage() {
             </button>
           </div>
 
-          {/* Messages area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-900">
             {messages.length === 0 && (
-              <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-center text-sm text-gray-500 dark:text-gray-400" style={{ fontFamily: "'Sora', sans-serif" }}>
                 Ask me anything about the retrieved documents or targets!
               </p>
             )}
@@ -345,6 +376,7 @@ export default function AgentPage() {
                       ? "bg-primary text-white"
                       : "bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-200 shadow-sm"
                   }`}
+                  style={{ fontFamily: "'Sora', sans-serif" }}
                 >
                   {msg.role === "user" ? (
                     msg.content
@@ -391,7 +423,6 @@ export default function AgentPage() {
             )}
           </div>
 
-          {/* Input area */}
           <div className="border-t p-3 bg-white dark:bg-gray-800 dark:border-gray-700">
             <div className="flex gap-2">
               <input
@@ -401,11 +432,13 @@ export default function AgentPage() {
                 onKeyDown={(e) => e.key === "Enter" && sendQuestion()}
                 placeholder="Ask a question..."
                 className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                style={{ fontFamily: "'Sora', sans-serif" }}
               />
               <button
                 onClick={sendQuestion}
                 disabled={isAsking}
                 className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 disabled:opacity-50"
+                style={{ fontFamily: "'Sora', sans-serif" }}
               >
                 Send
               </button>
@@ -415,6 +448,30 @@ export default function AgentPage() {
       )}
 
       <style jsx global>{`
+        /* Blob animations */
+        @keyframes float1 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-24px) scale(1.06); }
+        }
+        @keyframes float2 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-18px) scale(1.04); }
+        }
+        @keyframes float3 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-12px) scale(1.03); }
+        }
+
+        .blob-float-1 {
+          animation: float1 8s ease-in-out infinite;
+        }
+        .blob-float-2 {
+          animation: float2 7s ease-in-out 1s infinite;
+        }
+        .blob-float-3 {
+          animation: float3 9s ease-in-out 0.5s infinite;
+        }
+
         .markdown-assistant {
           font-size: 0.85rem;
           line-height: 1.4;

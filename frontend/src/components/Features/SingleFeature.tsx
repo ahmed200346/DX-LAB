@@ -1,8 +1,7 @@
 import { Feature } from "@/types/feature";
-import Link from "next/link";
 
 const SingleFeature = ({ feature }: { feature: Feature }) => {
-  const { icon, title, paragraph, route } = feature;
+  const { icon, title, paragraph } = feature;
   return (
     <div className="w-full">
       <div className="wow fadeInUp" data-wow-delay=".15s">
@@ -15,22 +14,6 @@ const SingleFeature = ({ feature }: { feature: Feature }) => {
         <p className="text-body-color pr-[10px] text-base leading-relaxed font-medium">
           {paragraph}
         </p>
-        <Link
-          href={route}
-          className="bg-primary mt-6 inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white transition hover:opacity-80"
-        >
-          Launch Agent
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </Link>
       </div>
     </div>
   );
