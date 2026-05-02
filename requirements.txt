@@ -1,0 +1,11 @@
+langchain>=0.2.16,<0.3.0
+langchain-groq>=0.1.9
+langchain-community>=0.2.16,<0.3.0
+langchain-core>=0.2.38,<0.3.0
+
+groq>=0.9.0
+requests>=2.31.0,<3.0.0
+python-dotenv>=1.0.1
+pydantic>=2.11.5
+rich>=13.8.0
+tenacity>=8.5.0,<9.0.0
