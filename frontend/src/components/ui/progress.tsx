@@ -1,34 +1,37 @@
 import * as React from "react"
-import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
-
 import { cn } from "@/lib/utils"
 
 function Progress({
   className,
   value,
+  indicatorClassName,
   ...props
-}: React.ComponentProps<typeof ProgressPrimitive.Root> & {
-  indicatorClassName?: string
+}: React.HTMLAttributes<HTMLDivElement> & {
+  value?: number;
+  indicatorClassName?: string;
 }) {
   return (
-    <ProgressPrimitive.Root
-      value={value}
+    <div
       data-slot="progress"
+      role="progressbar"
+      aria-valuenow={value}
+      aria-valuemin={0}
+      aria-valuemax={100}
       className={cn(
         "relative h-2 w-full overflow-hidden rounded-full bg-primary/20",
         className
       )}
       {...props}
     >
-      <ProgressPrimitive.Indicator
+      <div
         data-slot="progress-indicator"
         className={cn(
-          "h-full w-full flex-1 bg-primary transition-all",
-          props.indicatorClassName
+          "h-full bg-primary transition-all duration-500 ease-out",
+          indicatorClassName
         )}
-        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+        style={{ width: `${value || 0}%` }}
       />
-    </ProgressPrimitive.Root>
+    </div>
   )
 }
 

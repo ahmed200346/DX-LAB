@@ -41,9 +41,10 @@ interface PipelineStep {
 }
 
 export default function DiscoveryAgentView() {
-  const [protein, setProtein] = useState("BCL-2");
-  const [disease, setDisease] = useState("CLL");
+  const [protein, setProtein] = useState("");
+  const [disease, setDisease] = useState("");
   const [isRunning, setIsRunning] = useState(false);
+  const [hasRun, setHasRun] = useState(false);
   const [runId, setRunId] = useState<string | null>(null);
   const [steps, setSteps] = useState<PipelineStep[]>([
     { id: "extraction", name: "Target Extraction", description: "Identifying gene, fasta and seed SMILES", status: "pending" },
@@ -56,7 +57,10 @@ export default function DiscoveryAgentView() {
   const [candidates, setCandidates] = useState<any[]>([]);
 
   const startPipeline = async () => {
+    if (!protein.trim() || !disease.trim()) return;
     setIsRunning(true);
+    setHasRun(false);
+    setCandidates([]);
     setRunId("demo_" + Date.now());
     
     // Reset steps
@@ -99,6 +103,7 @@ export default function DiscoveryAgentView() {
       updateStep("boltz", "running");
       await new Promise(r => setTimeout(r, 2000));
       updateStep("boltz", "completed", "3D complexes generated");
+      setHasRun(true);
 
     } catch (err) {
       console.error(err);
@@ -119,6 +124,7 @@ export default function DiscoveryAgentView() {
               <Input 
                 value={protein} 
                 onChange={(e) => setProtein(e.target.value)}
+                placeholder="e.g. BCL-2"
                 className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-blue-500/50 h-11"
               />
             </div>
@@ -127,14 +133,15 @@ export default function DiscoveryAgentView() {
               <Input 
                 value={disease} 
                 onChange={(e) => setDisease(e.target.value)}
+                placeholder="e.g. Chronic Lymphocytic Leukemia"
                 className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-blue-500/50 h-11"
               />
             </div>
             <div className="md:col-span-1">
               <Button 
                 onClick={startPipeline} 
-                disabled={isRunning}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white h-11 font-bold shadow-lg shadow-blue-600/20 rounded-lg group"
+                disabled={isRunning || !protein.trim() || !disease.trim()}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white h-11 font-bold shadow-lg shadow-blue-600/20 rounded-lg group disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {isRunning ? (
                   <Loader2 className="w-5 h-5 animate-spin mr-2" />
@@ -149,19 +156,19 @@ export default function DiscoveryAgentView() {
           <div className="mt-8 flex flex-wrap gap-3 items-center">
             <span className="text-[10px] font-bold text-gray-600 dark:text-white/20 uppercase tracking-widest mr-2">Try Examples:</span>
             {[
-              "Identify novel targets for Venetoclax resistance",
-              "What are the mechanisms of BCL-2 inhibition?",
-              "Discover small molecule candidates for Alzheimer's BACE1",
+              { label: "BCL-2 / CLL", protein: "BCL-2", disease: "Chronic Lymphocytic Leukemia" },
+              { label: "MCL-1 / DLBCL", protein: "MCL-1", disease: "Diffuse Large B-Cell Lymphoma" },
+              { label: "BACE1 / Alzheimer's", protein: "BACE1", disease: "Alzheimer's Disease" },
             ].map((ex) => (
               <button 
-                key={ex}
+                key={ex.label}
                 onClick={() => {
-                  setProtein(ex.split(" ").slice(-1)[0].replace("'s", ""));
-                  setDisease(ex);
+                  setProtein(ex.protein);
+                  setDisease(ex.disease);
                 }}
-                className="text-[10px] bg-white dark:bg-white/5 hover:bg-blue-50 dark:bg-blue-500/10 border border-gray-200 dark:border-white/10 hover:border-blue-300 dark:border-blue-500/30 px-3 py-1.5 rounded-full text-white/60 hover:text-blue-700 dark:text-blue-400 transition-all"
+                className="text-[10px] bg-white dark:bg-white/5 hover:bg-blue-50 dark:bg-blue-500/10 border border-gray-200 dark:border-white/10 hover:border-blue-300 dark:border-blue-500/30 px-3 py-1.5 rounded-full text-gray-600 dark:text-white/60 hover:text-blue-700 dark:text-blue-400 transition-all"
               >
-                {ex}
+                {ex.label}
               </button>
             ))}
           </div>
@@ -232,8 +239,22 @@ export default function DiscoveryAgentView() {
 
         {/* Intelligence / Results */}
         <div className="xl:col-span-2 space-y-8">
-           {/* Visual Section */}
+           {/* Idle placeholder – shown before any run */}
+           {!hasRun && !isRunning && (
+             <div className="flex flex-col items-center justify-center h-64 rounded-2xl border-2 border-dashed border-gray-200 dark:border-white/10 text-center gap-4 animate-in fade-in duration-500">
+               <Beaker className="w-12 h-12 text-gray-300 dark:text-white/10" />
+               <div>
+                 <p className="text-sm font-semibold text-gray-500 dark:text-white/30">No results yet</p>
+                 <p className="text-xs text-gray-400 dark:text-white/20 mt-1">Enter a target protein and disease context above, then click <strong>Start Discovery</strong></p>
+               </div>
+             </div>
+           )}
+
+           {/* Results cards – only shown after a run */}
+           {(hasRun || isRunning) && (
+           <>{/* Visual Section */}
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
               <Card className="bg-gradient-to-br from-blue-600/10 to-indigo-600/5 border-gray-200 dark:border-white/10 relative overflow-hidden group">
                 <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-1000">
                   <Beaker className="w-32 h-32 text-blue-700 dark:text-blue-400" />
