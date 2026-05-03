@@ -1,0 +1,11 @@
+[2026-05-03T21:54:09.210999] Entering _extract_pipeline_context_fast for KRAS
+[2026-05-03T21:54:09.987639] retrieval: tool imported
+[2026-05-03T21:54:10.021885] retrieval: text_splitter imported
+[2026-05-03T21:55:34.421927] retrieval: tool imported
+[2026-05-03T21:55:34.447030] retrieval: text_splitter imported
+[2026-05-03T21:55:34.720585] retrieval: pypdfloader imported
+[2026-05-03T21:55:40.253663] retrieval: llm imported
+[2026-05-03T21:55:40.273608] retrieval: serper imported
+[2026-05-03T21:56:01.795344] Entering _extract_pipeline_context_fast for KRAS
+[2026-05-03T21:56:01.802502] status updated to uniprot_lookup
+[2026-05-03T21:56:03.935230] UniProt ids: [('P01116', 'GTPase KRas')]

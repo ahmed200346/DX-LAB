@@ -38,6 +38,8 @@ def _ensure_discovery_agent_importable() -> None:
     if str(DISCOVERY_AGENT_ROOT) not in sys.path:
         sys.path.insert(0, str(DISCOVERY_AGENT_ROOT))
 
+from DiscoveryAgent.tools import retrieval as R
+
 
 def _should_force_conda_run() -> bool:
     """
@@ -155,8 +157,6 @@ def _extract_pipeline_context_fast(
     and typically finishes in seconds.
     """
     import re
-
-    from DiscoveryAgent.tools import retrieval as R
 
     progress.update("extraction", {"substep": "uniprot_lookup"})
     ids = R.get_uniprot_ids.invoke({"protein_name": protein.strip()})
