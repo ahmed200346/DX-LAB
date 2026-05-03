@@ -252,140 +252,142 @@ export default function DiscoveryAgentView() {
 
            {/* Results cards – only shown after a run */}
            {(hasRun || isRunning) && (
-           <>{/* Visual Section */}
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              <Card className="bg-gradient-to-br from-blue-600/10 to-indigo-600/5 border-gray-200 dark:border-white/10 relative overflow-hidden group">
-                <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-1000">
-                  <Beaker className="w-32 h-32 text-blue-700 dark:text-blue-400" />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-sm uppercase tracking-widest text-gray-600 dark:text-gray-500 dark:text-white/40">Target Insights</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-end justify-between">
-                       <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tighter">P10415</p>
-                       <Badge className="bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/30">Verified</Badge>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-white/5">
-                       <div>
-                         <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40">Druggability</p>
-                         <p className="text-xl font-bold text-blue-700 dark:text-blue-400">High (0.84)</p>
-                       </div>
-                       <div>
-                         <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40">PDB Records</p>
-                         <p className="text-xl font-bold">142</p>
-                       </div>
-                    </div>
+           <>
+             {/* Visual Section */}
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="bg-gradient-to-br from-blue-600/10 to-indigo-600/5 border-gray-200 dark:border-white/10 relative overflow-hidden group">
+                  <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-1000">
+                    <Beaker className="w-32 h-32 text-blue-700 dark:text-blue-400" />
                   </div>
-                </CardContent>
-              </Card>
+                  <CardHeader>
+                    <CardTitle className="text-sm uppercase tracking-widest text-gray-600 dark:text-gray-500 dark:text-white/40">Target Insights</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-end justify-between">
+                         <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tighter">P10415</p>
+                         <Badge className="bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/30">Verified</Badge>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-white/5">
+                         <div>
+                           <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40">Druggability</p>
+                           <p className="text-xl font-bold text-blue-700 dark:text-blue-400">High (0.84)</p>
+                         </div>
+                         <div>
+                           <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40">PDB Records</p>
+                           <p className="text-xl font-bold">142</p>
+                         </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-              <Card className="bg-gradient-to-br from-purple-600/10 to-pink-600/5 border-gray-200 dark:border-white/10 relative overflow-hidden group">
-                <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-1000">
-                  <Activity className="w-32 h-32 text-purple-700 dark:text-purple-400" />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-sm uppercase tracking-widest text-gray-600 dark:text-gray-500 dark:text-white/40">Discovery Score</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-end justify-between">
-                       <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tighter">92.4<span className="text-xl text-gray-600 dark:text-gray-500 dark:text-white/40">/100</span></p>
-                       <Badge className="bg-purple-500/20 text-purple-700 dark:text-purple-400 border-purple-300 dark:border-purple-500/30">Excellent</Badge>
-                    </div>
-                    <div className="pt-4 border-t border-gray-200 dark:border-white/5">
-                       <div className="flex justify-between text-xs mb-1.5">
-                          <span className="text-gray-600 dark:text-gray-500 dark:text-white/40">Confidence Interval</span>
-                          <span className="text-gray-900 dark:text-white/90">89.2% - 94.8%</span>
-                       </div>
-                       <div className="h-1.5 w-full bg-white dark:bg-white/5 rounded-full overflow-hidden">
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            animate={{ width: "92.4%" }}
-                            className="h-full bg-gradient-to-r from-purple-500 to-indigo-500" 
-                          />
-                       </div>
-                    </div>
+                <Card className="bg-gradient-to-br from-purple-600/10 to-pink-600/5 border-gray-200 dark:border-white/10 relative overflow-hidden group">
+                  <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-1000">
+                    <Activity className="w-32 h-32 text-purple-700 dark:text-purple-400" />
                   </div>
-                </CardContent>
-              </Card>
-           </div>
+                  <CardHeader>
+                    <CardTitle className="text-sm uppercase tracking-widest text-gray-600 dark:text-gray-500 dark:text-white/40">Discovery Score</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex items-end justify-between">
+                         <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tighter">92.4<span className="text-xl text-gray-600 dark:text-gray-500 dark:text-white/40">/100</span></p>
+                         <Badge className="bg-purple-500/20 text-purple-700 dark:text-purple-400 border-purple-300 dark:border-purple-500/30">Excellent</Badge>
+                      </div>
+                      <div className="pt-4 border-t border-gray-200 dark:border-white/5">
+                         <div className="flex justify-between text-xs mb-1.5">
+                            <span className="text-gray-600 dark:text-gray-500 dark:text-white/40">Confidence Interval</span>
+                            <span className="text-gray-900 dark:text-white/90">89.2% - 94.8%</span>
+                         </div>
+                         <div className="h-1.5 w-full bg-white dark:bg-white/5 rounded-full overflow-hidden">
+                            <motion.div 
+                              initial={{ width: 0 }}
+                              animate={{ width: "92.4%" }}
+                              className="h-full bg-gradient-to-r from-purple-500 to-indigo-500" 
+                            />
+                         </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+             </div>
 
-           {/* Candidates Table */}
-           <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none">
-             <CardHeader className="flex flex-row items-center justify-between border-b border-gray-200 dark:border-white/5 pb-4">
-                <div>
-                  <CardTitle>Screened Candidates</CardTitle>
-                  <CardDescription>Molecules ranked by predicted binding affinity</CardDescription>
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-gray-200 dark:border-white/10">
-                    <RotateCcw className="w-3.5 h-3.5" />
-                  </Button>
-                  <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-gray-200 dark:border-white/10">
-                    <Download className="w-3.5 h-3.5" />
-                  </Button>
-                </div>
-             </CardHeader>
-             <CardContent className="p-0">
-               <ScrollArea className="h-[400px]">
-                 {candidates.length === 0 ? (
-                   <div className="flex flex-col items-center justify-center h-[300px] text-gray-600 dark:text-white/20">
-                      <Beaker className="w-12 h-12 mb-4 opacity-5" />
-                      <p className="text-sm font-medium">Start discovery to generate candidates</p>
-                   </div>
-                 ) : (
-                   <table className="w-full text-left border-collapse">
-                     <thead>
-                       <tr className="text-[10px] uppercase tracking-widest text-gray-600 dark:text-gray-500 dark:text-white/40 border-b border-gray-200 dark:border-white/5">
-                         <th className="py-4 px-6 font-semibold">Candidate</th>
-                         <th className="py-4 px-6 font-semibold text-center">pKd</th>
-                         <th className="py-4 px-6 font-semibold text-center">QED</th>
-                         <th className="py-4 px-6 font-semibold text-center">SA Score</th>
-                         <th className="py-4 px-6 font-semibold text-right">Status</th>
-                       </tr>
-                     </thead>
-                     <tbody className="divide-y divide-white/5">
-                       {candidates.map((mol) => (
-                         <tr key={mol.id} className="group hover:bg-white dark:bg-white/5 transition-all duration-300 cursor-pointer">
-                           <td className="py-5 px-6">
-                             <div className="flex items-center gap-3">
-                               <div className="w-10 h-10 rounded-lg bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-blue-500/50 group-hover:bg-blue-500/5 transition-all">
-                                 <FlaskConical className="w-5 h-5 text-blue-700 dark:text-blue-400/60" />
-                               </div>
-                               <div>
-                                 <p className="text-sm font-bold text-gray-900 dark:text-white/90">{mol.name}</p>
-                                 <p className="text-[10px] text-gray-600 dark:text-white/30 font-mono mt-0.5 truncate max-w-[140px]">{mol.smiles}</p>
-                               </div>
-                             </div>
-                           </td>
-                           <td className="py-5 px-6 text-center">
-                             <span className="text-base font-bold text-blue-700 dark:text-blue-400">{mol.pkd}</span>
-                           </td>
-                           <td className="py-5 px-6 text-center">
-                             <span className="text-sm font-medium text-white/70">{mol.qed}</span>
-                           </td>
-                           <td className="py-5 px-6 text-center">
-                             <span className="text-sm font-medium text-white/70">{mol.sa}</span>
-                           </td>
-                           <td className="py-5 px-6 text-right">
-                              <Badge className={cn(
-                                "rounded-full px-2 py-0.5 text-[10px]",
-                                mol.status === "Lead" ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/30" : "bg-blue-500/20 text-blue-700 dark:text-blue-400 border-blue-300 dark:border-blue-500/30"
-                              )}>
-                                {mol.status}
-                              </Badge>
-                           </td>
+             {/* Candidates Table */}
+             <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none">
+               <CardHeader className="flex flex-row items-center justify-between border-b border-gray-200 dark:border-white/5 pb-4">
+                  <div>
+                    <CardTitle>Screened Candidates</CardTitle>
+                    <CardDescription>Molecules ranked by predicted binding affinity</CardDescription>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-gray-200 dark:border-white/10">
+                      <RotateCcw className="w-3.5 h-3.5" />
+                    </Button>
+                    <Button variant="outline" size="icon" className="w-8 h-8 rounded-full border-gray-200 dark:border-white/10">
+                      <Download className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
+               </CardHeader>
+               <CardContent className="p-0">
+                 <ScrollArea className="h-[400px]">
+                   {candidates.length === 0 ? (
+                     <div className="flex flex-col items-center justify-center h-[300px] text-gray-600 dark:text-white/20">
+                        <Beaker className="w-12 h-12 mb-4 opacity-5" />
+                        <p className="text-sm font-medium">Start discovery to generate candidates</p>
+                     </div>
+                   ) : (
+                     <table className="w-full text-left border-collapse">
+                       <thead>
+                         <tr className="text-[10px] uppercase tracking-widest text-gray-600 dark:text-gray-500 dark:text-white/40 border-b border-gray-200 dark:border-white/5">
+                           <th className="py-4 px-6 font-semibold">Candidate</th>
+                           <th className="py-4 px-6 font-semibold text-center">pKd</th>
+                           <th className="py-4 px-6 font-semibold text-center">QED</th>
+                           <th className="py-4 px-6 font-semibold text-center">SA Score</th>
+                           <th className="py-4 px-6 font-semibold text-right">Status</th>
                          </tr>
-                       ))}
-                     </tbody>
-                   </table>
-                 )}
-               </ScrollArea>
-             </CardContent>
-           </Card>
+                       </thead>
+                       <tbody className="divide-y divide-white/5">
+                         {candidates.map((mol) => (
+                           <tr key={mol.id} className="group hover:bg-white dark:bg-white/5 transition-all duration-300 cursor-pointer">
+                             <td className="py-5 px-6">
+                               <div className="flex items-center gap-3">
+                                 <div className="w-10 h-10 rounded-lg bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-blue-500/50 group-hover:bg-blue-500/5 transition-all">
+                                   <FlaskConical className="w-5 h-5 text-blue-700 dark:text-blue-400/60" />
+                                 </div>
+                                 <div>
+                                   <p className="text-sm font-bold text-gray-900 dark:text-white/90">{mol.name}</p>
+                                   <p className="text-[10px] text-gray-600 dark:text-white/30 font-mono mt-0.5 truncate max-w-[140px]">{mol.smiles}</p>
+                                 </div>
+                               </div>
+                             </td>
+                             <td className="py-5 px-6 text-center">
+                               <span className="text-base font-bold text-blue-700 dark:text-blue-400">{mol.pkd}</span>
+                             </td>
+                             <td className="py-5 px-6 text-center">
+                               <span className="text-sm font-medium text-white/70">{mol.qed}</span>
+                             </td>
+                             <td className="py-5 px-6 text-center">
+                               <span className="text-sm font-medium text-white/70">{mol.sa}</span>
+                             </td>
+                             <td className="py-5 px-6 text-right">
+                                <Badge className={cn(
+                                  "rounded-full px-2 py-0.5 text-[10px]",
+                                  mol.status === "Lead" ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/30" : "bg-blue-500/20 text-blue-700 dark:text-blue-400 border-blue-300 dark:border-blue-500/30"
+                                )}>
+                                  {mol.status}
+                                </Badge>
+                             </td>
+                           </tr>
+                         ))}
+                       </tbody>
+                     </table>
+                   )}
+                 </ScrollArea>
+               </CardContent>
+             </Card>
+           </>
+           )}
         </div>
       </div>
     </div>
