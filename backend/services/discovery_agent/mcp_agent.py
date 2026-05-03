@@ -28,9 +28,18 @@ from configs.tool_globals import LLM_MODEL as DEFAULT_LLM_MODEL
 
 DISCOVERY_AGENT_ROOT = Path(__file__).resolve().parent
 
-# Heavy retrieval tools that download papers / run full RAG — excluded from pipeline
-# extraction so the agent finishes quickly and never blocks on PDF pipelines.
-_PIPELINE_EXTRACTION_EXCLUDED_TOOLS = frozenset({"download_relevant_papers", "question_answering"})
+# --- Fast-track worker/qna modes to avoid heavy imports below ---
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "_worker":
+        # Enable stderr for debugging
+        # import os
+        # devnull_fd = os.open(os.devnull, os.O_WRONLY)
+        # os.dup2(devnull_fd, 2)
+        # os.close(devnull_fd)
+        
+        # We need a few local functions but we want to avoid the 'from DiscoveryAgent.tools import retrieval'
+        # so we'll import what we need inside main() or the worker functions.
+        pass # We will move the logic here later
 
 
 def _ensure_discovery_agent_importable() -> None:
@@ -141,6 +150,15 @@ def _parse_fasta_to_sequence(fasta_text: str) -> str:
     return "".join(seq.split())
 
 
+_lazy_R = None
+
+def _get_R():
+    global _lazy_R
+    if _lazy_R is None:
+        from DiscoveryAgent.tools import retrieval
+        _lazy_R = retrieval
+    return _lazy_R
+
 def _extract_pipeline_context_fast(
     *,
     protein: str,
@@ -155,7 +173,20 @@ def _extract_pipeline_context_fast(
     and typically finishes in seconds.
     """
     import re
-    from DiscoveryAgent.tools import retrieval as R
+    
+    mock_flag = os.environ.get("DISCOVERY_AGENT_MOCK_MODELS", "0").strip().lower()
+    if mock_flag in ("1", "true", "yes", "on") and protein.upper() == "KRAS":
+        progress.update("extraction", {"substep": "completed", "mode": "mock_kras"})
+        return {
+            "protein": "KRAS",
+            "disease": disease,
+            "uniprot_id": "P01116",
+            "fasta": "MTEYKLVVVGAGGVGKSALTIQLIQNHFVDEYDPTIEDSYRKQVVIDGETCLLDILDTAGQEEYSAMRDQYMRTGEGFLCVFAINNTKSFEDIHHYREQIKRVKDSEDVPMVLVGNKCDLPSRTVDTKQAQDLARSYGIPFIETSAKTRQRVEDAFYTLVREIRQYRLKKISKEEKTPGCVKIKKCIIM",
+            "drug_name": "Sotorasib",
+            "SMILES": "C=CC(=O)N1CCN(c2nc(=O)n(-c3c(C)ccnc3C(C)C)c3nc(-c4c(O)cccc4F)c(F)cc23)[C@@H](C)C1",
+        }
+
+    R = _get_R()
 
     progress.update("extraction", {"substep": "uniprot_lookup"})
     ids = R.get_uniprot_ids.invoke({"protein_name": protein.strip()})
@@ -426,6 +457,22 @@ def _worker_predict_affinity(*, sequence: str, smiles_csv: str, out_dir: str) ->
     sys.stderr = io.StringIO()
     
     try:
+        mock_flag = os.environ.get("DISCOVERY_AGENT_MOCK_MODELS", "0").strip().lower()
+        if mock_flag in ("1", "true", "yes", "on"):
+            import pandas as pd
+            import random
+            os.makedirs(out_dir, exist_ok=True)
+            os.chdir(out_dir)
+            df = pd.read_csv(smiles_csv)
+            results = []
+            for smiles in df["SMILES"]:
+                results.append({"SMILES": smiles, "Affinity [pKd]": random.uniform(5.0, 9.0)})
+            os.makedirs("property", exist_ok=True)
+            out_file = os.path.join("property", "affinity_" + os.path.basename(smiles_csv))
+            pd.DataFrame(results).to_csv(out_file, index=False)
+            print(f"MOCK: Affinity results saved to {out_file}")
+            return 0
+
         _load_api_keys_fallback()
         os.makedirs(out_dir, exist_ok=True)
         os.chdir(out_dir)
@@ -469,6 +516,27 @@ def _worker_predict_admet(*, smiles_csv: str, out_dir: str) -> int:
     sys.stderr = io.StringIO()
     
     try:
+        mock_flag = os.environ.get("DISCOVERY_AGENT_MOCK_MODELS", "0").strip().lower()
+        if mock_flag in ("1", "true", "yes", "on"):
+            import pandas as pd
+            import random
+            os.makedirs(out_dir, exist_ok=True)
+            os.chdir(out_dir)
+            df = pd.read_csv(smiles_csv)
+            results = []
+            for smiles in df["SMILES"]:
+                results.append({
+                    "SMILES": smiles,
+                    "QED": random.uniform(0.1, 0.9),
+                    "LogP": random.uniform(1.0, 5.0),
+                    "Solubility": random.uniform(-5.0, 0.0),
+                })
+            os.makedirs("property", exist_ok=True)
+            out_file = os.path.join("property", "admet_" + os.path.basename(smiles_csv))
+            pd.DataFrame(results).to_csv(out_file, index=False)
+            print(f"MOCK: ADMET results saved to {out_file}")
+            return 0
+
         _load_api_keys_fallback()
         os.makedirs(out_dir, exist_ok=True)
         os.chdir(out_dir)
@@ -1015,6 +1083,23 @@ def _run_reinvent_pooling(
 
     Uses REINVENT_PATH from configs/tool_globals.py.
     """
+    mock_flag = os.environ.get("DISCOVERY_AGENT_MOCK_MODELS", "0").strip().lower()
+    if mock_flag in ("1", "true", "yes", "on"):
+        pool_dir = run_dir / "pool"
+        pool_dir.mkdir(parents=True, exist_ok=True)
+        # Create a mock CSV with the initial SMILES
+        import pandas as pd
+        df = pd.DataFrame([{"SMILES": initial_smiles}])
+        df.to_csv(pool_dir / "combined_candidates.csv", index=False)
+        # Also need a seed.csv for consistency
+        df.to_csv(pool_dir / "seed.csv", index=False)
+        return {
+            "ok": True,
+            "mock": True,
+            "pool_dir": str(pool_dir),
+            "results": "MOCK: REINVENT skipped, using seed SMILES only."
+        }
+
     _load_api_keys_fallback()
     os.chdir(run_dir)
 
@@ -1140,6 +1225,9 @@ def _run_prediction_jobs(
     """
     job_name_suffix = f"_i{iteration:02d}{suffix}"
 
+    _worker_env = os.environ.copy()
+    _worker_env["PYTHONPATH"] = str(DISCOVERY_AGENT_ROOT)
+
     job_aff = jm.start(
         name=f"affinity{job_name_suffix}",
         command=[
@@ -1156,7 +1244,7 @@ def _run_prediction_jobs(
             str(iter_dir),
         ],
         cwd=iter_dir,
-        env={"PYTHONPATH": str(DISCOVERY_AGENT_ROOT)},
+        env=_worker_env,
     )
 
     job_admet = jm.start(
@@ -1173,7 +1261,7 @@ def _run_prediction_jobs(
             str(iter_dir),
         ],
         cwd=iter_dir,
-        env={"PYTHONPATH": str(DISCOVERY_AGENT_ROOT)},
+        env=_worker_env,
     )
 
     return job_aff, job_admet
@@ -1372,6 +1460,8 @@ def _make_mcp():
                 from DiscoveryAgent.utils import get_tool_decorated_functions  # type: ignore
                 from DiscoveryAgent.prompts.data_extraction import PREFIX, SUFFIX, FORMAT_INSTRUCTIONS  # type: ignore
 
+                _PIPELINE_EXTRACTION_EXCLUDED_TOOLS = frozenset({"download_relevant_papers", "question_answering"})
+
                 all_retrieval_tools = get_tool_decorated_functions(
                     str(DISCOVERY_AGENT_ROOT / "DiscoveryAgent" / "tools" / "retrieval.py")
                 )
@@ -1440,7 +1530,7 @@ def _make_mcp():
                                 if isinstance(observation, str) and len(observation) > 10:
                                     smiles = observation
 
-                from DiscoveryAgent.tools import retrieval as R
+                R = _get_R()
 
                 if not uniprot_id:
                     ids = R.get_uniprot_ids.invoke({"protein_name": protein})
@@ -1713,8 +1803,18 @@ def _make_mcp():
             refinement_dir.mkdir(parents=True, exist_ok=True)
             refinement_csv = refinement_dir / "refinement.csv"
             
-            _refine_smiles(smiles_csv_iter, refinement_csv, protein=protein, model=model)
-            progress.update(f"iteration_{i}_refinement", {"substep": "completed"})
+            mock_flag = os.environ.get("DISCOVERY_AGENT_MOCK_MODELS", "0").strip().lower()
+            if mock_flag in ("1", "true", "yes", "on"):
+                # Mock refinement: just copy the input to the output
+                import pandas as pd
+                df = pd.read_csv(smiles_csv_iter)
+                # Add a dummy 'Refined_SMILES' column if it expects it
+                df["Refined_SMILES"] = df["SMILES"]
+                df.to_csv(refinement_csv, index=False)
+                progress.update(f"iteration_{i}_refinement", {"substep": "completed", "mock": True})
+            else:
+                _refine_smiles(smiles_csv_iter, refinement_csv, protein=protein, model=model)
+                progress.update(f"iteration_{i}_refinement", {"substep": "completed"})
 
             if is_last_iteration:
                 updated_smiles_csv_raw = refinement_dir / "updated_smiles_raw.csv"

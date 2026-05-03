@@ -20,16 +20,47 @@ const menuData: Menu[] = [
     newTab: false,
   },
   {
-    id: 6,                          // new unique id
+    id: 6,
     title: "Hypothesis Generator",
     path: "/hypothesis-generator",
     newTab: false,
   },
-    {
+  {
     id: 7,
     title: "MediSafe AI",
-    path: "/safety",           // or any page you want
+    path: "/safety",
     newTab: false,
+  },
+  {
+    id: 8,
+    title: "More Agents",
+    newTab: false,
+    submenu: [
+      {
+        id: 81,
+        title: "Lab Orchestrator",
+        path: "/orchestrator",
+        newTab: false,
+      },
+      {
+        id: 82,
+        title: "Reporter Agent",
+        path: "/reporter",
+        newTab: false,
+      },
+      {
+        id: 83,
+        title: "Data Manager",
+        path: "/data-manager",
+        newTab: false,
+      },
+      {
+        id: 84,
+        title: "Lab Automation",
+        path: "/automation",
+        newTab: false,
+      },
+    ]
   },
   {
     id: 4,
@@ -43,6 +74,5 @@ const menuData: Menu[] = [
     path: "/contact",
     newTab: false,
   },
-
 ];
 export default menuData;

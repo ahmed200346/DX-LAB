@@ -61,7 +61,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
 
   if (!targets || targets.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500">
+      <div className="text-center py-12 text-gray-600">
         No target data available. Run a query with target extraction first.
       </div>
     );
@@ -106,14 +106,14 @@ export default function TargetDashboard({ targets }: DashboardProps) {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 border border-gray-200 dark:border-gray-700">
-          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Targets</h3>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">{targets.length}</p>
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-600">Total Targets</h3>
+          <p className="text-3xl font-bold text-gray-900 dark:text-gray-900 dark:text-white">{targets.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-600">
             Avg. Druggability Score
           </h3>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">
+          <p className="text-3xl font-bold text-gray-900 dark:text-gray-900 dark:text-white">
             {(avgDruggability * 100).toFixed(1)}%
           </p>
           <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -124,10 +124,10 @@ export default function TargetDashboard({ targets }: DashboardProps) {
           </div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-600">
             Total PubMed Mentions
           </h3>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">
+          <p className="text-3xl font-bold text-gray-900 dark:text-gray-900 dark:text-white">
             {totalPubMed.toLocaleString()}
           </p>
         </div>
@@ -136,7 +136,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-          <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+          <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-900 dark:text-white">
             Druggability Score by Target
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -152,7 +152,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
 
         {trendData.length > 0 && (
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-900 dark:text-white">
               PubMed Trend Distribution
             </h3>
             <ResponsiveContainer width="100%" height={300}>
@@ -178,7 +178,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-900 dark:text-white">
           PubMed Publications per Target
         </h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -194,7 +194,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
 
       {/* Detailed Target Cards */}
       <div>
-        <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+        <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-900 dark:text-white">
           Detailed Target Information
         </h3>
         <div className="grid grid-cols-1 gap-6">
@@ -219,11 +219,11 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                         {target.protein_full_name || target.protein}
                       </p>
                       <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-sm">
-                        <span className="text-gray-500">UniProt: {target.uniprot_id}</span>
+                        <span className="text-gray-600">UniProt: {target.uniprot_id}</span>
                         {target.organism && (
-                          <span className="text-gray-500">Organism: {target.organism}</span>
+                          <span className="text-gray-600">Organism: {target.organism}</span>
                         )}
-                        <span className="text-gray-500">
+                        <span className="text-gray-600">
                           PDB structures: {target.pdb_ids?.length || 0}
                         </span>
                       </div>
@@ -244,7 +244,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                     <div>
                       <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-600 dark:text-gray-400">Druggability Score</span>
+                        <span className="text-gray-600 dark:text-gray-600">Druggability Score</span>
                         <span className="font-medium">
                           {((target.druggability_score || 0) * 100).toFixed(1)}%
                         </span>
@@ -258,7 +258,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">PubMed trend:</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-600">PubMed trend:</span>
                         <span
                           className={`inline-flex items-center gap-1 text-sm font-medium ${
                             target.pubmed_trend === "rising"
@@ -275,7 +275,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                         </span>
                       </div>
                       <div className="text-sm">
-                        <span className="text-gray-600 dark:text-gray-400">Publications:</span>{" "}
+                        <span className="text-gray-600 dark:text-gray-600">Publications:</span>{" "}
                         <span className="font-medium">
                           {target.pubmed_total_count?.toLocaleString() || 0}
                         </span>
@@ -284,7 +284,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                   </div>
 
                   {!isExpanded && (
-                    <div className="mt-3 text-sm text-gray-500">
+                    <div className="mt-3 text-sm text-gray-600">
                       Click to see mutations, pathways, structural details, diseases, and more.
                     </div>
                   )}
@@ -309,7 +309,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                             ))}
                           </div>
                         ) : (
-                          <p className="text-gray-500 text-sm mt-1">None specified</p>
+                          <p className="text-gray-600 text-sm mt-1">None specified</p>
                         )}
                       </div>
                       <div>
@@ -360,7 +360,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                             </span>
                           </p>
                           {target.pathway_profile && (
-                            <div className="mt-2 text-gray-600 dark:text-gray-400">
+                            <div className="mt-2 text-gray-600 dark:text-gray-600">
                               <p>Reactome pathways: {target.pathway_profile.reactome_pathways?.length || 0}</p>
                               <p>KEGG pathways: {target.pathway_profile.kegg_pathways?.length || 0}</p>
                               {target.pathway_profile.text_pathways?.length > 0 && (
@@ -383,7 +383,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                             </span>
                           ))}
                           {target.associated_diseases.length > 8 && (
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-gray-600">
                               +{target.associated_diseases.length - 8} more
                             </span>
                           )}
@@ -431,7 +431,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                         {target.subcellular_locs && target.subcellular_locs.length > 0 && (
                           <div>
                             <h6 className="font-medium">Subcellular location</h6>
-                            <p className="text-gray-600 dark:text-gray-400">
+                            <p className="text-gray-600 dark:text-gray-600">
                               {target.subcellular_locs.join("; ")}
                             </p>
                           </div>
@@ -480,7 +480,7 @@ export default function TargetDashboard({ targets }: DashboardProps) {
                         {target.function && (
                           <div>
                             <h6 className="font-medium">Function</h6>
-                            <p className="text-gray-600 dark:text-gray-400 text-sm">
+                            <p className="text-gray-600 dark:text-gray-600 text-sm">
                               {target.function.length > 300
                                 ? target.function.substring(0, 300) + "..."
                                 : target.function}

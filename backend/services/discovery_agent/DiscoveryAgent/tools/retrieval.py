@@ -13,7 +13,6 @@ from langchain_community.document_loaders import PyPDFLoader
 from DiscoveryAgent.llm import chat_llm, embeddings_client
 from langchain_community.utilities import GoogleSerperAPIWrapper
 from langchain_community.vectorstores import FAISS
-from chembl_webresource_client.new_client import new_client
 # Local utilities
 from DiscoveryAgent.utils import download_pdf, RetrievalQABypassTokenLimit
 from configs.tool_globals import UNIPROT_NUM_IDS, MAX_PAPERS, PAPER_DIR
@@ -134,6 +133,7 @@ def get_drug_smiles(drug_name: str):
     cannot be parsed after standardization.
     """
     from DiscoveryAgent.chem import standardize  # type: ignore
+    from chembl_webresource_client.new_client import new_client
 
     molecule = new_client.molecule
     mols = molecule.filter(pref_name__iexact=drug_name)
