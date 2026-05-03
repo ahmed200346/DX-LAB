@@ -1,0 +1,16 @@
+id,drug,rxcui,major_interaction,adverse_outcome,naranjo_score,annotator_id,notes
+1,aspirin,1191,True,False,5,annotatorA,Increased bleeding risk with anticoagulants
+2,warfarin,3094,True,True,9,annotatorA,High bleeding risk when combined with NSAIDs
+3,ibuprofen,5640,False,False,2,annotatorA,Typical NSAID effects; context-dependent
+4,metformin,860975,False,False,1,annotatorA,Low interaction profile
+5,lisinopril,83367,True,False,3,annotatorA,Hyperkalemia risk with potassium-sparing diuretics
+6,simvastatin,5271,True,False,3,annotatorA,CYP3A4 inhibitors increase myopathy risk
+7,atorvastatin,31619,True,False,3,annotatorA,Interaction with strong CYP3A4 inhibitors
+8,clopidogrel,135565,True,True,6,annotatorA,Additive bleeding with antiplatelets
+9,amiodarone,197361,True,True,7,annotatorA,Multiple major interactions; QT and arrhythmia risk
+10,sertraline,22072,False,False,2,annotatorA,Possible interactions but major ones are rare
+11,fluoxetine,4446,True,False,4,annotatorA,Serotonin syndrome risk with MAOIs
+12,digoxin,5976,True,True,8,annotatorA,Narrow therapeutic index; major toxicity possible
+13,furosemide,3440,False,False,1,annotatorA,Loop diuretic; monitor electrolytes
+14,spironolactone,997,True,True,5,annotatorA,Hyperkalemia risk with ACEi/ARB
+15,insulin,75506,False,True,7,annotatorA,Hypoglycaemia can be severe

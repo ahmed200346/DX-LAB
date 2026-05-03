@@ -1,0 +1,6 @@
+id,drug,rxcui,major_interaction,major_interaction_targets,naranjo_score,adverse_outcome,annotator_id,notes
+1,aspirin,1191,True,warfarin,5,False,clin1,Verified increased bleeding risk with warfarin in label
+2,warfarin,,True,aspirin;ibuprofen,7,True,clin2,High bleed risk; multiple interacting agents
+3,ibuprofen,,False,,2,False,clin1,Typical NSAID adverse effects; major interactions are context-dependent
+4,metformin,,False,,1,False,clin2,Low interaction profile when used alone
+5,lisinopril,,True,spironolactone,3,False,clin1,Hyperkalemia risk with potassium-sparing diuretics

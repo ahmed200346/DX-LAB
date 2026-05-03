@@ -1,0 +1,32 @@
+{
+  "n_pairs": 15,
+  "major": {
+    "confusion": {
+      "n00": 4,
+      "n01": 1,
+      "n10": 1,
+      "n11": 9
+    },
+    "kappa": 0.7000000000000001,
+    "bootstrap_ci": {
+      "2.5%": 0.18918918918918906,
+      "97.5%": 1.0
+    }
+  },
+  "adverse": {
+    "confusion": {
+      "n00": 9,
+      "n01": 0,
+      "n10": 1,
+      "n11": 5
+    },
+    "kappa": 0.8571428571428572,
+    "bootstrap_ci": {
+      "2.5%": 0.4827586206896551,
+      "97.5%": 1.0
+    }
+  },
+  "annotator_a_file": "evaluations/annotations_annotatorA.csv",
+  "annotator_b_file": "evaluations/annotations_annotatorB.csv",
+  "adjudicator_file": null
+}
