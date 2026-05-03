@@ -15,13 +15,23 @@ export default function HypothesisAgentView() {
   const [hasRun, setHasRun] = useState(false);
   const [query, setQuery] = useState("");
   const [hypotheses, setHypotheses] = useState<any[]>([]);
+  const [currentAction, setCurrentAction] = useState("");
 
   const generateHypothesis = async () => {
     if (!query.trim()) return;
     setIsRunning(true);
     setHasRun(false);
+    setHypotheses([]);
     
-    await new Promise(r => setTimeout(r, 2500));
+    setCurrentAction("Querying vector database for similar literature...");
+    await new Promise(r => setTimeout(r, 2000 + Math.random() * 1000));
+    
+    setCurrentAction("Cross-referencing PubMed and clinical trial data...");
+    await new Promise(r => setTimeout(r, 2500 + Math.random() * 1000));
+
+    setCurrentAction("Synthesizing mechanistic pathways with LLM...");
+    await new Promise(r => setTimeout(r, 3000 + Math.random() * 1500));
+
     const results = [
       { 
         id: 1, 
@@ -42,6 +52,7 @@ export default function HypothesisAgentView() {
     setHypotheses(results);
     setHasRun(true);
     setIsRunning(false);
+    setCurrentAction("");
   };
 
   return (
@@ -63,8 +74,9 @@ export default function HypothesisAgentView() {
               <Input 
                 value={query} 
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="What are the mechanisms of BCL-2 inhibition resistance?"
+                placeholder="Type your research hypothesis or query here..."
                 className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-yellow-500/50 h-11"
+                onKeyDown={(e) => { if (e.key === 'Enter') generateHypothesis(); }}
               />
             </div>
             <div className="md:col-span-1">
@@ -77,23 +89,6 @@ export default function HypothesisAgentView() {
                 {isRunning ? "Synthesizing..." : "Generate Ideas"}
               </Button>
             </div>
-          </div>
-          
-          <div className="mt-6 flex flex-wrap gap-2 items-center">
-            <span className="text-[10px] font-bold text-gray-600 dark:text-white/20 uppercase tracking-widest mr-2">Ideas for:</span>
-            {[
-              "Synergistic targets for MCL-1 overexpression",
-              "Mechanism of action for dual BH3 inhibitors",
-              "New scaffolds for BAX/BAK activation",
-            ].map((ex) => (
-              <button 
-                key={ex}
-                onClick={() => setQuery(ex)}
-                className="text-[9px] bg-white dark:bg-white/5 hover:bg-yellow-50 dark:bg-yellow-500/10 border border-gray-200 dark:border-white/10 hover:border-yellow-300 dark:border-yellow-500/30 px-3 py-1.5 rounded-full text-gray-600 dark:text-white/60 hover:text-yellow-700 transition-all"
-              >
-                {ex}
-              </button>
-            ))}
           </div>
         </CardContent>
       </Card>
@@ -111,6 +106,18 @@ export default function HypothesisAgentView() {
           <div className="lg:col-span-3 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <AnimatePresence mode="popLayout">
+                  {isRunning && (
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      className="col-span-1 md:col-span-2 flex flex-col items-center justify-center h-48 border-2 border-dashed border-yellow-500/30 rounded-xl bg-yellow-500/5 animate-pulse"
+                    >
+                      <BrainCircuit className="w-10 h-10 text-yellow-500 mb-4 animate-bounce" />
+                      <p className="text-yellow-600 dark:text-yellow-500/80 font-mono text-sm text-center px-4">{currentAction}</p>
+                    </motion.div>
+                  )}
+
                   {hypotheses.map((h) => (
                     <motion.div
                       key={h.id}
@@ -192,7 +199,7 @@ export default function HypothesisAgentView() {
                                 <Search className="w-4 h-4 text-yellow-500" />
                               </div>
                               <div>
-                                <p className="text-xs text-yellow-700 dark:text-yellow-400 font-bold">Vector Search in progress...</p>
+                                <p className="text-xs text-yellow-700 dark:text-yellow-400 font-bold">{currentAction}</p>
                                 <p className="text-[10px] text-gray-600 dark:text-white/20 mt-1">now</p>
                               </div>
                           </div>

@@ -30,17 +30,21 @@ export default function SafetyAgentView() {
     setSafetyChecks(s => s.map(check => ({ ...check, status: "pending", score: 0 })));
 
     const results = [
-      { name: "Hepatotoxicity", score: 95, status: "Pass" },
-      { name: "Cardiotoxicity (hERG)", score: 88, status: "Pass" },
-      { name: "Mutagenicity (Ames)", score: 92, status: "Pass" },
-      { name: "Drug-Drug Interaction", score: 45, status: "Warning" },
-      { name: "Cytotoxicity", score: 98, status: "Pass" },
+      { name: "Hepatotoxicity", score: 95, status: "Pass", delay: 1200 },
+      { name: "Cardiotoxicity (hERG)", score: 88, status: "Pass", delay: 4200 },
+      { name: "Mutagenicity (Ames)", score: 92, status: "Pass", delay: 1800 },
+      { name: "Drug-Drug Interaction", score: 45, status: "Warning", delay: 2500 },
+      { name: "Cytotoxicity", score: 98, status: "Pass", delay: 5000 },
     ];
 
     for (let i = 0; i < results.length; i++) {
       setSafetyChecks(prev => prev.map((s, idx) => idx === i ? { ...s, status: "running" } : s));
-      await new Promise(r => setTimeout(r, 800 + Math.random() * 800));
-      setSafetyChecks(prev => prev.map((s, idx) => idx === i ? results[i] : s));
+      await new Promise(r => setTimeout(r, results[i].delay + Math.random() * 1000));
+      setSafetyChecks(prev => prev.map((s, idx) => idx === i ? {
+        name: results[i].name,
+        score: results[i].score,
+        status: results[i].status
+      } : s));
     }
     
     setHasRun(true);
@@ -69,7 +73,7 @@ export default function SafetyAgentView() {
               <Input 
                 value={smiles} 
                 onChange={(e) => setSmiles(e.target.value)}
-                placeholder="Enter SMILES string or Lead Name (e.g. Venetoclax-Analog)"
+                placeholder="Enter molecule name or SMILES sequence..."
                 className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-red-500/50 h-11"
               />
             </div>
@@ -85,22 +89,7 @@ export default function SafetyAgentView() {
             </div>
           </div>
           
-          <div className="mt-6 flex flex-wrap gap-2 items-center">
-            <span className="text-[10px] font-bold text-gray-600 dark:text-white/20 uppercase tracking-widest mr-2">Quick Checks:</span>
-            {[
-              "Venetoclax-Analog",
-              "DXL-102",
-              "Sotorasib",
-            ].map((ex) => (
-              <button 
-                key={ex}
-                onClick={() => setSmiles(ex)}
-                className="text-[9px] bg-white dark:bg-white/5 hover:bg-red-50 dark:bg-red-500/10 border border-gray-200 dark:border-white/10 hover:border-red-300 dark:border-red-500/30 px-3 py-1.5 rounded-full text-gray-600 dark:text-white/60 hover:text-red-500 transition-all"
-              >
-                {ex}
-              </button>
-            ))}
-          </div>
+
         </CardContent>
       </Card>
 
@@ -117,7 +106,10 @@ export default function SafetyAgentView() {
           <div className="lg:col-span-2 space-y-6">
             <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none">
               <CardHeader>
-                  <CardTitle className="text-lg">Toxicity Profile</CardTitle>
+                  <CardTitle className="text-lg flex justify-between items-center">
+                    Toxicity Profile
+                    {isRunning && <Badge variant="secondary" className="animate-pulse bg-blue-500/20 text-blue-500">Evaluating</Badge>}
+                  </CardTitle>
                   <CardDescription>Predicted organ-specific toxicity scores</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -147,15 +139,16 @@ export default function SafetyAgentView() {
                           {check.status === "pending" ? "0%" : `${check.score}% Safe`}
                         </span>
                       </div>
-                      <div className="h-1.5 w-full bg-white dark:bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-1.5 w-full bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: `${check.score}%` }}
                           transition={{ duration: 1, ease: "easeOut" }}
                           className={cn(
-                            "h-full rounded-full",
+                            "h-full rounded-full transition-colors",
                             check.status === "Pass" ? "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]" : 
-                            check.status === "Warning" ? "bg-yellow-500" : "bg-transparent"
+                            check.status === "Warning" ? "bg-yellow-500" : 
+                            check.status === "running" ? "bg-blue-500/50" : "bg-transparent"
                           )} 
                         />
                       </div>
@@ -164,34 +157,36 @@ export default function SafetyAgentView() {
               </CardContent>
             </Card>
 
-            <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none">
-              <CardHeader>
-                  <CardTitle className="text-lg">Mechanistic Alerts</CardTitle>
-                  <CardDescription>Known structural alerts for adverse effects</CardDescription>
-              </CardHeader>
-              <CardContent>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/20 rounded-xl flex gap-4">
-                        <div className="shrink-0 w-10 h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center">
-                          <AlertTriangle className="w-5 h-5 text-yellow-500" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-bold text-yellow-500">Tumor Lysis Syndrome (TLS) Alert</p>
-                          <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40 mt-1">High risk of TLS due to rapid reduction in tumor burden. Clinical protocols mandate gradual ramp-up dosing and hydration/anti-hyperuricemic prophylaxis.</p>
-                        </div>
+            {hasRun && (
+              <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <CardHeader>
+                    <CardTitle className="text-lg">Mechanistic Alerts</CardTitle>
+                    <CardDescription>Known structural alerts for adverse effects</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="space-y-4">
+                      <div className="p-4 bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/20 rounded-xl flex gap-4">
+                          <div className="shrink-0 w-10 h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+                            <AlertTriangle className="w-5 h-5 text-yellow-500" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-bold text-yellow-500">Tumor Lysis Syndrome (TLS) Alert</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40 mt-1">High risk of TLS due to rapid reduction in tumor burden. Clinical protocols mandate gradual ramp-up dosing and hydration/anti-hyperuricemic prophylaxis.</p>
+                          </div>
+                      </div>
+                      <div className="p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-xl flex gap-4">
+                          <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                            <ShieldCheck className="w-5 h-5 text-emerald-500" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-bold text-emerald-500">Neutropenia Management Flag</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40 mt-1">Grade 3/4 neutropenia frequently observed. Requires baseline and ongoing hematologic monitoring, but is manageable with dose interruption or G-CSF.</p>
+                          </div>
+                      </div>
                     </div>
-                    <div className="p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-xl flex gap-4">
-                        <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                          <ShieldCheck className="w-5 h-5 text-emerald-500" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-bold text-emerald-500">Neutropenia Management Flag</p>
-                          <p className="text-xs text-gray-600 dark:text-gray-500 dark:text-white/40 mt-1">Grade 3/4 neutropenia frequently observed. Requires baseline and ongoing hematologic monitoring, but is manageable with dose interruption or G-CSF.</p>
-                        </div>
-                    </div>
-                  </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           <div className="space-y-6">
@@ -201,26 +196,37 @@ export default function SafetyAgentView() {
                 </CardHeader>
                 <CardContent className="flex flex-col items-center py-10">
                   <div className="relative w-40 h-40">
-                      <svg className="w-full h-full" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" className="text-white/5" />
-                        <motion.circle 
-                          cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" 
-                          strokeDasharray="283" 
-                          initial={{ strokeDashoffset: 283 }}
-                          animate={{ strokeDashoffset: 283 - (283 * (isRunning ? 0.4 : 0.85)) }}
-                          transition={{ duration: 2, ease: "easeInOut" }}
-                          className="text-red-500" 
-                          strokeLinecap="round"
-                          transform="rotate(-90 50 50)"
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className="text-4xl font-bold">{isRunning ? "--" : "0.15"}</span>
-                        <span className="text-[10px] text-gray-600 dark:text-gray-500 dark:text-white/40 uppercase font-bold tracking-tighter">Hazard Index</span>
-                      </div>
+                      {isRunning ? (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center animate-pulse">
+                           <Loader2 className="w-12 h-12 text-red-500/50 animate-spin" />
+                        </div>
+                      ) : (
+                        <>
+                          <svg className="w-full h-full" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" className="text-white/5" />
+                            <motion.circle 
+                              cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" 
+                              strokeDasharray="283" 
+                              initial={{ strokeDashoffset: 283 }}
+                              animate={{ strokeDashoffset: 283 - (283 * 0.85) }}
+                              transition={{ duration: 1.5, ease: "easeOut" }}
+                              className="text-red-500" 
+                              strokeLinecap="round"
+                              transform="rotate(-90 50 50)"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-4xl font-bold">0.15</span>
+                            <span className="text-[10px] text-gray-600 dark:text-gray-500 dark:text-white/40 uppercase font-bold tracking-tighter">Hazard Index</span>
+                          </div>
+                        </>
+                      )}
                   </div>
-                  <Badge className="mt-6 bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/30">
-                    {isRunning ? "Calculating..." : "Low Risk Portfolio"}
+                  <Badge className={cn(
+                    "mt-6 border",
+                    isRunning ? "bg-gray-100 text-gray-500 border-gray-200 dark:bg-white/5 dark:text-white/50 dark:border-white/10" : "bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/30"
+                  )}>
+                    {isRunning ? "Running Multi-task Models..." : "Low Risk Portfolio"}
                   </Badge>
                 </CardContent>
             </Card>
@@ -231,19 +237,19 @@ export default function SafetyAgentView() {
               </CardHeader>
               <CardContent className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                    <p className="text-xs text-white/60">Cross-referenced with FDA FAERS</p>
+                    <div className={cn("w-2 h-2 rounded-full transition-colors", hasRun ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "bg-gray-300 dark:bg-white/20")} />
+                    <p className="text-xs text-gray-600 dark:text-white/60">Cross-referenced with FDA FAERS</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                    <p className="text-xs text-white/60">EMA Pharmacovigilance check</p>
+                    <div className={cn("w-2 h-2 rounded-full transition-colors", hasRun ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "bg-gray-300 dark:bg-white/20")} />
+                    <p className="text-xs text-gray-600 dark:text-white/60">EMA Pharmacovigilance check</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className={cn(
                       "w-2 h-2 rounded-full transition-colors",
-                      isRunning ? "bg-blue-500 animate-pulse" : "bg-yellow-500"
+                      isRunning ? "bg-blue-500 animate-pulse" : hasRun ? "bg-yellow-500" : "bg-gray-300 dark:bg-white/20"
                     )} />
-                    <p className="text-xs text-white/60">SIDER side effect mapping</p>
+                    <p className="text-xs text-gray-600 dark:text-white/60">SIDER side effect mapping</p>
                   </div>
               </CardContent>
             </Card>

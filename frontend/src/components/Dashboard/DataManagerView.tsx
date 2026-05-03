@@ -18,17 +18,24 @@ export default function DataManagerView() {
 
   const runIndexing = async () => {
     setIsRunning(true);
-    await new Promise(r => setTimeout(r, 2000));
+    setHasFiles(true);
+    setFiles([]);
     
     const initialFiles = [
-      { name: "BCL2_P10415_Complex_PDB.zip", size: "42.5 MB", type: "zip", date: "2026-05-01", status: "Indexed" },
-      { name: "PMID: 26822266_Venetoclax_CLL.pdf", size: "1.2 MB", type: "pdf", date: "2026-05-02", status: "Indexed" },
-      { name: "Ensemble_Docking_Scores_BCL2.json", size: "2.4 MB", type: "json", date: new Date().toISOString().split("T")[0], status: "Indexed" },
-      { name: "Venetoclax_Analog_SMILES.smi", size: "15.8 MB", type: "smi", date: "2026-04-28", status: "Indexed" },
+      { name: "BCL2_P10415_Complex_PDB.zip", size: "42.5 MB", type: "zip", date: "2026-05-01", status: "Indexing..." },
+      { name: "PMID: 26822266_Venetoclax_CLL.pdf", size: "1.2 MB", type: "pdf", date: "2026-05-02", status: "Indexing..." },
+      { name: "Ensemble_Docking_Scores_BCL2.json", size: "2.4 MB", type: "json", date: new Date().toISOString().split("T")[0], status: "Indexing..." },
+      { name: "Venetoclax_Analog_SMILES.smi", size: "15.8 MB", type: "smi", date: "2026-04-28", status: "Indexing..." },
     ];
     
-    setFiles(initialFiles);
-    setHasFiles(initialFiles.length > 0);
+    for (let i = 0; i < initialFiles.length; i++) {
+      // Add file as "Indexing..."
+      setFiles(prev => [...prev, initialFiles[i]]);
+      await new Promise(r => setTimeout(r, 1000 + Math.random() * 1500));
+      // Update file to "Indexed"
+      setFiles(prev => prev.map((f, idx) => idx === i ? { ...f, status: "Indexed" } : f));
+    }
+    
     setIsRunning(false);
   };
 
@@ -38,6 +45,7 @@ export default function DataManagerView() {
         <div>
           <h3 className="text-2xl font-bold">Data Management</h3>
           <p className="text-gray-600 dark:text-gray-500 dark:text-white/40 text-sm">Unified storage and knowledge indexing for all lab assets</p>
+
         </div>
         <div className="flex gap-3">
            <Button variant="outline" className="border-gray-200 dark:border-white/10 hover:bg-white dark:bg-white/5">
@@ -65,7 +73,7 @@ export default function DataManagerView() {
                  <label className="text-xs font-medium text-gray-700 dark:text-white/60">Search</label>
                  <div className="relative">
                     <Search className="absolute left-2.5 top-2.5 w-4 h-4 text-gray-600 dark:text-white/20" />
-                    <Input className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 pl-9 h-10 text-sm" placeholder="Filename..." />
+                    <Input className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 pl-9 h-10 text-sm" placeholder="Search indexed assets..." />
                  </div>
               </div>
               <div className="space-y-2">

@@ -16,13 +16,22 @@ export default function ReporterAgentView() {
   const [hasReport, setHasReport] = useState(false);
   const [subject, setSubject] = useState("");
   const [reports, setReports] = useState<any[]>([]);
+  const [currentStep, setCurrentStep] = useState("");
 
   const generateReport = async () => {
     if (!subject.trim()) return;
     setIsRunning(true);
     setHasReport(false);
     
-    await new Promise(r => setTimeout(r, 3000));
+    setCurrentStep("Compiling molecular characteristics...");
+    await new Promise(r => setTimeout(r, 2000 + Math.random() * 1000));
+    
+    setCurrentStep("Retrieving FAERS toxicity profile...");
+    await new Promise(r => setTimeout(r, 2000 + Math.random() * 1000));
+
+    setCurrentStep("Formatting clinical justification...");
+    await new Promise(r => setTimeout(r, 3000 + Math.random() * 1000));
+
     const newReport = {
       id: Date.now(),
       title: subject.includes("BCL-2") ? "Consolidated Insights: BCL-2 Drug Discovery" : `Synthesis Report: ${subject}`,
@@ -54,8 +63,9 @@ export default function ReporterAgentView() {
               <Input 
                 value={subject} 
                 onChange={(e) => setSubject(e.target.value)}
-                placeholder="e.g. BCL-2 Discovery Justification"
+                placeholder="Specify report subject or target area..."
                 className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-emerald-500/50 h-11"
+                onKeyDown={(e) => { if (e.key === 'Enter') generateReport(); }}
               />
             </div>
             <div className="md:col-span-1">
@@ -90,21 +100,21 @@ export default function ReporterAgentView() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute inset-0 z-20 bg-gray-900 dark:bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center space-y-4"
+                        className="absolute inset-0 z-20 bg-gray-900/10 dark:bg-black/60 backdrop-blur-md flex flex-col items-center justify-center space-y-4"
                     >
                         <div className="relative">
-                          <FileText className="w-16 h-16 text-emerald-500/20" />
+                          <FileText className="w-16 h-16 text-emerald-500/40 animate-pulse" />
                           <motion.div 
                               className="absolute inset-0"
                               animate={{ opacity: [0.5, 1, 0.5] }}
                               transition={{ duration: 1.5, repeat: Infinity }}
                           >
-                              <Sparkles className="w-8 h-8 text-emerald-700 dark:text-emerald-400 absolute -top-2 -right-2" />
+                              <Sparkles className="w-8 h-8 text-emerald-600 dark:text-emerald-400 absolute -top-2 -right-2" />
                           </motion.div>
                         </div>
                         <div className="text-center">
                           <p className="text-emerald-700 dark:text-emerald-400 font-bold text-lg">AI Synthesis in Progress</p>
-                          <p className="text-gray-600 dark:text-gray-500 dark:text-white/40 text-sm italic">Formatting technical justifications and citations...</p>
+                          <p className="text-emerald-600/70 dark:text-emerald-500/80 text-sm italic font-mono mt-2">{currentStep}</p>
                         </div>
                     </motion.div>
                   )}
