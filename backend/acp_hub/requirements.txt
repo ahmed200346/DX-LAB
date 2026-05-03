@@ -1,0 +1,11 @@
+# ACP hub (backend/acp_hub) — install in same venv as ITD or a dedicated venv
+acp-sdk>=0.7.0
+langgraph>=0.2.0
+langchain-core>=0.3.0
+openai>=1.0.0
+httpx>=0.27.0
+psutil>=5.9.0
+uvicorn>=0.30.0,<0.35.0
+fastapi>=0.115.0
+pydantic>=2.0.0
+PyYAML>=6.0.1

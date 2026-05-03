@@ -1,0 +1,33 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+.next/
+
+# Environment
+.env
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+
+# Local outputs / storage
+outputs/
+qdrant_storage/
+
+# Vendored services (large / local-only)
+backend/services/discovery_agent/runs/
+backend/services/discovery_agent/.venv/
+backend/services/discovery_agent/**/__pycache__/
+backend/services/printer_3d/.venv/
+backend/services/printer_3d/**/__pycache__/
+.venv/

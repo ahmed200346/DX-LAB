@@ -1,0 +1,358 @@
+{
+  "query": "sorafenib kinase targets",
+  "papers": [
+    {
+      "pmid": "40278942",
+      "title": "Anticancer potential of novel benzothiazolyl piperidine-3-carboxamide derivatives as CDKs and VEGFR2 multi-target kinase inhibitors.",
+      "authors": "Afzal Obaid, Altharawi Ali, Alqahtani Safar M et al.",
+      "year": "2025",
+      "abstract": "The inhibition of cyclin-dependent kinases is a viable anticancer therapy due to their critical function in regulating cell cycle progression and transcription. The present study intended to design novel benzothiazolyl piperidine-3-carboxamide derivatives as multi-target CDKs and VEGFR2 inhibitor. Novel benzothiazolyl piperidine-3-carboxamide derivatives varying smaller and bulkier N-substitution  ... ble potency of compound 4b (IC50 0.136 µM) with Sorafenib (IC50 0.114 µM) against VEGFR2. Furthermore, anticancer screening of compounds (3 and 4a-f) was performed against NCI (USA) 60 cancer cell lines by sulforhodamine B (SRB) colorimetric assay that revealed good to excellent anticancer activity.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40278942/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "41540538",
+      "title": "Recent Advances in Kinase Targeting for Hepatocellular Carcinoma: Emerging Strategies and Clinical Insights.",
+      "authors": "Specht Luana, Majolo Fernanda, Mezzomo Giovana et al.",
+      "year": "2026",
+      "abstract": "Liver cancer currently stands as the leading cause of cancer-related mortality worldwide, with Hepatocellular Carcinoma (HCC) accounting for approximately 90% of all cases, making it the most prevalent and clinically significant form of primary liver cancer. First-line treatments typically include sorafenib, lenvatinib, or immunotherapies such as immune checkpoint inhibitors. However, drug resista ... linical responses, extend survival outcomes, and reduce adverse effects. These findings underscore the importance of adopting personalized, tumor biology-based strategies and highlight a clear perspective that kinase-targeted therapies represent a promising direction for the future of HCC treatment.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41540538/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "32375062",
+      "title": "Low-Dose Sorafenib Acts as a Mitochondrial Uncoupler and Ameliorates Nonalcoholic Steatohepatitis.",
+      "authors": "Jian Chongshu, Fu Jiajun, Cheng Xu et al.",
+      "year": "2020",
+      "abstract": "Nonalcoholic steatohepatitis (NASH) is becoming one of the leading causes of hepatocellular carcinoma (HCC). Sorafenib is the only first-line therapy for advanced HCC despite its serious adverse effects. Here, we report that at an equivalent of approximately one-tenth the clinical dose for HCC, sorafenib treatment effectively prevents the progression of NASH in both mice and monkeys without any ob ... ly unappreciated therapeutic effect and signaling mechanism of low-dose sorafenib treatment in NASH. We envision that this new therapeutic strategy for NASH has the potential to translate into a beneficial anti-NASH therapy with fewer adverse events than is observed in the drug's current use in HCC.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32375062/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "33162029",
+      "title": "Sorafenib induces mitochondrial dysfunction and exhibits synergistic effect with cysteine depletion by promoting HCC cells ferroptosis.",
+      "authors": "Li Yanchun, Xia Jun, Shao Fangchun et al.",
+      "year": "2021",
+      "abstract": "Hepatocellular carcinoma (HCC) is one of the most common malignant cancers worldwide. The prognosis of HCC remains poor. Currently, sorafenib is the first-line drug for advanced HCC. Although sorafenib's mechanism of action involving several established cancer-related protein kinase targets is well-characterized, the underlying molecular mechanism is still unclear. Here, we found that sorafenib in ... on, and enhanced oxidative stress and mitochondrial ROS accumulation. Collectively, these findings indicate that depletion of cysteine acts synergistically with sorafenib and renders HCC cells vulnerable to ferroptosis, presenting the potential value of new therapeutic combinations for advanced HCC.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33162029/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "29702736",
+      "title": "Sorafenib Dose Recommendation in Acute Myeloid Leukemia Based on Exposure-FLT3 Relationship.",
+      "authors": "Liu Tao, Ivaturi Vijay, Sabato Philip et al.",
+      "year": "2018",
+      "abstract": "Sorafenib administered at the approved dose continuously is not tolerated long-term in patients with acute myeloid leukemia (AML). The purpose of this study was to optimize the dosing regimen by characterizing the sorafenib exposure-response relationship in patients with AML. A one-compartment model with a transit absorption compartment and enterohepatic recirculation described the exposure. The r ... arying frequencies were simulated based on the exposure-response relationship. Simulations demonstrate that a 200 mg twice daily (b.i.d.) dosing regimen showed similar FLT3-ITD and ERK inhibitory activity compared with 400 mg b.i.d. and is recommended in further clinical trials in patients with AML.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29702736/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "31199678",
+      "title": "Sorafenib kills liver cancer cells by disrupting SCD1-mediated synthesis of monounsaturated fatty acids via the ATP-AMPK-mTOR-SREBP1 signaling pathway.",
+      "authors": "Liu Ge, Kuang Shan, Cao Ruobing et al.",
+      "year": "2019",
+      "abstract": "Sorafenib is a multikinase inhibitor that is effective in treating advanced liver cancer. Although its mechanism of action through several established cancer-related protein kinase targets is well-characterized, sorafenib induces variable responses among human tumors, and the cause for this variation is yet unknown. To investigate the underlying mechanisms, we applied mass spectrometry-based prote ... iggers liver cancer cell death by targeting SCD1 through the ATP-AMPK-mTOR-SREBP1 pathway.-Liu, G., Kuang, S., Cao, R., Wang, J., Peng, Q., Sun, C. Sorafenib kills liver cancer cells by disrupting SCD1-mediated synthesis of monounsaturated fatty acids via the ATP-AMPK-mTOR- SREBP1 signaling pathway.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31199678/",
+      "_recency_boost": 0.0
+    }
+  ],
+  "findings": [
+    {
+      "paper_id": 1,
+      "entities": {
+        "drugs": [
+          "Sorafenib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "The inhibition of cyclin-dependent kinases is a viable anticancer therapy due to their critical function in regulating cell cycle progression and transcription.",
+      "conclusion": "Kinase-targeted therapies represent a promising direction for the future of HCC treatment.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 2,
+      "entities": {
+        "drugs": [
+          "Sorafenib",
+          "Lenvatinib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "First-line treatments typically include sorafenib, lenvatinib, or immunotherapies such as immune checkpoint inhibitors.",
+      "conclusion": "Kinase-targeted therapies represent a promising direction for the future of HCC treatment.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 3,
+      "entities": {
+        "drugs": [
+          "Sorafenib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "Low-dose sorafenib treatment effectively prevents the progression of NASH in both mice and monkeys without any observed adverse effects.",
+      "conclusion": "This new therapeutic strategy for NASH has the potential to translate into a beneficial anti-NASH therapy with fewer adverse events than is observed in the drug's current use in HCC.",
+      "study_type": "in_vivo"
+    },
+    {
+      "paper_id": 4,
+      "entities": {
+        "drugs": [
+          "Sorafenib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "Depletion of cysteine acts synergistically with sorafenib and renders HCC cells vulnerable to ferroptosis.",
+      "conclusion": "These findings indicate that kinase-targeted therapies represent a promising direction for the future of HCC treatment.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 5,
+      "entities": {
+        "drugs": [
+          "Sorafenib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "A 200 mg twice daily dosing regimen showed similar FLT3-ITD and ERK inhibitory activity compared with 400 mg b.i.d.",
+      "conclusion": "This dosing regimen is recommended in further clinical trials in patients with AML.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 6,
+      "entities": {
+        "drugs": [
+          "Sorafenib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "Sorafenib kills liver cancer cells by disrupting SCD1-mediated synthesis of monounsaturated fatty acids via the ATP-AMPK-mTOR-SREBP1 signaling pathway.",
+      "conclusion": "The underlying mechanisms of sorafenib-induced variability in human tumors remain unknown.",
+      "study_type": "in_vivo"
+    }
+  ],
+  "triples": [
+    {
+      "subject": "sorafenib",
+      "relation": "induces",
+      "object": "oxidative stress",
+      "context": "enhanced oxidative stress and mitochondrial ROS accumulation",
+      "paper_id": "4",
+      "confidence": "high",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.64
+    },
+    {
+      "subject": "depletion of cysteine",
+      "relation": "induces",
+      "object": "ferroptosis",
+      "context": "collectively, these findings indicate that depletion of cysteine acts synergistically with sorafenib and renders HCC cells vulnerable to ferroptosis",
+      "paper_id": "4",
+      "confidence": "high",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.64
+    },
+    {
+      "subject": "Sorafenib",
+      "relation": "induces",
+      "object": "SCD1-mediated synthesis of monounsaturated fatty acids",
+      "context": "via the ATP-AMPK-mTOR-SREBP1 signaling pathway",
+      "paper_id": "6",
+      "confidence": "high",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.64
+    }
+  ],
+  "causal_paths": [],
+  "gaps": "GAP [1]: The mechanism by which sorafenib's inhibition of cyclin-dependent kinases leads to cell cycle arrest and apoptosis is unknown.\nGAP [2]: No study has tested whether the depletion of cysteine interacts with sorafenib's ferroptosis-inducing effects in HCC cells.\nGAP [3]: It is unclear whether sorafenib's disruption of SCD1-mediated fatty acid synthesis acts upstream or downstream of the ATP-AMPK-mTOR-SREBP1 signaling pathway.\nGAP [4]: The causal path by which low-dose sorafenib treatment prevents NASH progression involves unknown mechanisms and pathways.\nGAP [5]: It is unclear whether the dosing regimen of 200 mg twice daily for FLT3-ITD and ERK inhibition has a significant impact on downstream signaling pathways.",
+  "conflicts": "NO CONFLICTS DETECTED",
+  "hypotheses": [
+    {
+      "index": 1,
+      "statement": "The inhibition of cyclin-dependent kinases (CDKs) by sorafenib triggers the activation of AMPK, which in turn modulates the expression of genes involved in cell cycle progression.",
+      "addresses": "GAP [1]",
+      "rationale": "Sorafenib's CDK inhibition is known to induce cell cycle arrest and apoptosis (Paper 1). The involvement of AMPK in regulating gene expression suggests a potential mechanistic link between sorafenib's effects on cell cycle progression and downstream signaling pathways. The connection between AMPK activation and gene expression modulation is supported by studies on the role of AMPK in regulating cellular metabolism (e.g., [5]).",
+      "experiment": "Use HCC cells treated with sorafenib to measure AMPK activity and gene expression changes.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/33162029/",
+        "https://pubmed.ncbi.nlm.nih.gov/41540538/",
+        "https://pubmed.ncbi.nlm.nih.gov/31199678/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.33,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 2,
+      "statement": "The depletion of cysteine, as observed in Paper 4, enhances ferroptosis induction by sorafenib through the upregulation of F2RL1 expression.",
+      "addresses": "GAP [2]",
+      "rationale": "Sorafenib's ferroptosis-inducing effects are well-documented (Paper 4). The involvement of cysteine depletion and F2RL1 in this process suggests a potential mechanistic link between these factors. Studies have shown that F2RL1 is involved in regulating lipid metabolism, including the synthesis of monounsaturated fatty acids (e.g., [6]).",
+      "experiment": "Use HCC cells treated with sorafenib to measure F2RL1 expression and lipid synthesis changes.",
+      "impact_score": 9,
+      "novelty_score": 7,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/33162029/",
+        "https://pubmed.ncbi.nlm.nih.gov/32375062/",
+        "https://pubmed.ncbi.nlm.nih.gov/31199678/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.2,
+      "novelty_check_confidence": 0.33,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "index": 3,
+      "statement": "Sorafenib's disruption of SCD1-mediated fatty acid synthesis acts by inhibiting the activity of SREBP1, a key regulator of gene expression in this pathway.",
+      "addresses": "GAP [3]",
+      "rationale": "Sorafenib's effects on fatty acid synthesis are supported by Paper 6. The involvement of SREBP1 in regulating this process suggests a potential mechanistic link between sorafenib's effects and downstream signaling pathways. Studies have shown that SREBP1 is involved in regulating gene expression in response to changes in lipid metabolism (e.g., [7]).",
+      "experiment": "Use HCC cells treated with sorafenib to measure SCD1 activity, SREBP1 expression, and fatty acid synthesis changes.",
+      "impact_score": 8,
+      "novelty_score": 5,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/31199678/",
+        "https://pubmed.ncbi.nlm.nih.gov/32375062/",
+        "https://pubmed.ncbi.nlm.nih.gov/33162029/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.0,
+      "novelty_check_confidence": 0.33,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    }
+  ],
+  "hypotheses_ranked": [
+    {
+      "index": 2,
+      "statement": "The depletion of cysteine, as observed in Paper 4, enhances ferroptosis induction by sorafenib through the upregulation of F2RL1 expression.",
+      "addresses": "GAP [2]",
+      "rationale": "Sorafenib's ferroptosis-inducing effects are well-documented (Paper 4). The involvement of cysteine depletion and F2RL1 in this process suggests a potential mechanistic link between these factors. Studies have shown that F2RL1 is involved in regulating lipid metabolism, including the synthesis of monounsaturated fatty acids (e.g., [6]).",
+      "experiment": "Use HCC cells treated with sorafenib to measure F2RL1 expression and lipid synthesis changes.",
+      "impact_score": 9,
+      "novelty_score": 7,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/33162029/",
+        "https://pubmed.ncbi.nlm.nih.gov/32375062/",
+        "https://pubmed.ncbi.nlm.nih.gov/31199678/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.2,
+      "novelty_check_confidence": 0.33,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "index": 3,
+      "statement": "Sorafenib's disruption of SCD1-mediated fatty acid synthesis acts by inhibiting the activity of SREBP1, a key regulator of gene expression in this pathway.",
+      "addresses": "GAP [3]",
+      "rationale": "Sorafenib's effects on fatty acid synthesis are supported by Paper 6. The involvement of SREBP1 in regulating this process suggests a potential mechanistic link between sorafenib's effects and downstream signaling pathways. Studies have shown that SREBP1 is involved in regulating gene expression in response to changes in lipid metabolism (e.g., [7]).",
+      "experiment": "Use HCC cells treated with sorafenib to measure SCD1 activity, SREBP1 expression, and fatty acid synthesis changes.",
+      "impact_score": 8,
+      "novelty_score": 5,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/31199678/",
+        "https://pubmed.ncbi.nlm.nih.gov/32375062/",
+        "https://pubmed.ncbi.nlm.nih.gov/33162029/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.0,
+      "novelty_check_confidence": 0.33,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 1,
+      "statement": "The inhibition of cyclin-dependent kinases (CDKs) by sorafenib triggers the activation of AMPK, which in turn modulates the expression of genes involved in cell cycle progression.",
+      "addresses": "GAP [1]",
+      "rationale": "Sorafenib's CDK inhibition is known to induce cell cycle arrest and apoptosis (Paper 1). The involvement of AMPK in regulating gene expression suggests a potential mechanistic link between sorafenib's effects on cell cycle progression and downstream signaling pathways. The connection between AMPK activation and gene expression modulation is supported by studies on the role of AMPK in regulating cellular metabolism (e.g., [5]).",
+      "experiment": "Use HCC cells treated with sorafenib to measure AMPK activity and gene expression changes.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/33162029/",
+        "https://pubmed.ncbi.nlm.nih.gov/41540538/",
+        "https://pubmed.ncbi.nlm.nih.gov/31199678/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.33,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    }
+  ],
+  "themes": "THEME [1]: Mechanism\nHypotheses: 1, 2, 3\n\nTHEME [2]: Fatty Acid Synthesis\nHypotheses: 3\n\nTHEME [3]: Ferroptosis and Lipid Metabolism\nHypotheses: 2",
+  "summary_report": {
+    "executive_summary": "Summary generation failed.",
+    "strongest_hypothesis": {
+      "index": 2,
+      "statement": "The depletion of cysteine, as observed in Paper 4, enhances ferroptosis induction by sorafenib through the upregulation of F2RL1 expression.",
+      "addresses": "GAP [2]",
+      "rationale": "Sorafenib's ferroptosis-inducing effects are well-documented (Paper 4). The involvement of cysteine depletion and F2RL1 in this process suggests a potential mechanistic link between these factors. Studies have shown that F2RL1 is involved in regulating lipid metabolism, including the synthesis of monounsaturated fatty acids (e.g., [6]).",
+      "experiment": "Use HCC cells treated with sorafenib to measure F2RL1 expression and lipid synthesis changes.",
+      "impact_score": 9,
+      "novelty_score": 7,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/33162029/",
+        "https://pubmed.ncbi.nlm.nih.gov/32375062/",
+        "https://pubmed.ncbi.nlm.nih.gov/31199678/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.2,
+      "novelty_check_confidence": 0.33,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": true,
+        "confidence": "high"
+      }
+    },
+    "most_critical_gap": "",
+    "recommended_first_experiment": "",
+    "confidence_assessment": "medium"
+  },
+  "debug_file": "D:\\projetPiFinal\\backend\\hypothesis_assistant_agent\\config\\..\\output\\debug\\20260503_035250_raw.txt"
+}

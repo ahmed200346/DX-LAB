@@ -1,0 +1,537 @@
+{
+  "query": "KRAS inhibitor resistance in NSCLC",
+  "papers": [
+    {
+      "pmid": "39499616",
+      "title": "USP7 deubiquitinates KRAS and promotes non-small cell lung cancer.",
+      "authors": "Huang Bin, Cao Dan, Yuan Xiao et al.",
+      "year": "2024",
+      "abstract": "RAS oncogenic mutations are pivotal drivers of tumorigenesis. Ubiquitination modulates RAS functions, including activation, stability, and localization. While several E3 ligases regulate RAS ubiquitination, RAS deubiquitination remains less understood. Our study reveals that ubiquitin-specific protease 7 (USP7) directly deubiquitinates KRAS, stabilizing it and promoting the proliferation of non-sm ... P7 inhibitors suppress NSCLC cell proliferation, particularly in cells resistant to the KRAS-G12C inhibitor AMG510. In conclusion, our findings identify USP7 as a key deubiquitinase regulating RAS stability, and targeting USP7 is a promising strategy to counteract KRAS inhibitor resistance in NSCLC.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "39047616",
+      "title": "The next-generation KRAS inhibitors…What comes after sotorasib and adagrasib?",
+      "authors": "Oya Yuko, Imaizumi Kazuyoshi, Mitsudomi Tetsuya et al.",
+      "year": "2024",
+      "abstract": "The Kirsten rat sarcoma viral oncogene homolog (KRAS) is one of the first driver oncogenes identified in human cancer in the early 1980s. However, it has been deemed 'undruggable' for nearly four decades until the discovery of KRAS G12C covalent inhibitors, which marked a pivotal breakthrough. Currently, sotorasib and adagrasib have been approved by the US FDA to treat patients with non-small cell ... ack mechanisms. Additionally, immunological approaches utilizing T-cell receptor (TCR)-engineered T cell therapy or vaccines, and Hapimmune antibodies are ongoing. This review delineates the recent advancements in KRAS inhibitor development in the post-sotorasib/adagrasib era, with a focus on NSCLC.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39047616/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "38277141",
+      "title": "Cotargeting CDK4/6 and BRD4 Promotes Senescence and Ferroptosis Sensitivity in Cancer.",
+      "authors": "Zhu Xianbing, Fu Zheng, Dutchak Kendall et al.",
+      "year": "2024",
+      "abstract": "Cyclin-dependent kinase 4/6 (CDK4/6) inhibitors are approved for breast cancer treatment and show activity against other malignancies, including KRAS-mutant non-small cell lung cancer (NSCLC). However, the clinical efficacy of CDK4/6 inhibitors is limited due to frequent drug resistance and their largely cytostatic effects. Through a genome-wide cDNA screen, we identified that bromodomain-containi ... es and effective combinations to enhance the clinical utility of CDK4/6 inhibitors. The combination of cytostatic CDK4/6 and BRD4 inhibitors induces senescent cancer cells that are primed for activation of ferroptotic cell death by targeting GPX4, providing an effective strategy for treating cancer.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38277141/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "38867255",
+      "title": "KRAS-mutant non-small cell lung cancer (NSCLC) therapy based on tepotinib and omeprazole combination.",
+      "authors": "Rosell Rafael, Jantus-Lewintre Eloisa, Cao Peng et al.",
+      "year": "2024",
+      "abstract": "KRAS-mutant non-small cell lung cancer (NSCLC) shows a relatively low response rate to chemotherapy, immunotherapy and KRAS-G12C selective inhibitors, leading to short median progression-free survival, and overall survival. The MET receptor tyrosine kinase (c-MET), the cognate receptor of hepatocyte growth factor (HGF), was reported to be overexpressed in KRAS-mutant lung cancer cells leading to t ... evels of KRAS mRNA expression and 3.742 (p = 0.052) for high MET mRNA expression. We posit that the combination of the V-ATPase inhibitor omeprazole plus tepotinib warrants further assessment in KRAS-mutant G12C and non G12C cell lines, including those resistant to the covalent KRAS G12C inhibitors.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38867255/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "39914665",
+      "title": "Genomic landscape of clinically acquired resistance alterations in patients treated with KRASG12C inhibitors.",
+      "authors": "Riedl J M, Fece de la Cruz F, Lin J J et al.",
+      "year": "2025",
+      "abstract": "Mutant-selective inhibitors of KRASG12C (KRASG12Ci) have demonstrated efficacy in KRASG12C cancers. However, resistance invariably develops, resulting in short-lived responses. We aimed to define the genomic landscape of acquired resistance to KRASG12Ci and to elucidate whether novel classes of KRAS inhibitors can overcome these resistance mechanisms. To assess clinical frequencies of acquired res ... bitor RMC-7797 demonstrated high potency across all RAS alterations. Acquired RAS/MAPK alterations are recurrent drivers of resistance to KRASG12Ci detected in CRC and, less frequently, in NSCLC. Preclinical data suggest that novel (K)RAS inhibitors may overcome many of these resistance alterations.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39914665/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "32430388",
+      "title": "EGFR Blockade Reverts Resistance to KRASG12C Inhibition in Colorectal Cancer.",
+      "authors": "Amodio Vito, Yaeger Rona, Arcella Pamela et al.",
+      "year": "2020",
+      "abstract": "Most patients with KRAS G12C-mutant non-small cell lung cancer (NSCLC) experience clinical benefit from selective KRASG12C inhibition, whereas patients with colorectal cancer bearing the same mutation rarely respond. To investigate the cause of the limited efficacy of KRASG12C inhibitors in colorectal cancer, we examined the effects of AMG510 in KRAS G12C colorectal cancer cell lines. Unlike NSCLC ... ity or resistance to KRASG12C inhibition in colorectal cancer. EGFR and KRASG12C should be concomitantly inhibited to overcome resistance to KRASG12C blockade in colorectal tumors.See related commentary by Koleilat and Kwong, p. 1094.This article is highlighted in the In This Issue feature, p. 1079.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32430388/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "34953682",
+      "title": "Anticancer drug resistance: An update and perspective.",
+      "authors": "Nussinov Ruth, Tsai Chung-Jung, Jang Hyunbum et al.",
+      "year": "2021",
+      "abstract": "Driver mutations promote initiation and progression of cancer. Pharmacological treatment can inhibit the action of the mutant protein; however, drug resistance almost invariably emerges. Multiple studies revealed that cancer drug resistance is based upon a plethora of distinct mechanisms. Drug resistance mutations can occur in the same protein or in different proteins; as well as in the same pathw ... icine, are the focus of our present review. We end with our perspective, which calls for target combinations to be selected and prioritized with the help of the emerging massive compute power which enables artificial intelligence, and the increased gathering of data to overcome its insatiable needs.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34953682/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "35811500",
+      "title": "KRAS-G12D mutation drives immune suppression and the primary resistance of anti-PD-1/PD-L1 immunotherapy in non-small cell lung cancer.",
+      "authors": "Liu Chengming, Zheng Sufei, Wang Zhanyu et al.",
+      "year": "2022",
+      "abstract": "Although immune checkpoint inhibitors (ICIs) against programmed cell death protein 1 (PD-1) and its ligand PD-L1 have demonstrated potency towards treating patients with non-small cell lung carcinoma (NSCLC), the potential association between Kirsten rat sarcoma viral oncogene homolog (KRAS) oncogene substitutions and the efficacy of ICIs remains unclear. In this study, we aimed to find point muta ... ICI monotherapy. Our study elucidated the molecular mechanism by which KRAS-G12D mutation drives immunosuppression and enhances resistance of ICIs in NSCLC. Importantly, our findings demonstrate that ICIs in combination with chemotherapy may be more effective in patients with KRAS-G12D-mutant NSCLC.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35811500/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "33582927",
+      "title": "Targeting KRAS in Colorectal Cancer.",
+      "authors": "Wang Chongkai, Fakih Marwan",
+      "year": "2021",
+      "abstract": "Mutations in kirsten rat sarcoma viral oncogene homolog (KRAS) are the most frequently observed genomic alterations in human cancers. No KRAS targeting therapy has been approved despite more than three decades of efforts. Encouraging progress has been made in targeting KRASG12C with KRASG12C specific covalent inhibitors in the past few years. Herein, we review the recent breakthroughs in KRAS targ ... nslated into clinical benefits, which holds the potential of transforming clinical management of KRAS mutated solid tumors. Additional efforts are needed to identify biomarkers that predict response to KRAS inhibition in patients with KRASG12C as well as to develop strategies to overcome resistance.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33582927/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "36512628",
+      "title": "PARP Inhibition Induces Synthetic Lethality and Adaptive Immunity in LKB1-Mutant Lung Cancer.",
+      "authors": "Long Li-Li, Ma Si-Cong, Guo Ze-Qin et al.",
+      "year": "2023",
+      "abstract": "Contradictory characteristics of elevated mutational burden and a \"cold\" tumor microenvironment (TME) coexist in liver kinase B1 (LKB1)-mutant non-small cell lung cancers (NSCLC). The molecular basis underlying this paradox and strategies tailored to these historically difficult to treat cancers are lacking. Here, by mapping the single-cell transcriptomic landscape of genetically engineered mouse  ... or dual PARP1 and PD-1 inhibition in treating LKB1-mutant NSCLC. Targeting PARP exerts dual effects to overcome LKB1 loss-driven immunotherapy resistance through triggering DNA damage and adaptive immunity, providing a rationale for dual PARP and PD-1 inhibition in treating LKB1-mutant lung cancers.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36512628/",
+      "_recency_boost": 0.0
+    }
+  ],
+  "findings": [
+    {
+      "paper_id": 1,
+      "entities": {
+        "drugs": [
+          "AMG 510"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": []
+      },
+      "outcome": "USP7 inhibitors suppress NSCLC cell proliferation, particularly in cells resistant to the KRAS-G12C inhibitor AMG510.",
+      "conclusion": "Our findings identify USP7 as a key deubiquitinase regulating RAS stability, and targeting USP7 is a promising strategy to counteract KRAS inhibitor resistance in NSCLC.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 2,
+      "entities": {
+        "drugs": [
+          "sotorasib",
+          "adagrasib"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "This review delineates the recent advancements in KRAS inhibitor development in the post-sotorasib/adagrasib era, with a focus on NSCLC.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 3,
+      "entities": {
+        "drugs": [
+          "BRD4"
+        ],
+        "genes": [
+          "CDK4",
+          "CDK6",
+          "BRD4"
+        ],
+        "pathways": []
+      },
+      "outcome": "The combination of cytostatic CDK4/6 and BRD4 inhibitors induces senescent cancer cells that are primed for activation of ferroptotic cell death.",
+      "conclusion": "",
+      "study_type": "in_vitro"
+    },
+    {
+      "paper_id": 4,
+      "entities": {
+        "drugs": [
+          "tepotinib",
+          "omeprazole"
+        ],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "We posit that the combination of the V-ATPase inhibitor omeprazole plus tepotinib warrants further assessment in KRAS-mutant G12C and non G12C cell lines, including those resistant to the covalent KRAS G12C inhibitors.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 5,
+      "entities": {
+        "drugs": [
+          "RMC 7797"
+        ],
+        "genes": [
+          "KRAS",
+          "MAPK"
+        ],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "Preclinical data suggest that novel (K)RAS inhibitors may overcome many of these resistance alterations.",
+      "study_type": "in_vitro"
+    },
+    {
+      "paper_id": 6,
+      "entities": {
+        "drugs": [
+          "AMG 510"
+        ],
+        "genes": [
+          "KRAS",
+          "EGFR"
+        ],
+        "pathways": []
+      },
+      "outcome": "EGFR and KRASG12C should be concomitantly inhibited to overcome resistance to KRASG12C blockade in colorectal tumors.",
+      "conclusion": "Targeting EGFR and KRASG12C simultaneously may improve efficacy in colorectal cancer treatment.",
+      "study_type": "in_vivo"
+    },
+    {
+      "paper_id": 7,
+      "entities": {
+        "drugs": [],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "Target combinations of drugs and prioritization with AI can help overcome cancer drug resistance.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 8,
+      "entities": {
+        "drugs": [],
+        "genes": [
+          "KRAS",
+          "PD-1",
+          "PD-L1"
+        ],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "ICIs in combination with chemotherapy may be more effective in patients with KRAS-G12D-mutant NSCLC.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 9,
+      "entities": {
+        "drugs": [],
+        "genes": [
+          "KRAS"
+        ],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "Targeting KRASG12C with covalent inhibitors holds potential for transforming clinical management of KRAS mutated solid tumors.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 10,
+      "entities": {
+        "drugs": [],
+        "genes": [
+          "PARP1",
+          "LKB1"
+        ],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "Dual PARP and PD-1 inhibition may provide a rationale for treating LKB1-mutant lung cancers.",
+      "study_type": "clinical_trial"
+    }
+  ],
+  "triples": [
+    {
+      "subject": "CDK4/6 inhibitors",
+      "relation": "induces",
+      "object": "senescent cancer cells",
+      "context": "combination with BRD4 inhibitors",
+      "paper_id": "3",
+      "confidence": "high",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.64
+    },
+    {
+      "subject": "BRD4 inhibitors",
+      "relation": "activates",
+      "object": "ferroptotic cell death pathway",
+      "context": "targeting GPX4",
+      "paper_id": "3",
+      "confidence": "high",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.64
+    },
+    {
+      "subject": "high MET mRNA expression",
+      "relation": "upregulates",
+      "object": "KRAS mRNA expression",
+      "context": "levels of KRAS mRNA expression",
+      "paper_id": "4",
+      "confidence": "medium",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.49
+    },
+    {
+      "subject": "KRAS-G12D mutation",
+      "relation": "activates",
+      "object": "immunosuppression",
+      "context": "drives immunosuppression",
+      "paper_id": "8",
+      "confidence": "high",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.64
+    },
+    {
+      "subject": "ICIs",
+      "relation": "inhibits",
+      "object": "KRAS-G12D mutation",
+      "context": "enhances resistance to ICIs",
+      "paper_id": "8",
+      "confidence": "medium",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.49
+    }
+  ],
+  "causal_paths": [],
+  "gaps": "GAP [1]: The mechanism by which USP7 regulates RAS stability is unknown, and understanding this relationship could inform more targeted therapies.\n\nGAP [2]: No study has tested whether BRD4 inhibition interacts with CDK4/6 inhibition in the context of KRAS inhibitor resistance in NSCLC.\n\nGAP [3]: It is unclear how omeprazole affects the efficacy of tepotinib in combination, and understanding this interaction could lead to more effective treatment strategies.\n\nGAP [4]: The causal path USP7→RAS stability→KRAS inhibitor resistance is missing experimental validation of the RAS intermediate, which would provide insight into potential therapeutic targets.\n\nGAP [5]: No study has tested whether targeting EGFR simultaneously with KRAS G12C inhibition improves efficacy in NSCLC tumors resistant to KRAS inhibitors.",
+  "conflicts": "NO CONFLICTS DETECTED",
+  "hypotheses": [
+    {
+      "index": 1,
+      "statement": "USP7 deubiquitinates RAS protein, which is stabilized by USP7-mediated regulation of c-Myc expression.",
+      "addresses": "GAP [4]",
+      "rationale": "According to Paper 1, USP7 inhibitors suppress NSCLC cell proliferation in cells resistant to AMG510. The review paper suggests that targeting USP7 could be a promising strategy. By understanding the mechanism by which USP7 regulates RAS stability, we can identify potential therapeutic targets. Furthermore, c-Myc is known to interact with RAS protein, and its dysregulation has been implicated in various cancers (not directly cited in the provided knowledge).",
+      "experiment": "Measure the effect of USP7 inhibition on c-Myc expression in NSCLC cells using Western blotting or qRT-PCR.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+        "https://pubmed.ncbi.nlm.nih.gov/39047616/",
+        "https://pubmed.ncbi.nlm.nih.gov/36512628/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 2,
+      "statement": "BRD4 inhibition enhances CDK4/6 inhibition-mediated senescence by inducing ferroptotic cell death in KRAS mutant NSCLC cells.",
+      "addresses": "GAP [2]",
+      "rationale": "Paper 3 shows that the combination of cytostatic CDK4/6 and BRD4 inhibitors induces senescent cancer cells. Although this study did not investigate the interaction between BRD4 and CDK4/6 inhibition in the context of KRAS inhibitor resistance, we can infer from this finding that combining these two inhibitors may enhance senescence-mediated killing of cancer cells.",
+      "experiment": "Co-treat NSCLC cells with AMG510 (KRAS-G12C inhibitor) and either a BRD4 inhibitor or CDK4/6 inhibitor, and measure the effect on cell proliferation using MTT assays.",
+      "impact_score": 9,
+      "novelty_score": 5,
+      "theme": "Combination Therapy",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/38277141/",
+        "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+        "https://pubmed.ncbi.nlm.nih.gov/39914665/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 3,
+      "statement": "Omeprazole enhances tepotinib efficacy by increasing tepotinib intracellular concentrations through inhibition of ABCB1.",
+      "addresses": "GAP [3]",
+      "rationale": "Paper 4 suggests that combining omeprazole with tepotinib warrants further assessment in NSCLC tumors. Although the mechanism behind this interaction is unclear, we can hypothesize that omeprazole may inhibit ABCB1 (P-glycoprotein) transporters, which could increase intracellular concentrations of tepotinib.",
+      "experiment": "Measure the effect of omeprazole on tepotinib intracellular concentrations using cell-based assays or in vitro transport studies.",
+      "impact_score": 7,
+      "novelty_score": 2,
+      "theme": "Drug Resistance",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/38867255/",
+        "https://pubmed.ncbi.nlm.nih.gov/39047616/",
+        "https://pubmed.ncbi.nlm.nih.gov/32430388/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 6.2,
+      "novelty_check_confidence": 0.0,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    }
+  ],
+  "hypotheses_ranked": [
+    {
+      "index": 2,
+      "statement": "BRD4 inhibition enhances CDK4/6 inhibition-mediated senescence by inducing ferroptotic cell death in KRAS mutant NSCLC cells.",
+      "addresses": "GAP [2]",
+      "rationale": "Paper 3 shows that the combination of cytostatic CDK4/6 and BRD4 inhibitors induces senescent cancer cells. Although this study did not investigate the interaction between BRD4 and CDK4/6 inhibition in the context of KRAS inhibitor resistance, we can infer from this finding that combining these two inhibitors may enhance senescence-mediated killing of cancer cells.",
+      "experiment": "Co-treat NSCLC cells with AMG510 (KRAS-G12C inhibitor) and either a BRD4 inhibitor or CDK4/6 inhibitor, and measure the effect on cell proliferation using MTT assays.",
+      "impact_score": 9,
+      "novelty_score": 5,
+      "theme": "Combination Therapy",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/38277141/",
+        "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+        "https://pubmed.ncbi.nlm.nih.gov/39914665/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 1,
+      "statement": "USP7 deubiquitinates RAS protein, which is stabilized by USP7-mediated regulation of c-Myc expression.",
+      "addresses": "GAP [4]",
+      "rationale": "According to Paper 1, USP7 inhibitors suppress NSCLC cell proliferation in cells resistant to AMG510. The review paper suggests that targeting USP7 could be a promising strategy. By understanding the mechanism by which USP7 regulates RAS stability, we can identify potential therapeutic targets. Furthermore, c-Myc is known to interact with RAS protein, and its dysregulation has been implicated in various cancers (not directly cited in the provided knowledge).",
+      "experiment": "Measure the effect of USP7 inhibition on c-Myc expression in NSCLC cells using Western blotting or qRT-PCR.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+        "https://pubmed.ncbi.nlm.nih.gov/39047616/",
+        "https://pubmed.ncbi.nlm.nih.gov/36512628/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 3,
+      "statement": "Omeprazole enhances tepotinib efficacy by increasing tepotinib intracellular concentrations through inhibition of ABCB1.",
+      "addresses": "GAP [3]",
+      "rationale": "Paper 4 suggests that combining omeprazole with tepotinib warrants further assessment in NSCLC tumors. Although the mechanism behind this interaction is unclear, we can hypothesize that omeprazole may inhibit ABCB1 (P-glycoprotein) transporters, which could increase intracellular concentrations of tepotinib.",
+      "experiment": "Measure the effect of omeprazole on tepotinib intracellular concentrations using cell-based assays or in vitro transport studies.",
+      "impact_score": 7,
+      "novelty_score": 2,
+      "theme": "Drug Resistance",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/38867255/",
+        "https://pubmed.ncbi.nlm.nih.gov/39047616/",
+        "https://pubmed.ncbi.nlm.nih.gov/32430388/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 6.2,
+      "novelty_check_confidence": 0.0,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    }
+  ],
+  "themes": "THEME 1: Mechanism\nHypotheses: 1, 5\nDescription: Hypotheses that explore the molecular mechanisms underlying resistance to KRAS-G12C inhibitors.\n\nTHEME 2: Combination Therapy\nHypotheses: 2, 4, 6\nDescription: Hypotheses that investigate the potential of combining different inhibitors to overcome resistance and enhance treatment efficacy.\n\nTHEME 3: Drug Resistance\nHypothesis: 3\nDescription: A hypothesis that explores a potential strategy for overcoming drug resistance by inhibiting ABCB1 transporters.",
+  "summary_report": {
+    "executive_summary": "Researchers aim to understand KRAS inhibitor resistance in non-small cell lung cancer (NSCLC) by generating hypotheses for testing. Three potential hypotheses focus on combination therapies, mechanism-based approaches, and drug interactions. The goal is to identify novel targets and strategies to overcome resistance.",
+    "strongest_hypothesis": {
+      "index": 2,
+      "statement": "BRD4 inhibition enhances CDK4/6 inhibition-mediated senescence by inducing ferroptotic cell death in KRAS mutant NSCLC cells.",
+      "addresses": "GAP [2]",
+      "rationale": "Paper 3 shows that the combination of cytostatic CDK4/6 and BRD4 inhibitors induces senescent cancer cells. Although this study did not investigate the interaction between BRD4 and CDK4/6 inhibition in the context of KRAS inhibitor resistance, we can infer from this finding that combining these two inhibitors may enhance senescence-mediated killing of cancer cells.",
+      "experiment": "Co-treat NSCLC cells with AMG510 (KRAS-G12C inhibitor) and either a BRD4 inhibitor or CDK4/6 inhibitor, and measure the effect on cell proliferation using MTT assays.",
+      "impact_score": 9,
+      "novelty_score": 5,
+      "theme": "Combination Therapy",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/38277141/",
+        "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+        "https://pubmed.ncbi.nlm.nih.gov/39914665/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    "most_critical_gap": {
+      "index": 4,
+      "statement": "The causal path USP7→RAS stability→KRAS inhibitor resistance is missing experimental validation of the RAS intermediate, which would provide insight into potential therapeutic targets.",
+      "addresses": "GAP [4]",
+      "rationale": "Experimental data on the relationship between USP7 and RAS stability are lacking, making it difficult to understand how this pathway contributes to KRAS inhibitor resistance.",
+      "experiment": "Measure the effect of USP7 inhibition on c-Myc expression in NSCLC cells using Western blotting or qRT-PCR.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+        "https://pubmed.ncbi.nlm.nih.gov/39047616/",
+        "https://pubmed.ncbi.nlm.nih.gov/36512628/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    "recommended_first_experiment": {
+      "index": 2,
+      "statement": "BRD4 inhibition enhances CDK4/6 inhibition-mediated senescence by inducing ferroptotic cell death in KRAS mutant NSCLC cells.",
+      "addresses": "GAP [2]",
+      "rationale": "This hypothesis is supported by a plausible mechanism and has the potential to be tested using existing reagents.",
+      "experiment": "Co-treat NSCLC cells with AMG510 (KRAS-G12C inhibitor) and either a BRD4 inhibitor or CDK4/6 inhibitor, and measure the effect on cell proliferation using MTT assays.",
+      "impact_score": 9,
+      "novelty_score": 5,
+      "theme": "Combination Therapy",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/38277141/",
+        "https://pubmed.ncbi.nlm.nih.gov/39499616/",
+        "https://pubmed.ncbi.nlm.nih.gov/39914665/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    "confidence_assessment": "low"
+  },
+  "debug_file": "D:\\projetPiFinal\\backend\\hypothesis_assistant_agent\\config\\..\\output\\debug\\20260503_033902_raw.txt"
+}

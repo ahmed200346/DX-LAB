@@ -1,0 +1,475 @@
+{
+  "query": "EGFR T790M resistance to osimertinib",
+  "papers": [
+    {
+      "pmid": "39697713",
+      "title": "Targeting C797S mutations and beyond in non-small cell lung cancer-a mini-review.",
+      "authors": "Dempke Wolfram C M, Fenchel Klaus",
+      "year": "2024",
+      "abstract": "Non-small cell lung cancer (NSCLC) represents over 80% of lung cancer cases and has a high mortality worldwide, however, targeting common epidermal growth-factor receptor (EGFR) alterations (i.e., del19, L858R) has provided a paradigm shift in the treatment of NSCLC. Uncommon EGFR mutations, however, show variable efficacy to EGFR-targeted drugs depending on the molecular alterations within exons  ...  in over 50% of NSCLCs) suggesting that novel EGFR TKIs will include many challenges in sufficiently targeting on-target resistance mechanisms. The development of novel drugs that can overcome TKI resistance in NSCLC patients harbouring the C797S mutation and beyond is, therefore, eagerly warranted.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39697713/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "39297884",
+      "title": "Inhibition of hTERT/telomerase/telomere mediates therapeutic efficacy of osimertinib in EGFR mutant lung cancer.",
+      "authors": "Chen Zhen, Vallega Karin A, Wang Dongsheng et al.",
+      "year": "2024",
+      "abstract": "The inevitable acquired resistance to osimertinib (AZD9291), an FDA-approved third-generation EGFR tyrosine kinase inhibitor (EGFR-TKI) for the treatment of patients with advanced non-small cell lung cancer (NSCLC) harboring EGFR activating or T790M resistant mutations, limits its long-term clinical benefit. Telomere maintenance via telomerase reactivation is linked to uncontrolled cell growth and ...  tested in a phase II trial, effectively inhibited the growth of osimertinib-resistant tumors, regressed EGFRm NSCLC patient-derived xenografts, and delayed the emergence of acquired resistance to osimertinib, warranting clinical validation of this strategy to manage osimertinib acquired resistance.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39297884/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "39250635",
+      "title": "ctDNA Dynamics and Mechanisms of Acquired Resistance in Patients Treated with Osimertinib with or without Bevacizumab from the Randomized Phase II ETOP-BOOSTER Trial.",
+      "authors": "Soo Ross A, Dafni Urania, Han Ji-Youn et al.",
+      "year": "2024",
+      "abstract": "The ETOP 10-16 BOOSTER study was a randomized phase II trial of osimertinib and bevacizumab therapy versus osimertinib therapy in patients with an acquired EGFR T790M mutation. The mechanisms of acquired resistance to osimertinib and bevacizumab have not been described previously. Next-generation sequencing (Guardant360) was conducted in serial plasma samples. The association between ctDNA and eff ... ation and osimertinib arms, respectively. The differential effect of treatment by smoking was not explained by TP53 mutations or other molecular alterations examined. Molecular mechanisms of acquired resistance were detected, but no novel molecular alterations were identified in the combination arm.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39250635/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "39497713",
+      "title": "Comprehensive liquid biopsy analysis for monitoring NSCLC patients under second-line osimertinib treatment.",
+      "authors": "Ntzifa Aliki, Marras Theodoros, Kallergi Galatea et al.",
+      "year": "2024",
+      "abstract": "The heterogeneous and complex genetic landscape of NSCLC impacts the clinical outcomes of patients who will eventually develop resistance to osimertinib. Liquid biopsy (LB) analysis as a minimally invasive approach is a key step to efficiently identify resistance mechanisms and adjust to proper subsequent treatments. In the present study, we combined plasma-cfDNA and CTC analysis from 30 NSCLC pat ... ssible therapeutic strategies. Our results reveal that comprehensive liquid biopsy analysis can efficiently represent the heterogeneous molecular landscape and provide prominent information on subsequent treatments for NSCLC patients at PD since druggable molecular alterations were detected in CTCs.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39497713/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "39159134",
+      "title": "NUAK1-Mediated Phosphorylation of NADK Mitigates ROS Accumulation to Promote Osimertinib Resistance in Non-Small Cell Lung Carcinoma.",
+      "authors": "Lin Wei, Wang Na, Wu Shihao et al.",
+      "year": "2024",
+      "abstract": "Osimertinib, a third generation epidermal growth factor receptor tyrosine kinase inhibitor, is approved as a first-line therapy in patients with advanced non-small cell lung carcinoma (NSCLC) with EGFR-activating mutations or the T790M resistance mutation. However, the efficacy of osimertinib is limited due to acquired resistance, highlighting the need to elucidate resistance mechanisms to facilit ... ing this axis as a strategy for circumventing resistance. Significance: Phosphorylation of NADK by NUAK1 diminishes ROS accumulation and confers resistance to osimertinib, identifying NUAK1-NADK signaling as a potential therapeutic target for improving the response to EGFR inhibition in lung cancer.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39159134/",
+      "_recency_boost": 0.2
+    },
+    {
+      "pmid": "31564718",
+      "title": "Resistance mechanisms to osimertinib in EGFR-mutated non-small cell lung cancer.",
+      "authors": "Leonetti Alessandro, Sharma Sugandhi, Minari Roberta et al.",
+      "year": "2019",
+      "abstract": "Osimertinib is an irreversible, third-generation epidermal growth factor receptor (EGFR) tyrosine kinase inhibitor that is highly selective for EGFR-activating mutations as well as the EGFR T790M mutation in patients with advanced non-small cell lung cancer (NSCLC) with EGFR oncogene addiction. Despite the documented efficacy of osimertinib in first- and second-line settings, patients inevitably d ... ion, activation of the RAS-mitogen-activated protein kinase (MAPK) or RAS-phosphatidylinositol 3-kinase (PI3K) pathways, novel fusion events and histological/phenotypic transformation, as well as discussing the current evidence regarding potential new approaches to counteract osimertinib resistance.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31564718/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "37060646",
+      "title": "Acquired resistance mechanisms to osimertinib: The constant battle.",
+      "authors": "Zalaquett Ziad, Catherine Rita Hachem Maria, Kassis Yara et al.",
+      "year": "2023",
+      "abstract": "Lung cancer is the leading cause of cancer-related mortality worldwide. Detectable driver mutations have now changed the course of lung cancer treatment with the emergence of targeted therapy as a novel strategy that widely improved lung cancer prognosis, especially in metastatic patients. Osimertinib (AZD9291) is an irreversible third-generation epidermal growth factor receptor tyrosine kinase in ... dent mechanisms include bypass pathways, oncogenic fusions, and phenotypic transformation, among others. This review summarizes the molecular resistance mechanisms to osimertinib, with the aim of identifying novel therapeutic approaches to overcome osimertinib resistance and improve patient outcome.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37060646/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "32642198",
+      "title": "Mechanisms of resistance to osimertinib.",
+      "authors": "Lazzari Chiara, Gregorc Vanesa, Karachaliou Niki et al.",
+      "year": "2020",
+      "abstract": "The introduction of epidermal growth factor receptor tyrosine kinase inhibitors (EGFR-TKIs) has significantly improved the prognosis of advanced non-small cell lung cancer (NSCLC) patients with EGFR mutations. The most common mechanism of acquired resistance to first- and second-generation EGFR TKIs is represented by the secondary T790M mutation. Osimertinib, a third-generation TKI designed to tar ... ficant central nervous system (CNS) activity and a favorable safety profile. The current review focuses on the clinical development of osimertinib, the mechanisms of acquired resistance identified in patients receiving osimertinib and the strategies currently under evaluation to overcome resistance.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32642198/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "36765799",
+      "title": "Osimertinib Resistance: Molecular Mechanisms and Emerging Treatment Options.",
+      "authors": "Gomatou Georgia, Syrigos Nikolaos, Kotteas Elias et al.",
+      "year": "2023",
+      "abstract": "The development of tyrosine kinase inhibitors (TKIs) targeting the mutant epidermal growth factor receptor (EGFR) protein initiated the success story of targeted therapies in non-small-cell lung cancer (NSCLC). Osimertinib, a third-generation EGFR-TKI, is currently indicated as first-line therapy in patients with NSCLC with sensitizing EGFR mutations, as second-line therapy in patients who present ...  options after progression to osimertinib involve combinations of different therapeutic approaches and novel EGFR-TKI inhibitors. Research should also be focused on the standardization of liquid biopsies in order to facilitate the monitoring of molecular alterations after progression to osimertinib.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36765799/",
+      "_recency_boost": 0.0
+    },
+    {
+      "pmid": "37169941",
+      "title": "3-Phosphoinositide-dependent kinase 1 drives acquired resistance to osimertinib.",
+      "authors": "Meraz Ismail M, Majidi Mourad, Fang Bingliang et al.",
+      "year": "2023",
+      "abstract": "Osimertinib sensitive and resistant NSCLC NCI-H1975 clones are used to model osimertinib acquired resistance in humanized and non-humanized mice and delineate potential resistance mechanisms. No new EGFR mutations or loss of the EGFR T790M mutation are found in resistant clones. Resistant tumors grown under continuous osimertinib pressure both in humanized and non-humanized mice show aggressive tu ... DK1 knock-out inhibits nuclear translocation of YAP. Higher expression of PDK1 and an association between PDK1 and YAP are found in patients with progressive disease following osimertinib treatment. PDK1 is a central upstream regulator of two critical drug resistance pathways: PI3K/AKT/mTOR and YAP.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+      "_recency_boost": 0.0
+    }
+  ],
+  "findings": [
+    {
+      "paper_id": 1,
+      "entities": {
+        "drugs": [
+          "EGFR TKIs"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "The development of novel drugs that can overcome TKI resistance in NSCLC patients harbouring the C797S mutation and beyond is, therefore, eagerly warranted.",
+      "conclusion": "Novel EGFR TKIs will include many challenges in sufficiently targeting on-target resistance mechanisms.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 2,
+      "entities": {
+        "drugs": [
+          "osimertinib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "Telomere maintenance via telomerase reactivation is linked to uncontrolled cell growth and ... tested in a phase II trial, effectively inhibited the growth of osimertinib-resistant tumors.",
+      "conclusion": "This strategy warrants clinical validation to manage osimertinib acquired resistance.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 3,
+      "entities": {
+        "drugs": [
+          "osimertinib",
+          "bevacizumab"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "The association between ctDNA and eff ... ation and osimertinib arms, respectively.",
+      "conclusion": "Molecular mechanisms of acquired resistance were detected, but no novel molecular alterations were identified in the combination arm.",
+      "study_type": "clinical_trial"
+    },
+    {
+      "paper_id": 4,
+      "entities": {
+        "drugs": [],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "Our results reveal that comprehensive liquid biopsy analysis can efficiently represent the heterogeneous molecular landscape and provide prominent information on subsequent treatments for NSCLC patients at PD since druggable molecular alterations were detected in CTCs.",
+      "conclusion": "Liquid biopsy analysis as a minimally invasive approach is a key step to efficiently identify resistance mechanisms and adjust to proper subsequent treatments.",
+      "study_type": "case_report"
+    },
+    {
+      "paper_id": 5,
+      "entities": {
+        "drugs": [],
+        "genes": [
+          "NUAK1",
+          "NADK"
+        ],
+        "pathways": []
+      },
+      "outcome": "Phosphorylation of NADK by NUAK1 diminishes ROS accumulation and confers resistance to osimertinib, identifying NUAK1-NADK signaling as a potential therapeutic target for improving the response to EGFR inhibition in lung cancer.",
+      "conclusion": "This axis as a strategy for circumventing resistance.",
+      "study_type": "research_article"
+    },
+    {
+      "paper_id": 6,
+      "entities": {
+        "drugs": [
+          "Osimertinib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "Despite the documented efficacy of osimertinib in first- and second-line settings, patients inevitably develop resistance.",
+      "conclusion": "The current evidence regarding potential new approaches to counteract osimertinib resistance is limited.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 7,
+      "entities": {
+        "drugs": [
+          "Osimertinib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "This review summarizes the molecular resistance mechanisms to osimertinib, with the aim of identifying novel therapeutic approaches to overcome osimertinib resistance and improve patient outcome.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 8,
+      "entities": {
+        "drugs": [
+          "Osimertinib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "The current review focuses on the clinical development of osimertinib, the mechanisms of acquired resistance identified in patients receiving osimertinib and the strategies currently under evaluation to overcome resistance.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 9,
+      "entities": {
+        "drugs": [
+          "Osimertinib"
+        ],
+        "genes": [],
+        "pathways": []
+      },
+      "outcome": "",
+      "conclusion": "Research should also be focused on the standardization of liquid biopsies in order to facilitate the monitoring of molecular alterations after progression to osimertinib.",
+      "study_type": "review"
+    },
+    {
+      "paper_id": 10,
+      "entities": {
+        "drugs": [
+          "Osimertinib"
+        ],
+        "genes": [
+          "DK1",
+          "YAP"
+        ],
+        "pathways": [
+          "PI3K/AKT/mTOR"
+        ]
+      },
+      "outcome": "",
+      "conclusion": "",
+      "study_type": "clinical_trial"
+    }
+  ],
+  "triples": [
+    {
+      "subject": "PDK1",
+      "relation": "upregulates",
+      "object": "YAP",
+      "context": "Higher expression of PDK1 and its association with YAP are found in patients with progressive disease following osimertinib treatment.",
+      "paper_id": "10",
+      "confidence": "high",
+      "subject_type": "unknown",
+      "object_type": "unknown",
+      "type_validity": 0.5,
+      "confidence_score": 0.64
+    }
+  ],
+  "causal_paths": [],
+  "gaps": "GAP [1]: The mechanism by which osimertinib causes cell death in T790M-resistant NSCLC cells is unknown.\nGAP [2]: No study has tested whether NUAK1 phosphorylates NADK under conditions of ROS accumulation and subsequent osimertinib resistance.\nGAP [3]: It is unclear whether the PI3K/AKT/mTOR pathway acts upstream or downstream of telomere maintenance via telomerase reactivation in osimertinib-resistant NSCLC cells.\nGAP [4]: The causal path by which bevacizumab affects cell growth and tumor effusion is missing experimental validation of the intermediate between these two outcomes.\nGAP [5]: No study has tested whether comprehensive liquid biopsy analysis can identify molecular alterations in CTCs under conditions of heterogeneous treatment responses.",
+  "conflicts": "NO CONFLICTS DETECTED",
+  "hypotheses": [
+    {
+      "index": 1,
+      "statement": "The telomere maintenance pathway (via telomerase reactivation) acts downstream of the PI3K/AKT/mTOR pathway in osimertinib-resistant NSCLC cells, which is mediated by the activation of YAP/DK1.",
+      "addresses": "GAP [3]",
+      "rationale": "Paper 2 describes telomere maintenance via telomerase reactivation as a mechanism for uncontrolled cell growth and resistance to osimertinib. Paper 10 links the PI3K/AKT/mTOR pathway to YAP/DK1, suggesting a potential downstream effect of this pathway on telomerase activity. This hypothesis combines the molecular pathways described in these papers.",
+      "experiment": "Use CRISPR-Cas9 gene editing to selectively delete YAP or DK1 in osimertinib-resistant NSCLC cells and assess changes in PI3K/AKT/mTOR signaling and telomerase activity.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39297884/",
+        "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+        "https://pubmed.ncbi.nlm.nih.gov/39159134/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 2,
+      "statement": "Phosphorylation of NADK by NUAK1 diminishes ROS accumulation, which in turn prevents osimertinib from binding to EGFR and inhibiting downstream signaling pathways.",
+      "addresses": "GAP [5]",
+      "rationale": "Paper 5 describes the phosphorylation of NADK by NUAK1 as a mechanism for resistance to osimertinib. Paper 2 suggests that ROS accumulation is linked to uncontrolled cell growth and tumor progression. This hypothesis combines these papers to propose a mechanistic link between NUAK1-NADK signaling and ROS-mediated resistance.",
+      "experiment": "Use biochemical assays to measure phosphorylation of NADK by NUAK1 in the presence and absence of osimertinib, and assess changes in ROS levels.",
+      "impact_score": 9,
+      "novelty_score": 2,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39159134/",
+        "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+        "https://pubmed.ncbi.nlm.nih.gov/31564718/"
+      ],
+      "novelty_flag": "likely_known",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.8,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 3,
+      "statement": "Comprehensive liquid biopsy analysis can identify molecular alterations in CTCs that correlate with heterogeneous treatment responses to osimertinib, allowing for personalized therapy selection and resistance monitoring.",
+      "addresses": "GAP [5]",
+      "rationale": "Paper 4 describes the use of comprehensive liquid biopsy analysis as a minimally invasive approach for identifying druggable molecular alterations in NSCLC patients. This hypothesis combines this paper with others that describe the importance of accurate biomarker identification (e.g., Papers 2 and 6) and personalized therapy.",
+      "experiment": "Use liquid biopsy analysis to identify molecular alterations in CTCs from osimertinib-treated patients and correlate these changes with treatment response and outcome.",
+      "impact_score": 7,
+      "novelty_score": 1,
+      "theme": "Biomarker",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39497713/",
+        "https://pubmed.ncbi.nlm.nih.gov/39250635/",
+        "https://pubmed.ncbi.nlm.nih.gov/32642198/"
+      ],
+      "novelty_flag": "likely_known",
+      "composite_score": 6.2,
+      "novelty_check_confidence": 0.8,
+      "closest_known_paper": "ID: 4",
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    }
+  ],
+  "hypotheses_ranked": [
+    {
+      "index": 2,
+      "statement": "Phosphorylation of NADK by NUAK1 diminishes ROS accumulation, which in turn prevents osimertinib from binding to EGFR and inhibiting downstream signaling pathways.",
+      "addresses": "GAP [5]",
+      "rationale": "Paper 5 describes the phosphorylation of NADK by NUAK1 as a mechanism for resistance to osimertinib. Paper 2 suggests that ROS accumulation is linked to uncontrolled cell growth and tumor progression. This hypothesis combines these papers to propose a mechanistic link between NUAK1-NADK signaling and ROS-mediated resistance.",
+      "experiment": "Use biochemical assays to measure phosphorylation of NADK by NUAK1 in the presence and absence of osimertinib, and assess changes in ROS levels.",
+      "impact_score": 9,
+      "novelty_score": 2,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39159134/",
+        "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+        "https://pubmed.ncbi.nlm.nih.gov/31564718/"
+      ],
+      "novelty_flag": "likely_known",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.8,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 1,
+      "statement": "The telomere maintenance pathway (via telomerase reactivation) acts downstream of the PI3K/AKT/mTOR pathway in osimertinib-resistant NSCLC cells, which is mediated by the activation of YAP/DK1.",
+      "addresses": "GAP [3]",
+      "rationale": "Paper 2 describes telomere maintenance via telomerase reactivation as a mechanism for uncontrolled cell growth and resistance to osimertinib. Paper 10 links the PI3K/AKT/mTOR pathway to YAP/DK1, suggesting a potential downstream effect of this pathway on telomerase activity. This hypothesis combines the molecular pathways described in these papers.",
+      "experiment": "Use CRISPR-Cas9 gene editing to selectively delete YAP or DK1 in osimertinib-resistant NSCLC cells and assess changes in PI3K/AKT/mTOR signaling and telomerase activity.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39297884/",
+        "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+        "https://pubmed.ncbi.nlm.nih.gov/39159134/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    {
+      "index": 3,
+      "statement": "Comprehensive liquid biopsy analysis can identify molecular alterations in CTCs that correlate with heterogeneous treatment responses to osimertinib, allowing for personalized therapy selection and resistance monitoring.",
+      "addresses": "GAP [5]",
+      "rationale": "Paper 4 describes the use of comprehensive liquid biopsy analysis as a minimally invasive approach for identifying druggable molecular alterations in NSCLC patients. This hypothesis combines this paper with others that describe the importance of accurate biomarker identification (e.g., Papers 2 and 6) and personalized therapy.",
+      "experiment": "Use liquid biopsy analysis to identify molecular alterations in CTCs from osimertinib-treated patients and correlate these changes with treatment response and outcome.",
+      "impact_score": 7,
+      "novelty_score": 1,
+      "theme": "Biomarker",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39497713/",
+        "https://pubmed.ncbi.nlm.nih.gov/39250635/",
+        "https://pubmed.ncbi.nlm.nih.gov/32642198/"
+      ],
+      "novelty_flag": "likely_known",
+      "composite_score": 6.2,
+      "novelty_check_confidence": 0.8,
+      "closest_known_paper": "ID: 4",
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    }
+  ],
+  "themes": "THEME [1]: Mechanism\nHypotheses: 1, 2, 5\n\nTHEME [2]: Biomarker\nHypotheses: 3\n\nTHEME [3]: Combination Therapy\nHypotheses: 4",
+  "summary_report": {
+    "executive_summary": "Researchers aim to understand the mechanisms behind EGFR T790M resistance to osimertinib, a common treatment for non-small cell lung cancer (NSCLC). Three hypotheses were generated: one proposing a link between NUAK1-NADK signaling and ROS-mediated resistance, another suggesting a role for telomere maintenance via telomerase reactivation in osimertinib-resistant NSCLC cells, and a third exploring the potential of comprehensive liquid biopsy analysis to identify molecular alterations in circulating tumor cells. These hypotheses address key gaps in current knowledge and offer promising avenues for personalized therapy development.",
+    "strongest_hypothesis": {
+      "index": 2,
+      "statement": "Phosphorylation of NADK by NUAK1 diminishes ROS accumulation, which in turn prevents osimertinib from binding to EGFR and inhibiting downstream signaling pathways.",
+      "addresses": "GAP [5]",
+      "rationale": "Paper 5 describes the phosphorylation of NADK by NUAK1 as a mechanism for resistance to osimertinib. Paper 2 suggests that ROS accumulation is linked to uncontrolled cell growth and tumor progression. This hypothesis combines these papers to propose a mechanistic link between NUAK1-NADK signaling and ROS-mediated resistance.",
+      "experiment": "Use biochemical assays to measure phosphorylation of NADK by NUAK1 in the presence and absence of osimertinib, and assess changes in ROS levels.",
+      "impact_score": 9,
+      "novelty_score": 2,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39159134/",
+        "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+        "https://pubmed.ncbi.nlm.nih.gov/31564718/"
+      ],
+      "novelty_flag": "likely_known",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.8,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    "most_critical_gap": {
+      "index": 1,
+      "statement": "The telomere maintenance pathway (via telomerase reactivation) acts downstream of the PI3K/AKT/mTOR pathway in osimertinib-resistant NSCLC cells, which is mediated by the activation of YAP/DK1.",
+      "addresses": "GAP [3]",
+      "rationale": "Paper 2 describes telomere maintenance via telomerase reactivation as a mechanism for uncontrolled cell growth and resistance to osimertinib. Paper 10 links the PI3K/AKT/mTOR pathway to YAP/DK1, suggesting a potential downstream effect of this pathway on telomerase activity. This hypothesis combines the molecular pathways described in these papers.",
+      "experiment": "Use CRISPR-Cas9 gene editing to selectively delete YAP or DK1 in osimertinib-resistant NSCLC cells and assess changes in PI3K/AKT/mTOR signaling and telomerase activity.",
+      "impact_score": 8,
+      "novelty_score": 3,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39297884/",
+        "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+        "https://pubmed.ncbi.nlm.nih.gov/39159134/"
+      ],
+      "novelty_flag": "novel",
+      "composite_score": 7.2,
+      "novelty_check_confidence": 0.3,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    "recommended_first_experiment": {
+      "index": 2,
+      "statement": "Phosphorylation of NADK by NUAK1 diminishes ROS accumulation, which in turn prevents osimertinib from binding to EGFR and inhibiting downstream signaling pathways.",
+      "addresses": "GAP [5]",
+      "rationale": "Paper 5 describes the phosphorylation of NADK by NUAK1 as a mechanism for resistance to osimertinib. Paper 2 suggests that ROS accumulation is linked to uncontrolled cell growth and tumor progression. This hypothesis combines these papers to propose a mechanistic link between NUAK1-NADK signaling and ROS-mediated resistance.",
+      "experiment": "Use biochemical assays to measure phosphorylation of NADK by NUAK1 in the presence and absence of osimertinib, and assess changes in ROS levels.",
+      "impact_score": 9,
+      "novelty_score": 2,
+      "theme": "Mechanism",
+      "citations": [
+        "https://pubmed.ncbi.nlm.nih.gov/39159134/",
+        "https://pubmed.ncbi.nlm.nih.gov/37169941/",
+        "https://pubmed.ncbi.nlm.nih.gov/31564718/"
+      ],
+      "novelty_flag": "likely_known",
+      "composite_score": 8.6,
+      "novelty_check_confidence": 0.8,
+      "closest_known_paper": null,
+      "biomedical_validation": {
+        "supported_by_data": false,
+        "confidence": "low",
+        "note": "Contains interactions not found in provided papers or known KRAS pathways."
+      }
+    },
+    "confidence_assessment": "low"
+  },
+  "debug_file": "D:\\projetPiFinal\\backend\\hypothesis_assistant_agent\\config\\..\\output\\debug\\20260502_210452_raw.txt"
+}

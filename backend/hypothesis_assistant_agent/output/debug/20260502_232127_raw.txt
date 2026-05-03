@@ -1,0 +1,44 @@
+HYPOTHESIS [1]:
+Statement: USP7 deubiquitinates RAS, preventing its degradation and promoting resistance to KRAS inhibitors.
+Addresses: GAP [4]
+Rationale: Although the mechanism by which USP7 regulates RAS stability is unknown (GAP [1]), it has been shown that USP7 inhibitors suppress NSCLC cell proliferation in cells resistant to AMG510 [Paper 1]. Given that USP7 targets RAS, understanding its role in maintaining RAS stability could provide insight into potential therapeutic targets.
+Experiment: Use Western blotting and mass spectrometry to analyze the ubiquitination status of RAS in NSCLC cells treated with USP7 inhibitors.
+Impact Score: 8
+Novelty Score: 6
+Theme: Mechanism
+
+HYPOTHESIS [2]:
+Statement: The combination of BRD4 inhibition and CDK4/6 inhibition induces senescent cancer cells that are primed for ferroptotic cell death, leading to enhanced sensitivity to KRAS inhibitors.
+Addresses: GAP [2]
+Rationale: Although the interaction between BRD4 inhibition and CDK4/6 inhibition has not been explored in the context of KRAS inhibitor resistance (GAP [2]), it has been shown that the combination of cytostatic CDK4/6 and BRD4 inhibitors induces senescent cancer cells [Paper 3]. This suggests that targeting these pathways may enhance sensitivity to KRAS inhibitors.
+Experiment: Use co-culture assays and ferroptosis assays to examine the effects of combining BRD4 inhibition and CDK4/6 inhibition on NSCLC cell viability and senescence.
+Impact Score: 9
+Novelty Score: 8
+Theme: Combination Therapy
+
+HYPOTHESIS [3]:
+Statement: Omeprazole enhances the efficacy of tepotinib by inhibiting V-ATPase, leading to increased intracellular acidification and enhanced delivery of tepotinib.
+Addresses: GAP [3]
+Rationale: Although the interaction between omeprazole and tepotinib is unclear (GAP [3]), it has been shown that combining tepotinib with omeprazole warrants further assessment in KRAS-mutant G12C and non-G12C cell lines [Paper 4]. Given the role of V-ATPase in cancer metabolism, it is plausible that omeprazole enhances tepotinib delivery.
+Experiment: Use acidification assays and fluorescence imaging to examine the effects of combining omeprazole with tepotinib on NSCLC tumor metabolism.
+Impact Score: 7
+Novelty Score: 5
+Theme: Combination Therapy
+
+HYPOTHESIS [4]:
+Statement: Targeting EGFR simultaneously with KRAS G12C inhibition improves efficacy in NSCLC tumors resistant to KRAS inhibitors by increasing the sensitivity of cancer cells to ferroptotic cell death.
+Addresses: GAP [5]
+Rationale: Although targeting EGFR has not been explored in combination with KRAS G12C inhibition (GAP [5]), it has been shown that co-inhibiting EGFR and KRAS G12C improves efficacy in colorectal tumors [Paper 6]. This suggests that combining these pathways may enhance sensitivity to KRAS inhibitors.
+Experiment: Use co-culture assays and ferroptosis assays to examine the effects of combining EGFR inhibition with KRAS G12C inhibition on NSCLC cell viability and senescence.
+Impact Score: 8
+Novelty Score: 7
+Theme: Combination Therapy
+
+HYPOTHESIS [5]:
+Statement: Novel (K)RAS inhibitors may overcome many of the resistance alterations by targeting specific RAS intermediates.
+Addresses: GAP [4]
+Rationale: Although the mechanism by which KRAS inhibitors induce resistance is unclear (GAP [4]), preclinical data suggest that novel (K)RAS inhibitors may overcome these resistance alterations [Paper 5]. This suggests that targeting specific RAS intermediates could provide a new therapeutic strategy.
+Experiment: Use biochemical assays and cell culture experiments to examine the effects of novel (K)RAS inhibitors on NSCLC tumor metabolism and sensitivity to ferroptotic cell death.
+Impact Score: 9
+Novelty Score: 9
+Theme: Mechanism

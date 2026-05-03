@@ -1,0 +1,16 @@
+id,drug,rxcui,major_interaction,naranjo_score,adverse_outcome,notes
+1,aspirin,,True,,False,Increased bleeding risk with anticoagulants | Agrees: bleeding risk with anticoagulants
+10,sertraline,,False,,False,Possible interactions but major ones are rare | Agrees
+11,fluoxetine,,True,,False,Serotonin syndrome risk with MAOIs | Agrees
+12,digoxin,,True,,True,Narrow therapeutic index; major toxicity possible | Agrees
+13,furosemide,,False,,False,Loop diuretic; monitor electrolytes | Agrees
+14,spironolactone,,True,,,Hyperkalemia risk with ACEi/ARB | Disagrees on adverse_outcome severity
+15,insulin,,False,,True,Hypoglycaemia can be severe | Agrees that severe hypoglycaemia is possible
+2,warfarin,,True,,True,High bleeding risk when combined with NSAIDs | Agrees
+3,ibuprofen,,,,False,Typical NSAID effects; context-dependent | Considers NSAID-NSAID interactions major in elderly
+4,metformin,,False,,False,Low interaction profile | Agrees
+5,lisinopril,,,,False,Hyperkalemia risk with potassium-sparing diuretics | Does not consider spironolactone interaction as major
+6,simvastatin,,True,,False,CYP3A4 inhibitors increase myopathy risk | Agrees
+7,atorvastatin,,True,,False,Interaction with strong CYP3A4 inhibitors | Agrees
+8,clopidogrel,,True,,True,Additive bleeding with antiplatelets | Agrees
+9,amiodarone,,True,,True,Multiple major interactions; QT and arrhythmia risk | Agrees

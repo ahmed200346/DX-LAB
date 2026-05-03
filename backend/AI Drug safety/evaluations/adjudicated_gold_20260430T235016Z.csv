@@ -1,0 +1,16 @@
+id,drug,major_interaction_A,major_interaction_B,major_interaction_final,major_interaction_agree,adverse_outcome_A,adverse_outcome_B,adverse_outcome_final,adverse_outcome_agree,notes_A,notes_B
+1,aspirin,True,True,True,True,False,False,False,True,Increased bleeding risk with anticoagulants,Agrees: bleeding risk with anticoagulants
+10,sertraline,False,False,False,True,False,False,False,True,Possible interactions but major ones are rare,Agrees
+11,fluoxetine,True,True,True,True,False,False,False,True,Serotonin syndrome risk with MAOIs,Agrees
+12,digoxin,True,True,True,True,True,True,True,True,Narrow therapeutic index; major toxicity possible,Agrees
+13,furosemide,False,False,False,True,False,False,False,True,Loop diuretic; monitor electrolytes,Agrees
+14,spironolactone,True,True,True,True,True,False,,False,Hyperkalemia risk with ACEi/ARB,Disagrees on adverse_outcome severity
+15,insulin,False,False,False,True,True,True,True,True,Hypoglycaemia can be severe,Agrees that severe hypoglycaemia is possible
+2,warfarin,True,True,True,True,True,True,True,True,High bleeding risk when combined with NSAIDs,Agrees
+3,ibuprofen,False,True,,False,False,False,False,True,Typical NSAID effects; context-dependent,Considers NSAID-NSAID interactions major in elderly
+4,metformin,False,False,False,True,False,False,False,True,Low interaction profile,Agrees
+5,lisinopril,True,False,,False,False,False,False,True,Hyperkalemia risk with potassium-sparing diuretics,Does not consider spironolactone interaction as major
+6,simvastatin,True,True,True,True,False,False,False,True,CYP3A4 inhibitors increase myopathy risk,Agrees
+7,atorvastatin,True,True,True,True,False,False,False,True,Interaction with strong CYP3A4 inhibitors,Agrees
+8,clopidogrel,True,True,True,True,True,True,True,True,Additive bleeding with antiplatelets,Agrees
+9,amiodarone,True,True,True,True,True,True,True,True,Multiple major interactions; QT and arrhythmia risk,Agrees

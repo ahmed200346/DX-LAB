@@ -1,0 +1,46 @@
+name: Python package
+
+on:
+  push:
+    branches: [ release ]
+  pull_request:
+    branches: [ release ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Create dummy configs/secret_keys.py
+      run: |
+        mkdir -p configs
+        echo 'serper_api_key = "dummy_serper_key"' > configs/secret_keys.py
+        echo 'llm_api_key = "dummy_nvidia_key"' >> configs/secret_keys.py
+
+    - name: Install REINVENT4 extras
+      run: |
+        if [ -d "REINVENT4" ]; then
+          cd REINVENT4
+        elif [ -d "src/REINVENT4" ]; then
+          cd src/REINVENT4
+        else
+          git clone https://github.com/MolecularAI/REINVENT4.git
+          cd REINVENT4
+          git checkout 3266e54
+        fi
+        python install.py cpu
+
+    - name: Run tests
+      run: |
+        python -m unittest discover tests

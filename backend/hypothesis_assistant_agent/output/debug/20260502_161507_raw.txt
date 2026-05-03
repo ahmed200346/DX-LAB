@@ -1,0 +1,8 @@
+HYPOTHESIS [1]:
+Statement: Further mechanistic investigation into KRAS inhibitor resistance is warranted.
+Addresses: GAP 1
+Rationale: Literature synthesis was incomplete due to a processing error.
+Experiment: Please re-run the pipeline with a valid GROQ_API_KEY.
+Impact Score: 5
+Novelty Score: 5
+Theme: General Research

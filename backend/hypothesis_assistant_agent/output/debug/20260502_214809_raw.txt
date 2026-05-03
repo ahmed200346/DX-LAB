@@ -1,0 +1,44 @@
+HYPOTHESIS [1]:
+Statement: Targeting USP7 with a small molecule inhibitor will increase RAS stability by preventing deubiquitination of RAS, thereby overcoming KRAS inhibitor resistance in NSCLC.
+Addresses: GAP [4]
+Rationale: By understanding the relationship between USP7 and RAS stability, we can identify potential therapeutic targets to overcome KRAS inhibitor resistance. Paper 1 suggests that USP7 inhibitors suppress NSCLC cell proliferation, particularly in cells resistant to AMG510, indicating a possible mechanism of action.
+Experiment: Use cell culture assays to assess the effects of USP7 inhibition on RAS stability and proliferation in NSCLC cells resistant to KRAS-G12C inhibitors.
+Impact Score: 8
+Novelty Score: 6
+Theme: Mechanism
+
+HYPOTHESIS [2]:
+Statement: The combination of BRD4 inhibition with CDK4/6 inhibition will enhance senescence-like cell death in NSCLC cells resistant to KRAS-G12C inhibitors, through the induction of ferroptotic pathways.
+Addresses: GAP [2]
+Rationale: Paper 3 suggests that combining cytostatic CDK4/6 and BRD4 inhibitors induces senescent cancer cells primed for ferroptotic cell death. By targeting both CDK4/6 and BRD4, we may enhance this therapeutic strategy.
+Experiment: Use in vitro assays to evaluate the effects of combining BRD4 inhibition with CDK4/6 inhibition on senescence-like cell death and ferroptosis in NSCLC cells resistant to KRAS-G12C inhibitors.
+Impact Score: 7
+Novelty Score: 5
+Theme: Combination Therapy
+
+HYPOTHESIS [3]:
+Statement: Omeprazole enhances the efficacy of tepotinib by inhibiting V-ATPase, which increases intracellular pH and sensitizes NSCLC cells to tepotinib-induced apoptosis.
+Addresses: GAP [3]
+Rationale: Paper 4 suggests that combining omeprazole with tepotinib warrants further assessment. By understanding the interaction between omeprazole and tepotinib, we may develop more effective treatment strategies for KRAS-mutant NSCLC tumors.
+Experiment: Use in vitro assays to evaluate the effects of omeprazole on tepotinib-induced apoptosis in NSCLC cells resistant to KRAS-G12C inhibitors.
+Impact Score: 9
+Novelty Score: 8
+Theme: Mechanism
+
+HYPOTHESIS [4]:
+Statement: Simultaneous inhibition of EGFR and KRAS G12C will overcome resistance to KRAS-G12C blockade in NSCLC tumors resistant to KRAS inhibitors, through the prevention of RAS protein interactions.
+Addresses: GAP [5]
+Rationale: Paper 6 suggests that concomitant inhibition of EGFR and KRASG12C may improve efficacy in colorectal cancer treatment. By targeting both EGFR and KRAS G12C, we may develop a more effective therapeutic strategy for NSCLC tumors resistant to KRAS-G12C inhibitors.
+Experiment: Use in vitro assays to evaluate the effects of simultaneous inhibition of EGFR and KRASG12C on tumor cell proliferation and survival in NSCLC cells resistant to KRAS-G12C inhibitors.
+Impact Score: 8
+Novelty Score: 6
+Theme: Combination Therapy
+
+HYPOTHESIS [5]:
+Statement: RMC 7797, a novel (K)RAS inhibitor, will overcome resistance to covalent KRAS G12C inhibitors by selectively targeting the mutant RAS protein and preventing its interactions with downstream effector proteins.
+Addresses: GAP [4]
+Rationale: Paper 5 suggests that novel (K)RAS inhibitors may overcome many of the resistance alterations. By understanding the mechanism of action of RMC 7797, we can identify potential therapeutic targets for KRAS-mutant NSCLC tumors.
+Experiment: Use in vitro assays to evaluate the effects of RMC 7797 on tumor cell proliferation and survival in NSCLC cells resistant to covalent KRAS-G12C inhibitors.
+Impact Score: 9
+Novelty Score: 8
+Theme: Mechanism
