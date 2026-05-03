@@ -38,8 +38,6 @@ def _ensure_discovery_agent_importable() -> None:
     if str(DISCOVERY_AGENT_ROOT) not in sys.path:
         sys.path.insert(0, str(DISCOVERY_AGENT_ROOT))
 
-from DiscoveryAgent.tools import retrieval as R
-
 
 def _should_force_conda_run() -> bool:
     """
@@ -157,6 +155,7 @@ def _extract_pipeline_context_fast(
     and typically finishes in seconds.
     """
     import re
+    from DiscoveryAgent.tools import retrieval as R
 
     progress.update("extraction", {"substep": "uniprot_lookup"})
     ids = R.get_uniprot_ids.invoke({"protein_name": protein.strip()})
@@ -2200,7 +2199,7 @@ def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == "_worker":
         import os
         devnull_fd = os.open(os.devnull, os.O_WRONLY)
-        os.dup2(devnull_fd, 2)  # Redirect stderr to /dev/null at OS level
+        # os.dup2(devnull_fd, 2)  # Redirect stderr to /dev/null at OS level
         os.close(devnull_fd)
         return _run_worker_from_argv(sys.argv[1:])
 
