@@ -3,7 +3,7 @@
 # Usage: conda run -n DiscoveryAgent python run_discovery_agent.py --config pipeline_config_selection.yaml
 
 run_id: "example_selection"
-model: "moonshotai/kimi-k2.5"
+model: "moonshotai/kimi-k2.6"
 
 protein: "EGFR"
 disease: "non-small cell lung cancer"

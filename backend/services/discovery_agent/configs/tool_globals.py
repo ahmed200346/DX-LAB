@@ -20,7 +20,7 @@ PAPER_DIR = "papers"
 
 # LLM via NVIDIA NIM (OpenAI-compatible: https://integrate.api.nvidia.com/v1)
 LLM_PROVIDER = "nvidia"
-LLM_MODEL = "moonshotai/kimi-k2.5"
+LLM_MODEL = "moonshotai/kimi-k2.6"
 NVIDIA_API_BASE = "https://integrate.api.nvidia.com/v1"
 # NIM embedding model (change in NVIDIA catalog if this ID updates)
 EMBEDDING_MODEL = "nvidia/nv-embedqa-e5-v5"

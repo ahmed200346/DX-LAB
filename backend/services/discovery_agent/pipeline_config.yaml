@@ -3,7 +3,7 @@
 # Or override without editing:  ... --protein "PD-L1" --disease "melanoma"
 
 run_id: "example_pipeline"
-model: "moonshotai/kimi-k2.5"
+model: "moonshotai/kimi-k2.6"
 
 protein: "EGFR"
 disease: "non-small cell lung cancer"

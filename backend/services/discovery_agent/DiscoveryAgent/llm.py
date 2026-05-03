@@ -37,8 +37,13 @@ def chat_llm(
     max_tokens: Optional[int] = 4096,
     **kwargs,
 ) -> ChatOpenAI:
+    target_model = model or tool_globals.LLM_MODEL
+    if "kimi" in target_model:
+        kwargs["model_kwargs"] = kwargs.get("model_kwargs", {})
+        kwargs["model_kwargs"]["extra_body"] = {"chat_template_kwargs": {"thinking": True}}
+
     return ChatOpenAI(
-        model=model or tool_globals.LLM_MODEL,
+        model=target_model,
         temperature=temperature,
         api_key=llm_api_key(),
         base_url=tool_globals.NVIDIA_API_BASE,

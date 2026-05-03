@@ -136,7 +136,7 @@ class DiscovererAgent(BaseAgent):
             "run_id": run_id,
             "protein": protein,
             "disease": disease,
-            "model": payload.get("model", "moonshotai/kimi-k2.5"),
+            "model": payload.get("model", "moonshotai/kimi-k2.6"),
         }
         cfg.update(_lite_config() if tier == "lite" else _full_config())
         cfg.update({k: v for k, v in payload.items() if k in cfg or k in (

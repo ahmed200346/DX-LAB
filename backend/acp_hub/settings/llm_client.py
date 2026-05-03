@@ -66,14 +66,20 @@ class LLMClient:
     ) -> str:
         """Appel synchrone au LLM. Retourne le contenu de la réponse."""
         try:
+            target_model = model or self.model
+            kwargs = {}
+            if "kimi" in target_model:
+                kwargs["extra_body"] = {"chat_template_kwargs": {"thinking": True}}
+
             response = self.sync_client.chat.completions.create(
-                model=model or self.model,
+                model=target_model,
                 messages=messages,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,
                 frequency_penalty=frequency_penalty,
                 presence_penalty=presence_penalty,
+                **kwargs
             )
             content = response.choices[0].message.content
             logger.debug(f"LLM response (sync): {content[:200]}...")
@@ -94,14 +100,20 @@ class LLMClient:
     ) -> str:
         """Appel asynchrone au LLM. Retourne le contenu de la réponse."""
         try:
+            target_model = model or self.model
+            kwargs = {}
+            if "kimi" in target_model:
+                kwargs["extra_body"] = {"chat_template_kwargs": {"thinking": True}}
+
             response = await self.async_client.chat.completions.create(
-                model=model or self.model,
+                model=target_model,
                 messages=messages,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,
                 frequency_penalty=frequency_penalty,
                 presence_penalty=presence_penalty,
+                **kwargs
             )
             content = response.choices[0].message.content
             logger.debug(f"LLM response (async): {content[:200]}...")

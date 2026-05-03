@@ -1,6 +1,6 @@
 # One-off demo: KRAS + colorectal cancer (pipeline run)
 run_id: "demo_kras_crc"
-model: "moonshotai/kimi-k2.5"
+model: "moonshotai/kimi-k2.6"
 
 protein: "KRAS"
 disease: "colorectal cancer"
