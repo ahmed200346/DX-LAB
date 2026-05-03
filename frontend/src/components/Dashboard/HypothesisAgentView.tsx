@@ -3,12 +3,23 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lightbulb, Sparkles, Network, FileText, BrainCircuit, MessageSquare, Plus, ArrowRight, Loader2, Search, ZapOff } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { 
+  Sparkles, 
+  FileText, 
+  BrainCircuit, 
+  Plus, 
+  ArrowRight, 
+  ZapOff, 
+  Loader2, 
+  Search, 
+  MessageSquare,
+  Bot
+} from "lucide-react";
+import { Card, CardContent, CardTitle, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Input } from "@/components/ui/input";
 
 export default function HypothesisAgentView() {
   const [isRunning, setIsRunning] = useState(false);
@@ -16,6 +27,11 @@ export default function HypothesisAgentView() {
   const [query, setQuery] = useState("");
   const [hypotheses, setHypotheses] = useState<any[]>([]);
   const [currentAction, setCurrentAction] = useState("");
+  const [selectedHypothesis, setSelectedHypothesis] = useState<any | null>(null);
+  const [activities, setActivities] = useState<any[]>([
+    { icon: MessageSquare, text: "System standby", time: "1h ago" },
+    { icon: FileText, text: "Ingested PDF: 'Emerging targets in CLL'", time: "4h ago" },
+  ]);
 
   const generateHypothesis = async () => {
     if (!query.trim()) return;
@@ -24,12 +40,15 @@ export default function HypothesisAgentView() {
     setHypotheses([]);
     
     setCurrentAction("Querying vector database for similar literature...");
+    setActivities(prev => [{ icon: Search, text: "Querying vector database...", time: "just now" }, ...prev]);
     await new Promise(r => setTimeout(r, 2000 + Math.random() * 1000));
     
     setCurrentAction("Cross-referencing PubMed and clinical trial data...");
+    setActivities(prev => [{ icon: BrainCircuit, text: "Cross-referencing PubMed/ClinicalTrials.gov", time: "just now" }, ...prev]);
     await new Promise(r => setTimeout(r, 2500 + Math.random() * 1000));
 
     setCurrentAction("Synthesizing mechanistic pathways with LLM...");
+    setActivities(prev => [{ icon: Sparkles, text: "Synthesizing novel mechanistic relationships", time: "just now" }, ...prev]);
     await new Promise(r => setTimeout(r, 3000 + Math.random() * 1500));
 
     const results = [
@@ -38,15 +57,37 @@ export default function HypothesisAgentView() {
         title: "MCL-1 Upregulation Mediating Resistance", 
         confidence: 94, 
         category: "Mechanistic",
-        abstract: "Analyzing multi-omic data suggests that secondary resistance to Venetoclax-Analog is primarily driven by BAX/BAK sequestration via MCL-1 overexpression."
+        impact: "High",
+        novelty: "Medium",
+        abstract: "Secondary resistance to Venetoclax-Analog is driven by BAX/BAK sequestration via MCL-1 overexpression.",
+        rationale: "Analysis of 14 clinical trials indicates tumor cells compensate by upregulating MCL-1 to sequester pro-apoptotic factors.",
+        experiment: "In vitro CRISPR/Cas9 knockout of MCL-1 in resistant CLL cell lines to restore Venetoclax sensitivity.",
+        citations: ["PMID: 31103752", "PMID: 29401645"]
       },
       { 
         id: 2, 
-        title: "Role of BCL-xL Bypass Signaling", 
+        title: "BCL-xL Dependency Switch", 
         confidence: 76, 
         category: "Clinical",
-        abstract: "In CLL models, reliance on BCL-xL survival pathways may provide an escape mechanism after complete BCL-2 blockade."
+        impact: "Medium",
+        novelty: "High",
+        abstract: "CLL cells shift survival dependency from BCL-2 to BCL-xL under therapeutic pressure.",
+        rationale: "Single-cell RNA sequencing reveals sub-populations that switch dependency during deep BCL-2 target engagement.",
+        experiment: "Combinatorial treatment with BCL-xL inhibitors and BH3 profiling to measure mitochondrial priming shifts.",
+        citations: ["PMID: 26822266", "Nature 2023: Escape"]
       },
+      { 
+        id: 3, 
+        title: "PRAME-Mediated Mitochondrial Escape", 
+        confidence: 62, 
+        category: "Emerging",
+        impact: "Medium",
+        novelty: "Very High",
+        abstract: "Epigenetic upregulation of PRAME alters mitochondrial membrane potential, reducing BAX insertion efficiency.",
+        rationale: "Novel multi-omic integration suggests PRAME modifies mitochondrial lipid composition in resistant clones.",
+        experiment: "Lipidomic analysis of mitochondrial membranes in PRAME-high vs PRAME-low Venetoclax resistant models.",
+        citations: ["Cell 2024: PRAME Axis", "PMID: 32581902"]
+      }
     ];
     
     setHypotheses(results);
@@ -126,7 +167,13 @@ export default function HypothesisAgentView() {
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       transition={{ duration: 0.4 }}
                     >
-                      <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 hover:border-yellow-300 dark:border-yellow-500/30 transition-colors group cursor-pointer h-full">
+                      <Card 
+                        className={cn(
+                          "bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 hover:border-yellow-300 dark:border-yellow-500/30 transition-all group cursor-pointer h-full relative overflow-hidden",
+                          selectedHypothesis?.id === h.id && "ring-2 ring-yellow-500 border-yellow-500"
+                        )}
+                        onClick={() => setSelectedHypothesis(selectedHypothesis?.id === h.id ? null : h)}
+                      >
                         <CardHeader className="pb-3">
                           <div className="flex justify-between items-start">
                              <Badge variant="outline" className="text-yellow-700 dark:text-yellow-400 border-yellow-300 dark:border-yellow-500/30 bg-yellow-500/5">{h.category}</Badge>
@@ -136,8 +183,48 @@ export default function HypothesisAgentView() {
                         </CardHeader>
                         <CardContent>
                           <p className="text-sm text-gray-600 dark:text-gray-500 dark:text-white/40 leading-relaxed line-clamp-3">{h.abstract}</p>
+                          
+                          <div className="mt-4 flex gap-4">
+                             <div className="space-y-1">
+                               <p className="text-[9px] uppercase font-bold text-gray-400">Impact</p>
+                               <Badge variant="secondary" className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-none text-[10px]">{h.impact}</Badge>
+                             </div>
+                             <div className="space-y-1">
+                               <p className="text-[9px] uppercase font-bold text-gray-400">Novelty</p>
+                               <Badge variant="secondary" className="bg-purple-500/10 text-purple-600 dark:text-purple-400 border-none text-[10px]">{h.novelty}</Badge>
+                             </div>
+                          </div>
+
+                          <AnimatePresence>
+                            {selectedHypothesis?.id === h.id && (
+                              <motion.div 
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="mt-4 pt-4 border-t border-gray-200 dark:border-white/10 space-y-4"
+                              >
+                                <div className="space-y-2">
+                                  <h4 className="text-[10px] uppercase tracking-widest font-bold text-yellow-600 dark:text-yellow-500/60">Scientific Rationale</h4>
+                                  <p className="text-xs text-gray-700 dark:text-white/70 italic leading-relaxed">{h.rationale}</p>
+                                </div>
+                                <div className="space-y-2">
+                                  <h4 className="text-[10px] uppercase tracking-widest font-bold text-yellow-600 dark:text-yellow-500/60">Proposed Experiment</h4>
+                                  <p className="text-xs text-gray-700 dark:text-white/70 leading-relaxed">{h.experiment}</p>
+                                </div>
+                                <div className="space-y-2">
+                                  <h4 className="text-[10px] uppercase tracking-widest font-bold text-yellow-600 dark:text-yellow-500/60">Citations</h4>
+                                  <div className="flex flex-wrap gap-2">
+                                    {h.citations.map((c: string, i: number) => (
+                                      <Badge key={i} variant="secondary" className="text-[9px] bg-gray-100 dark:bg-white/5 border-none">{c}</Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+
                           <div className="mt-6 flex items-center text-xs font-bold text-yellow-500 group-hover:gap-2 transition-all">
-                             VIEW DETAILS <ArrowRight className="w-3 h-3 ml-1" />
+                             {selectedHypothesis?.id === h.id ? "HIDE DETAILS" : "VIEW DETAILS"} <ArrowRight className={cn("w-3 h-3 ml-1 transition-transform", selectedHypothesis?.id === h.id && "rotate-90")} />
                           </div>
                         </CardContent>
                       </Card>
@@ -145,78 +232,49 @@ export default function HypothesisAgentView() {
                   ))}
                 </AnimatePresence>
             </div>
-
-            <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none">
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                     <Network className="w-5 h-5 text-yellow-700 dark:text-yellow-400" />
-                     Knowledge Synthesis
-                  </CardTitle>
-                  <CardDescription>Cross-referencing papers, patents, and multi-omics</CardDescription>
+          </div>
+          <div className="space-y-6">
+            {/* Dexter QA Assistant */}
+            <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 overflow-hidden h-[380px] flex flex-col shadow-xl">
+                <CardHeader className="bg-blue-600 py-3 px-4 flex flex-row items-center justify-between">
+                   <div className="flex items-center gap-2">
+                     <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border-2 border-white/20">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Dexter&backgroundColor=transparent" alt="Dexter" className="w-full h-full" />
+                     </div>
+                     <CardTitle className="text-xs font-bold text-white uppercase tracking-wider">Dexter QA Assistant</CardTitle>
+                   </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="h-[300px] w-full rounded-xl bg-gray-900/5 dark:bg-black/40 border border-gray-200 dark:border-white/5 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 opacity-20">
-                        <svg className="w-full h-full" viewBox="0 0 400 200">
-                            <circle cx="200" cy="100" r="10" fill="#facc15" />
-                            <circle cx="150" cy="60" r="6" fill="#facc15" />
-                            <circle cx="250" cy="140" r="8" fill="#facc15" />
-                            <line x1="200" y1="100" x2="150" y2="60" stroke="#facc15" strokeWidth="1" />
-                            <line x1="200" y1="100" x2="250" y2="140" stroke="#facc15" strokeWidth="1" />
-                            <motion.circle 
-                                cx="200" cy="100" r={isRunning ? 80 : 40} stroke="#facc15" strokeWidth="0.5" fill="none"
-                                animate={{ scale: isRunning ? [1, 1.2, 1] : [1, 1.5, 1], opacity: isRunning ? [0.5, 0.2, 0.5] : [0.2, 0.1, 0.2] }}
-                                transition={{ duration: isRunning ? 1 : 4, repeat: Infinity }}
-                            />
-                        </svg>
+                <CardContent className="flex-1 p-0 flex flex-col overflow-hidden">
+                   <ScrollArea className="flex-1 p-4 bg-gray-50 dark:bg-black/20">
+                      <div className="space-y-4">
+                         <div className="bg-white dark:bg-white/5 p-3 rounded-2xl rounded-tl-none border border-gray-100 dark:border-white/5 shadow-sm">
+                            <p className="text-[11px] text-gray-700 dark:text-white/80 leading-relaxed">I am **Dexter**. Ask me follow-up questions about the hypotheses, target gaps, or experimental design.</p>
+                         </div>
                       </div>
-                      <div className="text-center z-10">
-                        {isRunning ? (
-                          <div className="flex flex-col items-center gap-3">
-                             <Loader2 className="w-8 h-8 text-yellow-500 animate-spin" />
-                             <p className="text-sm text-yellow-500/60 font-bold tracking-widest uppercase">Cross-referencing databases...</p>
-                          </div>
-                        ) : (
-                          <p className="text-sm text-gray-600 dark:text-white/20 font-medium italic">Interactive Knowledge Graph Standby</p>
-                        )}
-                      </div>
-                  </div>
+                   </ScrollArea>
+                   <div className="p-3 bg-white dark:bg-white/5 border-t border-gray-100 dark:border-white/10 flex gap-2">
+                      <Input className="bg-gray-100 dark:bg-white/5 border-none h-9 text-xs" placeholder="Ask Dexter..." />
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700 h-9 px-3 text-[10px] font-bold uppercase tracking-widest">Send</Button>
+                   </div>
                 </CardContent>
             </Card>
-          </div>
 
-          <div className="space-y-6">
+            {/* Agent Activity */}
             <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10">
-                <CardHeader>
-                  <CardTitle className="text-sm">Agent Activity</CardTitle>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xs font-bold uppercase tracking-widest text-gray-400">Agent Activity</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ScrollArea className="h-[400px] pr-4">
-                      <div className="space-y-6">
-                        {isRunning && (
-                          <div className="flex gap-3 animate-pulse">
-                              <div className="w-8 h-8 rounded-lg bg-yellow-50 dark:bg-yellow-500/10 flex items-center justify-center shrink-0">
-                                <Search className="w-4 h-4 text-yellow-500" />
-                              </div>
-                              <div>
-                                <p className="text-xs text-yellow-700 dark:text-yellow-400 font-bold">{currentAction}</p>
-                                <p className="text-[10px] text-gray-600 dark:text-white/20 mt-1">now</p>
-                              </div>
-                          </div>
-                        )}
-                        {[
-                          { icon: Sparkles, text: "Extracted novel relationship: MCL-1 <-> Venetoclax Resistance", time: "2m ago" },
-                          { icon: BrainCircuit, text: "Synthesized abstract from 14 clinical trials", time: "15m ago" },
-                          { icon: MessageSquare, text: "User queried: 'Are there any dual MCL-1/BCL-2 inhibitors?'", time: "1h ago" },
-                          { icon: FileText, text: "Ingested PDF: 'Emerging targets in CLL'", time: "4h ago" },
-                        ].map((item, i) => (
+                  <ScrollArea className="h-[250px] pr-4">
+                      <div className="space-y-4">
+                        {activities.map((item, i) => (
                           <div key={i} className="flex gap-3">
-                              <div className="w-8 h-8 rounded-lg bg-white dark:bg-white/5 flex items-center justify-center shrink-0">
-                                <item.icon className="w-4 h-4 text-yellow-500/60" />
+                              <div className="w-7 h-7 rounded-lg bg-gray-100 dark:bg-white/5 flex items-center justify-center shrink-0">
+                                <item.icon className="w-3.5 h-3.5 text-yellow-500/60" />
                               </div>
                               <div>
-                                <p className="text-xs text-gray-700 dark:text-white/80 leading-tight">{item.text}</p>
-                                <p className="text-[10px] text-gray-600 dark:text-white/20 mt-1">{item.time}</p>
+                                <p className="text-[11px] text-gray-700 dark:text-white/80 leading-tight">{item.text}</p>
+                                <p className="text-[9px] text-gray-400 mt-1">{item.time}</p>
                               </div>
                           </div>
                         ))}

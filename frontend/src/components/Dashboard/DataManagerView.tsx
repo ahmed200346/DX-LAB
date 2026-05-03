@@ -15,27 +15,41 @@ export default function DataManagerView() {
   const [isRunning, setIsRunning] = useState(false);
   const [hasFiles, setHasFiles] = useState(false);
   const [files, setFiles] = useState<any[]>([]);
+  const [doiInput, setDoiInput] = useState("");
 
   const runIndexing = async () => {
     setIsRunning(true);
     setHasFiles(true);
-    setFiles([]);
     
-    const initialFiles = [
-      { name: "BCL2_P10415_Complex_PDB.zip", size: "42.5 MB", type: "zip", date: "2026-05-01", status: "Indexing..." },
-      { name: "PMID: 26822266_Venetoclax_CLL.pdf", size: "1.2 MB", type: "pdf", date: "2026-05-02", status: "Indexing..." },
-      { name: "Ensemble_Docking_Scores_BCL2.json", size: "2.4 MB", type: "json", date: new Date().toISOString().split("T")[0], status: "Indexing..." },
-      { name: "Venetoclax_Analog_SMILES.smi", size: "15.8 MB", type: "smi", date: "2026-04-28", status: "Indexing..." },
-    ];
-    
-    for (let i = 0; i < initialFiles.length; i++) {
-      // Add file as "Indexing..."
-      setFiles(prev => [...prev, initialFiles[i]]);
-      await new Promise(r => setTimeout(r, 1000 + Math.random() * 1500));
-      // Update file to "Indexed"
-      setFiles(prev => prev.map((f, idx) => idx === i ? { ...f, status: "Indexed" } : f));
+    let itemsToIndex = [];
+
+    if (doiInput.trim()) {
+      itemsToIndex = [{ 
+        name: `Extracted_Paper_${doiInput.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`, 
+        size: (Math.random() * 4 + 1).toFixed(1) + " MB", 
+        type: "pdf", 
+        date: new Date().toISOString().split("T")[0], 
+        status: "Indexing..." 
+      }];
+    } else {
+      setFiles([]);
+      itemsToIndex = [
+        { name: "BCL2_P10415_Complex_PDB.zip", size: "42.5 MB", type: "zip", date: "2026-05-01", status: "Indexing..." },
+        { name: "PMID: 26822266_Venetoclax_CLL.pdf", size: "1.2 MB", type: "pdf", date: "2026-05-02", status: "Indexing..." },
+        { name: "Ensemble_Docking_Scores_BCL2.json", size: "2.4 MB", type: "json", date: new Date().toISOString().split("T")[0], status: "Indexing..." },
+        { name: "Venetoclax_Analog_SMILES.smi", size: "15.8 MB", type: "smi", date: "2026-04-28", status: "Indexing..." },
+      ];
     }
     
+    for (let i = 0; i < itemsToIndex.length; i++) {
+      // Add file as "Indexing..."
+      setFiles(prev => [itemsToIndex[i], ...prev]);
+      await new Promise(r => setTimeout(r, 1500 + Math.random() * 1500));
+      // Update file to "Indexed"
+      setFiles(prev => prev.map(f => f.name === itemsToIndex[i].name ? { ...f, status: "Indexed" } : f));
+    }
+    
+    setDoiInput("");
     setIsRunning(false);
   };
 
@@ -45,17 +59,26 @@ export default function DataManagerView() {
         <div>
           <h3 className="text-2xl font-bold">Data Management</h3>
           <p className="text-gray-600 dark:text-gray-500 dark:text-white/40 text-sm">Unified storage and knowledge indexing for all lab assets</p>
-
         </div>
-        <div className="flex gap-3">
-           <Button variant="outline" className="border-gray-200 dark:border-white/10 hover:bg-white dark:bg-white/5">
+        <div className="flex gap-3 items-center">
+           <div className="relative w-[280px]">
+             <Input 
+               value={doiInput}
+               onChange={e => setDoiInput(e.target.value)}
+               placeholder="Import via DOI or PMID..." 
+               className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-sm h-10 pr-10 focus:ring-purple-500/50"
+               onKeyDown={e => { if (e.key === 'Enter' && !isRunning) runIndexing(); }}
+             />
+             <Search className="absolute right-3 top-3 w-4 h-4 text-gray-400" />
+           </div>
+           <Button variant="outline" className="border-gray-200 dark:border-white/10 hover:bg-white dark:bg-white/5 h-10">
               <HardDrive className="w-4 h-4 mr-2" />
               Storage Stats
            </Button>
            <Button 
              onClick={runIndexing}
-             disabled={isRunning}
-             className="bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-600/20 min-w-[140px] text-white"
+             disabled={isRunning || (hasFiles && !doiInput.trim())}
+             className="bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-600/20 min-w-[140px] text-white h-10"
            >
               {isRunning ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Upload className="w-4 h-4 mr-2" />}
               {isRunning ? "Indexing..." : "Index Files"}

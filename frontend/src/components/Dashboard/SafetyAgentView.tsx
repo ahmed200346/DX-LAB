@@ -13,6 +13,10 @@ export default function SafetyAgentView() {
   const [isRunning, setIsRunning] = useState(false);
   const [hasRun, setHasRun] = useState(false);
   const [smiles, setSmiles] = useState("");
+  const [patientAge, setPatientAge] = useState("");
+  const [patientSex, setPatientSex] = useState("");
+  const [comorbidities, setComorbidities] = useState("");
+  
   const [safetyChecks, setSafetyChecks] = useState([
     { name: "Hepatotoxicity", score: 0, status: "pending" as any },
     { name: "Cardiotoxicity (hERG)", score: 0, status: "pending" as any },
@@ -58,17 +62,14 @@ export default function SafetyAgentView() {
           <h3 className="text-2xl font-bold">Drug Safety Analysis</h3>
           <p className="text-gray-600 dark:text-gray-500 dark:text-white/40 text-sm">Predictive toxicology and clinical safety screening</p>
         </div>
-        <div className="flex gap-3">
-           <Button variant="outline" className="border-gray-200 dark:border-white/10 hover:bg-white dark:bg-white/5">Export Report</Button>
-        </div>
       </div>
 
       {/* Input Section */}
       <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 backdrop-blur-md shadow-sm dark:shadow-none overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-500" />
         <CardContent className="p-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
-            <div className="md:col-span-3 space-y-2">
+          <div className="space-y-6">
+            <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-600 dark:text-gray-500 dark:text-white/40 uppercase tracking-wider">Molecule SMILES / Name</label>
               <Input 
                 value={smiles} 
@@ -77,19 +78,47 @@ export default function SafetyAgentView() {
                 className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-red-500/50 h-11"
               />
             </div>
-            <div className="md:col-span-1">
-              <Button 
-                onClick={runScreen} 
-                disabled={isRunning || !smiles.trim()}
-                className="w-full bg-red-600 hover:bg-red-700 text-white h-11 font-bold shadow-lg shadow-red-600/20 rounded-lg group disabled:opacity-40"
-              >
-                {isRunning ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Shield className="w-4 h-4 mr-2" />}
-                {isRunning ? "Screening..." : "Run Full Screen"}
-              </Button>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end pt-2">
+               <div className="space-y-2 md:col-span-1">
+                 <label className="text-xs font-semibold text-gray-600 dark:text-gray-500 dark:text-white/40 uppercase tracking-wider">Patient Age</label>
+                 <Input 
+                   value={patientAge} 
+                   onChange={(e) => setPatientAge(e.target.value)}
+                   placeholder="Enter age" 
+                   className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-red-500/50 h-11"
+                 />
+               </div>
+               <div className="space-y-2 md:col-span-1">
+                 <label className="text-xs font-semibold text-gray-600 dark:text-gray-500 dark:text-white/40 uppercase tracking-wider">Patient Sex</label>
+                 <Input 
+                   value={patientSex} 
+                   onChange={(e) => setPatientSex(e.target.value)}
+                   placeholder="M / F / Other" 
+                   className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-red-500/50 h-11"
+                 />
+               </div>
+               <div className="space-y-2 md:col-span-1">
+                 <label className="text-xs font-semibold text-gray-600 dark:text-gray-500 dark:text-white/40 uppercase tracking-wider">Comorbidities</label>
+                 <Input 
+                   value={comorbidities} 
+                   onChange={(e) => setComorbidities(e.target.value)}
+                   placeholder="Enter comorbidities..." 
+                   className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-900 dark:text-white focus:ring-red-500/50 h-11"
+                 />
+               </div>
+               <div className="md:col-span-1">
+                 <Button 
+                   onClick={runScreen} 
+                   disabled={isRunning || !smiles.trim()}
+                   className="w-full bg-red-600 hover:bg-red-700 text-white h-11 font-bold shadow-lg shadow-red-600/20 rounded-lg group disabled:opacity-40"
+                 >
+                   {isRunning ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Shield className="w-4 h-4 mr-2" />}
+                   {isRunning ? "Screening..." : "Run Full Screen"}
+                 </Button>
+               </div>
             </div>
           </div>
-          
-
         </CardContent>
       </Card>
 
