@@ -25,6 +25,12 @@ const menuData: Menu[] = [
     path: "/hypothesis-generator",
     newTab: false,
   },
+    {
+    id: 7,
+    title: "MediSafe AI",
+    path: "/safety",           // or any page you want
+    newTab: false,
+  },
   {
     id: 4,
     title: "Blog",
@@ -37,5 +43,6 @@ const menuData: Menu[] = [
     path: "/contact",
     newTab: false,
   },
+
 ];
 export default menuData;
