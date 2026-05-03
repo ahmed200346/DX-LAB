@@ -1,3 +1,5 @@
+import os
+
 # global variables for retrieval task
 UNIPROT_NUM_IDS = 1 # Number of UniProt IDs to retrieve
 MAX_PAPERS = 10 # Number of papers to download for molecule optimization guideline
@@ -14,7 +16,9 @@ EMBEDDING_DIM = 1024
 
 # global variables for generation task
 POOL_PATH = "pool"
-REINVENT_PATH = "/home/hoon/dd-agent/REINVENT4"
+# Local install path for REINVENT4 (required for pooling). Override with env REINVENT_PATH.
+_REINVENT_DEFAULT = "/home/hoon/dd-agent/REINVENT4"
+REINVENT_PATH = os.getenv("REINVENT_PATH", "").strip() or _REINVENT_DEFAULT
 
 # global variables for prediction task
 ADMET_WAIT_INTERVAL = 30

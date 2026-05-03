@@ -1,12 +1,13 @@
 # DX-LAB integration — ACP hub and services
 
-This document describes how the **ACP multi-agent hub** (`backend/acp_hub`) talks to **ITD (Data Manager)**, **DiscoveryAgent**, and the **3D printer (Flask)**. All runnable backends live under **`backend/services/`** in this monorepo; `backend/reference/dx_lab_architecture` is a **read-only snapshot** of the original architecture repo (not imported at runtime).
+This document describes how the **ACP multi-agent hub** (`backend/acp_hub`) talks to **ITD (Data Manager)**, **DiscoveryAgent**, and the **3D printer (Flask)**. All runnable backends live under **`backend/services/`** in this monorepo (including **`data_manager`**, **`discovery_agent`**, **`printer_3d`**, **`drug_safety`**, and **`hypothesis_assistant_agent`**); `backend/reference/` is a **read-only snapshot** of the original architecture repo (not imported at runtime). See `backend/README.md`.
 
 ## Ports (default)
 
 | Service | Port | URL / command |
 |--------|------|----------------|
 | **ITD** (Data Manager) | **8000** | `http://127.0.0.1:8000` — FastAPI `POST /generate` |
+| **Drug safety** | **8002** | `http://127.0.0.1:8002` — FastAPI `GET /analyze` (default avoids clash with ITD) |
 | **ACP hub** | **8010** | `http://127.0.0.1:8010` — `acp_sdk` server (`GET /agents`, `POST /runs`) |
 | **3D printer** | **5000** | `http://127.0.0.1:5000` — Flask `POST /api/submit` |
 | **Next.js** | **3000** | Existing pages may call ITD on `:8000` unchanged |
@@ -27,6 +28,16 @@ Set `ACP_SERVER_PORT` if 8010 is taken. **Do not** run ITD and the ACP hub on th
 | `DISCOVERY_AGENT_ROOT` | `backend/services/discovery_agent` | Root containing `run_discovery_agent.py` (override with absolute path if you keep a copy elsewhere) |
 | `EXECUTOR_STEP_TIMEOUT` | `900` | Seconds (discoverer runs can be long) |
 | `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL` | see `acp_hub/settings/config.py` | Planner / executor LLM |
+
+### Frontend (see repo root `.env.example` and `frontend/.env.example`)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `NEXT_PUBLIC_ACP_URL` | `http://127.0.0.1:8010` | Hub URL for browser code (optional until you wire UI) |
+| `ACP_SERVER_URL` | same as public | Server-side proxy target (`/api/acp/*` Route Handler) |
+| `DRUG_SAFETY_API_URL` | `http://127.0.0.1:8002` | Drug safety FastAPI for `/api/drug-safety` |
+
+Same-origin ACP proxy: **`GET /api/acp/agents`**, **`POST /api/acp/runs`**, etc. (forwards to the hub).
 
 ### DiscoveryAgent external context (Phase 2)
 
@@ -94,6 +105,16 @@ Plain text description, or JSON:
 { "description": "SMILES: CC(=O)Oc1ccccc1C(=O)O" }
 ```
 
+## One-shot local stack (Windows)
+
+From the repo root:
+
+```powershell
+.\start_stack.ps1
+```
+
+Opens separate terminals for **data_manager (8000)**, **drug_safety (8002)**, **printer_3d (5000)**, and **acp_hub (8010)**. Then run the Next app manually: `cd frontend && npm run dev`.
+
 ## Manual smoke run (four processes)
 
 1. **ITD / Data Manager** — working directory `backend/services/data_manager`:
@@ -132,6 +153,11 @@ Plain text description, or JSON:
 - **Literature / vectors / evidence**: **ITD** (`data_manager`).
 - **Molecule pipeline** (REINVENT, predictions, Boltz tier): **DiscoveryAgent** (`discoverer`), optionally seeded from ITD via `context_bundle` + `DISCOVERY_USE_EXTERNAL_CONTEXT`.
 
+## Other Python services (same `backend/services/` tree)
+
+- **Drug safety (FastAPI)** — working directory `backend/services/drug_safety`: `python run_web.py` (defaults to **127.0.0.1:8002**; override with `DRUG_SAFETY_PORT` / `DRUG_SAFETY_HOST`).
+- **Hypothesis assistant** — working directory `backend/services/hypothesis_assistant_agent`: `uvicorn api:app --host 127.0.0.1 --port 8001` (matches the Next.js hypothesis page, which calls **http://localhost:8001**).
+
 ## Frontend
 
-Phase 1 keeps the Next.js app calling **ITD :8000** where it already does. Optional later: `NEXT_PUBLIC_ACP_URL` and a single API route or page that calls the hub on **8010**.
+Phase 1 keeps existing pages calling **ITD :8000** where they already do. **ACP proxy** is available at **`/api/acp/*`** (configure `frontend/.env.local` from `frontend/.env.example`). You can add UI that calls `fetch("/api/acp/agents")` or `POST /api/acp/runs` without CORS issues.

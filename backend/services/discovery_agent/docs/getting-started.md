@@ -10,22 +10,17 @@ This guide gets you from a fresh checkout to a completed pipeline run.
 - Serper API key
 - NVIDIA NIM or another OpenAI-compatible API key
 
-## 1. Clone and install dependencies
+## 1. Install dependencies (DX-LAB monorepo)
+
+From the **DX-LAB-integration** repository root, this service lives at `backend/services/discovery_agent`. Install Python deps from that directory:
 
 ```bash
-git clone https://github.com/hoon-ock/llm-dd.git
-cd llm-dd
+cd backend/services/discovery_agent
 ```
 
 ```bash
 conda create -n DiscoveryAgent python=3.10 -y
 conda activate DiscoveryAgent
-pip install -e .
-```
-
-If you prefer pinned installs from requirements:
-
-```bash
 pip install -r requirements.txt
 ```
 
@@ -40,7 +35,7 @@ python install.py --help
 python install.py cu124
 ```
 
-After install, update `REINVENT_PATH` in `configs/tool_globals.py` to your local REINVENT4 path.
+After install, set your local REINVENT4 path via environment variable **`REINVENT_PATH`** (recommended) or edit `configs/tool_globals.py` fallback.
 
 ## 3. Configure API keys
 

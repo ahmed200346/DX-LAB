@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
  * Proxy route: /api/drug-safety  →  http://localhost:8000/analyze
  *
  * Le frontend (page.tsx) appelle /api/drug-safety?drug=...&age=...&conditions=...
- * Cette route transfère la requête au backend FastAPI (web.py) sur le port 8000
+ * Cette route transfère la requête au backend FastAPI (web.py); défaut port 8002 (ITD utilise 8000).
  * et retourne la réponse JSON directement au client React.
  *
  * Avantages :
@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from "next/server";
  *  - Frontend reste accessible via `cd frontend && npm run dev` (port 3000)
  */
 
-const BACKEND_URL = process.env.DRUG_SAFETY_API_URL ?? "http://localhost:8000";
+const BACKEND_URL = process.env.DRUG_SAFETY_API_URL ?? "http://127.0.0.1:8002";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
         {
           error:
             "❌ Impossible de joindre le backend Drug Safety. " +
-            "Lancez-le avec : cd backend && python run_web.py",
+            "Lancez-le avec : cd backend/services/drug_safety && python run_web.py (port 8002 par défaut; DRUG_SAFETY_PORT pour changer)",
         },
         { status: 503 }
       );

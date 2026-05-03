@@ -10,6 +10,8 @@ node_modules/
 
 # Environment
 .env
+.env.local
+frontend/.env.local
 
 # Docker
 .docker/
@@ -30,4 +32,8 @@ backend/services/discovery_agent/.venv/
 backend/services/discovery_agent/**/__pycache__/
 backend/services/printer_3d/.venv/
 backend/services/printer_3d/**/__pycache__/
+backend/services/drug_safety/.venv/
+backend/services/drug_safety/**/__pycache__/
+backend/services/hypothesis_assistant_agent/.venv/
+backend/services/hypothesis_assistant_agent/**/__pycache__/
 .venv/
