@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2026-05-01T19:49:21.786607",
+    "agent": "planner",
+    "metric": "processing_time_seconds",
+    "value": 42.88019943237305,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:21.786607",
+    "agent": "planner",
+    "metric": "analysis_time_seconds",
+    "value": 0.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:21.786607",
+    "agent": "planner",
+    "metric": "generation_time_seconds",
+    "value": 42.88019943237305,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:21.786607",
+    "agent": "planner",
+    "metric": "num_steps_generated",
+    "value": 5,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:21.786607",
+    "agent": "planner",
+    "metric": "plans_generated_total",
+    "value": 1,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:21.786607",
+    "agent": "planner",
+    "metric": "avg_plan_steps",
+    "value": 5.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:21.786607",
+    "agent": "planner",
+    "metric": "user_validation_score",
+    "value": 0.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:29.823809",
+    "agent": "planner",
+    "metric": "user_validation_score",
+    "value": 4.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T19:49:29.823809",
+    "agent": "planner",
+    "metric": "total_validations",
+    "value": 1,
+    "context": {}
+  }
+]

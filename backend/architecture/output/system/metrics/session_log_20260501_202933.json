@@ -1,0 +1,114 @@
+[
+  {
+    "timestamp": "2026-05-01T20:32:11.281741",
+    "agent": "planner",
+    "metric": "processing_time_seconds",
+    "value": 44.77891778945923,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:11.281741",
+    "agent": "planner",
+    "metric": "analysis_time_seconds",
+    "value": 0.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:11.281741",
+    "agent": "planner",
+    "metric": "generation_time_seconds",
+    "value": 44.77891778945923,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:11.281741",
+    "agent": "planner",
+    "metric": "num_steps_generated",
+    "value": 6,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:11.281741",
+    "agent": "planner",
+    "metric": "plans_generated_total",
+    "value": 1,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:11.281741",
+    "agent": "planner",
+    "metric": "avg_plan_steps",
+    "value": 6.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:11.281741",
+    "agent": "planner",
+    "metric": "user_validation_score",
+    "value": 0.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:20.965892",
+    "agent": "planner",
+    "metric": "user_validation_score",
+    "value": 4.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:32:20.965892",
+    "agent": "planner",
+    "metric": "total_validations",
+    "value": 1,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:40:06.133620",
+    "agent": "executor",
+    "metric": "processing_time_seconds",
+    "value": 210.3261444568634,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:40:06.133620",
+    "agent": "executor",
+    "metric": "plans_executed",
+    "value": 1,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:40:06.133620",
+    "agent": "executor",
+    "metric": "steps_succeeded",
+    "value": 7,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:40:06.133620",
+    "agent": "executor",
+    "metric": "steps_failed",
+    "value": 0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:40:06.133620",
+    "agent": "executor",
+    "metric": "plan_completion_rate",
+    "value": 1.0,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:40:06.133620",
+    "agent": "executor",
+    "metric": "avg_acp_latency_seconds",
+    "value": 26.79298037290573,
+    "context": {}
+  },
+  {
+    "timestamp": "2026-05-01T20:40:06.133620",
+    "agent": "executor",
+    "metric": "total_routing_decisions",
+    "value": 8,
+    "context": {}
+  }
+]

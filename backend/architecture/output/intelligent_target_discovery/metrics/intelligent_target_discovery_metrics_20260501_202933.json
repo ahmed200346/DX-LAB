@@ -1,0 +1,12 @@
+{
+  "total_requests": 4,
+  "successful_requests": 1,
+  "failed_requests": 3,
+  "total_llm_calls": 0,
+  "total_tokens_used": 0,
+  "total_processing_time": 105.5274600982666,
+  "avg_processing_time": 26.38186502456665,
+  "errors": [],
+  "api_requests_sent": 4,
+  "api_errors": 3
+}

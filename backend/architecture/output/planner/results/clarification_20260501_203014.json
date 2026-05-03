@@ -1,0 +1,33 @@
+{
+  "agent": "planner",
+  "result_type": "clarification",
+  "timestamp": "2026-05-01T20:30:14.594584",
+  "session_id": "20260501_202933",
+  "data": {
+    "status": "needs_clarification",
+    "analysis": {
+      "reasoning": "J'ai lu attentivement le besoin exprimé et identifié l'objectif principal qui est d'obtenir des informations concernant la molécule de l'aspirine. Il n'y a pas de sous-objectifs explicites, mais on peut en déduire que l'utilisateur souhaite connaître la structure chimique, les propriétés et peut-être les utilisations de la molécule. Aucune contrainte n'est mentionnée. Il y a une ambiguïté concernant la portée des informations souhaitées. Le type de besoin est de la recherche. La complexité est modérée.",
+      "main_objective": "Obtenir des informations concernant la molécule de l'aspirine",
+      "sub_objectives": [
+        "Connaître la structure chimique de la molécule",
+        "Comprendre les propriétés de la molécule",
+        "Découvrir les utilisations de la molécule"
+      ],
+      "constraints": [],
+      "ambiguities": [
+        "Portée des informations souhaitées"
+      ],
+      "need_type": "research",
+      "complexity": "moderate",
+      "requires_clarification": true,
+      "clarification_questions": [
+        "Quelle est la portée des informations souhaitées concernant la molécule de l'aspirine ?",
+        "Y a-t-il des aspects spécifiques que vous souhaitez que je couvre ?"
+      ]
+    },
+    "questions": [
+      "Quelle est la portée des informations souhaitées concernant la molécule de l'aspirine ?",
+      "Y a-t-il des aspects spécifiques que vous souhaitez que je couvre ?"
+    ]
+  }
+}

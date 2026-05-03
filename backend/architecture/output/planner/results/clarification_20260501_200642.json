@@ -1,0 +1,31 @@
+{
+  "agent": "planner",
+  "result_type": "clarification",
+  "timestamp": "2026-05-01T20:06:42.164881",
+  "session_id": "20260501_200446",
+  "data": {
+    "status": "needs_clarification",
+    "analysis": {
+      "reasoning": "Étape 1 : Le besoin exprimé par l'utilisateur est clairement centré sur l'obtention d'informations concernant la molécule de l'aspirine. Étape 2 : L'objectif principal est de fournir des informations sur la molécule de l'aspirine. Étape 3 : Les sous-objectifs implicites incluent la recherche de données sur la composition chimique, la structure moléculaire, les propriétés et les effets de l'aspirine. Étape 4 : Aucune contrainte spécifique n'est mentionnée. Étape 5 : Il y a une ambiguïté concernant la portée des informations souhaitées (généralités, détails techniques, etc.). Étape 6 : Le type de besoin est clairement une recherche d'informations scientifiques. Étape 7 : La complexité est modérée en raison de la nécessité de trouver des informations précises et fiables sur la molécule de l'aspirine.",
+      "main_objective": "Fournir des informations sur la molécule de l'aspirine",
+      "sub_objectives": [
+        "Rechercher la composition chimique de l'aspirine",
+        "Décrire la structure moléculaire de l'aspirine",
+        "Lister les propriétés et les effets de l'aspirine"
+      ],
+      "constraints": [],
+      "ambiguities": [
+        "Quel est le niveau de détail requis pour les informations sur l'aspirine ?"
+      ],
+      "need_type": "research",
+      "complexity": "moderate",
+      "requires_clarification": true,
+      "clarification_questions": [
+        "Quel aspect spécifique de la molécule de l'aspirine vous intéresse le plus ?"
+      ]
+    },
+    "questions": [
+      "Quel aspect spécifique de la molécule de l'aspirine vous intéresse le plus ?"
+    ]
+  }
+}

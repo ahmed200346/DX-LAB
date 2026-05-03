@@ -1,0 +1,11 @@
+{
+  "agent": "planner",
+  "result_type": "plan_validated",
+  "timestamp": "2026-05-01T19:49:29.824313",
+  "session_id": "20260501_194719",
+  "data": {
+    "status": "plan_validated",
+    "message": "Plan validé avec succès par l'utilisateur.",
+    "score": 4
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "summary": {
+    "session_id": "20260501_180731",
+    "session_duration_seconds": 193.75044798851013,
+    "system_info": {
+      "cpu_percent_process": 0.0,
+      "cpu_percent_system": 6.6,
+      "memory_rss_mb": 132.88671875,
+      "memory_vms_mb": 112.91796875,
+      "memory_percent": 0.549194466888751,
+      "system_memory_total_gb": 23.62955093383789,
+      "system_memory_available_gb": 7.8048553466796875,
+      "system_memory_percent": 67.0,
+      "num_threads": 25,
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python_version": "3.12.1"
+    },
+    "total_requests_all_agents": 0,
+    "requests_per_second": 0.0,
+    "active_agents": 0,
+    "latencies_per_agent": {},
+    "total_system_events": 0,
+    "error_events": 0,
+    "acp_total_messages": 0,
+    "acp_total_bytes_sent": 0,
+    "acp_total_bytes_received": 0,
+    "acp_avg_message_size_bytes": 0,
+    "agent_summaries": {}
+  },
+  "agent_metrics": {},
+  "system_events": [],
+  "acp_stats": {
+    "total_messages": 0,
+    "total_bytes_sent": 0,
+    "total_bytes_received": 0
+  }
+}

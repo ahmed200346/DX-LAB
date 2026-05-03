@@ -1,0 +1,31 @@
+{
+  "agent": "planner",
+  "result_type": "clarification",
+  "timestamp": "2026-05-01T17:59:52.904275",
+  "session_id": "20260501_175444",
+  "data": {
+    "status": "needs_clarification",
+    "analysis": {
+      "reasoning": "Étape 1 : Le besoin exprimé est relatif à l'obtention d'informations concernant la molécule d'aspirine. Étape 2 : L'objectif principal est de fournir des informations sur la molécule d'aspirine. Étape 3 : Les sous-objectifs implicites incluent la recherche de données sur la structure chimique, les propriétés, les effets et les utilisations de l'aspirine. Étape 4 : Aucune contrainte n'est mentionnée. Étape 5 : L'ambiguïté réside dans le type d'informations spécifiques attendues par l'utilisateur (générales, scientifiques, médicales, etc.). Étape 6 : Le type de besoin est la recherche. Étape 7 : La complexité est modérée en raison de la nécessité de rechercher et de synthétiser des informations sur la molécule d'aspirine.",
+      "main_objective": "Fournir des informations sur la molécule d'aspirine",
+      "sub_objectives": [
+        "Rechercher la structure chimique de l'aspirine",
+        "Décrire les propriétés de l'aspirine",
+        "Présenter les effets et les utilisations de l'aspirine"
+      ],
+      "constraints": [],
+      "ambiguities": [
+        "Type d'informations spécifiques attendues par l'utilisateur"
+      ],
+      "need_type": "research",
+      "complexity": "moderate",
+      "requires_clarification": true,
+      "clarification_questions": [
+        "Quel type d'informations sur l'aspirine êtes-vous à la recherche de (générales, scientifiques, médicales, etc.) ?"
+      ]
+    },
+    "questions": [
+      "Quel type d'informations sur l'aspirine êtes-vous à la recherche de (générales, scientifiques, médicales, etc.) ?"
+    ]
+  }
+}
