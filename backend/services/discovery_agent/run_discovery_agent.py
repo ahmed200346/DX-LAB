@@ -24,6 +24,16 @@ from pathlib import Path
 import warnings
 warnings.filterwarnings("ignore")
 
+_backend_root = Path(__file__).resolve().parents[2]
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+try:
+    import dx_lab_env
+
+    dx_lab_env.load_shared_dotenv()
+except Exception:
+    pass
+
 from configs.tool_globals import LLM_MODEL as DEFAULT_LLM_MODEL
 
 # Prevent local mcp.py from shadowing the mcp SDK

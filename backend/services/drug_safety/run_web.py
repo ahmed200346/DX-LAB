@@ -1,11 +1,23 @@
-try:
-    from dotenv import load_dotenv
+import os
+import sys
+from pathlib import Path
 
-    load_dotenv()
+_backend_root = Path(__file__).resolve().parents[2]
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+try:
+    import dx_lab_env
+
+    dx_lab_env.load_shared_dotenv()
 except Exception:
     pass
 
-import os
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(Path(__file__).resolve().parent / ".env", override=False)
+except Exception:
+    pass
 
 import uvicorn
 

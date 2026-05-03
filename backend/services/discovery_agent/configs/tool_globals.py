@@ -1,4 +1,17 @@
 import os
+import sys
+from pathlib import Path
+
+# Monorepo: load `backend/.env` and `DX_LAB_API_KEY` before other services read keys
+_backend_root = Path(__file__).resolve().parents[3]
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+try:
+    import dx_lab_env
+
+    dx_lab_env.load_shared_dotenv()
+except Exception:
+    pass
 
 # global variables for retrieval task
 UNIPROT_NUM_IDS = 1 # Number of UniProt IDs to retrieve

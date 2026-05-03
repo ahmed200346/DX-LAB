@@ -6,6 +6,18 @@ with session-based follow-up support.
 import sys
 import os
 import uuid
+from pathlib import Path
+
+_backend_root = Path(__file__).resolve().parents[2]
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+try:
+    import dx_lab_env
+
+    dx_lab_env.load_shared_dotenv()
+except Exception:
+    pass
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel

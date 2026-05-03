@@ -14,6 +14,10 @@ This document describes how the **ACP multi-agent hub** (`backend/acp_hub`) talk
 
 Set `ACP_SERVER_PORT` if 8010 is taken. **Do not** run ITD and the ACP hub on the same port.
 
+## One API key for backend services
+
+Create **`backend/.env`** from **`backend/.env.example`** and set **`DX_LAB_API_KEY`** (your NVIDIA NIM key). It is copied to `LLM_API_KEY`, `OPENAI_API_KEY`, and `NVIDIA_API_KEY` when those are unset, so **acp_hub**, **discovery_agent**, **drug_safety**, **hypothesis_assistant**, and **data_manager** (on API startup) all see the same key.
+
 ## Environment variables
 
 ### Hub (`acp_hub`)

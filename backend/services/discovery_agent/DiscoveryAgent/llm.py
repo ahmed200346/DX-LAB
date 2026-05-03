@@ -10,7 +10,10 @@ from configs import tool_globals
 
 
 def llm_api_key() -> str:
-    key = (os.getenv("LLM_API_KEY") or os.getenv("NVIDIA_API_KEY") or "").strip()
+    key = (
+        (os.getenv("LLM_API_KEY") or os.getenv("NVIDIA_API_KEY") or os.getenv("OPENAI_API_KEY") or "").strip()
+        or (os.getenv("DX_LAB_API_KEY") or os.getenv("API_KEY") or "").strip()
+    )
     if key:
         return key
     try:

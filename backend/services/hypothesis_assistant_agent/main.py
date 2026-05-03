@@ -6,6 +6,17 @@ import argparse
 import sys
 import os
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+_backend_root = Path(__file__).resolve().parents[2]
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+try:
+    import dx_lab_env
+
+    dx_lab_env.load_shared_dotenv()
+except Exception:
+    pass
 
 from rich.console import Console
 from config.settings import settings

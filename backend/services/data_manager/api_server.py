@@ -4,6 +4,19 @@ Exposes /generate endpoint for Next.js frontend and /ask for QA assistant.
 """
 
 import asyncio
+import sys
+from pathlib import Path
+
+_backend_root = Path(__file__).resolve().parents[2]
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+try:
+    import dx_lab_env
+
+    dx_lab_env.load_shared_dotenv()
+except Exception:
+    pass
+
 from typing import Dict, List, Optional, Any
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware

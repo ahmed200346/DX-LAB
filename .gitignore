@@ -10,6 +10,7 @@ node_modules/
 
 # Environment
 .env
+backend/.env
 .env.local
 frontend/.env.local
 

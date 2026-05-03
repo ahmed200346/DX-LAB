@@ -4,7 +4,19 @@ Toutes les variables d'environnement et paramètres globaux sont définis ici.
 """
 
 import os
+import sys
 from pathlib import Path
+
+# Monorepo: `backend/.env` + single `DX_LAB_API_KEY` before reading LLM_* below
+_backend_root = Path(__file__).resolve().parent.parent.parent
+if str(_backend_root) not in sys.path:
+    sys.path.insert(0, str(_backend_root))
+try:
+    import dx_lab_env
+
+    dx_lab_env.load_shared_dotenv()
+except Exception:
+    pass
 
 # ──────────────────────── Chemins du projet ────────────────────────
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
