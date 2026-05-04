@@ -1,421 +1,199 @@
 # 🧬 Intelligent Target Discovery Agent
 
-**v3.4** · Autonomous biomedical literature mining, multimodal RAG, and structural drug-target resolution
+> An end-to-end biomedical AI pipeline for automated drug target discovery, built with retrieval-augmented generation (RAG), hybrid vector search, and large language models.
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Async](https://img.shields.io/badge/async-asyncio-green.svg)](https://docs.python.org/3/library/asyncio.html)
-[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
-[![Qdrant](https://img.shields.io/badge/vector--db-Qdrant-red.svg)](https://qdrant.tech/)
+This project was developed as part of the coursework for **AI & Biomedical Systems — Final Year Project** at [Esprit School of Engineering](https://esprit.tn/).
+
+[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi)](https://fastapi.tiangolo.com)
+[![Qdrant](https://img.shields.io/badge/Qdrant-vector--db-red)](https://qdrant.tech)
+[![Groq](https://img.shields.io/badge/Groq-Llama--3.3--70B-orange)](https://groq.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
 ---
 
 ## Overview
 
-The **Intelligent Target Discovery Agent (ITDA)** is a production-grade, fully asynchronous AI agent that mines scientific literature for drug targets, validates the retrieved evidence, and resolves each candidate to its structural biology data—UniProt accession, experimental PDB structures, and AlphaFold predictions—all in a single pipeline call.
+The **Intelligent Target Discovery Agent** is a multi-stage AI system that autonomously retrieves, validates, embeds, and enriches biomedical literature to extract actionable drug targets. Given a natural language query (e.g., a disease, gene, or pathway), the agent collects documents from PubMed, Europe PMC, SearXNG, and Jina Reader, then processes them through a full RAG pipeline — culminating in a structured report with ranked gene/protein targets, pathway mappings, and chemical annotations.
 
-It exposes a clean **Agent Communication Protocol (ACP)** interface so it can slot into any multi-agent system as a drop-in discovery module.
-
-```
-query ──► WebSearchAgent ──► ValidatorAgent ──► VectorizerAgent ──► Qdrant
-                                                       │
-                                                 TargetExtractor
-                                                       │
-                                  UniProt · RCSB PDB · AlphaFold EBI
-                                                       │
-                                               ACPResponse (targets + payload)
-```
+Key capabilities:
+- Hybrid dense + sparse retrieval with Reciprocal Rank Fusion (RRF)
+- Parallel biomedical named-entity recognition (BioNER), chemical extraction, and UniProt-validated target extraction
+- Composite Semantic Grounding & Validation (SGV) scoring
+- Downloadable DOCX report narrated by Groq Llama-3.3-70B
+- Session-scoped QA assistant for follow-up queries
 
 ---
 
-## Key Features
+## Features
 
-| Capability | Detail |
+- 🔍 **Multi-source collection** — PubMed, Europe PMC, SearXNG, Jina Reader, ClinicalTrials.gov
+- 🧠 **RAG pipeline** — BGE-base-en (768d) embeddings + HNSW index with INT8 scalar quantization
+- ⚖️ **SGV scoring** — faithfulness, answer relevancy, source credibility, and contradiction rate
+- 🧬 **BioNER** — gene and protein extraction via spaCy + HuggingFace NER models
+- 💊 **ChemExtractor** — PubChem-backed chemical structure and SMILES annotation
+- 🎯 **TargetExtractor** — LLM-driven target identification with UniProt validation
+- 🗺️ **PathwayMapper** — KEGG and Reactome pathway mapping with PubMed frequency ranking
+- 📄 **Report generation** — structured FinalReport exported as DOCX via `python-docx`
+- ⚡ **Redis caching** — MD5-keyed query cache (TTL 3 600 s) for zero-latency repeat queries
+
+---
+
+## Tech Stack
+
+### Backend
+| Layer | Technology |
 |---|---|
-| **Multimodal retrieval** | Indexes and retrieves text, PDFs, images, tables, graphs, video transcripts, and code |
-| **Hybrid search** | Dense (HNSW) + sparse (BM25/TF-IDF) → RRF fusion → cross-encoder reranking → MMR diversity |
-| **HyDE augmentation** | Groq-powered hypothetical document embedding for improved cold-start recall |
-| **Structural resolution** | Per-target UniProt → PDB → AlphaFold lookups, all concurrent |
-| **Validated evidence** | Six-metric Semantic Grounding Value (SGV) gates every result before storage |
-| **Smart query decomposition** | Groq automatically breaks long queries into focused sub-queries |
-| **Circuit breakers** | All external services (SearXNG, Jina, etc.) are guarded against cascading failures |
-| **Redis caching** | Query-level and cross-encoder score caches to eliminate redundant API calls |
-| **ACP protocol** | Structured request/response schema for seamless multi-agent orchestration |
+| API framework | FastAPI + Uvicorn |
+| LLM | Groq — Llama-3.3-70B-Versatile |
+| Vector DB | Qdrant (AsyncQdrantClient) |
+| Cache | Redis (aioredis) |
+| NLP / NER | spaCy, HuggingFace Transformers |
+| Embeddings | BAAI/bge-base-en · CLIP ViT-B/32 · all-MiniLM-L6-v2 |
+| Reranking | BAAI/bge-reranker-v2-m3 · DeBERTa NLI |
+| Chunking | LlamaIndex SentenceSplitter |
+| HTTP | aiohttp · httpx |
 
----
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                IntelligentTargetDiscoveryAgent v3.4             │
-│                                                                 │
-│  ┌──────────────┐   ┌──────────────┐   ┌───────────────────┐  │
-│  │  ACPRequest  │──►│ ExtractorAgent│──►│    ACPResponse    │  │
-│  └──────────────┘   └──────┬───────┘   └───────────────────┘  │
-│                             │                                   │
-│         ┌───────────────────┼──────────────────────┐           │
-│         ▼                   ▼                      ▼           │
-│  ┌─────────────┐  ┌──────────────────┐  ┌────────────────┐    │
-│  │  CacheLayer │  │  RetrieverAgent  │  │ WebSearchAgent │    │
-│  │   (Redis)   │  │  (Qdrant+BM25+  │  │(SearXNG/DDG/   │    │
-│  └─────────────┘  │  CE+MMR+RRF)    │  │PubMed/Scholar) │    │
-│                   └──────────────────┘  └────────┬───────┘    │
-│                                                   │            │
-│                                         ┌─────────▼────────┐  │
-│                                         │  ValidatorAgent  │  │
-│                                         │ (SGV gating·NLI· │  │
-│                                         │  dedup·Groq)     │  │
-│                                         └─────────┬────────┘  │
-│                                                   │            │
-│                   ┌───────────────────────────────▼──────────┐ │
-│                   │           TargetExtractor                 │ │
-│                   │  Groq NER → UniProt → PDB → AlphaFold   │ │
-│                   └───────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Components
-
-**`WebSearchAgent`** — Parallel queries across SearXNG, DuckDuckGo, Semantic Scholar, PubMed (efetch XML), Europe PMC, and ClinicalTrials.gov. Content is extracted via a concurrent Jina/trafilatura race. Biomedical domain filtering and pre-filters drop irrelevant URLs before any embedding.
-
-**`ValidatorAgent`** — Computes a six-dimensional **Semantic Grounding Value (SGV)**:
-
-| Metric | Weight |
+### Data Sources
+| Source | Type |
 |---|---|
-| Faithfulness (Groq-verified) | 20% |
-| Answer relevancy (cosine) | 20% |
-| Context recall | 20% |
-| Context precision | 15% |
-| Source credibility (domain trust + citations) | 25% |
-| Contradiction rate (NLI, post-softmax) | 5% |
+| PubMed / NCBI E-utilities | Literature |
+| Europe PMC | Preprints + Open Access |
+| SearXNG | Open web search |
+| Jina Reader | Web scraping |
+| ClinicalTrials.gov | Clinical data |
+| UniProt REST API | Protein validation |
+| PubChem | Chemical annotation |
+| KEGG / Reactome | Pathway databases |
 
-Results with SGV < 0.60 trigger automatic query decomposition and re-search.
-
-**`VectorizerAgent`** — Chunks text/PDFs with LlamaIndex `SentenceSplitter`, applies section-aware splitting for academic PDFs, CLIP for images, and AST-based chunking for code.
-
-**`RetrieverAgent`** — Dense HNSW search → BM25 sparse re-rank → RRF fusion → cross-encoder reranking (cached in Redis) → MMR diversity filter with per-content-type seeding.
-
-**`TargetExtractor`** — Post-validation LLM extraction of gene/protein targets via Groq, followed by concurrent UniProt, RCSB PDB, and AlphaFold EBI resolution per target.
+### Other Tools
+- `python-docx` — DOCX report export
+- `loguru` — structured logging
+- `pydantic v2` — data validation and serialisation
+- `scikit-learn` — TF-IDF BM25 approximation
+- `numpy` — RRF and MMR fusion
 
 ---
 
-## Installation
+## Directory Structure
+
+```
+intelligent-target-discovery/
+├── agent.py                  # Core orchestration agent
+├── api_server.py             # FastAPI server & endpoints
+├── config.py                 # Centralised configuration (env-driven)
+├── models.py                 # Pydantic data models & enums
+├── embeddings.py             # EmbeddingService (BGE, CLIP, MiniLM)
+├── vectorizer.py             # VectorizerAgent — chunking & embedding
+├── storage.py                # QdrantCollectionManager + CacheLayer
+├── retriever.py              # Hybrid retrieval (dense + BM25 + RRF)
+├── validator.py              # Domain trust & biomedical filtering
+├── bio_ner.py                # BioNER named-entity recognition
+├── extractor.py              # Generic extraction utilities
+├── chemical_extractor.py     # ChemExtractor — PubChem / SMILES
+├── target_extractor.py       # TargetExtractor — LLM + UniProt
+├── uniprot_validator.py      # UniProt REST validation
+├── pathway_mapper.py         # KEGG / Reactome pathway mapping
+├── pubmed_frequency.py       # PubMed co-occurrence frequency
+├── search.py                 # SearXNG + Jina search helpers
+├── qa_assistant.py           # Session-scoped QA assistant
+├── report_generator.py       # FinalReport → DOCX generation
+├── utils.py                  # CircuitBreaker, BM25Index, domain filter
+└── requirements.txt
+```
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-- Python 3.10+
-- [Qdrant](https://qdrant.tech/documentation/quick-start/) (local or cloud)
-- Redis (optional, for caching)
-- [SearXNG](https://docs.searxng.org/) (optional; falls back to DuckDuckGo)
-- Node.js (optional, only if generating DOCX reports)
+- Python 3.11+
+- Docker (for Qdrant and Redis)
+- Node.js 18+ (optional, for frontend)
 
-### Python Dependencies
+### 1. Clone the repository
 
 ```bash
-pip install aiohttp asyncio numpy scipy scikit-learn pydantic loguru \
-            redis sentence-transformers qdrant-client llama-index-core \
-            pillow pymupdf ddgs trafilatura
+git clone https://github.com/<your-username>/intelligent-target-discovery.git
+cd intelligent-target-discovery
 ```
 
-### Clone & Configure
+### 2. Install dependencies
 
 ```bash
-git clone https://github.com/your-org/itda.git
-cd itda
+pip install -r requirements.txt
 ```
 
-Set environment variables (Linux/macOS):
+### 3. Start Qdrant and Redis
 
 ```bash
-export GROQ_API_KEY=gsk_...          # Required: Groq LLaMA-3.3-70B
-export QDRANT_URL=http://localhost:6333
-export REDIS_HOST=localhost
-export PUBMED_API_KEY=...            # Optional: higher PubMed rate limits
-export HF_TOKEN=hf_...              # Optional: BLIP image captioning
-export SEARXNG_URL=http://localhost:8080
-export SEARXNG_OPEN=true            # or set SEARXNG_API_KEY / SEARXNG_SECRET_KEY
+docker run -d -p 6333:6333 qdrant/qdrant
+docker run -d -p 6379:6379 redis:7
 ```
 
-Windows (PowerShell):
+### 4. Configure environment variables
 
-```powershell
-$env:GROQ_API_KEY = "gsk_..."
-$env:QDRANT_URL   = "http://localhost:6333"
+```bash
+cp .env.example .env
 ```
 
----
-
-## Quick Start
-
-```python
-import asyncio
-from intelligent_target_discovery_agent import (
-    IntelligentTargetDiscoveryAgent,
-    AgentContext,
-    ContentType,
-)
-
-async def main():
-    async with AgentContext() as agent:
-        response = await agent.discover(
-            query="KRAS G12C inhibitor resistance mechanisms non-small cell lung cancer",
-            data_types=[ContentType.TEXT, ContentType.PDF],
-            filters={"lang": "en", "score_min": 0.60},
-            top_k=10,
-        )
-
-        print(f"Status:  {response.status}")
-        print(f"SGV:     {response.validation_score:.3f}")
-        print(f"Sources: {response.source_count}")
-        print(f"Targets: {len(response.targets)}")
-
-        for target in response.targets:
-            print(f"\n  Gene:      {target['gene']}")
-            print(f"  UniProt:   {target['uniprot_id']}")
-            print(f"  PDB IDs:   {target['pdb_ids'][:3]}")
-            if target['alphafold']:
-                print(f"  AlphaFold: {target['alphafold']['alphafold_url']}")
-
-asyncio.run(main())
-```
-
----
-
-## ACP Protocol
-
-The agent communicates via structured `ACPRequest` / `ACPResponse` objects, making it composable with other agents.
-
-### Request
-
-```python
-from intelligent_target_discovery_agent import ACPRequest, ACPIntent, ContentType
-
-request = ACPRequest(
-    source_agent = "planner_agent",
-    query        = "CAR-T therapy clinical trials acute lymphoblastic leukemia",
-    data_types   = [ContentType.TEXT, ContentType.PDF, ContentType.TABLE],
-    filters      = {"lang": "en", "score_min": 0.60},
-    intent       = ACPIntent.FIND,   # FIND | RETRIEVE | REFRESH | VALIDATE
-    top_k        = 8,
-    require_fresh= True,
-)
-
-response = await agent.handle_request(request)
-```
-
-### Response Structure
-
-```json
-{
-  "acp_version":          "3.4",
-  "session_id":           "a1b2c3d4",
-  "status":               "success",
-  "validation_score":     0.823,
-  "retrieval_latency_ms": 1842,
-  "source_count":         12,
-  "payload": {
-    "text": [ { "title": "...", "source_url": "...", "pmid": "...", "doi": "..." } ],
-    "pdf":  [ { "title": "...", "source_url": "..." } ]
-  },
-  "targets": [
-    {
-      "gene":               "KRAS",
-      "protein":            "GTPase KRas",
-      "mutations":          ["G12C", "G12D"],
-      "disease_context":    "non-small cell lung cancer",
-      "druggability_notes": "covalent pocket at switch-II; AMG-510 approved",
-      "uniprot_id":         "P01116",
-      "pdb_ids":            ["6OIM", "6P8Z", "7T0Q"],
-      "pdb_structures": [
-        { "pdb_id": "6OIM", "title": "KRAS G12C + AMG-510", "resolution": 1.09 }
-      ],
-      "alphafold": {
-        "entry_id":      "AF-P01116-F1",
-        "avg_plddt":     87.4,
-        "alphafold_url": "https://alphafold.ebi.ac.uk/entry/P01116"
-      },
-      "supporting_pmids": ["34567890"],
-      "source_count":     8
-    }
-  ]
-}
-```
-
-### Intent Types
-
-| Intent | Behaviour |
+| Variable | Description |
 |---|---|
-| `FIND` | Cache lookup → Qdrant retrieval → web search if sparse |
-| `RETRIEVE` | Qdrant-only (no web search) |
-| `REFRESH` | Bypass cache and Qdrant; force fresh web collection |
-| `VALIDATE` | Re-validate existing results against current quality thresholds |
+| `GROQ_API_KEY` | Groq API key (Llama-3.3-70B) |
+| `PUBMED_API_KEY` | NCBI E-utilities API key |
+| `HF_TOKEN` | HuggingFace token (for gated models) |
+| `QDRANT_URL` | Qdrant URL (default: `http://localhost:6333`) |
+| `REDIS_HOST` | Redis host (default: `localhost`) |
+| `SEARXNG_URL` | SearXNG instance URL |
 
----
-
-## Configuration
-
-All settings live in `AgentConfig` and can be overridden via environment variables or by subclassing.
-
-```python
-# Key thresholds
-cfg.SGV_MIN                    = 0.60   # Minimum Semantic Grounding Value to accept results
-cfg.RELEVANCE_THRESHOLD_BASE   = 0.45   # Cosine similarity floor for individual items
-cfg.DATA_FRESHNESS_DAYS        = 365    # Max age of indexed documents
-cfg.TOP_K_DENSE                = 20     # Candidates from Qdrant before reranking
-cfg.TOP_K_RERANK               = 10     # Final results after cross-encoder + MMR
-cfg.QUERY_DECOMPOSE_WORD_THRESHOLD = 10 # Auto-decompose queries longer than N words
-cfg.BM25_MAX_DOCS              = 2000   # In-memory BM25 corpus cap (FIFO eviction)
-```
-
----
-
-## Data Sources
-
-| Source | Type | Notes |
-|---|---|---|
-| PubMed (NCBI E-utilities) | Abstracts + metadata | Highest-trust; up to 10 results per query |
-| Europe PMC | Abstracts | Full-text links where available |
-| Semantic Scholar | Abstracts + citation counts | Boosts credibility scoring |
-| ClinicalTrials.gov | Trial summaries | Phase and status metadata included |
-| SearXNG | Web (configurable engines) | Includes Bing, DuckDuckGo, Semantic Scholar |
-| DuckDuckGo (fallback) | Web | Activated if SearXNG returns fewer than 3 results |
-| Jina Reader | Full-page text | Concurrent with trafilatura; first non-empty wins |
-| ArXiv / bioRxiv / medRxiv | Preprints | Included in trusted domain list |
-
-### Trusted Domains (sample)
-
-PubMed, Nature, Science, Cell, The Lancet, NEJM, PLOS, Semantic Scholar, UniProt, RCSB PDB, ChEMBL, KEGG, Reactome, OMIM, ClinicalTrials.gov, DrugBank, and 30+ additional peer-reviewed and institutional sources.
-
----
-
-## Embedding Models
-
-| Role | Model | Dimension |
-|---|---|---|
-| Text (primary) | `BAAI/bge-base-en` | 768 |
-| Tables | `sentence-transformers/all-MiniLM-L6-v2` | 384 |
-| Images / graphs | `sentence-transformers/clip-ViT-B-32` | 512 |
-| Cross-encoder reranker | `BAAI/bge-reranker-v2-m3` | — |
-| NLI contradiction + faithfulness | `cross-encoder/nli-deberta-v3-small` | — |
-| LLM (HyDE, decomposition, summarization, NER) | Groq `llama-3.3-70b-versatile` | — |
-
----
-
-## Vector Collections (Qdrant)
-
-| Collection | Embedding | Distance | Use |
-|---|---|---|---|
-| `texts_collection` | BGE-base-en | Cosine | Journal articles, web text |
-| `pdfs_collection` | BGE-base-en | Cosine | PDFs, preprints |
-| `images_collection` | CLIP-ViT-B-32 | Cosine | Figures, micrographs |
-| `tables_collection` | MiniLM-L6 | Dot | Data tables |
-| `graphs_collection` | BGE-base-en | Cosine | Network diagrams, charts |
-| `videos_collection` | BGE-base-en | Cosine | Video transcripts |
-| `code_collection` | BGE-base-en | Cosine | Code snippets |
-
-All collections use INT8 scalar quantization with always-RAM storage and HNSW indices (m=16, ef_construct=100).
-
----
-
-## Running the Demo
+### 5. Run the server
 
 ```bash
-python intelligent_target_discovery_agent.py
+uvicorn api_server:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-The demo runs six sequential tests:
+### 6. Query the agent
 
-1. SearXNG / DDG / Scholar / PubMed connectivity check
-2. KRAS G12C drug target discovery (text + PDF)
-3. Multimodal query (text + image + table)
-4. Full ACP request with CAR-T clinical trial data
-5. Qdrant before/after vector counts
-6. REFRESH intent (bypasses cache and Qdrant entirely)
-7. Long-query Groq decomposition test
-
-Target JSON files are written to `outputs/targets_<session_id>.json` after each successful extraction.
-
----
-
-## Extending the Agent
-
-### Adding a New Data Source
-
-Implement an async method on `WebSearchAgent` following the pattern of `_search_pubmed`, then call it from `_collect_for_type`. Return a list of dicts with at minimum `url`, `title`, and `content` keys.
-
-### Adding a New Content Type
-
-1. Add a value to the `ContentType` enum.
-2. Add a corresponding Qdrant collection entry in `AgentConfig.COLLECTIONS`.
-3. Add a vectorization path in `VectorizerAgent._vectorize_item`.
-4. Map the new type in `QdrantCollectionManager.collection_for_type`.
-
-### Plugging Into a Multi-Agent System
-
-```python
-# Your orchestrator agent
-response = await requests.post(
-    "http://itda-service/acp",
-    json=ACPRequest(
-        source_agent="your_agent",
-        query="...",
-    ).model_dump()
-)
-targets = response.json()["targets"]
+```bash
+curl -X POST http://localhost:8000/generate \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "KRAS mutation drug targets in non-small cell lung cancer", "top_k": 10}'
 ```
 
 ---
 
-## Project Structure
+## API Endpoints
 
-```
-itda/
-├── intelligent_target_discovery_agent.py   # Core agent (all components)
-├── target_extractor.py                     # TargetExtractor post-processor
-├── outputs/                                # Per-session target JSON files
-│   └── targets_<session_id>.json
-└── agent_discovery.jsonl                   # Structured log (rotating, 50 MB)
-```
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/generate` | Run full discovery pipeline for a query |
+| `POST` | `/ask` | Ask a follow-up question on a session |
+| `GET` | `/download-report?session_id=` | Download DOCX report |
+| `GET` | `/health` | Health check |
 
 ---
 
-## Changelog
+## Evaluation
 
-### v3.4
-- `TargetExtractor` integrated: Groq NER → UniProt → PDB → AlphaFold per target
-- Targets persisted to `outputs/targets_<session_id>.json`
-- `ACPResponse` extended with `targets` field
+| Metric | Description |
+|---|---|
+| **SGV score** | Composite: faithfulness (20%) + relevancy (20%) + recall (20%) + precision (15%) + credibility (25%) |
+| **Retrieval quality** | Cross-encoder reranker score (BGE-reranker-v2-m3) |
+| **Target confidence** | UniProt validation match rate |
+| **Dedup rate** | Cosine-threshold deduplication per content type |
 
-### v3.3
-- Softmax fix: NLI raw logits normalized before contradiction threshold comparison
-- Faithfulness scoring blends Groq (top-3 items) with NLI coverage (remaining items)
-- BM25 corpus capped at 2,000 documents (FIFO eviction)
-- MMR filter seeds selection with one result per content type (type-diversity guarantee)
-- PubMed `max_results` raised to 10; DDG capped at 5
-- `DATA_FRESHNESS_DAYS` raised from 90 → 365
-- Relevance threshold floor raised from 0.28 → 0.32
+Minimum acceptable SGV threshold: **0.60**
 
 ---
 
-## License
+## Acknowledgments
 
-MIT — see [LICENSE](LICENSE) for details.
+This project was completed under the guidance of faculty at **Esprit School of Engineering**.  
+It was developed as a final-year AI engineering project exploring the intersection of biomedical NLP, retrieval-augmented generation, and autonomous agent design.
 
----
-
-## Citation
-
-If you use this agent in research, please cite:
-
-```bibtex
-@software{itda2024,
-  title   = {Intelligent Target Discovery Agent},
-  version = {3.4},
-  year    = {2024},
-  url     = {https://github.com/your-org/itda}
-}
-```
+Special thanks to the open-source communities behind Qdrant, LlamaIndex, HuggingFace Transformers, and FastAPI.
 
 ---
 
-*Built with [Qdrant](https://qdrant.tech/) · [Groq](https://groq.com/) · [SentenceTransformers](https://www.sbert.net/) · [LlamaIndex](https://www.llamaindex.ai/) · [aiohttp](https://docs.aiohttp.org/)*
+> **Topics:** `python` · `machine-learning` · `rag` · `biomedical-nlp` · `drug-discovery` · `vector-search` · `large-language-models` · `fastapi` · `qdrant` · `artificial-intelligence` · `named-entity-recognition` · `esprit-school-of-engineering`
