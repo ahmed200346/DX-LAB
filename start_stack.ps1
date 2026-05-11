@@ -16,12 +16,14 @@ function Start-ServiceWindow {
     Start-Process -FilePath $shell -ArgumentList $args -WindowStyle Normal
 }
 
-Write-Host "Launching stack in new windows (ITD :8000, Drug safety :8002, 3D :5000, ACP :8010)..." -ForegroundColor Green
+Write-Host "Launching stack in new windows (ITD :8000, Drug safety :8002, Hypothesis :8003, 3D :5000, ACP :8010)..." -ForegroundColor Green
 Write-Host "Close each window to stop that service." -ForegroundColor Yellow
 
 Start-ServiceWindow "ITD / Data Manager" (Join-Path $Backend "services\data_manager") "uvicorn api_server:app --host 127.0.0.1 --port 8000"
 Start-Sleep -Milliseconds 400
 Start-ServiceWindow "Drug safety" (Join-Path $Backend "services\drug_safety") "python run_web.py"
+Start-Sleep -Milliseconds 400
+Start-ServiceWindow "Hypothesis Assistant" (Join-Path $Backend "services\hypothesis_assistant_agent") "python api.py"
 Start-Sleep -Milliseconds 400
 Start-ServiceWindow "3D printer (Flask)" (Join-Path $Backend "services\printer_3d") "python web_server.py"
 Start-Sleep -Milliseconds 400

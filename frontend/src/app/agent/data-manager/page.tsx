@@ -56,7 +56,7 @@ export default function AgentPage() {
     setIsAssistantOpen(false);
 
     try {
-      const response = await fetch("http://localhost:8000/generate", {
+      const response = await fetch("/api/data-manager/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -129,7 +129,7 @@ export default function AgentPage() {
     setIsAsking(true);
 
     try {
-      const res = await fetch("http://localhost:8000/ask", {
+      const res = await fetch("/api/data-manager/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ session_id: sessionId, question: userMsg }),

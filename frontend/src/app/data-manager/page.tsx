@@ -1,6 +1,7 @@
 "use client";
 
 import DataManagerView from "@/components/Dashboard/DataManagerView";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 export default function Page() {
   return (
@@ -31,7 +32,7 @@ export default function Page() {
                 className="mb-5 text-4xl font-extrabold leading-tight tracking-tight text-black dark:text-white sm:text-5xl md:text-6xl"
                 style={{ fontFamily: "'DM Serif Display', serif" }}
               >
-                Data <span className="text-primary italic">Manager</span>
+                Knowledge <span className="text-primary italic">Hub Agent</span>
               </h1>
               <p
                 className="mx-auto mb-6 max-w-[720px] text-lg font-medium text-body-color dark:text-body-color-dark"
@@ -50,7 +51,7 @@ export default function Page() {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 mx-auto">
               <div className="shadow-sm dark:bg-[#0a0a0f] rounded-xl bg-white border border-gray-200 dark:border-white/10 p-6 sm:p-10 transition-all">
-                <DataManagerView />
+                <ErrorBoundary><DataManagerView /></ErrorBoundary>
               </div>
             </div>
           </div>

@@ -50,7 +50,7 @@ const menuData: Menu[] = [
       },
       {
         id: 83,
-        title: "Data Manager",
+        title: "Knowledge Hub Agent",
         path: "/data-manager",
         newTab: false,
       },
@@ -58,6 +58,12 @@ const menuData: Menu[] = [
         id: 84,
         title: "Lab Automation",
         path: "/automation",
+        newTab: false,
+      },
+      {
+        id: 85,
+        title: "3D Printer",
+        path: "/printer",
         newTab: false,
       },
     ]

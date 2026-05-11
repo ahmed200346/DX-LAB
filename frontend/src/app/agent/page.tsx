@@ -1,6 +1,7 @@
 "use client";
 
 import DiscoveryAgentView from "@/components/Dashboard/DiscoveryAgentView";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 export default function Page() {
   return (
@@ -50,7 +51,7 @@ export default function Page() {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 mx-auto">
               <div className="shadow-sm dark:bg-[#0a0a0f] rounded-xl bg-white border border-gray-200 dark:border-white/10 p-6 sm:p-10 transition-all">
-                <DiscoveryAgentView />
+                <ErrorBoundary><DiscoveryAgentView /></ErrorBoundary>
               </div>
             </div>
           </div>
